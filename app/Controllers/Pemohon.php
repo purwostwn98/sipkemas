@@ -8,4 +8,9 @@ class Pemohon extends BaseController
     {
         return view('pemohon/dtpemohon');
     }
+
+    public function frpemohon()
+    {
+        return view('pemohon/frpemohon');
+    }
 }

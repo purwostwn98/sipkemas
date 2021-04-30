@@ -4,7 +4,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Data Pemohon</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit Data</a>
+    <a href="/pemohon/frpemohon" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit Data</a>
 </div>
 
 <!-- Content Row Data Pemohon-->
@@ -148,9 +148,6 @@
         purwostwn98@gmail.com
     </div>
 </div>
-</div>
-</div>
-</div>
-</div>
+
 
 <?= $this->endSection(); ?>
