@@ -87,7 +87,7 @@
         </div>
       </div>
       <div class="text-center">
-        <a href="#services" class="btn-get-started scrollto">Pengajuan Bantuan</a>
+        <a href="/pemohon/dtpemohon" class="btn-get-started scrollto">Pengajuan Bantuan</a>
       </div>
 
       <div class="row icon-boxes">
