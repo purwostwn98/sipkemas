@@ -58,7 +58,7 @@
                                                 </a>
                                             </td>
                                             <td>1</td>
-                                            <td>Bantaan Sosial Kemasyarakatan</td>
+                                            <td><b>Paket A:</b> Bantuan Sosial Kemasyarakatan</td>
                                             <td><b>Pendaftaran:</b> 18 April 2021</td>
                                             <td><a href="#" class="btn btn-sm btn-info btn-icon-split">
                                                     <span class="icon text-white-50">
