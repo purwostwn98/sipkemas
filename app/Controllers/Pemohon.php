@@ -13,4 +13,8 @@ class Pemohon extends BaseController
     {
         return view('pemohon/frpemohon');
     }
+    public function ajuanbantuan()
+    {
+        return view('pemohon/dftrbantuan');
+    }
 }
