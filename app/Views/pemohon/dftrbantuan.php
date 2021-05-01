@@ -33,11 +33,12 @@
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead class="bg-primary text-white">
                                         <tr role="row">
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 40px;"><i class="fas fa-location-arrow"></i></th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20px;">No</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 57px;">Jenis Bantuan</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 100px;">Keterangan</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 49px;">Status</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Edit: activate to sort column ascending" style="width: 40px;"><i class="fas fa-location-arrow"></i></th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="No: activate to sort column ascending" style="width: 20px;">No</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Jenis Bantuan: activate to sort column descending" style="width: 57px;">Jenis Bantuan</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Keterangan: activate to sort column ascending" style="width: 100px;">Keterangan</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 49px;">Status</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="E-SIK: activate to sort column ascending" style="width: 49px;">E-SIK</th>
                                         </tr>
                                     </thead>
                                     <!-- <tfoot>
@@ -53,7 +54,7 @@
                                     <tbody>
                                         <tr role="row" class="even">
                                             <td class="sorting_1">
-                                                <a href="#">
+                                                <a href="/pemohon/timeline">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                             </td>
@@ -65,6 +66,13 @@
                                                         <i class="fas fa-flag fa-sm"></i>
                                                     </span>
                                                     <span class="text">Aktif</span>
+                                                </a>
+                                            </td>
+                                            <td><a href="#" class="btn btn-sm btn-success btn-icon-split">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-check fa-sm"></i>
+                                                    </span>
+                                                    <span class="text">Terdaftar</span>
                                                 </a>
                                             </td>
                                         </tr>

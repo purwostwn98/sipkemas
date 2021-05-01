@@ -8,7 +8,6 @@ class Pemohon extends BaseController
     {
         return view('pemohon/dtpemohon');
     }
-
     public function frpemohon()
     {
         return view('pemohon/frpemohon');
@@ -16,5 +15,9 @@ class Pemohon extends BaseController
     public function ajuanbantuan()
     {
         return view('pemohon/dftrbantuan');
+    }
+    public function timeline()
+    {
+        return view('pemohon/timelineajuan');
     }
 }
