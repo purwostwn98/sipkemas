@@ -18,6 +18,7 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?= base_url(); ?>/css/timeline.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -46,11 +47,36 @@
                     <i class="fa-fw fas fa-user-tie"></i>
                     <span>Data Pemohon</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="/pemohon/ajuanbantuan">
                     <i class="fas fa-hands-helping"></i>
                     <span>Ajuan Bantuan</span></a>
             </li>
+
+            <hr class="sidebar-divider my-0">
+
+            <div class="sidebar-heading">
+                Halaman Dishub
+            </div>
+
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-fw fas fa-user-tie"></i>
+                    <span>Daftar Ajuan</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Daftar Ajuan:</h6>
+                        <a class="collapse-item" href="/dishub/dftrajuan_i">Ajuan Individu</a>
+                        <a class="collapse-item" href="/dishub/dftrajuan_l">Ajuan Lembaga</a>
+                    </div>
+                </div>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/pemohon/ajuanbantuan">
+                    <i class="fas fa-hands-helping"></i>
+                    <span>Ajuan Bantuan</span></a>
+            </li> -->
 
             <!-- Nav Item - Pages Collapse Menu -->
             <!-- <li class="nav-item">
@@ -256,6 +282,13 @@
     <!-- Page level custom scripts -->
     <script src="<?= base_url(); ?>/js/demo/chart-area-demo.js"></script>
     <script src="<?= base_url(); ?>/js/demo/chart-pie-demo.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="<?= base_url(); ?>/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url(); ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="<?= base_url(); ?>/js/demo/datatables-demo.js"></script>
 
 </body>
 
