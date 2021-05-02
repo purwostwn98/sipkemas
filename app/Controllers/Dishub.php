@@ -12,4 +12,8 @@ class Dishub extends BaseController
     {
         return view('dishub/dftrajuan_l');
     }
+    public function detailajuan_i()
+    {
+        return view('dishub/detailajuan_i');
+    }
 }

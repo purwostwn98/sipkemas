@@ -89,8 +89,8 @@
                                         <span class="fa fa-star oke"></span>
                                         <span class="fa fa-star oke"></span>
                                         <span class="fa fa-star oke"></span>
-                                        <span class="fa fa-star oke"></span>
-                                        <span class="fa fa-star oke"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
                                     </td>
                                 </tr>
 
