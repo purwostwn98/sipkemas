@@ -149,5 +149,33 @@
     </div>
 </div>
 
+<div class="row py-1 bg-white darker">
+    <div class="col-md-4">
+        <label for="">
+            Foto Kartu Keluarga
+            <!-- <br>
+            <span class="text-primary">
+                <i>E-mail</i>
+            </span></label> -->
+    </div>
+    <div class="col-md-8">
+        <button type="submit" class="d-none d-sm-inline-block btn btn-primary btn-sm"><i class="fa-sm fas fa-eye text-white-50"></i> Lihat</button>
+    </div>
+</div>
+
+<div class="row py-1 ">
+    <div class="col-md-4">
+        <label for="">
+            Foto KTP
+            <!-- <br>
+            <span class="text-primary">
+                <i>E-mail</i>
+            </span></label> -->
+    </div>
+    <div class="col-md-8">
+        <button type="submit" class="d-none d-sm-inline-block btn btn-primary btn-sm"><i class="fa-sm fas fa-eye text-white-50"></i> Lihat</button>
+    </div>
+</div>
+
 
 <?= $this->endSection(); ?>

@@ -17,7 +17,7 @@
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <table class="table table-responsive table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead class="bg-primary text-white">
                                         <tr role="row">
                                             <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 40px;"><i class="fas fa-location-arrow"></i></th>

@@ -54,7 +54,7 @@
                             <tbody>
                                 <tr role="row" class="odd">
                                     <td>
-                                        <a href="/dishub/detailajuan_i">
+                                        <a href="/kesra/detailajuan_i">
                                             <i class="far fa-edit"></i>
                                         </a>
                                     </td>
@@ -78,7 +78,7 @@
                                 </tr>
                                 <tr role="row" class="odd">
                                     <td>
-                                        <a href="/dishub/detailajuan_i">
+                                        <a href="/kesra/detailajuan_i">
                                             <i class="far fa-edit"></i>
                                         </a>
                                     </td>

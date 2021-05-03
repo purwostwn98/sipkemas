@@ -2,18 +2,18 @@
 
 namespace App\Controllers;
 
-class Dishub extends BaseController
+class Kesra extends BaseController
 {
     public function dftrajuan_i()
     {
-        return view('dishub/dftrajuan_i');
+        return view('kesra/dftrajuan_i');
     }
     public function dftrajuan_l()
     {
-        return view('dishub/dftrajuan_l');
+        return view('kesra/dftrajuan_l');
     }
     public function detailajuan_i()
     {
-        return view('dishub/detailajuan_i');
+        return view('kesra/detailajuan_i');
     }
 }

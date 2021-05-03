@@ -93,7 +93,6 @@
                                         <span class="fa fa-star"></span>
                                     </td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
