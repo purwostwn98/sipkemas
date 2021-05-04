@@ -154,8 +154,18 @@
 </div>
 
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 bg-info">
+        <h6 class="m-0 font-weight-bold text-white">Data E-SIK</h6>
+    </div>
+    <div class="card-body">
+        DATA E-SIK
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
         <h6 class="m-0 font-weight-bold text-primary">Data Ajuan Bantuan</h6>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit</a>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -194,32 +204,11 @@
 </div>
 
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
         <h6 class="m-0 font-weight-bold text-primary">Dokumen Pendukung</h6>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit</a>
     </div>
     <div class="card-body">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto KTP</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto KK</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
@@ -230,51 +219,20 @@
                 Foto
             </div>
         </div>
-    </div>
-</div>
-
-<div class="card shadow mb-4">
-    <div class="card-header py-3 bg-info">
-        <h6 class="m-0 font-weight-bold text-white">Data E-SIK</h6>
-    </div>
-    <div class="card-body">
-        DATA E-SIK
-    </div>
-</div>
-
-<div class="card shadow mb-4">
-    <div class="card-header py-3 bg-warning">
-        <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
-    </div>
-    <div class="card-body">
+        <hr class="m-0 p-1">
         <div class="row bg-white darker">
             <div class="col-md-4">
-                <label for="rekomendasi">
-                    <b>Rekomendasi</b>
+                <label for="">
+                    <b>Foto Pendukung lainnya</b>
                 </label>
             </div>
             <div class="col-md-8">
-                <select id="rekomendasi" class="form-control">
-                    <option>Tidak Direkomendasikan</option>
-                    <option>Kurang Direkomendasikan</option>
-                    <option selected>Normal</option>
-                    <option>Lebih Direkomendasikan</option>
-                    <option>Sangat Direkomendasikan</option>
-                </select>
-            </div>
-        </div>
-        <div class="row bg-white darker py-2">
-            <div class="col-md-4">
-                <label for="ketRekomen">
-                    <b>Keterangan Rekomendasi</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                <textarea class="form-control" id="ketRekomen" rows="3"></textarea>
+                Foto
             </div>
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col">
         <a href="#" class="btn btn-warning btn-icon-split">
@@ -288,6 +246,12 @@
                 <i class="fas fa-save"></i>
             </span>
             <span class="text">Simpan</span>
+        </a>
+        <a href="#" class="btn btn-danger btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-key"></i>
+            </span>
+            <span class="text">Kunci Data</span>
         </a>
     </div>
 </div>

@@ -198,32 +198,22 @@
         <h6 class="m-0 font-weight-bold text-primary">Dokumen Pendukung</h6>
     </div>
     <div class="card-body">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto KTP</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto KK</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
         <hr class="m-0 p-1">
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
                     <b>Foto Rumah</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Foto Pendukung lainnya</b>
                 </label>
             </div>
             <div class="col-md-8">
@@ -243,8 +233,8 @@
 </div>
 
 <div class="card shadow mb-4">
-    <div class="card-header py-3 bg-warning">
-        <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
+    <div class="card-header py-3 bg-info">
+        <h6 class="m-0 font-weight-bold text-white">Rekomendasi</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -254,23 +244,60 @@
                 </label>
             </div>
             <div class="col-md-8">
-                <select id="rekomendasi" class="form-control">
-                    <option>Tidak Direkomendasikan</option>
-                    <option>Kurang Direkomendasikan</option>
-                    <option selected>Normal</option>
-                    <option>Lebih Direkomendasikan</option>
-                    <option>Sangat Direkomendasikan</option>
+                Sangat Direkomendasikan
+            </div>
+        </div>
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="rekomendasi">
+                    <b>Alasan Rekomendasi</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Belum pernah mendapatkan bantuan
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-warning">
+        <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
+    </div>
+    <div class="card-body">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="approval">
+                    <b>Persetujuan</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                <select id="approval" class="form-control">
+                    <option selected hidden>--Pilih--</option>
+                    <option>Disetujui</option>
+                    <option>Tidak Disetujui</option>
                 </select>
             </div>
         </div>
         <div class="row bg-white darker py-2">
             <div class="col-md-4">
-                <label for="ketRekomen">
-                    <b>Keterangan Rekomendasi</b>
+                <label for="alasan">
+                    <b>Alasan</b>
                 </label>
             </div>
             <div class="col-md-8">
-                <textarea class="form-control" id="ketRekomen" rows="3"></textarea>
+                <textarea class="form-control" id="alasan" rows="3" placeholder="Alasan ditolak atau diterima (tidak wajib)"></textarea>
+            </div>
+        </div>
+        <div class="row bg-white darker py-2">
+            <div class="col-md-4">
+                <label for="alasan">
+                    <b>Nilai Bantuan</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                <input type="number" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai">
+                <small id="nilai" class="form-text text-muted">Isikan nominal bantuan misalnya 750000 (Jika tidak disetujui isikan 0)</small>
             </div>
         </div>
     </div>

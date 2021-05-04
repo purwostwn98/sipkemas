@@ -12,8 +12,16 @@ class Kelurahan extends BaseController
     {
         return view('kelurahan/kel_dftrpemohon_l');
     }
+    public function dftrajuan_i()
+    {
+        return view('kelurahan/kel_dftrajuan_i');
+    }
+    public function dftrajuan_l()
+    {
+        return view('kelurahan/kel_dftrajuan_l');
+    }
     public function detailajuan_i()
     {
-        return view('kelurahan/detailajuan_i');
+        return view('kelurahan/kel_detailajuan_i');
     }
 }

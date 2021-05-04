@@ -82,14 +82,14 @@
                 <div id="kel_ajuan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Daftar Ajuan:</h6>
-                        <a class="collapse-item" href="/kesra/dftrajuan_i">Ajuan Individu</a>
-                        <a class="collapse-item" href="/kesra/dftrajuan_l">Ajuan Lembaga</a>
+                        <a class="collapse-item" href="/kelurahan/dftrajuan_i">Ajuan Individu</a>
+                        <a class="collapse-item" href="/kelurahan/dftrajuan_l">Ajuan Lembaga</a>
                     </div>
                 </div>
             </li>
 
-            <hr class="sidebar-divider my-0">
             <!-- Menu Kesra -->
+            <hr class="sidebar-divider my-0">
             <div class="sidebar-heading">
                 Halaman Kesra
             </div>
@@ -104,6 +104,26 @@
                         <h6 class="collapse-header">Daftar Ajuan:</h6>
                         <a class="collapse-item" href="/kesra/dftrajuan_i">Ajuan Individu</a>
                         <a class="collapse-item" href="/kesra/dftrajuan_l">Ajuan Lembaga</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Menu Mitra -->
+            <hr class="sidebar-divider my-0">
+            <div class="sidebar-heading">
+                Halaman Mitra
+            </div>
+
+            <li class="nav-item active">
+                <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#mitraSub" aria-expanded="true" aria-controls="mitraSub">
+                    <i class="fa-fw far fa-list-alt"></i>
+                    <span>Daftar Ajuan</span>
+                </a>
+                <div id="mitraSub" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Daftar Ajuan:</h6>
+                        <a class="collapse-item" href="/mitra/dftrajuan_i">Ajuan Individu</a>
+                        <a class="collapse-item" href="/mitra/dftrajuan_l">Ajuan Lembaga</a>
                     </div>
                 </div>
             </li>
