@@ -158,8 +158,31 @@
                 <i>E-mail</i>
             </span></label> -->
     </div>
-    <div class="col-md-8">
-        <button type="submit" class="d-none d-sm-inline-block btn btn-primary btn-sm"><i class="fa-sm fas fa-eye text-white-50"></i> Lihat</button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal">
+        Lihat
+    </button>
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Foto Kartu Keluarga</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        <img class="myImg" id="myImg2" src="<?= base_url(); ?>/img/kk.jpeg" alt="KTP" style="width:100%;max-width:800px">
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -172,10 +195,32 @@
                 <i>E-mail</i>
             </span></label> -->
     </div>
-    <div class="col-md-8">
-        <button type="submit" class="d-none d-sm-inline-block btn btn-primary btn-sm"><i class="fa-sm fas fa-eye text-white-50"></i> Lihat</button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ktpModal">
+        Lihat
+    </button>
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-xl" id="ktpModal" tabindex="-1" role="dialog" aria-labelledby="ktpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ktpModalLabel">Foto KTP</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        <img class="myImg" id="myImg2" src="<?= base_url(); ?>/img/ktp.jpeg" alt="KTP" style="width:100%;max-width:800px">
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 
 <?= $this->endSection(); ?>
