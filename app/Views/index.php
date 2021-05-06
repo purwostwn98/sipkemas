@@ -72,7 +72,7 @@
         </ul>
       </nav><!-- .nav-menu -->
 
-      <a href="/auth/login" class="get-started-btn scrollto">Masuk</a>
+      <a href="/login" class="get-started-btn scrollto">Masuk</a>
 
     </div>
   </header><!-- End Header -->

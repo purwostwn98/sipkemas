@@ -33,37 +33,46 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block">
+                                <img style="width: 100%;" src="<?= base_url(); ?>/img/balaikota1.jpeg" alt="">
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
                                     </div>
-                                    <form class="user">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                    <?= form_open("/login/cekuser", ['class' => 'formlogin user']); ?>
+                                    <?= csrf_field(); ?>
+                                    <div class="form-group">
+                                        <input name="User" type="text" class="form-control form-control-user" id="user" aria-describedby="emailHelp" placeholder="Masukkan Username">
+                                        <div class="invalid-feedback invalidUser text-center">
+
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="Password" type="password" class="form-control form-control-user" id="password" placeholder="Password">
+                                        <div class="invalid-feedback invalidPassword text-center">
+
                                         </div>
-                                        <!-- <div class="form-group">
+                                    </div>
+                                    <!-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
                                         </div> -->
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
-                                        <hr>
-                                        <!-- <a href="index.html" class="btn btn-google btn-user btn-block">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block btnlogin">
+                                        Login
+                                    </button>
+                                    <hr>
+                                    <!-- <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a> -->
-                                    </form>
+                                    <?= form_close(); ?>
                                     <hr>
                                     <!-- <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
@@ -83,8 +92,9 @@
 
     </div>
 
+
     <!-- Bootstrap core JavaScript-->
-    <script src="<?= base_url(); ?>/vendor/jquery/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="<?= base_url(); ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -92,6 +102,54 @@
 
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url(); ?>/js/sb-admin-2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.formlogin').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "post",
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    beforeSend: function() {
+                        $('.btnlogin').prop('disabled', true);
+                        $('.btnlogin').html('<i class="fa fa-spin fa-spinner"></i>');
+                    },
+                    complete: function() {
+                        $('.btnlogin').prop('disabled', false);
+                        $('.btnlogin').html('Login');
+                    },
+                    success: function(response) {
+                        if (response.error) {
+                            if (response.error.User) {
+                                $('#user').addClass('is-invalid');
+                                $('.invalidUser').html(response.error.User);
+                            } else {
+                                $('#user').removeClass('is-invalid');
+                                $('.invalidUser').html('');
+                            }
+                            if (response.error.Password) {
+                                $('#password').addClass('is-invalid');
+                                $('.invalidPassword').html(response.error.Password);
+                            } else {
+                                $('#password').removeClass('is-invalid');
+                                $('.invalidPassword').html('');
+                            }
+                        }
+                        if (response.berhasil) {
+                            window.location = response.berhasil.link;
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    }
+                });
+
+                return false;
+            });
+        });
+    </script>
 
 </body>
 
