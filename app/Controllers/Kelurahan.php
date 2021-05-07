@@ -32,4 +32,8 @@ class Kelurahan extends BaseController
     {
         return view('kelurahan/alur_bantuan');
     }
+    public function syarat_ketentuan()
+    {
+        return view('kelurahan/syarat_ketentuan');
+    }
 }

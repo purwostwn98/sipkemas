@@ -35,8 +35,8 @@ $session = \Config\Services::session();
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-landmark"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">SipKe-Mas</div>
             </a>
@@ -61,9 +61,9 @@ $session = \Config\Services::session();
             <!-- Menu Kelurahan -->
             <hr class="sidebar-divider my-0">
             <?php if ($session->get('privUser') == 2) { ?>
-                <div class="sidebar-heading">
+                <!-- <div class="sidebar-heading">
                     Halaman Kelurahan
-                </div>
+                </div> -->
 
                 <li class="nav-item active">
                     <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#collapseKel" aria-expanded="true" aria-controls="collapseKel">
@@ -94,15 +94,16 @@ $session = \Config\Services::session();
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link my-1 py-1" href="/kelurahan/form_ajuan">
-                        <i class="fas fa-hands-helping"></i>
+                    <a class="nav-link my-1 py-1" href="/kelurahan/syarat_ketentuan">
+                        <i class="fas fa-hands-helping fa-fw"></i>
                         <span>Ajukan Bantuan</span></a>
                 </li>
 
                 <li class="nav-item active">
                     <a class="nav-link my-1 py-1" href="/kelurahan/alur_bantuan">
-                        <i class="fas fa-hands-helping"></i>
-                        <span>Alur Bantuan</span></a>
+                        <i class="fab fa-stumbleupon-circle fa-fw"></i>
+                        <span>Alur Bantuan</span>
+                    </a>
                 </li>
             <?php } ?>
 

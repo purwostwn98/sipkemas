@@ -241,7 +241,6 @@
             <button class="btn btn-success btn-md btn-icon-split" target="_blank" onclick="tombol()"><span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Simpan</span></button>&nbsp;&nbsp;
             <button class="btn btn-danger btn-md btn-icon-split" onclick="del(this.value)" value="A310190001"><span class="icon text-white-50"> <i class="fas fa-trash"></i></span><span class="text">Batal</span></button>
         </div>
-
     </div>
 </div>
 <?= $this->endSection(); ?>
