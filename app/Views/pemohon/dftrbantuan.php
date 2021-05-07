@@ -7,7 +7,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="card shadow">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Riwayat Pendaftaran</h6>
@@ -72,7 +72,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
         <div class="card shadow">
             <div class="card-header py-3 bg-primary">
                 <h6 class="m-0 font-weight-bold text-white">Daftar Sekarang</h6>
@@ -122,7 +122,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <?= $this->endSection(); ?>

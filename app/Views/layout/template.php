@@ -53,8 +53,20 @@ $session = \Config\Services::session();
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link my-1 py-1" href="/pemohon/ajuanbantuan">
-                        <i class="fas fa-hands-helping"></i>
+                        <i class="fas fa-list-alt fa-fw"></i>
                         <span>Ajuan Bantuan</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link my-1 py-1" href="/kelurahan/syarat_ketentuan">
+                        <i class="fas fa-hands-helping fa-fw"></i>
+                        <span>Ajukan Bantuan</span></a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link my-1 py-1" href="/kelurahan/alur_bantuan">
+                        <i class="fab fa-stumbleupon-circle fa-fw"></i>
+                        <span>Alur Bantuan</span>
+                    </a>
                 </li>
             <?php } ?>
 

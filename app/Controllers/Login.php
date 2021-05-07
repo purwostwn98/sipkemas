@@ -69,11 +69,37 @@ class Login extends BaseController
                             'telepon' => $row->telepon
                         ];
                         $this->session->set($dapat_session);
-                        $msg = [
-                            'berhasil' => [
-                                'link' => '/pemohon/dtpemohon'
-                            ]
-                        ];
+                        if ($row->idPrivUser == 1) {
+                            $msg = [
+                                'berhasil' => [
+                                    'link' => '/pemohon/dtpemohon'
+                                ]
+                            ];
+                        } elseif ($row->idPrivUser == 2) {
+                            $msg = [
+                                'berhasil' => [
+                                    'link' => '/kelurahan/dftrpemohon_i'
+                                ]
+                            ];
+                        } elseif ($row->idPrivUser == 3) {
+                            $msg = [
+                                'berhasil' => [
+                                    'link' => '/dinsos/dftrajuan_i'
+                                ]
+                            ];
+                        } elseif ($row->idPrivUser == 4) {
+                            $msg = [
+                                'berhasil' => [
+                                    'link' => '/kesra/dftrajuan_i'
+                                ]
+                            ];
+                        } elseif ($row->idPrivUser == 5) {
+                            $msg = [
+                                'berhasil' => [
+                                    'link' => '/mitra/dftrajuan_i'
+                                ]
+                            ];
+                        }
                     } else {
                         $msg = [
                             'error' => [

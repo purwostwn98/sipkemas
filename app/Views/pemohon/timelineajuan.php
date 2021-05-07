@@ -38,16 +38,15 @@
                     <!-- <span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>5 April, 2019</span> -->
                     <p class="text-small mt-2 font-weight-light">Unggah dokumen yang dibutuhkan untuk pertimbangan kami</p>
                     <ul class="text-small mt-2 font-weight-light">
-                        <li>Foto KK</li>
-                        <li>Foto KTP</li>
                         <li>Foto Rumah</li>
+                        <li>Foto Pendukung Lainnya</li>
                     </ul>
                 </li>
                 <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                     <div class="timeline-arrow"></div>
                     <a href="#" class="h5 mb-0 text-info">Menunggu Verifikasi</a><br>
                     <span style="border-radius: 5px;" class="small text-white bg-info p-1"><i class="fa fa-clock-o mr-1"></i>Belum Diverifikasi</span>
-                    <p class="text-small mt-2 font-weight-light">Mohon tunggu verifikasi data dari pihak Dishub dan Kesra</p>
+                    <p class="text-small mt-2 font-weight-light">Mohon tunggu verifikasi data dari pihak dinsos dan Kesra</p>
                 </li>
                 <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                     <div class="timeline-arrow"></div>
