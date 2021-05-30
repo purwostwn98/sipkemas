@@ -6,6 +6,19 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('index');
+		return view('landing/index');
+	}
+
+	public function bantuan()
+	{
+		return view('landing/detail_bantuan');
+	}
+	public function bantuan2()
+	{
+		return view('landing/detail_bantuan2');
+	}
+	public function bantuan3()
+	{
+		return view('landing/detail_bantuan3');
 	}
 }
