@@ -87,7 +87,8 @@
         </div>
       </div>
       <div class="text-center">
-        <a href="#services" class="btn-get-started scrollto">Pengajuan Bantuan</a>
+        <a href="#services" class="btn-get-started scrollto btn-info">Program Bantuan</a>
+        <a href="/home/daftar" class="btn-get-started scrollto">Formulir Pendaftaran</a>
       </div>
 
       <div class="row icon-boxes">

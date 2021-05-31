@@ -21,4 +21,8 @@ class Home extends BaseController
 	{
 		return view('landing/detail_bantuan3');
 	}
+	public function daftar()
+	{
+		return view('landing/form_daftar');
+	}
 }
