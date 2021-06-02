@@ -20,7 +20,6 @@
             <div class="col-sm-4">
                 <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value="33104720212830002"> </div>
             </div>
-
             <div class="col-sm-1">
                 <button class="btn btn-info btn-circle" onclick="ceknim(this.value)"><i class="fas fa-search"></i></button>
             </div>
@@ -38,17 +37,6 @@
         <div class="row">
             <div class="col-sm-1"> </div>
             <div class="col-sm-4">
-                <label for="">Scan KTP/SIM</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger">
-                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
                 <label for="">Alamat</label>
             </div>
             <div class="col-sm-6">
@@ -60,7 +48,7 @@
             <div class="col-sm-4">
                 <label for="">No. Telepon</label>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-4">
                 <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value=""> </div>
             </div>
         </div>
@@ -69,7 +57,7 @@
             <div class="col-sm-4">
                 <label for="">Email</label>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-4">
                 <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value=""> </div>
             </div>
         </div>
@@ -89,10 +77,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 </div>
 
@@ -104,11 +88,25 @@
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-4">
+                <label for="">Jenis Bantuan</label>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group has-danger">
+                    <select class="form-control col-sm-12  border-left-info animated--grow-in" name="jnsbantuan" id="div">
+                        <option value="1">Individu</option>
+                        <option value="2">Lembaga</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
                 <label for="">Program Bantuan</label>
             </div>
             <div class="col-sm-4">
                 <div class="form-group has-danger">
-
                     <select class="form-control col-sm-12  border-left-info animated--grow-in" name="div" id="div">
                         <option value="1" disabled="" selected="" style="display:none;">Baznas:Program Bantuan Pendidikan</option>
                         <option value="2">Baznas:Program Bantuan Ekonomi Produktif</option>
@@ -144,7 +142,6 @@
         </div>
     </div>
 </div>
-
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Persyaratan Bantuan</h6>

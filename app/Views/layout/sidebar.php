@@ -51,19 +51,11 @@ $session = \Config\Services::session();
     <!-- <div class="sidebar-heading">
                     Halaman Kelurahan
                 </div> -->
-
     <li class="nav-item active">
-        <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#collapseKel" aria-expanded="true" aria-controls="collapseKel">
+        <a class="nav-link my-1 py-1" href="/kelurahan/dftrpemohon_i">
             <i class="fa-fw far fa-address-book"></i>
             <span>Daftar Pemohon</span>
         </a>
-        <div id="collapseKel" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Daftar Pemohon:</h6>
-                <a class="collapse-item" href="/kelurahan/dftrpemohon_i">Pemohon Individu</a>
-                <a class="collapse-item" href="/kelurahan/dftrpemohon_l">Pemohon Lembaga</a>
-            </div>
-        </div>
     </li>
     <li class="nav-item active">
         <a class="nav-link my-1 py-1" href="/kelurahan/alur_bantuan">

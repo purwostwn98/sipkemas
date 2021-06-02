@@ -65,6 +65,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="tgllahir" class="col-sm-4 col-form-label">Tanggal Lahir</label>
+                                <div class="col-sm-8">
+                                    <input type="date" name="tgllahir" class="form-control" id="tgllahir">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="tempatlahir" class="col-sm-4 col-form-label">Jenis Kelamin</label>
                                 <div class="col-sm-8">
                                     <div class="form-check">
@@ -79,12 +85,6 @@
                                             Perempuan
                                         </label>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="tgllahir" class="col-sm-4 col-form-label">Tanggal Lahir</label>
-                                <div class="col-sm-8">
-                                    <input type="date" name="tgllahir" class="form-control" id="tgllahir">
                                 </div>
                             </div>
                             <div class="form-group row">
