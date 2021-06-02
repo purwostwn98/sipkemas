@@ -26,14 +26,17 @@ class Kelurahan extends BaseController
     }
     public function form_ajuan()
     {
-        return view('kelurahan/ajuan_form_v');
+        $data['bttn']='syarat_ketentuan';
+		return view('kelurahan/ajuan_form_v',$data);
     }
     public function alur_bantuan()
     {
-        return view('kelurahan/alur_bantuan');
+        $data['bttn']='alur_bantuan';
+		return view('kelurahan/alur_bantuan',$data);
     }
     public function syarat_ketentuan()
     {
-        return view('kelurahan/syarat_ketentuan');
+        $data['bttn']='syarat_ketentuan';
+		return view('kelurahan/syarat_ketentuan',$data);
     }
 }

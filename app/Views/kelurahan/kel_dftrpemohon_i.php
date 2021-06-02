@@ -3,94 +3,121 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Daftar Pemohon</h1>
+    <h1 class="h3 mb-0 text-gray-800">Daftar Pemohon Individu</h1>
 </div>
 
-<div class="card shadow mb-4">
+<div id="accordion" class="card shadow mb-4">
     <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Daftar Pemohon Individu</h6>
+        <div>
+            <a class="d-none d-sm-inline-block btn btn-sm btn-warning" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+                Pendaftaran
+            </a>
+            <a class="d-none d-sm-inline-block btn btn-sm btn-success" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                Pemohon Terdaftar
+            </a>
+        </div>
         <a href="/pemohon/frpemohon" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Tambah Pemohon</a>
     </div>
-    <div style="font-size: 12px;" class="card-body">
-        <div class="table-responsive">
-            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <!-- <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select> entries</label></div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>
-                    </div>
-                </div> -->
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                            <thead>
-                                <tr role="row">
-                                    <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 5%;">-</th>
-                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5%;">No</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 70px;">Alamat</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Kelamin</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 25px;">Jumlah Ajuan</th>
-                                </tr>
-                            </thead>
-                            <!-- <tfoot>
-                                <tr>
-                                    <th rowspan="1" colspan="1">Name</th>
-                                    <th rowspan="1" colspan="1">Position</th>
-                                    <th rowspan="1" colspan="1">Office</th>
-                                    <th rowspan="1" colspan="1">Age</th>
-                                    <th rowspan="1" colspan="1">Start date</th>
-                                    <th rowspan="1" colspan="1">Salary</th>
-                                </tr>
-                            </tfoot> -->
-                            <tbody>
-                                <tr role="row" class="odd">
-                                    <td>
-                                        <a href="/pemohon/dtpemohon">
-                                            <i class="far fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td class="sorting_1">1</td>
-                                    <td>Michael Admin</td>
-                                    <td>RT.02/RW.04 Danukusuman</td>
-                                    <td>Laki-laki</td>
-                                    <td>
-                                        <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
-                                    </td>
-                                    <td class="text-center">2</td>
-                                </tr>
+    <div class="collapse show" id="collapseExample1" data-parent="#accordion">
+        <div style="font-size: 12px;" class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 5px">-</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5px;">No</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 70px;">Alamat</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Kelamin</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 25px;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            <a href="/pemohon/dtpemohon?konfirmasi=0">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                        </td>
+                                        <td class="sorting_1">1</td>
+                                        <td>Michael Admin</td>
+                                        <td>RT.02/RW.04 Danukusuman</td>
+                                        <td>Laki-laki</td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span style="border-radius: 5px;" class="p-1 bg-warning text-white">Belum Terdaftar</span>
+                                        </td>
+                                    </tr>
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                <li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
-                            </ul>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="collapse" id="collapseExample2" data-parent="#accordion">
+        <div style="font-size: 12px;" class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable2" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 5px;">-</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5px;">No</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 70px;">Alamat</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Kelamin</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 25px;">Jumlah Ajuan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            <a href="/pemohon/dtpemohon?konfirmasi=1">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                        </td>
+                                        <td class="sorting_1">1</td>
+                                        <td>Purwo Setiawan</td>
+                                        <td>RT.02/RW.04 Danukusuman</td>
+                                        <td>Laki-laki</td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
+                                        </td>
+                                        <td class="text-center">2</td>
+                                    </tr>
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            <a href="/pemohon/dtpemohon">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                        </td>
+                                        <td class="sorting_1">2</td>
+                                        <td>Wawan</td>
+                                        <td>RT.02/RW.10 Danukusuman</td>
+                                        <td>Perempuan</td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
+                                        </td>
+                                        <td class="text-center">1</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

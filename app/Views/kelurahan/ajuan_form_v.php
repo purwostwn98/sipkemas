@@ -98,93 +98,9 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Persyaratan Bantuan</h6>
-    </div>
-    <div class="card-body">
-
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">Surat 1</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger">
-                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">Surat 2</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger">
-                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">Surat 3</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger">
-                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">Foto 1</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger">
-                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">Foto 2</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger">
-                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">Foto 3</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger">
-                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
-                </div>
-            </div>
-        </div>
-
-
-
-
-    </div>
-</div>
-
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Ajuan Bantuan</h6>
     </div>
     <div class="card-body">
-
-
-
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-4">
@@ -206,7 +122,6 @@
                     </select>
                 </div>
             </div>
-
             <div class="col-sm-1"></div>
         </div>
         <div class="row">
@@ -225,6 +140,80 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value=""> </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Persyaratan Bantuan</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-1"> </div>
+            <div class="col-sm-4">
+                <label for="">Scan Kartu Keluarga</label>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group has-danger">
+                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"> </div>
+            <div class="col-sm-4">
+                <label for="">Scan KTP</label>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group has-danger">
+                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"> </div>
+            <div class="col-sm-4">
+                <label for="">Foto Kondisi 1</label>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group has-danger">
+                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"> </div>
+            <div class="col-sm-4">
+                <label for="">Foto Kondisi 2</label>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group has-danger">
+                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"> </div>
+            <div class="col-sm-4">
+                <label for="">Foto Kondisi 3</label>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group has-danger">
+                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"> </div>
+            <div class="col-sm-4">
+                <label for="">Dokumen Pendukung</label>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group has-danger">
+                    <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="files" name="files">
+                </div>
             </div>
         </div>
         <br>

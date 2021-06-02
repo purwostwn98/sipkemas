@@ -1,10 +1,19 @@
 <?= $this->extend("/layout/template.php"); ?>
 <?= $this->section("konten"); ?>
-
+<?php
+$session = \Config\Services::session();
+?>
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Data Pemohon</h1>
-    <a href="/pemohon/frpemohon" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit Data</a>
+    <div>
+        <?php if ($session->get('privUser') != 1) { ?>
+            <?php if ($konfirmasi == 0) { ?>
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">Konfirmasi Pendaftaran</a>
+            <?php } ?>
+        <?php } ?>
+        <a href="/pemohon/frpemohon" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit Data</a>
+    </div>
 </div>
 
 <!-- Content Row Data Pemohon-->
@@ -146,80 +155,6 @@
     </div>
     <div class="col-md-8">
         purwostwn98@gmail.com
-    </div>
-</div>
-
-<div class="row py-1 bg-white darker">
-    <div class="col-md-4">
-        <label for="">
-            Foto Kartu Keluarga
-            <!-- <br>
-            <span class="text-primary">
-                <i>E-mail</i>
-            </span></label> -->
-    </div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal">
-        Lihat
-    </button>
-    <!-- Modal -->
-    <div class="modal fade bd-example-modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Foto Kartu Keluarga</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="text-center">
-                        <img class="myImg" id="myImg2" src="<?= base_url(); ?>/img/kk.jpeg" alt="KTP" style="width:100%;max-width:800px">
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row py-1 ">
-    <div class="col-md-4">
-        <label for="">
-            Foto KTP
-            <!-- <br>
-            <span class="text-primary">
-                <i>E-mail</i>
-            </span></label> -->
-    </div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ktpModal">
-        Lihat
-    </button>
-    <!-- Modal -->
-    <div class="modal fade bd-example-modal-xl" id="ktpModal" tabindex="-1" role="dialog" aria-labelledby="ktpModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ktpModalLabel">Foto KTP</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="text-center">
-                        <img class="myImg" id="myImg2" src="<?= base_url(); ?>/img/ktp.jpeg" alt="KTP" style="width:100%;max-width:800px">
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

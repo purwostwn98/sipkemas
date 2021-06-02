@@ -6,18 +6,26 @@ class Pemohon extends BaseController
 {
     public function dtpemohon()
     {
-        return view('pemohon/dtpemohon');
+        $konfirmasi = $this->request->getVar('konfirmasi');
+        $data = [
+            'bttn' => 'dtpemohon',
+            'konfirmasi' => $konfirmasi
+        ];
+        return view('pemohon/dtpemohon', $data);
     }
     public function frpemohon()
     {
-        return view('pemohon/frpemohon');
+        $data['bttn'] = 'frpemohon';
+        return view('pemohon/frpemohon', $data);
     }
     public function ajuanbantuan()
     {
-        return view('pemohon/dftrbantuan');
+        $data['bttn'] = 'ajuanbantuan';
+        return view('pemohon/dftrbantuan', $data);
     }
     public function timeline()
     {
-        return view('pemohon/timelineajuan');
+        $data = ['bttn' => 'timelineajuan'];
+        return view('pemohon/timelineajuan', $data);
     }
 }

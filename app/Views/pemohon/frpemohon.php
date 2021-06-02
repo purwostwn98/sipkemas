@@ -107,19 +107,6 @@
     </div>
 
     <div class="form-group row">
-        <label for="kk" class="col-sm-2 col-form-label">Foto Kartu Keluarga</label>
-        <div class="col-md-10">
-            <input type="file" class="form-control-file" id="kk">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="ktp" class="col-sm-2 col-form-label">Foto KTP</label>
-        <div class="col-md-10">
-            <input type="file" class="form-control-file" id="ktp">
-        </div>
-    </div>
-    <div class="form-group row">
         <div class="col-sm-10">
             <a href="/pemohon/dtpemohon" type="button" class="d-none d-sm-inline-block btn btn-warning shadow-sm"><i class="fas fa-window-close text-white-50"></i> Batal</a>
             <button type="submit" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i class="fas fa-save text-white-50"></i> Simpan</button>

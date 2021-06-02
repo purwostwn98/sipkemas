@@ -150,34 +150,6 @@
                 purwostwn98@gmail.com
             </div>
         </div>
-        <hr class="m-0 p-1">
-        <div class="row py-1 bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    Foto Kartu Keluarga
-                    <!-- <br>
-            <span class="text-primary">
-                <i>E-mail</i>
-            </span></label> -->
-            </div>
-            <div class="col-md-8">
-                <button type="submit" class="d-none d-sm-inline-block btn btn-primary btn-sm"><i class="fa-sm fas fa-eye text-white-50"></i> Lihat</button>
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row py-1 ">
-            <div class="col-md-4">
-                <label for="">
-                    Foto KTP
-                    <!-- <br>
-            <span class="text-primary">
-                <i>E-mail</i>
-            </span></label> -->
-            </div>
-            <div class="col-md-8">
-                <button type="submit" class="d-none d-sm-inline-block btn btn-primary btn-sm"><i class="fa-sm fas fa-eye text-white-50"></i> Lihat</button>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -240,7 +212,18 @@
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
-                    <b>Foto Rumah</b>
+                    <b>Foto Kartu Keluarga</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Foto KTP</b>
                 </label>
             </div>
             <div class="col-md-8">
@@ -251,7 +234,40 @@
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
-                    <b>Foto Pendukung lainnya</b>
+                    <b>Foto Kondisi 1</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Foto Kondisi 2</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Foto Kondisi 3</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Surat/Dokumen Pendukung</b>
                 </label>
             </div>
             <div class="col-md-8">
