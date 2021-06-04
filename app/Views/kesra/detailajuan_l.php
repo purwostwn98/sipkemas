@@ -6,9 +6,10 @@
     <h1 class="h3 mb-0 text-gray-800">> Detail Ajuan</h1>
 </div>
 
+<!-- Data Pemohon -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Pemohon</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Pemohon</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -153,9 +154,51 @@
     </div>
 </div>
 
+<!-- Data Lembaga -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Ajuan Bantuan</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Lembaga</h6>
+    </div>
+    <div class="card-body">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Nama Lembaga</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Panti Asuhan ABC
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Alamat Lembaga</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Jl. Letjen Sutoyo, Ngadisono, RT 03/RW 01, Joglo, Banjarsari, Surakarta
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>No. Lembaga</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                699988986
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Data Bantuan -->
+<div class="card shadow mb-4">
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Ajuan Bantuan</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -165,7 +208,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                Paket A
+                BAZNAS: Dakwah dan Advokasi
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -176,7 +219,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                Bantuan pengadaan kursi roda
+                Renovasi kamar panti asuhan
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -187,15 +230,16 @@
                 </label>
             </div>
             <div class="col-md-8">
-                20 April 2021
+                11 Juni 2021
             </div>
         </div>
     </div>
 </div>
 
+<!-- Dokumen Pendukung -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Dokumen Pendukung</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Dokumen Pendukung</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -266,48 +310,8 @@
     </div>
 </div>
 
-<?php if ($status == 'fromdinsos' || $status == 'proses') {  ?>
-    <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-info">
-            <h6 class="m-0 font-weight-bold text-white">Data E-SIK dari Dinsos</h6>
-        </div>
-        <div class="card-body">
-            <div class="row bg-white darker">
-                <div class="col-md-4">
-                    <label for="">
-                        <b>Status</b>
-                    </label>
-                </div>
-                <div class="col-md-8">
-                    Terdaftar
-                </div>
-            </div>
-            <hr class="m-0 p-1">
-            <div class="row bg-white darker">
-                <div class="col-md-4">
-                    <label for="">
-                        <b>Rekomendasi</b>
-                    </label>
-                </div>
-                <div class="col-md-8">
-                    Sangat Direkomendasikan
-                </div>
-            </div>
-            <hr class="m-0 p-1">
-            <div class="row bg-white darker">
-                <div class="col-md-4">
-                    <label for="">
-                        <b>Ket. Tambahan</b>
-                    </label>
-                </div>
-                <div class="col-md-8">
-                    Belum pernah mendapatkan bantuan, merupakan warga miskin.
-                </div>
-            </div>
-        </div>
-    </div>
-<?php } ?>
-<?php if ($status == 'new' || $status == 'fromdinsos') { ?>
+<!-- Tindakan (untuk ajuan baru) -->
+<?php if ($status == 'new') { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-warning">
             <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
@@ -343,6 +347,7 @@
     </div>
 <?php } ?>
 
+<!-- Rekomendasi dari Kesra -->
 <?php if ($status == 'proses') { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-info">
@@ -374,7 +379,8 @@
     </div>
 <?php } ?>
 
-<?php if ($status == 'selesai') { ?>
+<!-- Status Ajuan -->
+<?php if ($status == 'selesai' || $status == 'proses') { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-info">
             <h6 class="m-0 font-weight-bold text-white">Status Ajuan</h6>
@@ -387,7 +393,9 @@
                     </label>
                 </div>
                 <div class="col-md-8">
-                    <span style="border-radius: 5px;" class="text-white bg-danger p-1">Ditolak</span>
+                    <span style="border-radius: 5px;" class="text-white <?= ($status == 'proses') ? 'bg-info' : 'bg-success' ?> p-1">
+                        <?= ($status == 'proses') ? 'Tunggu Mitra' : 'Diterima' ?>
+                    </span>
                 </div>
             </div>
             <hr class="m-0 p-1">
@@ -401,37 +409,32 @@
                     BAZNAS Surakarta
                 </div>
             </div>
-            <hr class="m-0 p-1">
-            <div class="row bg-white darker">
-                <div class="col-md-4">
-                    <label for="">
-                        <b>Alasan (opsional)</b>
-                    </label>
+            <?php if ($status == 'selesai') { ?>
+                <hr class="m-0 p-1">
+                <div class="row bg-white darker">
+                    <div class="col-md-4">
+                        <label for="">
+                            <b>Alasan (opsional)</b>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        Oke, Sudah disurvey
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    Rumah masih layak
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 <?php } ?>
 
+<!-- button -->
 <div class="row">
     <div class="col">
-        <a href="#" class="btn btn-warning btn-icon-split">
+        <a href="/kesra/dftrajuan_l" class="btn btn-warning btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-left"></i>
             </span>
             <span class="text">Kembali</span>
         </a>
-        <?php if ($status == 'new') { ?>
-            <a href="#" class="btn btn-primary btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-save"></i>
-                </span>
-                <span class="text">Konfirmasi ke Dinsos</span>
-            </a>
-        <?php } ?>
         <?php if ($status == 'new' || $status == 'fromdinsos') { ?>
             <a href="#" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
