@@ -94,18 +94,11 @@ $session = \Config\Services::session();
     </div>
 
     <li class="nav-item active">
-        <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#dinSub" aria-expanded="true" aria-controls="dinSub">
+        <a class="nav-link my-1 py-1" href="/dinsos/dftrajuan_i">
             <i class="fa-fw far fa-list-alt"></i>
-            <span>Daftar Ajuan</span>
-        </a>
-        <div id="dinSub" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Daftar Ajuan:</h6>
-                <a class="collapse-item" href="/dinsos/dftrajuan_i">Ajuan Individu</a>
-                <a class="collapse-item" href="/dinsos/dftrajuan_l">Ajuan Lembaga</a>
-            </div>
-        </div>
+            <span>Daftar Ajuan</span></a>
     </li>
+
 <?php } ?>
 
 <?php if ($session->get('privUser') == 4) { ?>

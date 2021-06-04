@@ -3,124 +3,223 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Daftar Ajuan</h1>
+    <h1 class="h3 mb-0 text-gray-800">Daftar Ajuan Individu</h1>
 </div>
 
-<div class="card shadow mb-4">
+<div id="accordion" class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Daftar Ajuan Bantuan Individu</h6>
+        <div>
+            <a class="btn btn-sm btn-warning" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+                Permintaan Rekomendasi
+            </a>
+            <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                Ajuan Dalam Proses
+            </a>
+            <a class="btn btn-sm btn-success" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+                Ajuan Selesai
+            </a>
+        </div>
     </div>
-    <div style="font-size: 12px;" class="card-body">
-        <div class="table-responsive">
-            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <!-- <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select> entries</label></div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>
-                    </div>
-                </div> -->
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                            <thead>
-                                <tr role="row">
-                                    <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 5%;">-</th>
-                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5%;">No</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Bantuan</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 14%;">Status Ajuan</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">Keterangan E-SIk</th>
-                                </tr>
-                            </thead>
-                            <!-- <tfoot>
-                                <tr>
-                                    <th rowspan="1" colspan="1">Name</th>
-                                    <th rowspan="1" colspan="1">Position</th>
-                                    <th rowspan="1" colspan="1">Office</th>
-                                    <th rowspan="1" colspan="1">Age</th>
-                                    <th rowspan="1" colspan="1">Start date</th>
-                                    <th rowspan="1" colspan="1">Salary</th>
-                                </tr>
-                            </tfoot> -->
-                            <tbody>
-                                <tr role="row" class="odd">
-                                    <td>
-                                        <a href="/dinsos/detailajuan_i">
-                                            <i class="far fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td class="sorting_1">1</td>
-                                    <td>Michael Admin</td>
-                                    <td>20 April 2021</td>
-                                    <td>Paket A : Pembelian barang</td>
-                                    <td>
-                                        <span style="border-radius: 5px;" class="small text-white bg-warning p-1"><i class="fa fa-clock-o mr-1"></i>Belum Diverifikasi</span>
-                                    </td>
-                                    <td>
-                                        <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                </tr>
-                                <tr role="row" class="odd">
-                                    <td>
-                                        <a href="/dinsos/detailajuan_i">
-                                            <i class="far fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td class="sorting_1">2</td>
-                                    <td>Salosa Kurniawan</td>
-                                    <td>20 Februari 2021</td>
-                                    <td>Paket B : Pembelian Sembako</td>
-                                    <td>
-                                        <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terverivikasi</span>
-                                    </td>
-                                    <td>
-                                        <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
-                                    </td>
-                                    <td>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, laborum consectetur ab magni dignissimos perspiciatis consequuntur aperiam blanditiis.
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                <li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
-                            </ul>
+    <!-- Tabel Permintaan Rekomendasi -->
+    <div class="collapse show" id="collapseExample1" data-parent="#accordion">
+        <div style="font-size: 12px;" class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-center" role="row">
+                                        <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 5px;">-</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5px;">No</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 50px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 60px;">Jenis Bantuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 50px;">Status Ajuan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            <a href="/dinsos/detailajuan_i?status=new">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                        </td>
+                                        <td class="sorting_1">1</td>
+                                        <td>3312201901987789</td>
+                                        <td>Michael Admin</td>
+                                        <td>20 April 2021</td>
+                                        <td>PMI : Griya PMI Bahagia</td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
+                                        </td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1">Butuh Rekomendasi</span>
+                                        </td>
+                                    </tr>
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            <a href="/dinsos/detailajuan_i?status=new">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                        </td>
+                                        <td class="sorting_1">2</td>
+                                        <td>3312289901980889</td>
+                                        <td>Salosa Kurniawan</td>
+                                        <td>20 Februari 2021</td>
+                                        <td>LAZIS : Sarana Belajar Yatim</td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
+                                        </td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1">Butuh Rekomendasi</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tabel Dalam Proses -->
+    <div class="collapse" id="collapseExample2" data-parent="#accordion">
+        <div style="font-size: 12px;" class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable1" id="dataTable1" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-center" role="row">
+                                        <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 5px;">-</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 10px;">No</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 50px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 60px;">Jenis Bantuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">Rekomendasi</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 50px;">Status Ajuan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            <a href="/dinsos/detailajuan_i?status=proses">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                        </td>
+                                        <td class="sorting_1">1</td>
+                                        <td>3312201901980889</td>
+                                        <td>Michael Admin</td>
+                                        <td>20 April 2021</td>
+                                        <td>BAZNAS : Ndandani Omah</td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star"></span>
+                                        </td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1">Seleksi Mitra</span>
+                                        </td>
+                                    </tr>
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            <a href="/dinsos/detailajuan_i?status=proses">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                        </td>
+                                        <td class="sorting_1">2</td>
+                                        <td>3312201901980999</td>
+                                        <td>Salosa Kurniawan</td>
+                                        <td>20 Februari 2021</td>
+                                        <td>PMI: Pendidikan</td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star oke"></span>
+                                        </td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1">Diproses Kesra</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tabel Ajuan Selesai -->
+    <div class="collapse" id="collapseExample3" data-parent="#accordion">
+        <div style="font-size: 12px;" class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable1" id="dataTable2" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr class="text-center" role="row">
+                                        <th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 5px;">-</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 10px;">No</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 50px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 60px;">Jenis Bantuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">Rekomendasi</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 50px;">Status Ajuan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr role="row" class="odd">
+                                        <td>
+                                            <a href="/dinsos/detailajuan_i?status=selesai">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                        </td>
+                                        <td class="sorting_1">1</td>
+                                        <td>3312201901980889</td>
+                                        <td>Purwo Setiawan</td>
+                                        <td>11 Juni 2021</td>
+                                        <td>BAZNAS : Beasiswa Pendidikan</td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star oke"></span>
+                                            <span class="fa fa-star"></span>
+                                        </td>
+                                        <td>
+                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Disetujui</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
 
 <?= $this->endSection(); ?>

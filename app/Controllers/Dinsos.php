@@ -14,6 +14,9 @@ class Dinsos extends BaseController
     }
     public function detailajuan_i()
     {
-        return view('dinsos/sos_detailajuan_i');
+        $data = [
+            "status" => $this->request->getVar('status')
+        ];
+        return view('dinsos/sos_detailajuan_i', $data);
     }
 }

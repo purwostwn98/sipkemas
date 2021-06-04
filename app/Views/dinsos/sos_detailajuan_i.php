@@ -6,9 +6,10 @@
     <h1 class="h3 mb-0 text-gray-800">> Detail Ajuan</h1>
 </div>
 
+<!-- Data Pemohon -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Pemohon</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Pemohon</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -150,86 +151,12 @@
                 purwostwn98@gmail.com
             </div>
         </div>
-        <hr class="m-0 p-1">
-        <div class="row py-1 bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    Foto Kartu Keluarga
-                    <!-- <br>
-            <span class="text-primary">
-                <i>E-mail</i>
-            </span></label> -->
-            </div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal">
-                Lihat
-            </button>
-            <!-- Modal -->
-            <div class="modal fade bd-example-modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Foto Kartu Keluarga</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="text-center">
-                                <img class="myImg" id="myImg2" src="<?= base_url(); ?>/img/kk.jpeg" alt="KTP" style="width:100%;max-width:800px">
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row py-1 ">
-            <div class="col-md-4">
-                <label for="">
-                    Foto KTP
-                    <!-- <br>
-            <span class="text-primary">
-                <i>E-mail</i>
-            </span></label> -->
-            </div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#ktpModal">
-                Lihat
-            </button>
-            <!-- Modal -->
-            <div class="modal fade bd-example-modal-xl" id="ktpModal" tabindex="-1" role="dialog" aria-labelledby="ktpModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ktpModalLabel">Foto KTP</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="text-center">
-                                <img class="myImg" id="myImg2" src="<?= base_url(); ?>/img/ktp.jpeg" alt="KTP" style="width:100%;max-width:800px">
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
-
+<!-- Data Ajuan Bantuan -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Ajuan Bantuan</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Ajuan Bantuan</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -266,16 +193,16 @@
         </div>
     </div>
 </div>
-
+<!-- Dokumen Pendukung -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Dokumen Pendukung</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Dokumen Pendukung</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
-                    <b>Foto Rumah</b>
+                    <b>Foto Kartu Keluarga</b>
                 </label>
             </div>
             <div class="col-md-8">
@@ -286,7 +213,51 @@
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
-                    <b>Foto Pendukung lainnya</b>
+                    <b>Foto KTP</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Foto Kondisi 1</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Foto Kondisi 2</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Foto Kondisi 3</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Dokumen pendukung lainnya</b>
                 </label>
             </div>
             <div class="col-md-8">
@@ -295,47 +266,134 @@
         </div>
     </div>
 </div>
-
-<div class="card shadow mb-4">
-    <div class="card-header py-3 bg-info">
-        <h6 class="m-0 font-weight-bold text-white">Data E-SIK</h6>
-    </div>
-    <div class="card-body">
-        DATA E-SIK
-    </div>
-</div>
-
-<div class="card shadow mb-4">
-    <div class="card-header py-3 bg-warning">
-        <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
-    </div>
-    <div class="card-body">
-        <div class="row bg-white darker py-2">
-            <div class="col-md-4">
-                <label for="ketRekomen">
-                    <b>Keterangan</b>
-                </label>
+<!-- Tindakan Dinsos -->
+<?php if ($status == 'new') { ?>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-warning">
+            <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
+        </div>
+        <div class="card-body">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="rekomendasi">
+                        <b>Rekomendasi ke Kesra</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <select id="rekomendasi" class="form-control">
+                        <option>Tidak Direkomendasikan</option>
+                        <option>Kurang Direkomendasikan</option>
+                        <option selected>Normal</option>
+                        <option>Lebih Direkomendasikan</option>
+                        <option>Sangat Direkomendasikan</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-md-8">
-                <textarea class="form-control" id="ketRekomen" rows="3"></textarea>
+            <div class="row bg-white darker py-2">
+                <div class="col-md-4">
+                    <label for="ketRekomen">
+                        <b>Ket. Tambahan (opsional)</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <textarea class="form-control" id="ketRekomen" rows="3"></textarea>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php } ?>
+<!-- Rekomendasi Dinsos -->
+<?php if ($status == 'proses' || $status == 'selesai') { ?>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-info">
+            <h6 class="m-0 font-weight-bold text-white">Rekomendasi (Dinsos)</h6>
+        </div>
+        <div class="card-body">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Rekomendasi</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    Kurang Direkomendasikan
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Ket. Rekomendasi</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    Warga miskin, sudah pernah mendapatkan beberapa bantuan
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+<!-- Status Ajuan -->
+<?php if ($status == 'proses' || $status == 'selesai') { ?>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-info">
+            <h6 class="m-0 font-weight-bold text-white">Status Ajuan</h6>
+        </div>
+        <div class="card-body">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Status</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <span style="border-radius: 5px;" class="text-white <?= ($status == 'proses') ? 'bg-info' : 'bg-success' ?> p-1">
+                        <?= ($status == 'proses') ? 'Diproses Mitra' : 'Disetujui' ?>
+                    </span>
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Mitra</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    BAZNAS Surakarta
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Alasan (opsional)</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    Rumah masih layak
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+<!-- Button -->
 <div class="row">
     <div class="col">
-        <a href="#" class="btn btn-warning btn-icon-split">
+        <a href="/dinsos/dftrajuan_i" class="btn btn-warning btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-left"></i>
             </span>
             <span class="text">Kembali</span>
         </a>
-        <a href="#" class="btn btn-primary btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-save"></i>
-            </span>
-            <span class="text">Simpan</span>
-        </a>
+        <?php if ($status == 'new') { ?>
+            <a href="#" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-save"></i>
+                </span>
+                <span class="text">Konfirmasi ke Kesra</span>
+            </a>
+        <?php } ?>
     </div>
 </div>
 
