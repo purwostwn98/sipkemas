@@ -34,124 +34,163 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+    <!-- Google ReCaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <!-- Sweat Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
-
-
     <div class="container mt-4">
-        <div class="row justify-content-center">
-            <div class="col">
+        <div class="row justify-content-md-center">
+            <div class="col-lg-8">
                 <h3 class="mb-3 text-center">Formulir Pendaftaran</h3>
-                <div class="card mb-2">
+                <div class="card o-hidden border-0 shadow-lg mb-2">
                     <div class="card-body">
-                        <form>
-                            <div class="form-group row">
-                                <label for="NIK" class="col-sm-4 col-form-label">NIK</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="nik" class="form-control" id="NIK">
+                        <!-- Form Pendafaran -->
+                        <div id="alertError" class="row" style="display: none;">
+                            <div class="col-12">
+                                <div class="alert alert-warning errortext" role="alert">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="nama" class="col-sm-4 col-form-label">Nama Lengkap</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="nama" class="form-control" id="nama">
+                        </div>
+                        <?= form_open("/pemohon/proses_daftar", ['class' => 'formdaftar']); ?>
+                        <?= csrf_field(); ?>
+                        <input type="hidden" id="gocode" name="gocode" value="">
+                        <!-- NIK -->
+                        <div class="form-group row">
+                            <label for="NIK" class="col-sm-4 col-form-label">NIK</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="NIK" class="form-control" id="NIK">
+                                <div class="invalid-feedback invalidNIK text-center"></div>
+                            </div>
+                        </div>
+                        <!-- Nama Lengkap -->
+                        <div class="form-group row">
+                            <label for="nama" class="col-sm-4 col-form-label">Nama Lengkap</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="nama" class="form-control" id="nama" required>
+                            </div>
+                        </div>
+                        <!-- Tempat Lahir -->
+                        <div class="form-group row">
+                            <label for="tempatlahir" class="col-sm-4 col-form-label">Tempat Lahir</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="tempatlahir" class="form-control" id="tempatlahir" required>
+                            </div>
+                        </div>
+                        <!-- Tanggal Lahir -->
+                        <div class="form-group row">
+                            <label for="tgLahir" class="col-sm-4 col-form-label">Tanggal Lahir</label>
+                            <div class="col-sm-8">
+                                <input type="date" name="tgLahir" class="form-control" id="tgLahir" required>
+                            </div>
+                        </div>
+                        <!-- Jenis Kelamin -->
+                        <div class="form-group row">
+                            <label for="jenkel" class="col-sm-4 col-form-label">Jenis Kelamin</label>
+                            <div class="col-sm-8">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="1">
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        Laki-laki
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" value="2">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        Perempuan
+                                    </label>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="tempatlahir" class="col-sm-4 col-form-label">Tempat Lahir</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="tempatlahir" class="form-control" id="tempatlahir">
+                        </div>
+                        <div id="alertGender" class="row" style="display: none;">
+                            <div class="col-12">
+                                <div class="alert alert-danger errorGender" role="alert">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="tgllahir" class="col-sm-4 col-form-label">Tanggal Lahir</label>
-                                <div class="col-sm-8">
-                                    <input type="date" name="tgllahir" class="form-control" id="tgllahir">
-                                </div>
+                        </div>
+                        <!-- Alamat -->
+                        <div class="form-group row">
+                            <label for="alamat" class="col-sm-4 col-form-label">Alamat</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="alamat" class="form-control" id="alamat" required>
                             </div>
-                            <div class="form-group row">
-                                <label for="tempatlahir" class="col-sm-4 col-form-label">Jenis Kelamin</label>
-                                <div class="col-sm-8">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-                                        <label class="form-check-label" for="exampleRadios1">
-                                            Laki-laki
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                        <label class="form-check-label" for="exampleRadios2">
-                                            Perempuan
-                                        </label>
-                                    </div>
-                                </div>
+                        </div>
+                        <!-- Kecamatan -->
+                        <div class="form-group row">
+                            <label for="kecamatan" class="col-sm-4 col-form-label">Kecamatan</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="kecamatan" name="kecamatan" required>
+                                    <option>--Pilih Kecamatan--</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
                             </div>
-                            <div class="form-group row">
-                                <label for="kecamatan" class="col-sm-4 col-form-label">Kecamatan</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control" id="kecamatan">
-                                        <option>--Pilih Kecamatan--</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <!-- Kelurahan -->
+                        <div class="form-group row">
+                            <label for="kelurahan" class="col-sm-4 col-form-label">Kelurahan</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="kelurahan" name="kelurahan" required>
+                                    <option>--Pilih Kelurahan--</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
                             </div>
-                            <div class="form-group row">
-                                <label for="kelurahan" class="col-sm-4 col-form-label">Kelurahan</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control" id="kelurahan">
-                                        <option>--Pilih Kelurahan--</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="agama" class="col-sm-4 col-form-label">Agama</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="agama" name="agama" required>
+                                    <option>--Pilih Agama--</option>
+                                    <option value="1">Islam</option>
+                                    <option value="2">Protestan</option>
+                                    <option value="3">Katolik</option>
+                                    <option value="4">Hindu</option>
+                                    <option value="5">Buddha</option>
+                                    <option value="6">Konghucu</option>
+                                    <option value="7">Lainnya</option>
+                                </select>
                             </div>
-                            <div class="form-group row">
-                                <label for="agama" class="col-sm-4 col-form-label">Agama</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control" id="agama">
-                                        <option>--Pilih Agama--</option>
-                                        <option>Islam</option>
-                                        <option>Protestan</option>
-                                        <option>Katolik</option>
-                                        <option>Hindu</option>
-                                        <option>Buddha</option>
-                                        <option>Konghucu</option>
-                                        <option>Lainnya</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="telepon" class="col-sm-4 col-form-label">Telepon</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="telepon" class="form-control" id="telepon" required>
                             </div>
-                            <div class="form-group row">
-                                <label for="telepon" class="col-sm-4 col-form-label">Telepon</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="telepon" class="form-control" id="telepon">
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-4 col-form-label">E-mail<span class="req">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="email" name="email" class="form-control" id="email">
                             </div>
-                            <div class="form-group row">
-                                <label for="email" class="col-sm-4 col-form-label">E-mail<span class="req">*</span></label>
-                                <div class="col-sm-8">
-                                    <input type="email" name="email" class="form-control" id="email">
-                                </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <p class="small"><i><span class="req">*</span>boleh kosong jika tidak ada</i></p>
                             </div>
-                            <div class="row mt-4">
-                                <div class="col">
-                                    <p class="small"><i><span class="req">*</span>boleh kosong jika tidak ada</i></p>
-                                </div>
+                        </div>
+                        <div class="form-group row justify-content-md-center">
+                            <div class="g-recaptcha" data-sitekey="6LdlXhwbAAAAACTiuY1WoMackLIWSIVG6FDH6Do8"></div>
+                            <span class="text-danger" id="captcha_error"></span>
+                        </div>
+                        <div class="form-group row justify-content-md-center">
+                            <div class="col-md-auto">
+                                <a href="/home/index" type="button" class="btn btn-warning">Batal</a>
+                                <button type="submit" role="button" class="btn btn-primary btndaftar">Daftar</button>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-8">
-                                    <a href="/home/index" type="button" class="btn btn-warning">Batal</a>
-                                    <button type="submit" class="btn btn-primary">Daftar</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
+                        <?= form_close(); ?>
                     </div>
                 </div>
             </div>
@@ -160,7 +199,6 @@
 
     <!-- FOOTER -->
     <footer id="footer">
-
         <div class="footer-top">
             <div class="container">
                 <div class="row">
@@ -172,39 +210,8 @@
                             Kp. Baru, Kec. Ps. Kliwon<br>
                             Kota Surakarta, Jawa Tengah 57133 <br><br>
                             <strong>Phone:</strong> (0271) 644308<br>
-                            <!-- <strong>Email:</strong> info@example.com<br> -->
                         </p>
                     </div>
-
-                    <!-- <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div> -->
-
-                    <!-- <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Join Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div> -->
                 </div>
             </div>
         </div>
@@ -250,6 +257,74 @@
 
     <!-- Template Main JS File -->
     <script src="<?= base_url(); ?>/assets/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.formdaftar').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "post",
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    beforeSend: function() {
+                        $('.btndaftar').prop('disabled', true);
+                        $('.btndaftar').html('<i class="fa fa-spin fa-spinner"></i>');
+                    },
+                    complete: function() {
+                        $('.btndaftar').prop('disabled', false);
+                        $('.btndaftar').html('Daftar');
+                    },
+                    success: function(response) {
+                        if (response.error) {
+                            if (response.error.Nik) {
+                                $('#alertError').css("display", "block");
+                                $('.errortext').html(response.error.Nik);
+                            } else {
+                                $('#alertError').css("display", "none");
+                                $('.errortext').html('');
+                            }
+                            if (response.error.gender) {
+                                $('#alertGender').css("display", "block");
+                                $('.errorGender').html(response.error.gender);
+                            } else {
+                                $('#alertGender').css("display", "none");
+                                $('.errorGender').html('');
+                            }
+                        }
+                        if (response.a) {
+                            if (response.a.b) {
+                                $('#alertError').css("display", "block");
+                                $('.errortext').html(response.a.b);
+                            } else {
+                                $('#alertError').css("display", "none");
+                                $('.errortext').html('');
+                            }
+                        }
+                        if (response.berhasil) {
+                            swal({
+                                title: response.berhasil.no,
+                                text: "Selamat Anda berhasil terdaftar. Silahkan konfirmasi dengan kelurahan setempat dengan no pendaftaran diatas",
+                                icon: "success",
+                                button: "Ok",
+                            }).then((value) => {
+                                window.location = 'http://sipkemas.puslogin.com/';
+                            });
+                            // window.location = response.berhasil.link;
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    }
+                });
+
+                return false;
+            });
+        });
+    </script>
+
+
+
 
 </body>
 

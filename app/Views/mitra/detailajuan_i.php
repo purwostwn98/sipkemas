@@ -5,10 +5,10 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">> Detail Ajuan</h1>
 </div>
-
+<!-- Data Pemohon -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Pemohon</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Pemohon</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -150,40 +150,12 @@
                 purwostwn98@gmail.com
             </div>
         </div>
-        <hr class="m-0 p-1">
-        <div class="row py-1 bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    Foto Kartu Keluarga
-                    <!-- <br>
-            <span class="text-primary">
-                <i>E-mail</i>
-            </span></label> -->
-            </div>
-            <div class="col-md-8">
-                <button type="submit" class="d-none d-sm-inline-block btn btn-primary btn-sm"><i class="fa-sm fas fa-eye text-white-50"></i> Lihat</button>
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row py-1 ">
-            <div class="col-md-4">
-                <label for="">
-                    Foto KTP
-                    <!-- <br>
-            <span class="text-primary">
-                <i>E-mail</i>
-            </span></label> -->
-            </div>
-            <div class="col-md-8">
-                <button type="submit" class="d-none d-sm-inline-block btn btn-primary btn-sm"><i class="fa-sm fas fa-eye text-white-50"></i> Lihat</button>
-            </div>
-        </div>
     </div>
 </div>
-
+<!-- Data Ajuan Bantuan -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Ajuan Bantuan</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Ajuan Bantuan</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -193,7 +165,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                Paket A
+                BAZNAS: Ndandani Omah
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -204,7 +176,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                Bantuan pengadaan kursi roda
+                Perbaikan Fasilitas MCK
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -220,17 +192,16 @@
         </div>
     </div>
 </div>
-
+<!-- Dokumen Pendukung -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Dokumen Pendukung</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Dokumen Pendukung</h6>
     </div>
     <div class="card-body">
-        <hr class="m-0 p-1">
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
-                    <b>Foto Rumah</b>
+                    <b>Foto Kartu Keluarga</b>
                 </label>
             </div>
             <div class="col-md-8">
@@ -241,7 +212,51 @@
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
-                    <b>Foto Pendukung lainnya</b>
+                    <b>Foto KTP</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Foto Kondisi 1</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Foto Kondisi 2</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Foto Kondisi 3</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Foto
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Dokumen pendukung lainnya</b>
                 </label>
             </div>
             <div class="col-md-8">
@@ -250,17 +265,46 @@
         </div>
     </div>
 </div>
-
-<div class="card shadow mb-4">
+<!-- <div class="card shadow mb-4">
     <div class="card-header py-3 bg-info">
         <h6 class="m-0 font-weight-bold text-white">Data E-SIK</h6>
     </div>
     <div class="card-body">
         DATA E-SIK
     </div>
+</div> -->
+
+<!-- Rekomendasi dari Kesra -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-info">
+        <h6 class="m-0 font-weight-bold text-white">Rekomendasi (Kesra)</h6>
+    </div>
+    <div class="card-body">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Rekomendasi</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Kurang Direkomendasikan
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Ket. Rekomendasi</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Warga miskin, sudah pernah mendapatkan beberapa bantuan
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="card shadow mb-4">
+<!-- <div class="card shadow mb-4">
     <div class="card-header py-3 bg-info">
         <h6 class="m-0 font-weight-bold text-white">Rekomendasi</h6>
     </div>
@@ -286,14 +330,15 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
+<!-- Tindakan -->
 <div class="card shadow mb-4">
     <div class="card-header py-3 bg-warning">
         <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
     </div>
     <div class="card-body">
-        <div class="row bg-white darker">
+        <div class="row bg-white darker py-2">
             <div class="col-md-4">
                 <label for="approval">
                     <b>Persetujuan</b>
@@ -309,12 +354,26 @@
         </div>
         <div class="row bg-white darker py-2">
             <div class="col-md-4">
+                <label for="survey">
+                    <b>Perlu Survey</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                <select id="survey" class="form-control">
+                    <option selected hidden>--Pilih--</option>
+                    <option>Ya</option>
+                    <option>Tidak</option>
+                </select>
+            </div>
+        </div>
+        <div class="row bg-white darker py-2">
+            <div class="col-md-4">
                 <label for="alasan">
                     <b>Alasan</b>
                 </label>
             </div>
             <div class="col-md-8">
-                <textarea class="form-control" id="alasan" rows="3" placeholder="Alasan ditolak atau diterima (tidak wajib)"></textarea>
+                <textarea class="form-control" id="alasan" rows="3" placeholder="Alasan ditolak atau diterima (opsional)"></textarea>
             </div>
         </div>
         <div class="row bg-white darker py-2">
@@ -330,6 +389,7 @@
         </div>
     </div>
 </div>
+<!-- Button -->
 <div class="row">
     <div class="col">
         <a href="#" class="btn btn-warning btn-icon-split">
@@ -342,7 +402,7 @@
             <span class="icon text-white-50">
                 <i class="fas fa-save"></i>
             </span>
-            <span class="text">Simpan</span>
+            <span class="text">Konfirmasi</span>
         </a>
     </div>
 </div>
