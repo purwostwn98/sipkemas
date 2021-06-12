@@ -45,12 +45,12 @@
                                         <td class="sorting_1">1</td>
                                         <td>Michael Admin</td>
                                         <td>20 April 2021</td>
-                                        <td>Paket A : Pembelian barang</td>
+                                        <td>LAZIS : Pendidikan Yatim</td>
                                         <td>
                                             <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
                                         </td>
                                         <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1"><i class="fa fa-clock-o mr-1"></i>Diproses</span>
+                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1"><i class="fa fa-clock-o mr-1"></i>Diproses Mitra</span>
                                         </td>
                                     </tr>
                                     <tr role="row" class="odd">
@@ -62,12 +62,12 @@
                                         <td class="sorting_1">2</td>
                                         <td>Salosa Kurniawan</td>
                                         <td>20 Februari 2021</td>
-                                        <td>Paket B : Pembelian Sembako</td>
+                                        <td>PMI : Griya PMI Peduli</td>
                                         <td>
                                             <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
                                         </td>
                                         <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1"><i class="fa fa-clock-o mr-1"></i>Belum Diverifikasi</span>
+                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1"><i class="fa fa-clock-o mr-1"></i>Diproses Dinsos</span>
                                         </td>
                                     </tr>
                                 </tbody>

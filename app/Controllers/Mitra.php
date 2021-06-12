@@ -14,6 +14,16 @@ class Mitra extends BaseController
     }
     public function detailajuan_i()
     {
-        return view('mitra/detailajuan_i');
+        $data = [
+            'status' => $this->request->getVar('status')
+        ];
+        return view('mitra/detailajuan_i', $data);
+    }
+    public function detailajuan_l()
+    {
+        $data = [
+            'status' => $this->request->getVar('status')
+        ];
+        return view('mitra/detailajuan_l', $data);
     }
 }

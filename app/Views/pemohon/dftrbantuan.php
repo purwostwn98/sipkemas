@@ -16,8 +16,8 @@
                 <div class="table-responsive">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-responsive table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <div class="col-12">
+                                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead class="bg-primary text-white">
                                         <tr role="row">
                                             <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 40px;"><i class="fas fa-location-arrow"></i></th>
@@ -28,18 +28,8 @@
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="E-SIK: activate to sort column ascending" style="width: 49px;">E-SIK</th>
                                         </tr>
                                     </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th rowspan="1" colspan="1">Name</th>
-                                            <th rowspan="1" colspan="1">Position</th>
-                                            <th rowspan="1" colspan="1">Office</th>
-                                            <th rowspan="1" colspan="1">Age</th>
-                                            <th rowspan="1" colspan="1">Start date</th>
-                                            <th rowspan="1" colspan="1">Salary</th>
-                                        </tr>
-                                    </tfoot> -->
                                     <tbody>
-                                        <tr role="row" class="even">
+                                        <!-- <tr role="row" class="even">
                                             <td>
                                                 <a href="/pemohon/timeline">
                                                     <i class="far fa-edit"></i>
@@ -62,7 +52,7 @@
                                                     <span class="text">Terdaftar</span>
                                                 </a>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -72,57 +62,6 @@
             </div>
         </div>
     </div>
-    <!-- <div class="col-md-4">
-        <div class="card shadow">
-            <div class="card-header py-3 bg-primary">
-                <h6 class="m-0 font-weight-bold text-white">Daftar Sekarang</h6>
-            </div>
-            <div class="card-body">
-                <div class="card border-left-primary h-100">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="h5 mb-0 font-weight-bold text-primary-800">
-                                    <a href="#">Paket A</a>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card border-left-success h-100 mt-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="h5 mb-0 font-weight-bold text-success-800">
-                                    <a class="text-success" href="#">Paket B</a>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card border-left-warning h-100 mt-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="h5 mb-0 font-weight-bold text-warning-800">
-                                    <a class="text-warning" href="#">Paket C</a>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </div>
 
 <?= $this->endSection(); ?>

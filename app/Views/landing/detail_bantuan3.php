@@ -44,8 +44,9 @@
     <section class="inner-page mt-0">
       <div class="container mt-0">
         <div class="row">
-          <div class="col">
+          <div class="col-12 d-sm-flex align-items-center justify-content-between mb-2">
             <h4 class="text-center mb-3 mt-0">Program BAZNAS Surakarta</h4>
+            <a href="/home/daftar" style="background-color: #2487ce;" class="btn text-white">Formulir Pendaftaran</a>
           </div>
         </div>
         <div id="accordion">

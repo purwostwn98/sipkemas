@@ -44,9 +44,9 @@
                                         <td class="sorting_1">1</td>
                                         <td>Panti Asuhan A</td>
                                         <td>20 April 2021</td>
-                                        <td>Paket A : Pembelian barang</td>
+                                        <td>BAZNAS : Advokasi & Dakwah</td>
                                         <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1"><i class="fa fa-clock-o mr-1"></i>Diproses</span>
+                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1"><i class="fa fa-clock-o mr-1"></i>Diproses Kesra</span>
                                         </td>
                                     </tr>
                                     <tr role="row" class="odd">
@@ -58,9 +58,9 @@
                                         <td class="sorting_1">2</td>
                                         <td>Masjid Al Falah</td>
                                         <td>20 Februari 2021</td>
-                                        <td>Paket B : Pembelian Sembako</td>
+                                        <td>BAZNAS : Advokasi & Dakwah</td>
                                         <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1"><i class="fa fa-clock-o mr-1"></i>Diproses</span>
+                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1"><i class="fa fa-clock-o mr-1"></i>Diproses Mitra</span>
                                         </td>
                                     </tr>
                                 </tbody>

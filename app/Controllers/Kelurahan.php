@@ -2,31 +2,58 @@
 
 namespace App\Controllers;
 
+use App\Models\PemohonModel;
+
 class Kelurahan extends BaseController
 {
+    protected $pemohonModel;
+    public function __construct()
+    {
+        $this->pemohonModel = new PemohonModel();
+    }
     public function dftrpemohon_i()
     {
-        return view('kelurahan/kel_dftrpemohon_i');
+        $data = [
+            'bttn' => 'dftrpemohon',
+            'pemohonBaru' => $this->pemohonModel->where('stsPendaftaran', 0)->findAll(),
+            'pemohon_terdaftar' => $this->pemohonModel->where('stsPendaftaran', 1)->findAll()
+        ];
+        return view('kelurahan/kel_dftrpemohon_i', $data);
     }
     public function dftrpemohon_l()
     {
-        return view('kelurahan/kel_dftrpemohon_l');
+        $data = [
+            'bttn' => 'dftrpemohon'
+        ];
+        return view('kelurahan/kel_dftrpemohon_l', $data);
     }
     public function dftrajuan_i()
     {
-        return view('kelurahan/kel_dftrajuan_i');
+        $data = [
+            'bttn' => 'dftrajuan'
+        ];
+        return view('kelurahan/kel_dftrajuan_i', $data);
     }
     public function dftrajuan_l()
     {
-        return view('kelurahan/kel_dftrajuan_l');
+        $data = [
+            'bttn' => 'dftrajuan'
+        ];
+        return view('kelurahan/kel_dftrajuan_l', $data);
     }
     public function detailajuan_i()
     {
-        return view('kelurahan/kel_detailajuan_i');
+        $data = [
+            'bttn' => 'dftrajuan'
+        ];
+        return view('kelurahan/kel_detailajuan_i', $data);
     }
     public function detailajuan_l()
     {
-        return view('kelurahan/kel_detailajuan_l');
+        $data = [
+            'bttn' => 'dftrajuan'
+        ];
+        return view('kelurahan/kel_detailajuan_l', $data);
     }
     public function form_ajuan()
     {

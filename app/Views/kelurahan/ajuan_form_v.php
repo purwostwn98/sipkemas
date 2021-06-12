@@ -6,8 +6,8 @@
     <h1 class="h3 mb-0 text-gray-800">FORM AJUAN BANTUAN</h1>
 
 </div>
-
-<div class="card shadow mb-4">
+<!-- Data Pemohon -->
+<!-- <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Data Pemohon</h6>
     </div>
@@ -78,8 +78,8 @@
             </div>
         </div>
     </div>
-</div>
-
+</div> -->
+<!-- Form Ajuan -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Ajuan Bantuan</h6>
@@ -92,7 +92,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="form-group has-danger">
-                    <select class="form-control col-sm-12  border-left-info animated--grow-in" name="jnsbantuan" id="div">
+                    <select class="form-control col-sm-12  border-left-info animated--grow-in" name="jnsbantuan" id="div" onchange="getval(this);">
                         <option value="1">Individu</option>
                         <option value="2">Lembaga</option>
                     </select>
@@ -142,6 +142,51 @@
         </div>
     </div>
 </div>
+<!-- Identitas Lembaga -->
+<div id="form_lembaga" style="display: none;" class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Identitas Lembaga</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <label for="">Nama Lembaga</label>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group has-danger">
+                    <input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value="">
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <label for="">Alamat Lembaga</label>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group has-danger">
+                    <input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value="">
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <label for="">No. Lembaga</label>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group has-danger">
+                    <input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value="">
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+</div>
+<!-- Persyaratan Ajuan -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Persyaratan Bantuan</h6>
@@ -218,15 +263,26 @@
             <div class="col-sm-1"> </div>
             <div class="checkbox">
                 <label for="persetujuan"><input type="checkbox" name="persetujuan" id="persetujuan" required="">
-                    Menyatakan bahwa apa yang tertulis pada formulir benar adanya dan berhak menerima bantuan yang diajukan.</label>
+                    Menyatakan bahwa apa yang tertulis pada formulir dan syarat yang diunggah benar adanya dan bersedia dibatalkan ajuannya apabila
+                    data tidak valid.</label>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-4"> </div>
-            <button class="btn btn-success btn-md btn-icon-split" target="_blank" onclick="tombol()"><span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Simpan</span></button>&nbsp;&nbsp;
+            <button class="btn btn-success btn-md btn-icon-split" target="_blank" onclick="tombol()"><span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Ajukan</span></button>&nbsp;&nbsp;
             <button class="btn btn-danger btn-md btn-icon-split" onclick="del(this.value)" value="A310190001"><span class="icon text-white-50"> <i class="fas fa-trash"></i></span><span class="text">Batal</span></button>
         </div>
     </div>
 </div>
+
+<script>
+    function getval(sel) {
+        if (sel.value == "1") {
+            $("#form_lembaga").css("display", "none");
+        } else if (sel.value == "2") {
+            $("#form_lembaga").css("display", "block");
+        }
+    }
+</script>
 <?= $this->endSection(); ?>

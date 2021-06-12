@@ -13,6 +13,15 @@ $session = \Config\Services::session();
             <i class="fa-fw fas fa-user-tie"></i>
             <span>Data Pemohon </span></a>
     </li>
+    <li class="<?php if ($bttn == 'ajuanbantuan') {
+                    echo 'nav-item active';
+                } else {
+                    echo 'nav-item';
+                } ?> ">
+        <a class="nav-link my-1 py-1" href="/pemohon/ajuanbantuan">
+            <i class="fas fa-list-alt fa-fw"></i>
+            <span>Ajuan Bantuan</span></a>
+    </li>
     <li class="<?php if ($bttn == 'alur_bantuan') {
                     echo 'nav-item active';
                 } else {
@@ -22,15 +31,6 @@ $session = \Config\Services::session();
             <i class="fab fa-stumbleupon-circle fa-fw"></i>
             <span>Alur Bantuan</span>
         </a>
-    </li>
-    <li class="<?php if ($bttn == 'ajuanbantuan') {
-                    echo 'nav-item active';
-                } else {
-                    echo 'nav-item';
-                } ?> ">
-        <a class="nav-link my-1 py-1" href="/pemohon/ajuanbantuan">
-            <i class="fas fa-list-alt fa-fw"></i>
-            <span>Ajuan Bantuan</span></a>
     </li>
     <li class="<?php if ($bttn == 'syarat_ketentuan') {
                     echo 'nav-item active';
@@ -51,19 +51,13 @@ $session = \Config\Services::session();
     <!-- <div class="sidebar-heading">
                     Halaman Kelurahan
                 </div> -->
-    <li class="nav-item active">
+    <li class="nav-item <?= ($bttn == 'dtpemohon' || $bttn == 'dftrpemohon') ? 'active' : '' ?>">
         <a class="nav-link my-1 py-1" href="/kelurahan/dftrpemohon_i">
             <i class="fa-fw far fa-address-book"></i>
             <span>Daftar Pemohon</span>
         </a>
     </li>
-    <li class="nav-item active">
-        <a class="nav-link my-1 py-1" href="/kelurahan/alur_bantuan">
-            <i class="fab fa-stumbleupon-circle fa-fw"></i>
-            <span>Alur Bantuan</span>
-        </a>
-    </li>
-    <li class="nav-item active">
+    <li class="nav-item <?= ($bttn == 'dftrajuan') ? 'active' : '' ?>">
         <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#kel_ajuan" aria-expanded="true" aria-controls="kel_ajuan">
             <i class="fa-fw far fa-list-alt"></i>
             <span>Daftar Ajuan</span>
@@ -76,14 +70,12 @@ $session = \Config\Services::session();
             </div>
         </div>
     </li>
-
-    <li class="nav-item active">
-        <a class="nav-link my-1 py-1" href="/kelurahan/syarat_ketentuan">
-            <i class="fas fa-hands-helping fa-fw"></i>
-            <span>Ajukan Bantuan</span></a>
+    <li class="nav-item <?= ($bttn == 'alur_bantuan') ? 'active' : '' ?>">
+        <a class="nav-link my-1 py-1" href="/kelurahan/alur_bantuan">
+            <i class="fab fa-stumbleupon-circle fa-fw"></i>
+            <span>Alur Bantuan</span>
+        </a>
     </li>
-
-
 <?php } ?>
 
 <?php if ($session->get('privUser') == 3) { ?>

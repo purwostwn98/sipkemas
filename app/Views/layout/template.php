@@ -70,7 +70,6 @@ $session = \Config\Services::session();
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
                     <!-- Topbar Search -->
                     <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
@@ -82,8 +81,13 @@ $session = \Config\Services::session();
                             </div>
                         </div>
                     </form> -->
-                    <a href="/home/index" class="logo mr-auto"><img style="max-height: 50px;" src="<?= base_url(); ?>/assets/img/pemkot_solo.png" alt="" class="img-fluid"></a>
-
+                    <div class="row mr-auto">
+                        <a href="/home/index" class="logo ml-3"><img style="max-height: 50px;" src="<?= base_url(); ?>/assets/img/logo_pms.png" alt="" class="img-fluid"></a>
+                        <span style="color: #2487ce; font-size: 14px;" class="ml-1 d-none d-lg-block">
+                            <b> Sekretariat Daerah Bidang Kesejahteraan Rakyat </b><br>
+                            Pemerintah Kota Surakarta
+                        </span>
+                    </div>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - Alerts -->
@@ -133,9 +137,7 @@ $session = \Config\Services::session();
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div> 
                         </li> -->
-
                         <div class="topbar-divider d-none d-sm-block"></div>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -165,21 +167,16 @@ $session = \Config\Services::session();
                         </li>
 
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Konten -->
                     <?= $this->renderSection("konten"); ?>
-
                 </div>
                 <!-- End of Main Content -->
             </div>
             <!-- End of Main Content -->
-
-
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -189,18 +186,14 @@ $session = \Config\Services::session();
                 </div>
             </footer>
             <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
-
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

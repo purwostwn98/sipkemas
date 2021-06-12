@@ -5,10 +5,10 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">> Detail Ajuan</h1>
 </div>
-
+<!-- Data Pemohon -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Pemohon</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Pemohon</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -152,10 +152,10 @@
         </div>
     </div>
 </div>
-
+<!-- Data Ajuan Bantuan -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Ajuan Bantuan</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Ajuan Bantuan</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -165,7 +165,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                Paket A
+                PMI: Griya PMI Peduli
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -192,10 +192,10 @@
         </div>
     </div>
 </div>
-
+<!-- Dokumen Pendukung -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Dokumen Pendukung</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Dokumen Pendukung</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -265,17 +265,17 @@
         </div>
     </div>
 </div>
-
+<!-- Rekomendasi dari Dinsos -->
 <?php if ($status == 'fromdinsos' || $status == 'proses') {  ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-info">
-            <h6 class="m-0 font-weight-bold text-white">Data E-SIK dari Dinsos</h6>
+            <h6 class="m-0 font-weight-bold text-white">Rekomendasi dari Dinsos</h6>
         </div>
         <div class="card-body">
             <div class="row bg-white darker">
                 <div class="col-md-4">
                     <label for="">
-                        <b>Status</b>
+                        <b>E-SIK</b>
                     </label>
                 </div>
                 <div class="col-md-8">
@@ -291,6 +291,11 @@
                 </div>
                 <div class="col-md-8">
                     Sangat Direkomendasikan
+                    (<i class="fa fa-star oke"></i>
+                    <span class="fa fa-star oke"></span>
+                    <span class="fa fa-star oke"></span>
+                    <span class="fa fa-star oke"></span>
+                    <span class="fa fa-star oke"></span>)
                 </div>
             </div>
             <hr class="m-0 p-1">
@@ -307,28 +312,79 @@
         </div>
     </div>
 <?php } ?>
+<!-- Tindakan Rekomendasi -->
 <?php if ($status == 'new' || $status == 'fromdinsos') { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-warning">
             <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
         </div>
         <div class="card-body">
-            <div class="row bg-white darker">
+            <!-- Option Rekomendasi -->
+            <div class="row bg-white py-2 darker">
                 <div class="col-md-4">
                     <label for="rekomendasi">
                         <b>Rekomendasi ke Mitra</b>
                     </label>
                 </div>
                 <div class="col-md-8">
-                    <select id="rekomendasi" class="form-control">
-                        <option>Tidak Direkomendasikan</option>
-                        <option>Kurang Direkomendasikan</option>
-                        <option selected>Normal</option>
-                        <option>Lebih Direkomendasikan</option>
-                        <option>Sangat Direkomendasikan</option>
-                    </select>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios1" value="5">
+                        <label class="form-check-label" for="exampleRadios1">
+                            Sangat Direkomendasikan
+                            (<span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios2" value="4">
+                        <label class="form-check-label" for="exampleRadios2">
+                            Lebih Direkomendasikan
+                            (<i class="fa fa-star oke"></i>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star"></span>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios3" value="3">
+                        <label class="form-check-label" for="exampleRadios3">
+                            Direkomendasikan
+                            (<i class="fa fa-star oke"></i>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios5" value="1">
+                        <label class="form-check-label" for="exampleRadios5">
+                            Kurang Direkomendasikan
+                            (<i class="fa fa-star oke"></i>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios4" value="2">
+                        <label class="form-check-label" for="exampleRadios4">
+                            Tidak Direkomendasikan
+                            (<i class="fa fa-star oke"></i>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>)
+                        </label>
+                    </div>
                 </div>
             </div>
+            <!-- <hr class="m-0 p-1"> -->
             <div class="row bg-white darker py-2">
                 <div class="col-md-4">
                     <label for="ketRekomen">
@@ -342,8 +398,8 @@
         </div>
     </div>
 <?php } ?>
-
-<?php if ($status == 'proses') { ?>
+<!-- Rekomendasi Kesra -->
+<?php if ($status == 'proses' || $status == 'selesai') { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-info">
             <h6 class="m-0 font-weight-bold text-white">Rekomendasi (Kesra)</h6>
@@ -357,6 +413,11 @@
                 </div>
                 <div class="col-md-8">
                     Kurang Direkomendasikan
+                    (<i class="fa fa-star oke"></i>
+                    <span class="fa fa-star oke"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>)
                 </div>
             </div>
             <hr class="m-0 p-1">
@@ -373,7 +434,7 @@
         </div>
     </div>
 <?php } ?>
-
+<!-- Status Ajuan -->
 <?php if ($status == 'selesai') { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-info">
@@ -405,7 +466,7 @@
             <div class="row bg-white darker">
                 <div class="col-md-4">
                     <label for="">
-                        <b>Alasan (opsional)</b>
+                        <b>Alasan</b>
                     </label>
                 </div>
                 <div class="col-md-8">
@@ -415,7 +476,7 @@
         </div>
     </div>
 <?php } ?>
-
+<!-- Button -->
 <div class="row">
     <div class="col">
         <a href="#" class="btn btn-warning btn-icon-split">

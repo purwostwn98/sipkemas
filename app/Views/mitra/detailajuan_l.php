@@ -5,7 +5,6 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">> Detail Ajuan</h1>
 </div>
-
 <!-- Data Pemohon -->
 <div class="card shadow mb-4">
     <div class="card-header bg-info py-3">
@@ -153,6 +152,46 @@
         </div>
     </div>
 </div>
+<!-- Data Lembaga -->
+<div class="card shadow mb-4">
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Lembaga</h6>
+    </div>
+    <div class="card-body">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Nama Lembaga</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Panti Asuhan ABC
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Alamat Lembaga</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Jl. Letjen Sutoyo, Ngadisono, RT 03/RW 01, Joglo, Banjarsari, Surakarta
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>No. Lembaga</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                699988986
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Data Ajuan Bantuan -->
 <div class="card shadow mb-4">
     <div class="card-header bg-info py-3">
@@ -166,7 +205,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                PMI: Griya PMI Peduli
+                BAZNAS: Ndandani Omah
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -177,7 +216,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                Bantuan pengadaan kursi roda
+                Perbaikan Fasilitas MCK
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -266,7 +305,41 @@
         </div>
     </div>
 </div>
-<!-- Tindakan Dinsos -->
+<!-- Rekomendasi dari Kesra -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-info">
+        <h6 class="m-0 font-weight-bold text-white">Rekomendasi (Kesra)</h6>
+    </div>
+    <div class="card-body">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Rekomendasi</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Kurang Direkomendasikan
+                (<i class="fa fa-star oke"></i>
+                <span class="fa fa-star oke"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>)
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Ket. Rekomendasi</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                Warga miskin, sudah pernah mendapatkan beberapa bantuan
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Tindakan Baru -->
 <?php if ($status == 'new') { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-warning">
@@ -275,145 +348,98 @@
         <div class="card-body">
             <div class="row bg-white darker py-2">
                 <div class="col-md-4">
-                    <label for="stsESIK">
-                        <b>E-SIK</b>
+                    <label for="approval">
+                        <b>Persetujuan</b>
                     </label>
                 </div>
                 <div class="col-md-8">
-                    <select id="stsESIK" class="form-control">
+                    <select id="approval" class="form-control" name="persetujuan" onchange="getval(this);">
                         <option selected value="" disabled>--Pilih--</option>
-                        <option>Terdaftar</option>
-                        <option>Belum Terdaftar</option>
+                        <option value="1">Disetujui</option>
+                        <option value="2">Perlu Survey</option>
+                        <option value="3">Ditolak</option>
+                    </select>
+                </div>
+            </div>
+            <div style="display: none;" class="disetujui">
+                <div class="row bg-white darker py-2">
+                    <div class="col-md-4">
+                        <label for="alasan">
+                            <b>Alasan</b>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <textarea class="form-control" id="alasan" rows="3" placeholder="Alasan disetujui atau ditolak (opsional)"></textarea>
+                    </div>
+                </div>
+                <div class="nilai">
+                    <div class="row bg-white darker py-2">
+                        <div class="col-md-4">
+                            <label for="alasan">
+                                <b>Nilai Bantuan</b>
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai">
+                            <small id="nilai" class="form-text text-muted">Isikan nominal bantuan misalnya 750000 (Jika tidak disetujui isikan 0)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+<!-- Tindakan setelah survey -->
+<?php if ($status == 'survey') { ?>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-warning">
+            <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
+        </div>
+        <div class="card-body">
+            <div class="row bg-white darker py-2">
+                <div class="col-md-4">
+                    <label for="approval">
+                        <b>Persetujuan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <select id="approval" class="form-control" name="persetujuan" onchange="getnilai(this);">
+                        <option selected value="" disabled>--Pilih--</option>
+                        <option value="1">Disetujui</option>
+                        <option value="2">Ditolak</option>
                     </select>
                 </div>
             </div>
             <div class="row bg-white darker py-2">
                 <div class="col-md-4">
-                    <label for="rekomendasi">
-                        <b>Rekomendasi ke Kesra</b>
+                    <label for="alasan">
+                        <b>Alasan</b>
                     </label>
                 </div>
-                <!-- Option Rekomendasi -->
                 <div class="col-md-8">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios1" value="5">
-                        <label class="form-check-label" for="exampleRadios1">
-                            Sangat Direkomendasikan
-                            (<span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios2" value="4">
-                        <label class="form-check-label" for="exampleRadios2">
-                            Lebih Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios3" value="3">
-                        <label class="form-check-label" for="exampleRadios3">
-                            Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios5" value="1">
-                        <label class="form-check-label" for="exampleRadios5">
-                            Kurang Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios4" value="2">
-                        <label class="form-check-label" for="exampleRadios4">
-                            Tidak Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
-                    </div>
+                    <textarea class="form-control" id="alasan" rows="3" placeholder="Alasan disetujui atau ditolak (opsional)"></textarea>
                 </div>
             </div>
-            <div class="row bg-white darker py-2">
-                <div class="col-md-4">
-                    <label for="ketRekomen">
-                        <b>Ket. Tambahan (opsional)</b>
-                    </label>
-                </div>
-                <div class="col-md-8">
-                    <textarea class="form-control" id="ketRekomen" rows="3"></textarea>
+            <div class="nilai2">
+                <div class="row bg-white darker py-2">
+                    <div class="col-md-4">
+                        <label for="alasan">
+                            <b>Nilai Bantuan</b>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="number" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai">
+                        <small id="nilai" class="form-text text-muted">Isikan nominal bantuan misalnya 750000 (Jika tidak disetujui isikan 0)</small>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 <?php } ?>
-<!-- Rekomendasi Dinsos -->
-<?php if ($status == 'proses' || $status == 'selesai') { ?>
-    <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-info">
-            <h6 class="m-0 font-weight-bold text-white">Rekomendasi (Dinsos)</h6>
-        </div>
-        <div class="card-body">
-            <div class="row bg-white darker">
-                <div class="col-md-4">
-                    <label for="">
-                        <b>E-SIK</b>
-                    </label>
-                </div>
-                <div class="col-md-8">
-                    Terdaftar
-                </div>
-            </div>
-            <hr class="m-0 p-1">
-            <div class="row bg-white darker">
-                <div class="col-md-4">
-                    <label for="">
-                        <b>Rekomendasi</b>
-                    </label>
-                </div>
-                <div class="col-md-8">
-                    Kurang Direkomendasikan
-                    (<i class="fa fa-star oke"></i>
-                    <span class="fa fa-star oke"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>)
-                </div>
-            </div>
-            <hr class="m-0 p-1">
-            <div class="row bg-white darker">
-                <div class="col-md-4">
-                    <label for="">
-                        <b>Ket. Rekomendasi</b>
-                    </label>
-                </div>
-                <div class="col-md-8">
-                    Warga miskin, sudah pernah mendapatkan beberapa bantuan
-                </div>
-            </div>
-        </div>
-    </div>
-<?php } ?>
+
 <!-- Status Ajuan -->
-<?php if ($status == 'proses' || $status == 'selesai') { ?>
+<?php if ($status == 'selesai') { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-info">
             <h6 class="m-0 font-weight-bold text-white">Status Ajuan</h6>
@@ -426,9 +452,7 @@
                     </label>
                 </div>
                 <div class="col-md-8">
-                    <span style="border-radius: 5px;" class="text-white <?= ($status == 'proses') ? 'bg-info' : 'bg-success' ?> p-1">
-                        <?= ($status == 'proses') ? 'Diproses Mitra' : 'Disetujui' ?>
-                    </span>
+                    <span style="border-radius: 5px;" class="text-white bg-danger p-1">Ditolak</span>
                 </div>
             </div>
             <hr class="m-0 p-1">
@@ -446,7 +470,7 @@
             <div class="row bg-white darker">
                 <div class="col-md-4">
                     <label for="">
-                        <b>Alasan (opsional)</b>
+                        <b>Alasan</b>
                     </label>
                 </div>
                 <div class="col-md-8">
@@ -459,43 +483,43 @@
 <!-- Button -->
 <div class="row">
     <div class="col">
-        <a href="/dinsos/dftrajuan_i" class="btn btn-warning btn-icon-split">
+        <a href="/mitra/dftrajuan_l" class="btn btn-warning btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-left"></i>
             </span>
             <span class="text">Kembali</span>
         </a>
-        <?php if ($status == 'new') { ?>
+        <?php if ($status != 'selesai') { ?>
             <a href="#" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-save"></i>
                 </span>
-                <span class="text">Konfirmasi ke Kesra</span>
+                <span class="text">Konfirmasi</span>
             </a>
         <?php } ?>
     </div>
 </div>
 
-<script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
 
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
-    var img = document.getElementById("myImg");
-    var modalImg = document.getElementById("img01");
-    var captionText = document.getElementById("caption");
-    img.onclick = function() {
-        modal.style.display = "block";
-        modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
+<script>
+    function getval(sel) {
+        if (sel.value == "1") {
+            $(".disetujui").css("display", "block");
+            $(".nilai").css("display", "block");
+        } else if (sel.value == "2") {
+            $(".disetujui").css("display", "none");
+        } else if (sel.value == "3") {
+            $(".disetujui").css("display", "block");
+            $(".nilai").css("display", "none");
+        }
     }
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
+    function getnilai(sel) {
+        if (sel.value == "1") {
+            $(".nilai2").css("display", "block");
+        } else if (sel.value == "2") {
+            $(".nilai2").css("display", "none");
+        }
     }
 </script>
 

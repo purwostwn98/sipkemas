@@ -15,9 +15,13 @@ class Pemohon extends BaseController
     public function dtpemohon()
     {
         $konfirmasi = $this->request->getVar('konfirmasi');
+        $noDaftar = $this->request->getVar('no');
         $data = [
             'bttn' => 'dtpemohon',
-            'konfirmasi' => $konfirmasi
+            'konfirmasi' => $konfirmasi,
+            'pemohon' => $this->pemohonModel->where('noDaftar', $noDaftar)
+                ->join('eagama', 'eagama.idAgama = mpemohon.idAgama')
+                ->first()
         ];
         return view('pemohon/dtpemohon', $data);
     }
@@ -115,6 +119,27 @@ class Pemohon extends BaseController
                 ];
                 echo json_encode($msg);
             };
+        }
+    }
+
+    //Konfirmasi Pendaftaran
+    public function konfirmasi()
+    {
+        $noDaftar = $this->request->getVar('no');
+        $status = $this->request->getVar('konfirmasi');
+        $data = [
+            'stsPendaftaran' => $status
+        ];
+        if ($this->pemohonModel->set($data)->where('noDaftar', $noDaftar)->update()) {
+            return redirect()->to('/kelurahan/dftrpemohon_i');
+        }
+    }
+
+    public function hapus()
+    {
+        $idPemohon = $this->request->getVar('no');
+        if ($this->pemohonModel->delete($idPemohon)) {
+            return redirect()->to('/kelurahan/dftrpemohon_i');
         }
     }
 }

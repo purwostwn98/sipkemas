@@ -20,6 +20,7 @@
             </a>
         </div>
     </div>
+    <!-- Tabel Ajuan Bantuan -->
     <div class="collapse show" id="collapseExample1" data-parent="#accordion">
         <div style="font-size: 12px;" class="card-body">
             <div class="table-responsive">
@@ -49,13 +50,13 @@
                                         <td class="sorting_1">1</td>
                                         <td>3312201901980001</td>
                                         <td>Sarno</td>
-                                        <td>20 April 2021</td>
-                                        <td>Paket A : Pembelian barang</td>
+                                        <td>20 Maret 2021</td>
+                                        <td>BAZNAS : Ekonomi Kreatif</td>
                                         <td>
                                             <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
                                         </td>
                                         <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1"><i class="fa fa-clock-o mr-1"></i>Dari Dinsos</span>
+                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1"><i class="fa fa-clock-o mr-1"></i>Dari Dinsos</span>
                                         </td>
                                     </tr>
                                     <tr role="row" class="odd">
@@ -66,14 +67,14 @@
                                         </td>
                                         <td class="sorting_1">2</td>
                                         <td>3312201901980889</td>
-                                        <td>Salosa Kurniawan</td>
-                                        <td>20 Februari 2021</td>
-                                        <td>Paket B : Pembelian Sembako</td>
+                                        <td>Bayu Prakosa</td>
+                                        <td>20 Januari 2021</td>
+                                        <td>LAZIS : Pendidikan Yatim</td>
                                         <td>
                                             <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
                                         </td>
                                         <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1"><i class="fa fa-clock-o mr-1"></i>Ajuan Baru</span>
+                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1"><i class="fa fa-clock-o mr-1"></i>Dari Dinsos</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -84,6 +85,7 @@
             </div>
         </div>
     </div>
+    <!-- Tabel Dalam Proses -->
     <div class="collapse" id="collapseExample2" data-parent="#accordion">
         <div style="font-size: 12px;" class="card-body">
             <div class="table-responsive">
@@ -101,7 +103,7 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Bantuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 20px;">Rekomendasi</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 89px;">Status Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 50px;">Status Ajuan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -115,7 +117,7 @@
                                         <td>3312201901980889</td>
                                         <td>Anto</td>
                                         <td>20 April 2021</td>
-                                        <td>Paket A : Pembelian barang</td>
+                                        <td>PMI : Griya PMI Bahagia</td>
                                         <td>
                                             <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
                                         </td>
@@ -136,7 +138,7 @@
                                         <td>7689001901980889</td>
                                         <td>Salosa Kurniawan</td>
                                         <td>20 Februari 2021</td>
-                                        <td>Paket B : Pembelian Sembako</td>
+                                        <td>LAZIS : Sarana Pendidikan Yatim</td>
                                         <td>
                                             <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
                                         </td>
@@ -148,7 +150,7 @@
                                             <span class="fa fa-star"></span>
                                         </td>
                                         <td class="text-center">
-                                            <span style="border-radius: 5px;" class="text-center small text-white bg-success p-1">Tunggu Mitra</span>
+                                            <span style="border-radius: 5px;" class="text-center small text-white bg-success p-1">Seleksi Mitra</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -159,6 +161,7 @@
             </div>
         </div>
     </div>
+    <!-- Tabel Ajuan Selesai -->
     <div class="collapse" id="collapseExample3" data-parent="#accordion">
         <div style="font-size: 12px;" class="card-body">
             <div class="table-responsive">

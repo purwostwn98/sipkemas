@@ -3,7 +3,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Daftar Ajuan</h1>
+    <h1 class="h3 mb-0 text-gray-800">Daftar Ajuan Individu</h1>
 </div>
 
 <div id="accordion" class="card shadow mb-4">
@@ -45,7 +45,7 @@
                                 <tbody>
                                     <tr role="row" class="odd">
                                         <td>
-                                            <a href="/mitra/detailajuan_i">
+                                            <a href="/mitra/detailajuan_i?status=new">
                                                 <i class="far fa-edit"></i>
                                             </a>
                                         </td>
@@ -53,7 +53,7 @@
                                         <td>3312201901984489</td>
                                         <td>Michael User</td>
                                         <td>30 April 2021</td>
-                                        <td>Paket A : Pembelian barang</td>
+                                        <td>LAZIS : Santunan Gizi Yatim</td>
                                         <td>
                                             <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
                                         </td>
@@ -70,7 +70,7 @@
                                     </tr>
                                     <tr role="row" class="odd">
                                         <td>
-                                            <a href="/mitra/detailajuan_i">
+                                            <a href="/mitra/detailajuan_i?status=new">
                                                 <i class="far fa-edit"></i>
                                             </a>
                                         </td>
@@ -78,7 +78,7 @@
                                         <td>3312207801987789</td>
                                         <td>Salosa Kurniawan</td>
                                         <td>20 Februari 2021</td>
-                                        <td>Paket B : Pembelian Sembako</td>
+                                        <td>LAZIS: Bantuan Paket Internet</td>
                                         <td>
                                             <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
                                         </td>
@@ -95,7 +95,7 @@
                                     </tr>
                                     <tr role="row" class="odd">
                                         <td>
-                                            <a href="/mitra/detailajuan_i">
+                                            <a href="/mitra/detailajuan_i?status=new">
                                                 <i class="far fa-edit"></i>
                                             </a>
                                         </td>
@@ -103,7 +103,7 @@
                                         <td>6712207801987789</td>
                                         <td>Fulandari</td>
                                         <td>19 Januari 2021</td>
-                                        <td>Paket C : Bantuan Dana</td>
+                                        <td>PMI: Dompet Kemanusiaan</td>
                                         <td>
                                             <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
                                         </td>
@@ -150,7 +150,7 @@
                                 <tbody>
                                     <tr role="row" class="odd">
                                         <td>
-                                            <a href="/mitra/detailajuan_i">
+                                            <a href="/mitra/detailajuan_i?status=survey">
                                                 <i class="far fa-edit"></i>
                                             </a>
                                         </td>
@@ -175,7 +175,7 @@
                                     </tr>
                                     <tr role="row" class="odd">
                                         <td>
-                                            <a href="/mitra/detailajuan_i">
+                                            <a href="/mitra/detailajuan_i?status=survey">
                                                 <i class="far fa-edit"></i>
                                             </a>
                                         </td>
@@ -230,7 +230,7 @@
                                 <tbody>
                                     <tr role="row" class="odd">
                                         <td>
-                                            <a href="/mitra/detailajuan_i">
+                                            <a href="/mitra/detailajuan_i?status=selesai">
                                                 <i class="far fa-edit"></i>
                                             </a>
                                         </td>
@@ -255,7 +255,7 @@
                                     </tr>
                                     <tr role="row" class="odd">
                                         <td>
-                                            <a href="/mitra/detailajuan_i">
+                                            <a href="/mitra/detailajuan_i?status=selesai">
                                                 <i class="far fa-edit"></i>
                                             </a>
                                         </td>

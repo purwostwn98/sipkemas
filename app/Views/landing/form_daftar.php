@@ -139,15 +139,16 @@
                             <label for="kelurahan" class="col-sm-4 col-form-label">Kelurahan</label>
                             <div class="col-sm-8">
                                 <select class="form-control" id="kelurahan" name="kelurahan" required>
-                                    <option>--Pilih Kelurahan--</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <option selected hidden value="">--Pilih Kelurahan--</option>
+                                    <option value="1">Gajahan</option>
+                                    <option value="2">Danukusuman</option>
+                                    <option value="3">Bumi</option>
+                                    <option value="4">Jagalan</option>
+                                    <option value="5">Joglo</option>
                                 </select>
                             </div>
                         </div>
+                        <!-- Agama -->
                         <div class="form-group row">
                             <label for="agama" class="col-sm-4 col-form-label">Agama</label>
                             <div class="col-sm-8">

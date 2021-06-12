@@ -20,6 +20,7 @@
             </a>
         </div>
     </div>
+    <!-- Tabel Ajuan Bantuan -->
     <div class="collapse show" id="collapseExample1" data-parent="#accordion">
         <div style="font-size: 12px;" class="card-body">
             <div class="table-responsive">
@@ -51,9 +52,9 @@
                                         <td>Panti Asuhan A</td>
                                         <td>JL. BRIGJEN SUDIARTO NO. 34</td>
                                         <td>20 April 2021</td>
-                                        <td>BAZNAS: Pembangunan</td>
+                                        <td>BAZNAS: Dakwah & Advokasi</td>
                                         <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1">Ajuan Baru</span>
+                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1">Ajuan Lembaga</span>
                                         </td>
                                     </tr>
                                     <tr role="row" class="odd">
@@ -64,12 +65,12 @@
                                         </td>
                                         <td class="sorting_1">2</td>
                                         <td>Ikwan</td>
-                                        <td>Masjid Al Falah</td>
+                                        <td>Karang Taruna Berkah</td>
                                         <td>JL.SLAMET RIYADI 308 SURAKARTA, SRIWEDARI, Kec. Laweyan</td>
                                         <td>20 Februari 2021</td>
-                                        <td>LAZIS: Pendidikan</td>
+                                        <td>BAZNAS: Ekonomi Kreatif</td>
                                         <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1"><i class="fa fa-clock-o mr-1"></i>Ajuan Baru</span>
+                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1"><i class="fa fa-clock-o mr-1"></i>Ajuan Lembaga</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -80,6 +81,7 @@
             </div>
         </div>
     </div>
+    <!-- Tabel Ajuan Dalam Proses -->
     <div class="collapse" id="collapseExample2" data-parent="#accordion">
         <div style="font-size: 12px;" class="card-body">
             <div class="table-responsive">
@@ -112,7 +114,7 @@
                                         <td>Panti Asuhan Z-Z</td>
                                         <td>JL. BRIGJEN SUDIARTO NO. 34</td>
                                         <td>20 April 2021</td>
-                                        <td>BAZNAS: Pembangunan</td>
+                                        <td>BAZNAS: Ekonomi Kretif</td>
                                         <td>
                                             <span class="fa fa-star oke"></span>
                                             <span class="fa fa-star oke"></span>
@@ -155,6 +157,7 @@
             </div>
         </div>
     </div>
+    <!-- Tabel Ajuan Selesai -->
     <div class="collapse" id="collapseExample3" data-parent="#accordion">
         <div style="font-size: 12px;" class="card-body">
             <div class="table-responsive">

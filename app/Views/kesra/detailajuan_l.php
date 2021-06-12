@@ -317,20 +317,69 @@
             <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
         </div>
         <div class="card-body">
-            <div class="row bg-white darker">
+            <!-- Option Rekomendasi -->
+            <div class="row bg-white py-2 darker">
                 <div class="col-md-4">
                     <label for="rekomendasi">
                         <b>Rekomendasi ke Mitra</b>
                     </label>
                 </div>
                 <div class="col-md-8">
-                    <select id="rekomendasi" class="form-control">
-                        <option>Tidak Direkomendasikan</option>
-                        <option>Kurang Direkomendasikan</option>
-                        <option selected>Normal</option>
-                        <option>Lebih Direkomendasikan</option>
-                        <option>Sangat Direkomendasikan</option>
-                    </select>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios1" value="5">
+                        <label class="form-check-label" for="exampleRadios1">
+                            Sangat Direkomendasikan
+                            (<span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios2" value="4">
+                        <label class="form-check-label" for="exampleRadios2">
+                            Lebih Direkomendasikan
+                            (<i class="fa fa-star oke"></i>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star"></span>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios3" value="3">
+                        <label class="form-check-label" for="exampleRadios3">
+                            Direkomendasikan
+                            (<i class="fa fa-star oke"></i>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios5" value="1">
+                        <label class="form-check-label" for="exampleRadios5">
+                            Kurang Direkomendasikan
+                            (<i class="fa fa-star oke"></i>
+                            <span class="fa fa-star oke"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios4" value="2">
+                        <label class="form-check-label" for="exampleRadios4">
+                            Tidak Direkomendasikan
+                            (<i class="fa fa-star oke"></i>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>)
+                        </label>
+                    </div>
                 </div>
             </div>
             <div class="row bg-white darker py-2">
