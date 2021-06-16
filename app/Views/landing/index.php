@@ -136,10 +136,11 @@
           <h2>Sistem Informasi Peningkatan Kesejahteraan Masyarakat</h2>
         </div>
       </div>
-      <div class="text-center">
+      <div class="text-center mb-3">
         <!-- <a href="#services" class="btn-get-started scrollto btn-info">Program Bantuan</a> -->
         <a href="/home/daftar" class="btn-get-started scrollto">Formulir Pendaftaran</a>
-        <?= form_open("/login/cekuser", ['class' => 'formlogin user']); ?>
+        <a href="/home/cekAjuan" class="btn-get-started scrollto">Cek Ajuan</a>
+        <!-- <?= form_open("/login/cekuser", ['class' => 'formlogin user']); ?>
         <?= csrf_field(); ?>
         <div class="row justify-content-center">
           <input type="hidden" name="User" value="pemohon">
@@ -151,7 +152,7 @@
             </div>
           </div>
         </div>
-        <?= form_close(); ?>
+        <?= form_close(); ?> -->
       </div>
 
       <div class="row icon-boxes">

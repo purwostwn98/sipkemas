@@ -12,7 +12,19 @@ class PemohonModel extends Model
     protected $createdField  = 'tgInput';
     protected $updatedField  = 'updated_at';
     protected $allowedFields = [
-        'noDaftar', 'Nama', 'tgLahir', 'tempatLahir', 'gender', 'NIK', 'Alamat', 'idKel', 'tgInput', 'updated_at', 'idAgama',
-        'telepon', 'email', 'stsPendaftaran'
+        'Nama', 'tgLahir', 'tempatLahir', 'gender', 'NIK', 'Alamat', 'idKel', 'tgInput', 'updated_at', 'idAgama',
+        'telepon', 'email'
+    ];
+}
+class FormulirModel extends Model
+{
+    protected $table      = 'mformulir';
+    protected $primaryKey = 'idFormulir';
+    protected $useTimestamps = true;
+    protected $createdField  = 'tgInput';
+    protected $updatedField  = 'updated_at';
+    protected $allowedFields = [
+        'noFormulir', 'Nama', 'tgLahir', 'tempatLahir', 'gender', 'NIK', 'Alamat', 'idKel', 'tgInput', 'updated_at', 'idAgama',
+        'telepon', 'email'
     ];
 }

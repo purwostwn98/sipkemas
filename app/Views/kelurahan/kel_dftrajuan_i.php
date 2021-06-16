@@ -17,6 +17,7 @@
             </a>
         </div>
     </div>
+    <!-- Ajuan Dalam Proses -->
     <div class="collapse show" id="collapseExample1" data-parent="#accordion">
         <div style="font-size: 12px;" class="card-body">
             <div class="table-responsive">
@@ -25,51 +26,64 @@
                         <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable1" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
-                                    <tr role="row">
+                                    <tr role="row text-center">
                                         <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 10px;">-</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 7px;">No</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 45px;">No.Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 35px;">E-SIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 40px;">Status Ajuan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/kelurahan/detailajuan_i">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">1</td>
-                                        <td>Michael Admin</td>
-                                        <td>20 April 2021</td>
-                                        <td>LAZIS : Pendidikan Yatim</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1"><i class="fa fa-clock-o mr-1"></i>Diproses Mitra</span>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/kelurahan/detailajuan_i">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">2</td>
-                                        <td>Salosa Kurniawan</td>
-                                        <td>20 Februari 2021</td>
-                                        <td>PMI : Griya PMI Peduli</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1"><i class="fa fa-clock-o mr-1"></i>Diproses Dinsos</span>
-                                        </td>
-                                    </tr>
+                                    <?php $no1 = 0;
+                                    foreach ($ajuan_proses as $proses) : ?>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <a href="/kelurahan/detailajuan_i">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                            </td>
+                                            <td class="sorting_1 text-center"><?= $no1 + 1; ?></td>
+                                            <td><?= $proses['noAjuan']; ?></td>
+                                            <td><?= $proses['NIK']; ?></td>
+                                            <td><?= $proses['Nama']; ?></td>
+                                            <?php
+                                            $blnthn = explode('-', $proses['tgAjuan']);
+                                            $bulan = array(
+                                                1 =>   'Januari',
+                                                'Februari',
+                                                'Maret',
+                                                'April',
+                                                'Mei',
+                                                'Juni',
+                                                'Juli',
+                                                'Agustus',
+                                                'September',
+                                                'Oktober',
+                                                'November',
+                                                'Desember'
+                                            );
+                                            ?>
+                                            <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
+                                            <td><?= $proses['idBantuan']; ?></td>
+                                            <td>
+                                                <span style="border-radius: 5px;" <?php if ($proses['idStsAjuan'] == 1) {
+                                                                                        echo ("class='small text-white bg-gray-600 p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 2) {
+                                                                                        echo ("class='small text-white bg-info p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 3) {
+                                                                                        echo ("class='small text-white bg-warning p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 4) {
+                                                                                        echo ("class='small text-white bg-dark p-1'");
+                                                                                    } ?>>
+                                                    <?= $proses['StatusAjuan']; ?></span>
+                                            </td>
+                                        </tr>
+                                    <?php $no1++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -86,34 +100,60 @@
                         <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable2" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
-                                    <tr role="row">
+                                    <tr role="row text-center">
                                         <th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 10px;">-</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 7px;">No</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 45px;">No.Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 35px;">E-SIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 40px;">Status Ajuan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/kelurahan/detailajuan_i">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">1</td>
-                                        <td>Michael Admin</td>
-                                        <td>20 April 2021</td>
-                                        <td>Paket A : Pembelian barang</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Disetujui</span>
-                                        </td>
-                                    </tr>
+                                    <?php $no2 = 0;
+                                    foreach ($ajuan_selesai as $proses) : ?>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <a href="/kelurahan/detailajuan_i">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                            </td>
+                                            <td class="sorting_1 text-center"><?= $no2 + 1; ?></td>
+                                            <td><?= $proses['noAjuan']; ?></td>
+                                            <td><?= $proses['NIK']; ?></td>
+                                            <td><?= $proses['Nama']; ?></td>
+                                            <?php
+                                            $blnthn = explode('-', $proses['tgAjuan']);
+                                            $bulan = array(
+                                                1 =>   'Januari',
+                                                'Februari',
+                                                'Maret',
+                                                'April',
+                                                'Mei',
+                                                'Juni',
+                                                'Juli',
+                                                'Agustus',
+                                                'September',
+                                                'Oktober',
+                                                'November',
+                                                'Desember'
+                                            );
+                                            ?>
+                                            <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
+                                            <td><?= $proses['idBantuan']; ?></td>
+                                            <td>
+                                                <span style="border-radius: 5px;" <?php if ($proses['idStsAjuan'] == 5) {
+                                                                                        echo ("class='small text-white bg-danger p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 6) {
+                                                                                        echo ("class='small text-white bg-success p-1'");
+                                                                                    } ?>>
+                                                    <?= $proses['StatusAjuan']; ?></span>
+                                            </td>
+                                        </tr>
+                                    <?php $no2++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                         </div>

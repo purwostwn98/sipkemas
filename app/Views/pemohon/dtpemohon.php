@@ -11,21 +11,66 @@ $session = \Config\Services::session();
             <span class="small">Pastikan pemohon sudah terdaftar E-SIK (kecuali untuk pemohon lembaga)</span>
         <?php } ?>
     </div>
-    <div>
-        <a href="/pemohon/frpemohon" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit Data</a>
+    <div class="row">
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit Data</a>
         <?php if ($session->get('privUser') != 1) { ?>
-            <?php if ($konfirmasi == 0) { ?>
-                <a href="/pemohon/konfirmasi?konfirmasi=1&no=<?= $pemohon['noDaftar']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">Konfirmasi Pendaftaran</a>
+            <?php if ($konfirmasi == 1) { ?>
+                <?= form_open("/kelurahan/pengajuanBantuan", ['class' => 'formPengajuan']); ?>
+                <?= csrf_field(); ?>
+                <input type="hidden" name="idPemohon" id="idPemohon" value="<?= $pemohon['idPemohon']; ?>">
+                <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm ml-2 btnAjukan" role="button">
+                    <i class="fas fa-hands-helping fa-sm text-white-50"></i> Ajukan Bantuan
+                </button>
+                <?= form_close(); ?>
             <?php } ?>
-            <a href="/pemohon/hapus?no=<?= $pemohon['idPemohon']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-sm fa-user-slash text-white-50"></i> Hapus</a>
+            <?php if ($konfirmasi == 0) { ?>
+                <div class="div ml-2">
+                    <form action="/kelurahan/konfirmasi" method="POST">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="idFormulir" id="idFormulir" value="<?= $pemohon['idFormulir']; ?>">
+                        <input type="hidden" name="nik" id="nik" value="<?= $pemohon['NIK']; ?>">
+                        <input type="hidden" name="nama" id="nama" value="<?= $pemohon['Nama']; ?>">
+                        <input type="hidden" name="tempatLahir" id="tempatLahir" value="<?= $pemohon['tempatLahir']; ?>">
+                        <input type="hidden" name="tgLahir" id="tgLahir" value="<?= $pemohon['tgLahir']; ?>">
+                        <input type="hidden" name="gender" id="gender" value="<?= $pemohon['gender']; ?>">
+                        <input type="hidden" name="alamat" id="alamat" value="<?= $pemohon['Alamat']; ?>">
+                        <input type="hidden" name="kelurahan" id="kelurahan" value="<?= $pemohon['idKel']; ?>">
+                        <input type="hidden" name="agama" id="agama" value="<?= $pemohon['idAgama']; ?>">
+                        <input type="hidden" name="telepon" id="telepon" value="<?= $pemohon['telepon']; ?>">
+                        <input type="hidden" name="email" id="email" value="<?= $pemohon['email']; ?>">
+                        <input type="hidden" name="status" id="status" value="1">
+                        <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">Konfirmasi Pendaftaran</button>
+                    </form>
+                </div>
+            <?php } ?>
+            <?php if ($konfirmasi == 0) { ?>
+                <a href="/kelurahan/hapusForm?no=<?= $pemohon['idFormulir']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm ml-2"><i class="fas fa-sm fa-user-slash text-white-50"></i> Hapus</a>
+            <?php } elseif ($konfirmasi == 1) { ?>
+                <a href="/kelurahan/hapusPemohon?no=<?= $pemohon['idPemohon']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm ml-2"><i class="fas fa-sm fa-user-slash text-white-50"></i> Hapus</a>
+            <?php } ?>
         <?php } ?>
     </div>
 </div>
 
 <!-- Content Row Data Pemohon-->
-
-<div class="row py-1 bg-white darker">
-    <div class="col-md-4">
+<?php if ($konfirmasi == 0) { ?>
+    <div class="row bg-white darker">
+        <div class="col-md-6">
+            <label for="">
+                <b>Nomor Formulir</b>
+                <br>
+                <span class="text-primary">
+                    <i>Form Number</i>
+                </span></label>
+        </div>
+        <div class="col-md-6">
+            <b><?= $pemohon['noFormulir']; ?></b>
+        </div>
+    </div>
+<?php } ?>
+<hr class="m-0 p-1">
+<div class="row">
+    <div class="col-md-6">
         <label for="">
             <b>Nomor Induk Kependudukan (NIK)</b>
             <br>
@@ -33,17 +78,13 @@ $session = \Config\Services::session();
                 <i>National Identification Number</i>
             </span></label>
     </div>
-    <div class="col-md-8">
-        <?php if ($session->get('privUser') != 1) { ?>
-            <?= $pemohon['NIK']; ?>
-        <?php } else { ?>
-            56777877766444
-        <?php } ?>
+    <div class="col-md-6">
+        <?= $pemohon['NIK']; ?>
     </div>
 </div>
-
-<div class="row py-1">
-    <div class="col-md-4">
+<hr class="m-0 p-1">
+<div class="row bg-white darker">
+    <div class="col-md-6">
         <label for="">
             <b>Nama Lengkap</b>
             <br>
@@ -51,17 +92,13 @@ $session = \Config\Services::session();
                 <i>Full Name</i>
             </span></label>
     </div>
-    <div class="col-md-8">
-        <?php if ($session->get('privUser') != 1) { ?>
-            <?= $pemohon['Nama']; ?>
-        <?php } else { ?>
-            Purwo Setiawan
-        <?php } ?>
+    <div class="col-md-6">
+        <?= $pemohon['Nama']; ?>
     </div>
 </div>
-
-<div class="row py-1 bg-white darker">
-    <div class="col-md-4">
+<hr class="m-0 p-1">
+<div class="row">
+    <div class="col-md-6">
         <label for="">
             <b>Tempat, Tanggal Lahir</b>
             <br>
@@ -69,36 +106,30 @@ $session = \Config\Services::session();
                 <i>Place, Date of Birth</i>
             </span></label>
     </div>
-    <?php if ($session->get('privUser') != 1) { ?>
-        <?php
-        $tgl = explode('-', $pemohon['tgLahir']);
-        $bulan = array(
-            1 =>   'Januari',
-            'Februari',
-            'Maret',
-            'April',
-            'Mei',
-            'Juni',
-            'Juli',
-            'Agustus',
-            'September',
-            'Oktober',
-            'November',
-            'Desember'
-        );
-        ?>
-        <div class="col-md-8">
-            <?= $pemohon['tempatLahir']; ?>, <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
-        </div>
-    <?php } else { ?>
-        <div class="col-md-8">
-            Wonogiri, 19 Januari 1998
-        </div>
-    <?php } ?>
+    <?php
+    $tgl = explode('-', $pemohon['tgLahir']);
+    $bulan = array(
+        1 =>   'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+    );
+    ?>
+    <div class="col-md-6">
+        <?= $pemohon['tempatLahir']; ?>, <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
+    </div>
 </div>
-
-<div class="row py-1">
-    <div class="col-md-4">
+<hr class="m-0 p-1">
+<div class="row bg-white darker">
+    <div class="col-md-6">
         <label for="">
             <b>Jenis Kelamin</b>
             <br>
@@ -106,17 +137,13 @@ $session = \Config\Services::session();
                 <i>Gender</i>
             </span></label>
     </div>
-    <div class="col-md-8">
-        <?php if ($session->get('privUser') != 1) { ?>
-            <?= ($pemohon['gender'] == 1) ? 'Laki-laki' : 'Perempuan' ?>
-        <?php } else { ?>
-            Laki laki
-        <?php } ?>
+    <div class="col-md-6">
+        <?= ($pemohon['gender'] == 1) ? 'Laki-laki' : 'Perempuan' ?>
     </div>
 </div>
-
-<div class="row py-1 bg-white darker">
-    <div class="col-md-4">
+<hr class="m-0 p-1">
+<div class="row">
+    <div class="col-md-6">
         <label for="">
             <b>Alamat</b>
             <br>
@@ -124,17 +151,13 @@ $session = \Config\Services::session();
                 <i>Address</i>
             </span></label>
     </div>
-    <div class="col-md-8">
-        <?php if ($session->get('privUser') != 1) { ?>
-            <?= $pemohon['Alamat']; ?>
-        <?php } else { ?>
-            RT02/RW09, No.7
-        <?php } ?>
+    <div class="col-md-6">
+        <?= $pemohon['Alamat']; ?>
     </div>
 </div>
-
-<div class="row py-1">
-    <div class="col-md-4">
+<hr class="m-0 p-1">
+<div class="row bg-white darker">
+    <div class="col-md-6">
         <label for="">
             <b>Kelurahan</b>
             <br>
@@ -142,17 +165,13 @@ $session = \Config\Services::session();
                 <i>Sub-district</i>
             </span></label>
     </div>
-    <div class="col-md-8">
-        <?php if ($session->get('privUser') != 1) { ?>
-            <?= $pemohon['idKel']; ?>
-        <?php } else { ?>
-            Danukusuman
-        <?php } ?>
+    <div class="col-md-6">
+        <?= $pemohon['idKel']; ?>
     </div>
 </div>
-
-<!-- <div class="row py-1 bg-white darker">
-    <div class="col-md-4">
+<hr class="m-0 p-1">
+<div class="row">
+    <div class="col-md-6">
         <label for="">
             <b>Kecamatan</b>
             <br>
@@ -160,13 +179,13 @@ $session = \Config\Services::session();
                 <i>Districts</i>
             </span></label>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
         Serengan
     </div>
-</div> -->
-
-<div class="row py-1">
-    <div class="col-md-4">
+</div>
+<hr class="m-0 p-1">
+<div class="row bg-white darker">
+    <div class="col-md-6">
         <label for="">
             <b>Agama</b>
             <br>
@@ -174,17 +193,13 @@ $session = \Config\Services::session();
                 <i>Religion</i>
             </span></label>
     </div>
-    <div class="col-md-8">
-        <?php if ($session->get('privUser') != 1) { ?>
-            <?= $pemohon['Agama']; ?>
-        <?php } else { ?>
-            Islam
-        <?php } ?>
+    <div class="col-md-6">
+        <?= $pemohon['Agama']; ?>
     </div>
 </div>
-
-<div class="row py-1 bg-white darker">
-    <div class="col-md-4">
+<hr class="m-0 p-1">
+<div class="row">
+    <div class="col-md-6">
         <label for="">
             <b>Telepon</b>
             <br>
@@ -192,31 +207,61 @@ $session = \Config\Services::session();
                 <i>Telephone</i>
             </span></label>
     </div>
-    <div class="col-md-8">
-        <?php if ($session->get('privUser') != 1) { ?>
-            <?= $pemohon['telepon']; ?>
-        <?php } else { ?>
-            0987776555
-        <?php } ?>
+    <div class="col-md-6">
+        <?= $pemohon['telepon']; ?>
     </div>
 </div>
-
-<div class="row py-1">
-    <div class="col-md-4">
+<hr class="m-0 p-1">
+<div class="row bg-white darker">
+    <div class="col-md-6">
         <label for="">
-            Email
+            <b>E-mail</b>
             <br>
             <span class="text-primary">
                 <i>E-mail</i>
             </span></label>
     </div>
-    <div class="col-md-8">
-        <?php if ($session->get('privUser') != 1) { ?>
-            <?= $pemohon['email']; ?>
-        <?php } else { ?>
-            setiawanpurwo0@gmail.com
-        <?php } ?>
+    <div class="col-md-6">
+        <?= $pemohon['email']; ?>
     </div>
 </div>
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.formPengajuan').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                dataType: "json",
+                beforeSend: function() {
+                    $('.btnAjukan').prop('disabled', true);
+                    $('.btnAjukan').html('<i class="fa fa-spin fa-spinner"></i>');
+                },
+                complete: function() {
+                    $('.btnAjukan').prop('disabled', false);
+                    $('.btnAjukan').html('Ajukan Bantuan');
+                },
+                success: function(response) {
+                    if (response.berhasil) {
+                        swal({
+                            title: "No. Ajuan: " + response.berhasil.noAjuan,
+                            text: "Ajuan berhasil didaftarkan",
+                            icon: "success",
+                            button: "Ok",
+                        }).then((value) => {
+                            window.location = response.berhasil.link;
+                        });
+                        // window.location = response.berhasil.link;
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+            return false;
+        });
+    });
+</script>
 <?= $this->endSection(); ?>

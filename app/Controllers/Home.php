@@ -25,4 +25,8 @@ class Home extends BaseController
 	{
 		return view('landing/form_daftar');
 	}
+	public function cekAjuan()
+	{
+		return view('landing/cek_ajuan');
+	}
 }

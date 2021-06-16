@@ -46,155 +46,186 @@
 <body>
     <div class="container mt-4">
         <div class="row justify-content-md-center">
-            <div class="col-lg-8">
-                <!-- <h3 class="mb-3 text-center">Formulir Pendaftaran</h3> -->
-                <div class="card o-hidden border-0 shadow-lg mb-2">
-                    <div class="card-header text-white bg-primary text-center">
-                        <strong>Formulir Pendaftaran</strong>
+            <div class="col-lg-9">
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-info py-3 d-sm-flex align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-white">Data Pemohon</h6>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
+                            <i class="ri-printer-line text-white m-0"></i>
+                            <span class="text-white m-0"> Cetak</span>
+                        </a>
                     </div>
                     <div class="card-body">
-                        <!-- Form Pendafaran -->
-                        <div id="alertError" class="row" style="display: none;">
-                            <div class="col-12">
-                                <div class="alert alert-warning errortext" role="alert">
-                                </div>
+                        <div class="row bg-white darker">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>Nomor Formulir</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>Form Number</i>
+                                    </span></label>
+                            </div>
+                            <div class="col-md-6">
+                                <b><?= $pemohon['noFormulir']; ?></b>
                             </div>
                         </div>
-                        <?= form_open("/pemohon/proses_daftar", ['class' => 'formdaftar']); ?>
-                        <?= csrf_field(); ?>
-                        <input type="hidden" id="gocode" name="gocode" value="">
-                        <!-- NIK -->
-                        <div class="form-group row">
-                            <label for="NIK" class="col-sm-4 col-form-label">NIK</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="NIK" class="form-control" id="NIK">
-                                <div class="invalid-feedback invalidNIK text-center"></div>
+                        <hr class="m-0 p-1">
+                        <div class="row bg-white darker">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>Nomor Induk Kependudukan (NIK)</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>National Identification Number</i>
+                                    </span></label>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $pemohon['NIK']; ?>
                             </div>
                         </div>
-                        <!-- Nama Lengkap -->
-                        <div class="form-group row">
-                            <label for="nama" class="col-sm-4 col-form-label">Nama Lengkap</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="nama" class="form-control" id="nama" required>
+                        <hr class="m-0 p-1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>Nama Lengkap</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>Full Name</i>
+                                    </span></label>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $pemohon['Nama']; ?>
                             </div>
                         </div>
-                        <!-- Tempat Lahir -->
-                        <div class="form-group row">
-                            <label for="tempatlahir" class="col-sm-4 col-form-label">Tempat Lahir</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="tempatlahir" class="form-control" id="tempatlahir" required>
+                        <hr class="m-0 p-1">
+                        <div class="row bg-white darker">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>Tempat, Tanggal Lahir</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>Place, Date of Birth</i>
+                                    </span></label>
+                            </div>
+                            <?php
+                            $tgl = explode('-', $pemohon['tgLahir']);
+                            $bulan = array(
+                                1 =>   'Januari',
+                                'Februari',
+                                'Maret',
+                                'April',
+                                'Mei',
+                                'Juni',
+                                'Juli',
+                                'Agustus',
+                                'September',
+                                'Oktober',
+                                'November',
+                                'Desember'
+                            );
+                            ?>
+                            <div class="col-md-6">
+                                <?= $pemohon['tempatLahir']; ?>, <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
                             </div>
                         </div>
-                        <!-- Tanggal Lahir -->
-                        <div class="form-group row">
-                            <label for="tgLahir" class="col-sm-4 col-form-label">Tanggal Lahir</label>
-                            <div class="col-sm-8">
-                                <input type="date" name="tgLahir" class="form-control" id="tgLahir" required>
+                        <hr class="m-0 p-1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>Jenis Kelamin</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>Gender</i>
+                                    </span></label>
+                            </div>
+                            <div class="col-md-6">
+                                <?= ($pemohon['gender'] == 1) ? 'Laki-laki' : 'Perempuan' ?>
                             </div>
                         </div>
-                        <!-- Jenis Kelamin -->
-                        <div class="form-group row">
-                            <label for="jenkel" class="col-sm-4 col-form-label">Jenis Kelamin</label>
-                            <div class="col-sm-8">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="1">
-                                    <label class="form-check-label" for="exampleRadios1">
-                                        Laki-laki
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" value="2">
-                                    <label class="form-check-label" for="exampleRadios2">
-                                        Perempuan
-                                    </label>
-                                </div>
+                        <hr class="m-0 p-1">
+                        <div class="row bg-white darker">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>Alamat</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>Address</i>
+                                    </span></label>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $pemohon['Alamat']; ?>
                             </div>
                         </div>
-                        <div id="alertGender" class="row" style="display: none;">
-                            <div class="col-12">
-                                <div class="alert alert-danger errorGender" role="alert">
-                                </div>
+                        <hr class="m-0 p-1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>Kelurahan</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>Sub-district</i>
+                                    </span></label>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $pemohon['idKel']; ?>
                             </div>
                         </div>
-                        <!-- Alamat -->
-                        <div class="form-group row">
-                            <label for="alamat" class="col-sm-4 col-form-label">Alamat</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="alamat" class="form-control" id="alamat" required>
+                        <hr class="m-0 p-1">
+                        <div class="row bg-white darker">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>Kecamatan</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>Districts</i>
+                                    </span></label>
+                            </div>
+                            <div class="col-md-6">
+                                Serengan
                             </div>
                         </div>
-                        <!-- Kecamatan -->
-                        <div class="form-group row">
-                            <label for="kecamatan" class="col-sm-4 col-form-label">Kecamatan</label>
-                            <div class="col-sm-8">
-                                <select class="form-control" id="kecamatan" name="kecamatan" required>
-                                    <option>--Pilih Kecamatan--</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
+                        <hr class="m-0 p-1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>Agama</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>Religion</i>
+                                    </span></label>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $pemohon['Agama']; ?>
                             </div>
                         </div>
-                        <!-- Kelurahan -->
-                        <div class="form-group row">
-                            <label for="kelurahan" class="col-sm-4 col-form-label">Kelurahan</label>
-                            <div class="col-sm-8">
-                                <select class="form-control" id="kelurahan" name="kelurahan" required>
-                                    <option selected hidden value="">--Pilih Kelurahan--</option>
-                                    <option value="1">Gajahan</option>
-                                    <option value="2">Danukusuman</option>
-                                    <option value="3">Bumi</option>
-                                    <option value="4">Jagalan</option>
-                                    <option value="5">Joglo</option>
-                                </select>
+                        <hr class="m-0 p-1">
+                        <div class="row bg-white darker">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>Telepon</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>Telephone</i>
+                                    </span></label>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $pemohon['telepon']; ?>
                             </div>
                         </div>
-                        <!-- Agama -->
-                        <div class="form-group row">
-                            <label for="agama" class="col-sm-4 col-form-label">Agama</label>
-                            <div class="col-sm-8">
-                                <select class="form-control" id="agama" name="agama" required>
-                                    <option>--Pilih Agama--</option>
-                                    <option value="1">Islam</option>
-                                    <option value="2">Protestan</option>
-                                    <option value="3">Katolik</option>
-                                    <option value="4">Hindu</option>
-                                    <option value="5">Buddha</option>
-                                    <option value="6">Konghucu</option>
-                                    <option value="7">Lainnya</option>
-                                </select>
+                        <hr class="m-0 p-1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">
+                                    <b>E-mail</b>
+                                    <br>
+                                    <span class="text-primary">
+                                        <i>E-mail</i>
+                                    </span></label>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $pemohon['email']; ?>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="telepon" class="col-sm-4 col-form-label">Telepon</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="telepon" class="form-control" id="telepon" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label">E-mail<span class="req">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="email" name="email" class="form-control" id="email">
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <p class="small"><i><span class="req">*</span>boleh kosong jika tidak ada</i></p>
-                            </div>
-                        </div>
-                        <div class="form-group row justify-content-md-center">
-                            <div class="g-recaptcha" data-sitekey="6LdlXhwbAAAAACTiuY1WoMackLIWSIVG6FDH6Do8"></div>
-                            <span class="text-danger" id="captcha_error"></span>
-                        </div>
-                        <div class="form-group row justify-content-md-center">
-                            <div class="col-md-auto">
-                                <a href="/home/index" type="button" class="btn btn-warning">Batal</a>
-                                <button type="submit" role="button" class="btn btn-primary btndaftar">Daftar</button>
-                            </div>
-                        </div>
-                        <?= form_close(); ?>
                     </div>
                 </div>
             </div>
@@ -312,7 +343,7 @@
                                 icon: "success",
                                 button: "Ok",
                             }).then((value) => {
-                                window.location = response.berhasil.cetak;
+                                window.location = 'http://sipkemas.puslogin.com/';
                             });
                             // window.location = response.berhasil.link;
                         }

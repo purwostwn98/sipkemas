@@ -2,26 +2,37 @@
 
 namespace App\Controllers;
 
+use App\Models\FormulirModel;
 use App\Models\PemohonModel;
 
 class Pemohon extends BaseController
 {
     protected $pemohonModel;
+    protected $formulirModel;
     public function __construct()
     {
         $this->pemohonModel = new PemohonModel();
+        $this->formulirModel = new FormulirModel();
     }
 
     public function dtpemohon()
     {
         $konfirmasi = $this->request->getVar('konfirmasi');
-        $noDaftar = $this->request->getVar('no');
+        if ($konfirmasi == 0) {
+            $noFormulir = $this->request->getVar('no');
+            $pemohon = $this->formulirModel->where('noFormulir', $noFormulir)
+                ->join('eagama', 'eagama.idAgama = mformulir.idAgama')
+                ->first();
+        } elseif ($konfirmasi == 1) {
+            $idPemohon = $this->request->getVar('idPemohon');
+            $pemohon = $this->pemohonModel->where('idPemohon', $idPemohon)
+                ->join('eagama', 'eagama.idAgama = mpemohon.idAgama')
+                ->first();
+        }
         $data = [
             'bttn' => 'dtpemohon',
             'konfirmasi' => $konfirmasi,
-            'pemohon' => $this->pemohonModel->where('noDaftar', $noDaftar)
-                ->join('eagama', 'eagama.idAgama = mpemohon.idAgama')
-                ->first()
+            'pemohon' => $pemohon
         ];
         return view('pemohon/dtpemohon', $data);
     }
@@ -52,12 +63,6 @@ class Pemohon extends BaseController
             $verify = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
             $recaptcha = json_decode($verify);
             if ($recaptcha->success == true) {
-                // $msg = [
-                //     'a' => [
-                //         'b' => "Captcha Berhasil"
-                //     ]
-                // ];
-                // echo json_encode($msg);
                 $validation = \Config\Services::validation();
                 $valid = $this->validate([
                     'NIK' => [
@@ -86,9 +91,10 @@ class Pemohon extends BaseController
                         ]
                     ];
                 } else {
-                    $noDaftar = random_int(1000, 4000);
+                    $noDaftar = random_int(00000000, 99999999);
+                    $noFormulir = "FR" . strval($noDaftar);
                     $data = [
-                        'noDaftar' => $noDaftar,
+                        'noFormulir' => $noFormulir,
                         'NIK' => $this->request->getVar('NIK'),
                         'Nama' => $this->request->getVar('nama'),
                         'tgLahir' => $this->request->getVar('tgLahir'),
@@ -99,13 +105,14 @@ class Pemohon extends BaseController
                         'idAgama' => $this->request->getVar('agama'),
                         'telepon' => $this->request->getVar('telepon'),
                         'email' => $this->request->getVar('email'),
-                        'stsPendaftaran' => 0,
+                        // 'stsPendaftaran' => 0,
                     ];
-                    $save = $this->pemohonModel->insert($data);
+                    $save = $this->formulirModel->insert($data);
                     if ($save) {
                         $msg = [
                             'berhasil' => [
-                                'no' => $noDaftar
+                                'no' => $noFormulir,
+                                'cetak' => "/pemohon/cetakForm/" . $noFormulir
                             ]
                         ];
                     }
@@ -114,7 +121,7 @@ class Pemohon extends BaseController
             } else {
                 $msg = [
                     'a' => [
-                        'b' => "Captcha Gagal"
+                        'b' => "Captcha tidak terverifikasi"
                     ]
                 ];
                 echo json_encode($msg);
@@ -122,24 +129,14 @@ class Pemohon extends BaseController
         }
     }
 
-    //Konfirmasi Pendaftaran
-    public function konfirmasi()
+    //Cetak Formulir Pendaftaran
+    public function cetakForm($noFormulir)
     {
-        $noDaftar = $this->request->getVar('no');
-        $status = $this->request->getVar('konfirmasi');
         $data = [
-            'stsPendaftaran' => $status
+            'pemohon' => $this->formulirModel->where('noFormulir', $noFormulir)
+                ->join('eagama', 'eagama.idAgama = mformulir.idAgama')
+                ->first()
         ];
-        if ($this->pemohonModel->set($data)->where('noDaftar', $noDaftar)->update()) {
-            return redirect()->to('/kelurahan/dftrpemohon_i');
-        }
-    }
-
-    public function hapus()
-    {
-        $idPemohon = $this->request->getVar('no');
-        if ($this->pemohonModel->delete($idPemohon)) {
-            return redirect()->to('/kelurahan/dftrpemohon_i');
-        }
+        return view("landing/cetak_form", $data);
     }
 }

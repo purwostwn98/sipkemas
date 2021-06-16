@@ -34,8 +34,7 @@
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">NIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 70px;">Alamat</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Kelamin</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Tgl. Daftar</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 35px;">Tgl. Daftar</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 60px;">Status</th>
                                     </tr>
                                 </thead>
@@ -44,18 +43,15 @@
                                     foreach ($pemohonBaru as $new) : ?>
                                         <tr role="row" class="odd">
                                             <td>
-                                                <a href="/pemohon/dtpemohon?konfirmasi=<?= $new['stsPendaftaran']; ?>&no=<?= $new['noDaftar']; ?>">
+                                                <a href="/pemohon/dtpemohon?konfirmasi=0&no=<?= $new['noFormulir']; ?>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                             </td>
-                                            <td class="sorting_1"><?= $no1 + 1; ?></td>
-                                            <td><?= $new['noDaftar']; ?></td>
+                                            <td class="sorting_1 text-center"><?= $no1 + 1; ?></td>
+                                            <td><?= $new['noFormulir']; ?></td>
                                             <td><?= $new['NIK']; ?></td>
                                             <td><?= $new['Nama']; ?></td>
                                             <td><?= $new['Alamat']; ?></td>
-                                            <td>
-                                                <?= ($new['gender'] == 1) ? 'Laki-laki' : 'Perempuan' ?>
-                                            </td>
                                             <?php
                                             $blnthn = explode('-', $new['tgInput']);
                                             $tgl = explode(" ", $blnthn[2]);
@@ -100,13 +96,12 @@
                                 <thead>
                                     <tr class="text-center" role="row">
                                         <th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 5px;">-</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5px;">No</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 25px;">No Ajuan</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 15px;">No</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 45px;">NIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 70px;">Alamat</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Kelamin</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 25px;">Riwayat Ajuan</th>
+                                        <!-- <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 25px;">Riwayat Ajuan</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -114,17 +109,16 @@
                                     foreach ($pemohon_terdaftar as $pemohon) : ?>
                                         <tr role="row" class="odd">
                                             <td>
-                                                <a href="/pemohon/dtpemohon?konfirmasi=<?= $pemohon['stsPendaftaran']; ?>&no=<?= $pemohon['noDaftar']; ?>">
+                                                <a href="/pemohon/dtpemohon?konfirmasi=1&idPemohon=<?= $pemohon['idPemohon']; ?>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                             </td>
-                                            <td class="sorting_1"><?= $no2 + 1; ?></td>
-                                            <td>5566</td>
+                                            <td class="sorting_1 text-center"><?= $no2 + 1; ?></td>
                                             <td><?= $pemohon['NIK']; ?></td>
                                             <td><?= $pemohon['Nama']; ?></td>
                                             <td><?= $pemohon['Alamat']; ?></td>
                                             <td><?= ($pemohon['gender'] == 1) ? 'Laki-laki' : 'Perempuan' ?></td>
-                                            <td class="text-center">0</td>
+                                            <!-- <td class="text-center">0</td> -->
                                         </tr>
                                     <?php $no2++;
                                     endforeach; ?>
