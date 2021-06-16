@@ -7,8 +7,8 @@
 </div>
 
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Pemohon</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Pemohon</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -21,7 +21,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                3312201901980001
+                <?= $pemohon['NIK']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -35,7 +35,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Purwo Setiawan
+                <?= $pemohon['Nama']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -48,8 +48,25 @@
                         <i>Place, Date of Birth</i>
                     </span></label>
             </div>
+            <?php
+            $tgl = explode('-', $pemohon['tgLahir']);
+            $bulan = array(
+                1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+            );
+            ?>
             <div class="col-md-8">
-                Surakarta, 19 Januari 1998
+                <?= $pemohon['tempatLahir']; ?>, <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -63,7 +80,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Laki-laki
+                <?= ($pemohon['gender'] == 1) ? 'Laki-laki' : 'Perempuan' ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -77,7 +94,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Jl. Brigjen Sudiarto No. 34
+                <?= $pemohon['Alamat']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -91,7 +108,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Danukusuman
+                <?= $pemohon['idKel']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -119,7 +136,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Islam
+                <?= $pemohon['Agama']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -133,7 +150,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                085647053296
+                <?= $pemohon['telepon']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -147,25 +164,24 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                purwostwn98@gmail.com
+                <?= $pemohon['email']; ?>
             </div>
         </div>
     </div>
 </div>
 
-<div class="card shadow mb-4">
+<!-- <div class="card shadow mb-4">
     <div class="card-header py-3 bg-info">
         <h6 class="m-0 font-weight-bold text-white">Data E-SIK</h6>
     </div>
     <div class="card-body">
         DATA E-SIK
     </div>
-</div>
+</div> -->
 
 <div class="card shadow mb-4">
-    <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Ajuan Bantuan</h6>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit</a>
+    <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Ajuan Bantuan</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -175,7 +191,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                Paket A
+                <?= $ajuan['idBantuan']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -186,7 +202,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                Bantuan pengadaan kursi roda
+                <?= $ajuan['Keperluan']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -197,7 +213,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                20 April 2021
+                <?= $ajuan['tgAjuan']; ?>
             </div>
         </div>
     </div>
@@ -206,7 +222,6 @@
 <div class="card shadow mb-4">
     <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
         <h6 class="m-0 font-weight-bold text-primary">Dokumen Pendukung</h6>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit</a>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -285,7 +300,7 @@
             </span>
             <span class="text">Kembali</span>
         </a>
-        <a href="#" class="btn btn-primary btn-icon-split">
+        <!-- <a href="#" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-save"></i>
             </span>
@@ -296,7 +311,7 @@
                 <i class="fas fa-key"></i>
             </span>
             <span class="text">Kunci Data</span>
-        </a>
+        </a> -->
     </div>
 </div>
 

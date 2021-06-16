@@ -3,81 +3,8 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">FORM AJUAN BANTUAN</h1>
+    <h1 class="h3 mb-0 text-gray-800">Formulir Ajuan Bantuan</h1>
 
-</div>
-<!-- Data Pemohon -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Pemohon</h6>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">NIK</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value="33104720212830002"> </div>
-            </div>
-            <div class="col-sm-1">
-                <button class="btn btn-info btn-circle" onclick="ceknim(this.value)"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">Nama Pemohon</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value="Sugeng Raharjo"> </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">Alamat</label>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value="Kp. Laweyan"> </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">No. Telepon</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value=""> </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"> </div>
-            <div class="col-sm-4">
-                <label for="">Email</label>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value=""> </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-4">
-                <label for="permohonan_jenis">
-                    Jenis Kelamin <span class="req">*</span>
-                </label>
-            </div>
-            <div class="col-sm-4">
-                <div class="radio">
-                    <label for="permohonan_jenis_1"><input type="radio" name="permohonan_jenis" id="permohonan_jenis_1" value="Bantuan Modal Usaha" required=""> Laki-laki</label>
-                </div>
-                <div class="radio">
-                    <label for="permohonan_jenis_2"><input type="radio" name="permohonan_jenis" id="permohonan_jenis_2" value="Bantuan Umum" required=""> Perempuan</label>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <!-- Form Ajuan -->
 <div class="card shadow mb-4">
@@ -105,7 +32,7 @@
             <div class="col-sm-4">
                 <label for="">Program Bantuan</label>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="form-group has-danger">
                     <select class="form-control col-sm-12  border-left-info animated--grow-in" name="div" id="div">
                         <option value="1" disabled="" selected="" style="display:none;">Baznas:Program Bantuan Pendidikan</option>
@@ -125,10 +52,13 @@
         <div class="row">
             <div class="col-sm-1"> </div>
             <div class="col-sm-4">
-                <label for="">Jumlah Ajuan</label>
+                <label for="">Nilai Ajuan</label>
             </div>
-            <div class="col-sm-2">
-                <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value="1000000"> </div>
+            <div class="col-sm-6">
+                <div class="form-group has-danger">
+                    <input type="number" class="form-control col-sm-12  border-left-info animated--grow-in" name="kebutuhan" id="kebutuhan" placeholder="1000000">
+                    <small id="nilai" class="form-text text-primary"><i>Isikan nominal bantuan yang dibutuhkan misalnya 750000</i></small>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -137,7 +67,9 @@
                 <label for="">Deskripsi Permohonan</label>
             </div>
             <div class="col-sm-6">
-                <div class="form-group has-danger"><input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value=""> </div>
+                <div class="form-group has-danger">
+                    <textarea type="text" rows="3" class="form-control col-sm-12  border-left-info animated--grow-in" name="tutor" id="tutor" value=""></textarea>
+                </div>
             </div>
         </div>
     </div>

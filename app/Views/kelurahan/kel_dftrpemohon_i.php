@@ -43,7 +43,7 @@
                                     foreach ($pemohonBaru as $new) : ?>
                                         <tr role="row" class="odd">
                                             <td>
-                                                <a href="/pemohon/dtpemohon?konfirmasi=0&no=<?= $new['noFormulir']; ?>">
+                                                <a href="/kelurahan/dtpemohon?konfirmasi=<?= md5(0); ?>&no=<?= $new['noFormulir']; ?>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                             </td>
@@ -109,7 +109,7 @@
                                     foreach ($pemohon_terdaftar as $pemohon) : ?>
                                         <tr role="row" class="odd">
                                             <td>
-                                                <a href="/pemohon/dtpemohon?konfirmasi=1&idPemohon=<?= $pemohon['idPemohon']; ?>">
+                                                <a href="/kelurahan/dtpemohon?konfirmasi=<?= md5(1); ?>&idPemohon=<?= $pemohon['idPemohon']; ?>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                             </td>

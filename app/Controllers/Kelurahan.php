@@ -17,6 +17,30 @@ class Kelurahan extends BaseController
         $this->formulirModel = new FormulirModel();
         $this->ajuanModel = new AjuanModel();
     }
+
+    public function dtpemohon()
+    {
+        $konfirmasi = $this->request->getVar('konfirmasi');
+        if ($konfirmasi == 'cfcd208495d565ef66e7dff9f98764da') {
+            $kode = 0;
+            $noFormulir = $this->request->getVar('no');
+            $pemohon = $this->formulirModel->where('noFormulir', $noFormulir)
+                ->join('eagama', 'eagama.idAgama = mformulir.idAgama')
+                ->first();
+        } elseif ($konfirmasi == 'c4ca4238a0b923820dcc509a6f75849b') {
+            $kode = 1;
+            $idPemohon = $this->request->getVar('idPemohon');
+            $pemohon = $this->pemohonModel->where('idPemohon', $idPemohon)
+                ->join('eagama', 'eagama.idAgama = mpemohon.idAgama')
+                ->first();
+        }
+        $data = [
+            'bttn' => 'dtpemohon',
+            'konfirmasi' => $kode,
+            'pemohon' => $pemohon
+        ];
+        return view('kelurahan/dtpemohon', $data);
+    }
     public function dftrpemohon_i()
     {
         $data = [
@@ -79,7 +103,8 @@ class Kelurahan extends BaseController
             $data = [
                 'idPemohon' => $idPemohon,
                 'noAjuan' => $noAjuan,
-                'idStsAjuan' => 1
+                'idStsAjuan' => 1,
+                'idLbgAjuan' => 0
             ];
             if ($this->ajuanModel->save($data)) {
                 $msg = [
@@ -99,11 +124,15 @@ class Kelurahan extends BaseController
     {
         $data = [
             'bttn' => 'dftrajuan',
-            'ajuan_proses' => $this->ajuanModel->where('trajuan.idStsAjuan <', 5)
+            'ajuan_proses' => $this->ajuanModel
+                ->where('trajuan.idStsAjuan <', 5)
+                ->where('idLbgAjuan =', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->findAll(),
-            'ajuan_selesai' => $this->ajuanModel->where('trajuan.idStsAjuan >=', 5)
+            'ajuan_selesai' => $this->ajuanModel
+                ->where('trajuan.idStsAjuan >=', 5)
+                ->where('idLbgAjuan =', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->findAll()
@@ -111,17 +140,26 @@ class Kelurahan extends BaseController
         // dd($data['ajuan_proses']);
         return view('kelurahan/kel_dftrajuan_i', $data);
     }
+
     public function dftrajuan_l()
     {
         $data = [
-            'bttn' => 'dftrajuan'
+            'bttn' => 'dftrajuan',
         ];
         return view('kelurahan/kel_dftrajuan_l', $data);
     }
-    public function detailajuan_i()
+
+    public function detailajuan_i($noAjuan)
     {
+        $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
+            ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
+            ->first();
         $data = [
-            'bttn' => 'dftrajuan'
+            'bttn' => 'dftrajuan',
+            'ajuan' => $ajuan,
+            'pemohon' => $this->pemohonModel->where('idPemohon', $ajuan['idPemohon'])
+                ->join('eagama', 'eagama.idAgama = mpemohon.idAgama')
+                ->first()
         ];
         return view('kelurahan/kel_detailajuan_i', $data);
     }
@@ -131,20 +169,5 @@ class Kelurahan extends BaseController
             'bttn' => 'dftrajuan'
         ];
         return view('kelurahan/kel_detailajuan_l', $data);
-    }
-    public function form_ajuan()
-    {
-        $data['bttn'] = 'syarat_ketentuan';
-        return view('kelurahan/ajuan_form_v', $data);
-    }
-    public function alur_bantuan()
-    {
-        $data['bttn'] = 'alur_bantuan';
-        return view('kelurahan/alur_bantuan', $data);
-    }
-    public function syarat_ketentuan()
-    {
-        $data['bttn'] = 'syarat_ketentuan';
-        return view('kelurahan/syarat_ketentuan', $data);
     }
 }

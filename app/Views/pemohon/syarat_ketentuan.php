@@ -45,7 +45,7 @@
 					<br>
 					<div class="row mt-0">
 						<div class="col text-center">
-							<a href="/kelurahan/form_ajuan" class="btn btn-success btn-md btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lanjutkan</span></a>&nbsp;&nbsp;
+							<a href="/pemohon/form_ajuan" class="btn btn-success btn-md btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lanjutkan</span></a>&nbsp;&nbsp;
 						</div>
 					</div>
 

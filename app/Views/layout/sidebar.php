@@ -2,6 +2,7 @@
 $session = \Config\Services::session();
 ?>
 
+<!-- Pemohon -->
 <?php if ($session->get('privUser') == 1) { ?>
     <!-- Nav Item - Dashboard -->
     <li class="<?php if ($bttn == 'dtpemohon') {
@@ -9,40 +10,41 @@ $session = \Config\Services::session();
                 } else {
                     echo 'nav-item';
                 } ?>">
-        <a class="nav-link my-1 py-1" href="/pemohon/dtpemohon">
+        <a class="nav-link my-1 py-1" href="/pemohon/biodata">
             <i class="fa-fw fas fa-user-tie"></i>
-            <span>Data Pemohon </span></a>
-    </li>
-    <li class="<?php if ($bttn == 'ajuanbantuan') {
-                    echo 'nav-item active';
-                } else {
-                    echo 'nav-item';
-                } ?> ">
-        <a class="nav-link my-1 py-1" href="/pemohon/ajuanbantuan">
-            <i class="fas fa-list-alt fa-fw"></i>
-            <span>Ajuan Bantuan</span></a>
+            <span>Biodata </span></a>
     </li>
     <li class="<?php if ($bttn == 'alur_bantuan') {
                     echo 'nav-item active';
                 } else {
                     echo 'nav-item';
                 } ?>">
-        <a class="nav-link my-1 py-1" href="/kelurahan/alur_bantuan">
+        <a class="nav-link my-1 py-1" href="/pemohon/alur_bantuan">
             <i class="fab fa-stumbleupon-circle fa-fw"></i>
             <span>Alur Bantuan</span>
         </a>
     </li>
-    <li class="<?php if ($bttn == 'syarat_ketentuan') {
-                    echo 'nav-item active';
-                } else {
-                    echo 'nav-item';
-                } ?>">
-        <a class="nav-link my-1 py-1" href="/kelurahan/syarat_ketentuan">
-            <i class="fas fa-hands-helping fa-fw"></i>
-            <span>Ajukan Bantuan</span></a>
-    </li>
-
-
+    <?php if ($session->get('idStsAjuan') == 0) { ?>
+        <li class="<?php if ($bttn == 'syarat_ketentuan') {
+                        echo 'nav-item active';
+                    } else {
+                        echo 'nav-item';
+                    } ?>">
+            <a class="nav-link my-1 py-1" href="/pemohon/syarat_ketentuan">
+                <i class="fas fa-hands-helping fa-fw"></i>
+                <span>Ajukan Bantuan</span></a>
+        </li>
+    <?php } elseif ($session->get('idStsAjuan') != 0) { ?>
+        <li class="<?php if ($bttn == 'resumeAjuan') {
+                        echo 'nav-item active';
+                    } else {
+                        echo 'nav-item';
+                    } ?>">
+            <a class="nav-link my-1 py-1" href="/pemohon/resume_ajuan">
+                <i class="fas fa-hands-helping fa-fw"></i>
+                <span>Resume Bantuan</span></a>
+        </li>
+    <?php } ?>
 <?php } ?>
 
 <!-- Menu Kelurahan -->

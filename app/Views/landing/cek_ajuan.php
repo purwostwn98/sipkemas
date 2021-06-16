@@ -59,28 +59,32 @@
                                 </div>
                             </div>
                         </div>
-                        <?= form_open("/home/prosesCekAjuan", ['class' => 'cekAjuan']); ?>
-                        <?= csrf_field(); ?>
-                        <input type="hidden" id="gocode" name="gocode" value="">
-                        <!-- No Ajuan -->
-                        <div class="form-group row">
-                            <label for="noAjuan" class="col-sm-4 col-form-label">Masukkan No. Ajuan</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="noAjuan" class="form-control" id="noAjuan" placeholder="Nomor Ajuan">
-                                <div class="invalid-feedback invalidNIK text-center"></div>
+                        <form method="POST" action="/pemohon/prosesCekAjuan" class="cekAjuan">
+                            <?= csrf_field(); ?>
+                            <?php if (session()->getFlashdata('pesan')) : ?>
+                                <div class="alert alert-warning" role="alert">
+                                    <?= session()->getFlashdata('pesan'); ?>
+                                </div>
+                            <?php endif; ?>
+                            <!-- No Ajuan -->
+                            <div class="form-group row">
+                                <label for="noAjuan" class="col-sm-4 col-form-label">Masukkan No. Ajuan</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="noAjuan" class="form-control" id="noAjuan" placeholder="Nomor Ajuan">
+                                    <div class="invalid-feedback invalidNIK text-center"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row justify-content-md-center">
-                            <div class="g-recaptcha" data-sitekey="6LdlXhwbAAAAACTiuY1WoMackLIWSIVG6FDH6Do8"></div>
-                            <span class="text-danger" id="captcha_error"></span>
-                        </div>
-                        <div class="form-group row justify-content-md-center">
-                            <div class="col-md-auto">
-                                <a href="/home/index" role="button" class="btn btn-secondary">Batal</a>
-                                <button type="submit" class="btn btn-info">Cek Ajuan</button>
+                            <div class="form-group row justify-content-md-center">
+                                <div class="g-recaptcha" data-sitekey="6LdlXhwbAAAAACTiuY1WoMackLIWSIVG6FDH6Do8"></div>
+                                <span class="text-danger" id="captcha_error"></span>
                             </div>
-                        </div>
-                        <?= form_close(); ?>
+                            <div class="form-group row justify-content-md-center">
+                                <div class="col-md-auto">
+                                    <a href="/home/index" role="button" class="btn btn-secondary">Batal</a>
+                                    <button type="submit" class="btn btn-info btnCek">Cek Ajuan</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -147,71 +151,6 @@
 
     <!-- Template Main JS File -->
     <script src="<?= base_url(); ?>/assets/js/main.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('.formdaftar').submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "post",
-                    url: $(this).attr('action'),
-                    data: $(this).serialize(),
-                    dataType: "json",
-                    beforeSend: function() {
-                        $('.btndaftar').prop('disabled', true);
-                        $('.btndaftar').html('<i class="fa fa-spin fa-spinner"></i>');
-                    },
-                    complete: function() {
-                        $('.btndaftar').prop('disabled', false);
-                        $('.btndaftar').html('Daftar');
-                    },
-                    success: function(response) {
-                        if (response.error) {
-                            if (response.error.Nik) {
-                                $('#alertError').css("display", "block");
-                                $('.errortext').html(response.error.Nik);
-                            } else {
-                                $('#alertError').css("display", "none");
-                                $('.errortext').html('');
-                            }
-                            if (response.error.gender) {
-                                $('#alertGender').css("display", "block");
-                                $('.errorGender').html(response.error.gender);
-                            } else {
-                                $('#alertGender').css("display", "none");
-                                $('.errorGender').html('');
-                            }
-                        }
-                        if (response.a) {
-                            if (response.a.b) {
-                                $('#alertError').css("display", "block");
-                                $('.errortext').html(response.a.b);
-                            } else {
-                                $('#alertError').css("display", "none");
-                                $('.errortext').html('');
-                            }
-                        }
-                        if (response.berhasil) {
-                            swal({
-                                title: response.berhasil.no,
-                                text: "Selamat Anda berhasil terdaftar. Silahkan konfirmasi dengan kelurahan setempat dengan no pendaftaran diatas",
-                                icon: "success",
-                                button: "Ok",
-                            }).then((value) => {
-                                window.location = 'http://sipkemas.puslogin.com/';
-                            });
-                            // window.location = response.berhasil.link;
-                        }
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-                    }
-                });
-
-                return false;
-            });
-        });
-    </script>
 
 
 

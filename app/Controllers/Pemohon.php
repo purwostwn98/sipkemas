@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\AjuanModel;
 use App\Models\FormulirModel;
 use App\Models\PemohonModel;
 
@@ -9,48 +10,30 @@ class Pemohon extends BaseController
 {
     protected $pemohonModel;
     protected $formulirModel;
+    protected $ajuanModel;
     public function __construct()
     {
         $this->pemohonModel = new PemohonModel();
         $this->formulirModel = new FormulirModel();
+        $this->ajuanModel = new AjuanModel();
     }
 
-    public function dtpemohon()
-    {
-        $konfirmasi = $this->request->getVar('konfirmasi');
-        if ($konfirmasi == 0) {
-            $noFormulir = $this->request->getVar('no');
-            $pemohon = $this->formulirModel->where('noFormulir', $noFormulir)
-                ->join('eagama', 'eagama.idAgama = mformulir.idAgama')
-                ->first();
-        } elseif ($konfirmasi == 1) {
-            $idPemohon = $this->request->getVar('idPemohon');
-            $pemohon = $this->pemohonModel->where('idPemohon', $idPemohon)
-                ->join('eagama', 'eagama.idAgama = mpemohon.idAgama')
-                ->first();
-        }
-        $data = [
-            'bttn' => 'dtpemohon',
-            'konfirmasi' => $konfirmasi,
-            'pemohon' => $pemohon
-        ];
-        return view('pemohon/dtpemohon', $data);
-    }
+
     public function frpemohon()
     {
         $data['bttn'] = 'frpemohon';
         return view('pemohon/frpemohon', $data);
     }
-    public function ajuanbantuan()
-    {
-        $data['bttn'] = 'ajuanbantuan';
-        return view('pemohon/dftrbantuan', $data);
-    }
-    public function timeline()
-    {
-        $data = ['bttn' => 'timelineajuan'];
-        return view('pemohon/timelineajuan', $data);
-    }
+    // public function ajuanbantuan()
+    // {
+    //     $data['bttn'] = 'ajuanbantuan';
+    //     return view('pemohon/dftrbantuan', $data);
+    // }
+    // public function timeline()
+    // {
+    //     $data = ['bttn' => 'timelineajuan'];
+    //     return view('pemohon/timelineajuan', $data);
+    // }
 
     //proses
     public function proses_daftar()
@@ -138,5 +121,68 @@ class Pemohon extends BaseController
                 ->first()
         ];
         return view("landing/cetak_form", $data);
+    }
+
+    // Proses Cek Ajuan
+    public function prosesCekAjuan()
+    {
+        $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+        $recaptcha_secret = '6LdlXhwbAAAAAJFSMK0WUDl4TffxdJc-eHnblZZB';
+        $recaptcha_response = $this->request->getVar('g-recaptcha-response');
+
+        $verify = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+        $recaptcha = json_decode($verify);
+        if ($recaptcha->success == true) {
+            $noAjuan = $this->request->getPost('noAjuan');
+            $countAjuan = $this->ajuanModel->where('noAjuan', $noAjuan)->countAllResults();
+            if ($countAjuan == 0) {
+                session()->setFlashdata('pesan', 'Mohon maaf, nomor ajuan belum terdaftar');
+                return redirect()->to('/home/cekAjuan');
+            } elseif ($countAjuan > 1) {
+                session()->setFlashdata('pesan', 'Mohon maaf, nomor ajuan anda tidak valid');
+                return redirect()->to('/home/cekAjuan');
+            } else {
+                $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)->first();
+                $dapat_session = [
+                    'privUser' => 1,
+                    'noAjuan' => $noAjuan,
+                    'idPemohon' => $ajuan['idPemohon'],
+                    'idStsAjuan' => $ajuan['idStsAjuan']
+                ];
+                $this->session->set($dapat_session);
+                return redirect()->to('/pemohon/biodata');
+            }
+        } else {
+            session()->setFlashdata('pesan', 'Mohon maaf, captcha anda tidak valid');
+            return redirect()->to('/home/cekAjuan');
+        }
+    }
+
+    public function biodata()
+    {
+        $idPemohon = $this->session->get('idPemohon');
+        $data = [
+            'bttn' => 'dtpemohon',
+            'pemohon' => $this->pemohonModel->where('idPemohon', $idPemohon)
+                ->join('eagama', 'eagama.idAgama = mpemohon.idAgama')
+                ->first(),
+        ];
+        return view('/pemohon/biodata', $data);
+    }
+
+    public function form_ajuan()
+    {
+        $data['bttn'] = 'syarat_ketentuan';
+        return view('pemohon/ajuan_form_v', $data);
+    }
+    public function alur_bantuan()
+    {
+        $data['bttn'] = 'alur_bantuan';
+        return view('pemohon/alur_bantuan', $data);
+    }
+    public function syarat_ketentuan()
+    {
+        $data['bttn'] = 'syarat_ketentuan';
+        return view('pemohon/syarat_ketentuan', $data);
     }
 }

@@ -42,7 +42,7 @@
                                     foreach ($ajuan_proses as $proses) : ?>
                                         <tr role="row" class="odd">
                                             <td>
-                                                <a href="/kelurahan/detailajuan_i">
+                                                <a href="/kelurahan/detailajuan_i/<?= $proses['noAjuan']; ?>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                             </td>
@@ -92,6 +92,7 @@
             </div>
         </div>
     </div>
+    <!-- Ajuan Selesai -->
     <div class="collapse" id="collapseExample2" data-parent="#accordion">
         <div style="font-size: 12px;" class="card-body">
             <div class="table-responsive">
