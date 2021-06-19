@@ -166,7 +166,7 @@ $session = \Config\Services::session();
             </span></label>
     </div>
     <div class="col-md-6">
-        <?= $pemohon['idKel']; ?>
+        <?= $pemohon['Kelurahan']; ?>
     </div>
 </div>
 <hr class="m-0 p-1">
@@ -180,7 +180,7 @@ $session = \Config\Services::session();
             </span></label>
     </div>
     <div class="col-md-6">
-        Serengan
+        <?= $pemohon['Kecamatan']; ?>
     </div>
 </div>
 <hr class="m-0 p-1">

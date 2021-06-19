@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="<?= base_url(); ?>/assets/img/favicon.png" rel="icon">
+    <link href="<?= base_url(); ?>/assets/img/logo_pms.png" rel="icon">
     <link href="<?= base_url(); ?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -127,13 +127,11 @@
                         <div class="form-group row">
                             <label for="kecamatan" class="col-sm-4 col-form-label">Kecamatan</label>
                             <div class="col-sm-8">
-                                <select class="form-control" id="kecamatan" name="kecamatan" required>
-                                    <option>--Pilih Kecamatan--</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                <select class="form-control" id="kecamatan" name="kecamatan" required onchange="getKec(this);">
+                                    <option value="" selected disabled>Pilih Kecamatan</option>
+                                    <?php foreach ($kecamatan as $kec) { ?>
+                                        <option value="<?= $kec['idKec']; ?>"><?= $kec['Kecamatan']; ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -141,13 +139,8 @@
                         <div class="form-group row">
                             <label for="kelurahan" class="col-sm-4 col-form-label">Kelurahan</label>
                             <div class="col-sm-8">
-                                <select class="form-control" id="kelurahan" name="kelurahan" required>
-                                    <option selected hidden value="">--Pilih Kelurahan--</option>
-                                    <option value="1">Gajahan</option>
-                                    <option value="2">Danukusuman</option>
-                                    <option value="3">Bumi</option>
-                                    <option value="4">Jagalan</option>
-                                    <option value="5">Joglo</option>
+                                <select class="form-control kelurahan" id="kelurahan" name="kelurahan" required>
+                                    <option selected disabled value="">Pilih Kelurahan</option>
                                 </select>
                             </div>
                         </div>
@@ -263,6 +256,26 @@
     <script src="<?= base_url(); ?>/assets/js/main.js"></script>
 
     <script>
+        // Load Kelurahan
+        function getKec(sel) {
+            var idKec = sel.value;
+            $.ajax({
+                url: "<?= site_url('home/load_kelurahan'); ?>",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    idKec: idKec
+                },
+                success: function(response) {
+                    $('.kelurahan').html(response.data);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+
+        }
+
         $(document).ready(function() {
             $('.formdaftar').submit(function(e) {
                 e.preventDefault();

@@ -24,7 +24,7 @@ $session = \Config\Services::session();
             <span>Alur Bantuan</span>
         </a>
     </li>
-    <?php if ($session->get('idStsAjuan') == 0) { ?>
+    <?php if ($session->get('idStsAjuan') == 1) { ?>
         <li class="<?php if ($bttn == 'syarat_ketentuan') {
                         echo 'nav-item active';
                     } else {
@@ -34,13 +34,13 @@ $session = \Config\Services::session();
                 <i class="fas fa-hands-helping fa-fw"></i>
                 <span>Ajukan Bantuan</span></a>
         </li>
-    <?php } elseif ($session->get('idStsAjuan') != 0) { ?>
+    <?php } elseif ($session->get('idStsAjuan') >= 2) { ?>
         <li class="<?php if ($bttn == 'resumeAjuan') {
                         echo 'nav-item active';
                     } else {
                         echo 'nav-item';
                     } ?>">
-            <a class="nav-link my-1 py-1" href="/pemohon/resume_ajuan">
+            <a class="nav-link my-1 py-1" href="/pemohon/resumeAjuan">
                 <i class="fas fa-hands-helping fa-fw"></i>
                 <span>Resume Bantuan</span></a>
         </li>

@@ -28,3 +28,14 @@ class FormulirModel extends Model
         'telepon', 'email'
     ];
 }
+
+class KecamatanModel extends Model
+{
+    protected $table      = 'ekecamatan';
+    protected $primaryKey = 'idKec';
+}
+class KelurahanModel extends Model
+{
+    protected $table      = 'ekelurahan';
+    protected $primaryKey = 'idKel';
+}

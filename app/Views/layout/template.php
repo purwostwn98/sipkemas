@@ -12,6 +12,8 @@ $session = \Config\Services::session();
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link href="<?= base_url(); ?>/assets/img/logo_pms.png" rel="icon" type="image/gif">
+
     <title>Sipkemas Surakarta</title>
 
     <!-- Custom fonts for this template-->

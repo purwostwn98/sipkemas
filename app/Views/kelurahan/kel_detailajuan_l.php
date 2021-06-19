@@ -2,13 +2,28 @@
 <?= $this->section("konten"); ?>
 
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">> Detail Ajuan</h1>
+<div class="row d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-auto">
+        <h1 class="h3 mb-0 text-gray-800">Detail Ajuan</h1>
+    </div>
+    <div class="col-auto mt-4">
+        <p>Status ajuan:
+            <?php if ($idStsAjuan == 1) { ?>
+                <span style="border-radius: 5px;" class="bg-gray-600 p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } elseif ($idStsAjuan <= 4 && $idStsAjuan >= 2) { ?>
+                <span style="border-radius: 5px;" class="bg-info p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } elseif ($idStsAjuan == 5) { ?>
+                <span style="border-radius: 5px;" class="bg-warning p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } elseif ($idStsAjuan == 6) { ?>
+                <span style="border-radius: 5px;" class="bg-success p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } ?>
+        </p>
+    </div>
 </div>
-
+<!-- Data Pemohon -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Pemohon</h6>
+    <div class="card-header bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Pemohon</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
@@ -21,7 +36,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                3312201901980001
+                <?= $pemohon['NIK']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -35,7 +50,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Purwo Setiawan
+                <?= $pemohon['Nama']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -48,8 +63,25 @@
                         <i>Place, Date of Birth</i>
                     </span></label>
             </div>
+            <?php
+            $tgl = explode('-', $pemohon['tgLahir']);
+            $bulan = array(
+                1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+            );
+            ?>
             <div class="col-md-8">
-                Surakarta, 19 Januari 1998
+                <?= $pemohon['tempatLahir']; ?>, <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -63,7 +95,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Laki-laki
+                <?= ($pemohon['gender'] == 1) ? 'Laki-laki' : 'Perempuan' ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -77,7 +109,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Jl. Brigjen Sudiarto No. 34
+                <?= $pemohon['Alamat']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -91,7 +123,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Danukusuman
+                <?= $pemohon['Kelurahan']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -105,7 +137,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Serengan
+                <?= $pemohon['Kecamatan']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -119,7 +151,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Islam
+                <?= $pemohon['Agama']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -133,7 +165,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                085647053296
+                <?= $pemohon['telepon']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -147,14 +179,15 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                purwostwn98@gmail.com
+                <?= $pemohon['email']; ?>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Data Lembaga (Jika Lembaga) -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3 bg-info">
+    <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
         <h6 class="m-0 font-weight-bold text-white">Data Lembaga</h6>
     </div>
     <div class="card-body">
@@ -165,7 +198,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                Masjid Nurul Falah
+                <?= $lembaga['namaLembaga']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -176,156 +209,131 @@
                 </label>
             </div>
             <div class="col-md-8">
-                JL. Slamet Riyadi NO. 23 DS. PELEM RT / RW : 02/12, Surakarta
+                <?= $lembaga['alamat']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
-                    <b>No. Pendirian</b>
+                    <b>No. Lembaga</b>
                 </label>
             </div>
             <div class="col-md-8">
-                6777SURAKARTA00
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card shadow mb-4">
-    <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Ajuan Bantuan</h6>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit</a>
-    </div>
-    <div class="card-body">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Paket Bantuan</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Paket A
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Deskripsi Bantuan</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Bantuan pengadaan kursi roda
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Tgl. Ajuan</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                20 April 2021
+                <?= $lembaga['Akta']; ?>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Data ajuan -->
 <div class="card shadow mb-4">
-    <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Dokumen Pendukung</h6>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit</a>
+    <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Data Ajuan Bantuan</h6>
+    </div>
+    <?php if ($idStsAjuan != 1) { ?>
+        <div class="card-body">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Program Bantuan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?= $ajuan['NamaMitra']; ?>: <?= $ajuan['namaProgram']; ?>
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Nilai Bantuan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    Rp <?= number_format((float)$ajuan['Kebutuhan'], 0, ',', '.'); ?>
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Deskripsi Bantuan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?= $ajuan['Keperluan']; ?>
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Tgl. Ajuan</b>
+                    </label>
+                </div>
+                <?php
+                $tgl = explode('-', $ajuan['tgAjuan']);
+                $bulan = array(
+                    1 =>   'Januari',
+                    'Februari',
+                    'Maret',
+                    'April',
+                    'Mei',
+                    'Juni',
+                    'Juli',
+                    'Agustus',
+                    'September',
+                    'Oktober',
+                    'November',
+                    'Desember'
+                );
+                ?>
+                <div class="col-md-8">
+                    <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
+                </div>
+            </div>
+        </div>
+    <?php } else { ?>
+        <div class="card-body">
+            Pemohon belum mengisi form ajuan
+        </div>
+    <?php } ?>
+</div>
+
+<!-- Dokumen pendukung -->
+<div class="card shadow mb-4">
+    <div class="card-header d-sm-flex align-items-center justify-content-between py-3 bg-info">
+        <h6 class="m-0 font-weight-bold text-white">Dokumen Pendukung</h6>
     </div>
     <div class="card-body">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kartu Keluarga</b>
-                </label>
+        <?php foreach ($dokumen as $dok) { ?>
+            <div class="row bg-white darker">
+                <div class="col-md-6">
+                    <label for="">
+                        <b><?php echo $dok['Syarat'] ?></b>
+                    </label>
+                </div>
+                <div class="col-md-6">
+                    <a href="<?= base_url(); ?>/uploads_syarat/<?= $dok['namaFile']; ?>" class="btn btn-success btn-sm btn-icon-split mb-2" target="_blank">
+                        <span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lihat</span>
+                    </a>
+                </div>
             </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto KTP</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kondisi 1</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kondisi 2</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kondisi 3</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Surat/Dokumen Pendukung</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
+            <hr class="m-0 p-1">
+        <?php } ?>
     </div>
 </div>
+
+
 <div class="row">
     <div class="col">
-        <a href="#" class="btn btn-warning btn-icon-split">
+        <button onclick="history.go(-1)" role="button" class="btn btn-warning btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-left"></i>
             </span>
             <span class="text">Kembali</span>
-        </a>
-        <a href="#" class="btn btn-primary btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-save"></i>
-            </span>
-            <span class="text">Simpan</span>
-        </a>
-        <a href="#" class="btn btn-danger btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-key"></i>
-            </span>
-            <span class="text">Kunci Data</span>
-        </a>
+        </button>
     </div>
 </div>
 
