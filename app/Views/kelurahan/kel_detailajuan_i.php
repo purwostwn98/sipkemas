@@ -10,16 +10,17 @@
         <p>Status ajuan:
             <?php if ($idStsAjuan == 1) { ?>
                 <span style="border-radius: 5px;" class="bg-gray-600 p-2 text-white"><?= $StatusAjuan; ?></span>
-            <?php } elseif ($idStsAjuan <= 4 && $idStsAjuan >= 2) { ?>
+            <?php } elseif ($idStsAjuan <= 5 && $idStsAjuan >= 2) { ?>
                 <span style="border-radius: 5px;" class="bg-info p-2 text-white"><?= $StatusAjuan; ?></span>
-            <?php } elseif ($idStsAjuan == 5) { ?>
-                <span style="border-radius: 5px;" class="bg-warning p-2 text-white"><?= $StatusAjuan; ?></span>
             <?php } elseif ($idStsAjuan == 6) { ?>
+                <span style="border-radius: 5px;" class="bg-warning p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } elseif ($idStsAjuan == 7) { ?>
                 <span style="border-radius: 5px;" class="bg-success p-2 text-white"><?= $StatusAjuan; ?></span>
             <?php } ?>
         </p>
     </div>
 </div>
+
 <!-- Data Pemohon -->
 <div class="card shadow mb-4">
     <div class="card-header bg-info py-3">
@@ -185,15 +186,6 @@
     </div>
 </div>
 
-<!-- <div class="card shadow mb-4">
-    <div class="card-header py-3 bg-info">
-        <h6 class="m-0 font-weight-bold text-white">Data E-SIK</h6>
-    </div>
-    <div class="card-body">
-        DATA E-SIK
-    </div>
-</div> -->
-
 <!-- Data ajuan -->
 <div class="card shadow mb-4">
     <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
@@ -307,18 +299,6 @@
             </span>
             <span class="text">Kembali</span>
         </button>
-        <!-- <a href="#" class="btn btn-primary btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-save"></i>
-            </span>
-            <span class="text">Simpan</span>
-        </a>
-        <a href="#" class="btn btn-danger btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-key"></i>
-            </span>
-            <span class="text">Kunci Data</span>
-        </a> -->
     </div>
 </div>
 

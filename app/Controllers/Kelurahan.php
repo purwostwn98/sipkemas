@@ -142,7 +142,7 @@ class Kelurahan extends BaseController
                 ->findAll(),
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 2)
-                ->where('trajuan.idStsAjuan <=', 4)
+                ->where('trajuan.idStsAjuan <=', 5)
                 ->where('idLbgAjuan =', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
@@ -150,7 +150,7 @@ class Kelurahan extends BaseController
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
-                ->where('trajuan.idStsAjuan >=', 5)
+                ->where('trajuan.idStsAjuan >=', 6)
                 ->where('idLbgAjuan =', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
@@ -168,7 +168,7 @@ class Kelurahan extends BaseController
             'bttn' => 'dftrajuan',
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 2)
-                ->where('trajuan.idStsAjuan <=', 4)
+                ->where('trajuan.idStsAjuan <=', 5)
                 ->where('trajuan.idLbgAjuan =', 1)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
@@ -177,7 +177,7 @@ class Kelurahan extends BaseController
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
-                ->where('trajuan.idStsAjuan >=', 5)
+                ->where('trajuan.idStsAjuan >=', 6)
                 ->where('trajuan.idLbgAjuan =', 1)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
@@ -218,7 +218,6 @@ class Kelurahan extends BaseController
 
     public function detailajuan_l($noAjuan)
     {
-
         $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
             ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
             ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')

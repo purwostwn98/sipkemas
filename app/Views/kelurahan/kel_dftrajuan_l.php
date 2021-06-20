@@ -79,8 +79,10 @@ $bulan = array(
                                                                                     } elseif ($proses['idStsAjuan'] == 3) {
                                                                                         echo ("class='small text-white bg-warning p-1'");
                                                                                     } elseif ($proses['idStsAjuan'] == 4) {
-                                                                                        echo ("class='small text-white bg-dark p-1'");
-                                                                                    } ?>>
+                                                                                        echo ("class='small text-white bg-primary p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 5) {
+                                                                                        echo ("class='small text-white bg-primary p-1'");
+                                                                                    }  ?>>
                                                     <?= $proses['StatusAjuan']; ?>
                                                 </span>
                                             </td>
@@ -134,9 +136,9 @@ $bulan = array(
                                             ?>
                                             <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
                                             <td>
-                                                <span style="border-radius: 5px;" <?php if ($selesai['idStsAjuan'] == 5) {
+                                                <span style="border-radius: 5px;" <?php if ($selesai['idStsAjuan'] == 6) {
                                                                                         echo ("class='small text-white bg-danger p-1'");
-                                                                                    } elseif ($selesai['idStsAjuan'] == 6) {
+                                                                                    } elseif ($selesai['idStsAjuan'] == 7) {
                                                                                         echo ("class='small text-white bg-success p-1'");
                                                                                     } ?>>
                                                     <?= $selesai['StatusAjuan']; ?>

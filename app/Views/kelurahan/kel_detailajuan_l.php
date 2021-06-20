@@ -10,11 +10,11 @@
         <p>Status ajuan:
             <?php if ($idStsAjuan == 1) { ?>
                 <span style="border-radius: 5px;" class="bg-gray-600 p-2 text-white"><?= $StatusAjuan; ?></span>
-            <?php } elseif ($idStsAjuan <= 4 && $idStsAjuan >= 2) { ?>
+            <?php } elseif ($idStsAjuan <= 5 && $idStsAjuan >= 2) { ?>
                 <span style="border-radius: 5px;" class="bg-info p-2 text-white"><?= $StatusAjuan; ?></span>
-            <?php } elseif ($idStsAjuan == 5) { ?>
-                <span style="border-radius: 5px;" class="bg-warning p-2 text-white"><?= $StatusAjuan; ?></span>
             <?php } elseif ($idStsAjuan == 6) { ?>
+                <span style="border-radius: 5px;" class="bg-warning p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } elseif ($idStsAjuan == 7) { ?>
                 <span style="border-radius: 5px;" class="bg-success p-2 text-white"><?= $StatusAjuan; ?></span>
             <?php } ?>
         </p>

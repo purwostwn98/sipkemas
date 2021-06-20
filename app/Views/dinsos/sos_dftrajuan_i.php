@@ -1,6 +1,22 @@
 <?= $this->extend("/layout/template.php"); ?>
 <?= $this->section("konten"); ?>
 
+<?php
+$bulan = array(
+    1 =>   'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
+);
+?>
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Daftar Ajuan Individu</h1>
@@ -29,54 +45,47 @@
                         <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
-                                    <tr class="text-center" role="row">
-                                        <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 5px;">-</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5px;">No</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 50px;">NIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
+                                    <tr role="row" class="text-center">
+                                        <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 10px;">-</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 7px;">No</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 45px;">No.Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 40px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 60px;">Jenis Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 50px;">Status Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Program Bantuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 40px;">Status Ajuan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/dinsos/detailajuan_i?status=new">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">1</td>
-                                        <td>9007701901987789</td>
-                                        <td>Michael Admin</td>
-                                        <td>20 April 2021</td>
-                                        <td>PMI : Griya PMI Bahagia</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1">Butuh Rekomendasi</span>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/dinsos/detailajuan_i?status=new">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">2</td>
-                                        <td>3312289901980100</td>
-                                        <td>Salosa Kurniawan</td>
-                                        <td>20 Februari 2021</td>
-                                        <td>LAZIS : Sarana Belajar Yatim</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1">Butuh Rekomendasi</span>
-                                        </td>
-                                    </tr>
+                                    <?php $no = 0;
+                                    foreach ($ajuan_baru as $baru) : ?>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <a href="/dinsos/detailajuan_i/<?= $baru['noAjuan']; ?>">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                            </td>
+                                            <td class="sorting_1 text-center"><?= $no + 1; ?></td>
+                                            <td><?= $baru['noAjuan']; ?></td>
+                                            <td><?= $baru['NIK']; ?></td>
+                                            <td><?= $baru['Nama']; ?></td>
+                                            <?php
+                                            $blnthn = explode('-', $baru['tgAjuan']);
+                                            ?>
+                                            <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
+                                            <td><?= $baru['NamaMitra']; ?>: <?= $baru['namaProgram']; ?></td>
+                                            <td>
+                                                <span style="border-radius: 5px;" <?php if ($baru['idStsAjuan'] == 1) {
+                                                                                        echo ("class='small text-white bg-gray-600 p-1'");
+                                                                                    } elseif ($baru['idStsAjuan'] == 2) {
+                                                                                        echo ("class='small text-white bg-gray-600 p-1'");
+                                                                                    } ?>>
+                                                    To Recomendation
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php $no++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -95,68 +104,66 @@
                             <table class="table table-bordered dataTable1" id="dataTable1" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
                                     <tr class="text-center" role="row">
-                                        <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 5px;">-</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 10px;">No</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 50px;">NIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
+                                        <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 10px;">-</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 7px;">No</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 30px;">No.Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 35px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 60px;">Jenis Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">Rekomendasi</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 50px;">Status Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 50px;">E-SIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 35px;">Program Bantuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Rekomendasi</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 40px;">Status Ajuan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/dinsos/detailajuan_i?status=proses">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">1</td>
-                                        <td>3312201901980889</td>
-                                        <td>Michael Admin</td>
-                                        <td>20 April 2021</td>
-                                        <td>BAZNAS : Ndandani Omah</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star"></span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1">Seleksi Mitra</span>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/dinsos/detailajuan_i?status=proses">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">2</td>
-                                        <td>3312201901980999</td>
-                                        <td>Salosa Kurniawan</td>
-                                        <td>20 Februari 2021</td>
-                                        <td>PMI: Pendidikan</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1">Diproses Kesra</span>
-                                        </td>
-                                    </tr>
+                                    <?php $no1 = 0;
+                                    foreach ($ajuan_proses as $proses) : ?>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <a href="/dinsos/detailajuan_i/<?= $proses['noAjuan']; ?>">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                            </td>
+                                            <td class="sorting_1 text-center"><?= $no1 + 1; ?></td>
+                                            <td><?= $proses['noAjuan']; ?></td>
+                                            <td><?= $proses['NIK']; ?></td>
+                                            <td><?= $proses['Nama']; ?></td>
+                                            <?php
+                                            $blnthn = explode('-', $proses['tgAjuan']);
+                                            ?>
+                                            <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
+                                            <td>
+                                                <span style="border-radius: 5px;" class="small text-white <?= ($proses['eSik'] == 1) ? 'bg-success' : 'bg-warning' ?> p-1">
+                                                    <?= ($proses['eSik'] == 1) ? 'Terdaftar' : 'Tidak Terdaftar' ?>
+                                                </span>
+                                            </td>
+                                            <td><?= $proses['NamaMitra']; ?>: <?= $proses['namaProgram']; ?></td>
+                                            <td class="text-center">
+                                                <span class="fa fa-star <?= ($proses['idRecDinsos'] >= 1) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($proses['idRecDinsos'] >= 2) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($proses['idRecDinsos'] >= 3) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($proses['idRecDinsos'] >= 4) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($proses['idRecDinsos'] == 5) ? 'oke' : '' ?>"></span>
+                                            </td>
+                                            <td>
+                                                <span style="border-radius: 5px;" <?php if ($proses['idStsAjuan'] == 1) {
+                                                                                        echo ("class='small text-white bg-gray-600 p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 2) {
+                                                                                        echo ("class='small text-white bg-info p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 3) {
+                                                                                        echo ("class='small text-white bg-warning p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 4) {
+                                                                                        echo ("class='small text-white bg-primary p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 5) {
+                                                                                        echo ("class='small text-white bg-primary p-1'");
+                                                                                    } ?>>
+                                                    <?= $proses['StatusAjuan']; ?>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php $no1++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -175,43 +182,60 @@
                             <table class="table table-bordered dataTable1" id="dataTable2" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
                                     <tr class="text-center" role="row">
-                                        <th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 5px;">-</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 10px;">No</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 50px;">NIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
+                                        <th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 10px;">-</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 7px;">No</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 30px;">No.Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 35px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 60px;">Jenis Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">Rekomendasi</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 50px;">Status Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 50px;">E-SIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 35px;">Program Bantuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Rekomendasi</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 40px;">Status Ajuan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/dinsos/detailajuan_i?status=selesai">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">1</td>
-                                        <td>3312201901980889</td>
-                                        <td>Purwo Setiawan</td>
-                                        <td>11 Juni 2021</td>
-                                        <td>BAZNAS : Beasiswa Pendidikan</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star"></span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Disetujui</span>
-                                        </td>
-                                    </tr>
+                                    <?php $no2 = 0;
+                                    foreach ($ajuan_selesai as $selesai) : ?>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <a href="/dinsos/detailajuan_i/<?= $selesai['noAjuan']; ?>">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                            </td>
+                                            <td class="sorting_1 text-center"><?= $no2 + 1; ?></td>
+                                            <td><?= $selesai['noAjuan']; ?></td>
+                                            <td><?= $selesai['NIK']; ?></td>
+                                            <td><?= $selesai['Nama']; ?></td>
+                                            <?php
+                                            $blnthn = explode('-', $selesai['tgAjuan']);
+                                            ?>
+                                            <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
+                                            <td>
+                                                <span style="border-radius: 5px;" class="small text-white <?= ($selesai['eSik'] == 1) ? 'bg-success' : 'bg-warning' ?> p-1">
+                                                    <?= ($selesai['eSik'] == 1) ? 'Terdaftar' : 'Tidak Terdaftar' ?>
+                                                </span>
+                                            </td>
+                                            <td><?= $selesai['NamaMitra']; ?>: <?= $selesai['namaProgram']; ?></td>
+                                            <td class="text-center">
+                                                <span class="fa fa-star <?= ($selesai['idRecDinsos'] >= 1) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($selesai['idRecDinsos'] >= 2) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($selesai['idRecDinsos'] >= 3) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($selesai['idRecDinsos'] >= 4) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($selesai['idRecDinsos'] == 5) ? 'oke' : '' ?>"></span>
+                                            </td>
+                                            <td>
+                                                <span style="border-radius: 5px;" <?php if ($selesai['idStsAjuan'] == 6) {
+                                                                                        echo ("class='small text-white bg-danger p-1'");
+                                                                                    } elseif ($selesai['idStsAjuan'] == 7) {
+                                                                                        echo ("class='small text-white bg-success p-1'");
+                                                                                    } ?>>
+                                                    <?= $selesai['StatusAjuan']; ?>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php $no2++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                         </div>

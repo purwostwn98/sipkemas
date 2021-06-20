@@ -91,27 +91,26 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-
                     <div class="col-lg-6 col-md-6 footer-contact">
-                        <h4>Forum Kesejahteraan Rakyat Kota Surakarta</h4>
+                        <h4>Sekretariat Daerah Bidang Kesejahteraan Rakyat</h4>
                         <p>
+                            Komp. Balai Kota,
                             JL. Jend. Sudirman, No. 2 <br>
                             Kp. Baru, Kec. Ps. Kliwon<br>
                             Kota Surakarta, Jawa Tengah 57133 <br><br>
-                            <strong>Phone:</strong> (0271) 644308<br>
+                            <strong>Phone:</strong> (0271) 644315<br>
+                            <!-- <strong>Email:</strong> info@example.com<br> -->
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="container d-md-flex py-4">
-
             <div class="mr-md-auto text-center text-md-left">
                 <div class="copyright">
                     &copy; Copyright <strong><span>Puslogin UMS</span></strong>. All Rights Reserved

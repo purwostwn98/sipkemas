@@ -109,7 +109,7 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">NIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Bantuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Program Bantuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 40px;">Status Ajuan</th>
                                     </tr>
                                 </thead>
@@ -153,7 +153,9 @@
                                                                                     } elseif ($proses['idStsAjuan'] == 3) {
                                                                                         echo ("class='small text-white bg-warning p-1'");
                                                                                     } elseif ($proses['idStsAjuan'] == 4) {
-                                                                                        echo ("class='small text-white bg-dark p-1'");
+                                                                                        echo ("class='small text-white bg-primary p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 5) {
+                                                                                        echo ("class='small text-white bg-primary p-1'");
                                                                                     } ?>>
                                                     <?= $proses['StatusAjuan']; ?></span>
                                             </td>
@@ -221,9 +223,9 @@
                                             <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
                                             <td><?= $selesai['NamaMitra']; ?>: <?= $selesai['namaProgram']; ?></td>
                                             <td>
-                                                <span style="border-radius: 5px;" <?php if ($selesai['idStsAjuan'] == 5) {
+                                                <span style="border-radius: 5px;" <?php if ($selesai['idStsAjuan'] == 6) {
                                                                                         echo ("class='small text-white bg-danger p-1'");
-                                                                                    } elseif ($selesai['idStsAjuan'] == 6) {
+                                                                                    } elseif ($selesai['idStsAjuan'] == 7) {
                                                                                         echo ("class='small text-white bg-success p-1'");
                                                                                     } ?>>
                                                     <?= $selesai['StatusAjuan']; ?></span>

@@ -4,7 +4,6 @@ $session = \Config\Services::session();
 
 <!-- Pemohon -->
 <?php if ($session->get('privUser') == 1) { ?>
-    <!-- Nav Item - Dashboard -->
     <li class="<?php if ($bttn == 'dtpemohon') {
                     echo 'nav-item active';
                 } else {
@@ -50,9 +49,6 @@ $session = \Config\Services::session();
 <!-- Menu Kelurahan -->
 <hr class="sidebar-divider my-0">
 <?php if ($session->get('privUser') == 2) { ?>
-    <!-- <div class="sidebar-heading">
-                    Halaman Kelurahan
-                </div> -->
     <li class="nav-item <?= ($bttn == 'dtpemohon' || $bttn == 'dftrpemohon') ? 'active' : '' ?>">
         <a class="nav-link my-1 py-1" href="/kelurahan/dftrpemohon_i">
             <i class="fa-fw far fa-address-book"></i>
@@ -80,23 +76,22 @@ $session = \Config\Services::session();
     </li>
 <?php } ?>
 
+<!-- Menu Dinsos -->
 <?php if ($session->get('privUser') == 3) { ?>
-    <!-- Menu Dinsos -->
     <hr class="sidebar-divider my-0">
     <div class="sidebar-heading">
         Halaman Dinsos
     </div>
 
-    <li class="nav-item active">
+    <li class="nav-item <?= ($bttn == 'sos_dftrajuan') ? 'active' : '' ?>">
         <a class="nav-link my-1 py-1" href="/dinsos/dftrajuan_i">
             <i class="fa-fw far fa-list-alt"></i>
             <span>Daftar Ajuan</span></a>
     </li>
-
 <?php } ?>
 
+<!-- Menu Kesra -->
 <?php if ($session->get('privUser') == 4) { ?>
-    <!-- Menu Kesra -->
     <hr class="sidebar-divider my-0">
     <div class="sidebar-heading">
         Halaman Kesra
@@ -116,13 +111,13 @@ $session = \Config\Services::session();
         </div>
     </li>
 <?php } ?>
+
+<!-- Menu Mitra -->
 <?php if ($session->get('privUser') == 5) { ?>
-    <!-- Menu Mitra -->
     <hr class="sidebar-divider my-0">
     <div class="sidebar-heading">
         Halaman Mitra
     </div>
-
     <li class="nav-item active">
         <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#mitraSub" aria-expanded="true" aria-controls="mitraSub">
             <i class="fa-fw far fa-list-alt"></i>
@@ -138,6 +133,7 @@ $session = \Config\Services::session();
     </li>
 <?php } ?>
 
+<!-- Tombol Logout -->
 <li class="nav-item">
     <a class="nav-link my-1 py-1" href="#" data-toggle="modal" data-target="#logoutModal">
         <i class="fas fa-sign-out-alt fa-fw"></i>

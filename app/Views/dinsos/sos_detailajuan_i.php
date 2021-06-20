@@ -1,9 +1,39 @@
 <?= $this->extend("/layout/template.php"); ?>
 <?= $this->section("konten"); ?>
-
+<?php
+$bulan = array(
+    1 =>   'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
+);
+?>
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">> Detail Ajuan</h1>
+<div class="row d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-auto">
+        <h1 class="h3 mb-0 text-gray-800">Detail Ajuan</h1>
+    </div>
+    <div class="col-auto mt-4">
+        <p>Status ajuan:
+            <?php if ($idStsAjuan == 2) { ?>
+                <span style="border-radius: 5px;" class="bg-gray-600 p-2 text-white">Untuk Direkomendasi</span>
+            <?php } elseif ($idStsAjuan <= 5 && $idStsAjuan >= 3) { ?>
+                <span style="border-radius: 5px;" class="bg-info p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } elseif ($idStsAjuan == 6) { ?>
+                <span style="border-radius: 5px;" class="bg-warning p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } elseif ($idStsAjuan == 7) { ?>
+                <span style="border-radius: 5px;" class="bg-success p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } ?>
+        </p>
+    </div>
 </div>
 
 <!-- Data Pemohon -->
@@ -22,7 +52,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                3312201901980001
+                <?= $pemohon['NIK']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -36,7 +66,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Purwo Setiawan
+                <?= $pemohon['Nama']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -49,8 +79,11 @@
                         <i>Place, Date of Birth</i>
                     </span></label>
             </div>
+            <?php
+            $tgl = explode('-', $pemohon['tgLahir']);
+            ?>
             <div class="col-md-8">
-                Surakarta, 19 Januari 1998
+                <?= $pemohon['tempatLahir']; ?>, <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -64,7 +97,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Laki-laki
+                <?= ($pemohon['gender'] == 1) ? 'Laki-laki' : 'Perempuan' ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -78,7 +111,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Jl. Brigjen Sudiarto No. 34
+                <?= $pemohon['Alamat']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -92,7 +125,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Danukusuman
+                <?= $pemohon['Kelurahan']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -106,7 +139,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Serengan
+                <?= $pemohon['Kecamatan']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -120,7 +153,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Islam
+                <?= $pemohon['Agama']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -134,7 +167,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                085647053296
+                <?= $pemohon['telepon']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -148,131 +181,121 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                purwostwn98@gmail.com
+                <?= $pemohon['email']; ?>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Data Ajuan Bantuan -->
 <div class="card shadow mb-4">
-    <div class="card-header bg-info py-3">
+    <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
         <h6 class="m-0 font-weight-bold text-white">Data Ajuan Bantuan</h6>
     </div>
-    <div class="card-body">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Paket Bantuan</b>
-                </label>
+    <?php if ($idStsAjuan != 1) { ?>
+        <div class="card-body">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Program Bantuan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?= $ajuan['NamaMitra']; ?>: <?= $ajuan['namaProgram']; ?>
+                </div>
             </div>
-            <div class="col-md-8">
-                PMI: Griya PMI Peduli
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Nilai Bantuan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    Rp <?= number_format((float)$ajuan['Kebutuhan'], 0, ',', '.'); ?>
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Deskripsi Bantuan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?= $ajuan['Keperluan']; ?>
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Tgl. Ajuan</b>
+                    </label>
+                </div>
+                <?php
+                $tgl = explode('-', $ajuan['tgAjuan']);
+                ?>
+                <div class="col-md-8">
+                    <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
+                </div>
             </div>
         </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Deskripsi Bantuan</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Bantuan pengadaan kursi roda
-            </div>
+    <?php } else { ?>
+        <div class="card-body">
+            Pemohon belum mengisi form ajuan
         </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Tgl. Ajuan</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                20 April 2021
-            </div>
-        </div>
-    </div>
+    <?php } ?>
 </div>
+
 <!-- Dokumen Pendukung -->
 <div class="card shadow mb-4">
-    <div class="card-header bg-info py-3">
+    <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
         <h6 class="m-0 font-weight-bold text-white">Dokumen Pendukung</h6>
     </div>
-    <div class="card-body">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kartu Keluarga</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
+    <?php if ($idStsAjuan != 1) { ?>
+        <div class="card-body">
+            <?php foreach ($dokumen as $dok) { ?>
+                <div class="row bg-white darker">
+                    <div class="col-md-6">
+                        <label for="">
+                            <b><?php echo $dok['Syarat'] ?></b>
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="<?= base_url(); ?>/uploads_syarat/<?= $dok['namaFile']; ?>" class="btn btn-success btn-sm btn-icon-split mb-2" target="_blank">
+                            <span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lihat</span>
+                        </a>
+                    </div>
+                </div>
+                <hr class="m-0 p-1">
+            <?php } ?>
         </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto KTP</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
+    <?php } else { ?>
+        <div class="card-body">
+            Pemohon belum mengupload syarat ajuan
         </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kondisi 1</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kondisi 2</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kondisi 3</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Dokumen pendukung lainnya</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-    </div>
+    <?php } ?>
 </div>
+
+
 <!-- Tindakan Dinsos -->
-<?php if ($status == 'new') { ?>
+<?php if ($ajuan['idStsAjuan'] == 2) { ?>
+    <?= form_open("/dinsos/updateAjuan", ['class' => 'formRekomendasi']); ?>
+    <?= csrf_field(); ?>
+    <input type="hidden" name="idAjuan" id="idAjuan" value="<?= $ajuan['idAjuan']; ?>">
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-warning">
             <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
         </div>
         <div class="card-body">
+            <div class="row" style="display: none;">
+                <div class="col-12">
+                    <div class="alert alert-danger peringatan" role="alert">
+                        This is a danger alert—check it out!
+                    </div>
+                </div>
+            </div>
             <div class="row bg-white darker py-2">
                 <div class="col-md-4">
                     <label for="stsESIK">
@@ -280,10 +303,10 @@
                     </label>
                 </div>
                 <div class="col-md-8">
-                    <select id="stsESIK" class="form-control">
+                    <select id="stsESIK" class="form-control" name="eSik">
                         <option selected value="" disabled>--Pilih--</option>
-                        <option>Terdaftar</option>
-                        <option>Belum Terdaftar</option>
+                        <option value="1">Terdaftar</option>
+                        <option value="0">Belum Terdaftar</option>
                     </select>
                 </div>
             </div>
@@ -329,7 +352,7 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios5" value="1">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios5" value="2">
                         <label class="form-check-label" for="exampleRadios5">
                             Kurang Direkomendasikan
                             (<i class="fa fa-star oke"></i>
@@ -340,7 +363,7 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios4" value="2">
+                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios4" value="1">
                         <label class="form-check-label" for="exampleRadios4">
                             Tidak Direkomendasikan
                             (<i class="fa fa-star oke"></i>
@@ -359,14 +382,33 @@
                     </label>
                 </div>
                 <div class="col-md-8">
-                    <textarea class="form-control" id="ketRekomen" rows="3"></textarea>
+                    <textarea class="form-control" id="ketRecDinsos" name="ketRecDinsos" rows="3"></textarea>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Button -->
+    <div class="row">
+        <div class="col">
+            <a href="/dinsos/dftrajuan_i" class="btn btn-warning btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">Kembali</span>
+            </a>
+            <button type="button" role="button" class="btn btn-primary btn-icon-split btnConfirm">
+                <span class='icon text-white-50'>
+                    <i class='fas fa-save'></i>
+                </span>
+                <span class='text'>Konfirmasi ke Kesra</span>
+            </button>
+        </div>
+    </div>
+    <?= form_close(); ?>
 <?php } ?>
-<!-- Rekomendasi Dinsos -->
-<?php if ($status == 'proses' || $status == 'selesai') { ?>
+
+<!-- Hasil Rekomendasi Dinsos -->
+<?php if ($idStsAjuan >= 3) { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-info">
             <h6 class="m-0 font-weight-bold text-white">Rekomendasi (Dinsos)</h6>
@@ -379,7 +421,7 @@
                     </label>
                 </div>
                 <div class="col-md-8">
-                    Terdaftar
+                    <?= ($ajuan['eSik'] == 1) ? 'Terdaftar' : 'Tidak Terdaftar' ?>
                 </div>
             </div>
             <hr class="m-0 p-1">
@@ -390,12 +432,24 @@
                     </label>
                 </div>
                 <div class="col-md-8">
-                    Kurang Direkomendasikan
-                    (<i class="fa fa-star oke"></i>
-                    <span class="fa fa-star oke"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>)
+                    <?php if ($ajuan['idRecDinsos'] == 1) { ?>
+                        Tidak Direkomendasikan
+                    <?php } elseif ($ajuan['idRecDinsos'] == 2) { ?>
+                        Kurang Direkomendasikan
+                    <?php } elseif ($ajuan['idRecDinsos'] == 3) { ?>
+                        Direkomendasikan
+                    <?php } elseif ($ajuan['idRecDinsos'] == 4) { ?>
+                        Lebih Direkomendasikan
+                    <?php } elseif ($ajuan['idRecDinsos'] == 5) { ?>
+                        Sangat Direkomendasikan
+                    <?php } ?> &nbsp;
+                    (
+                    <span class="fa fa-star <?= ($ajuan['idRecDinsos'] >= 1) ? 'oke' : '' ?>"></span>
+                    <span class="fa fa-star <?= ($ajuan['idRecDinsos'] >= 2) ? 'oke' : '' ?>"></span>
+                    <span class="fa fa-star <?= ($ajuan['idRecDinsos'] >= 3) ? 'oke' : '' ?>"></span>
+                    <span class="fa fa-star <?= ($ajuan['idRecDinsos'] >= 4) ? 'oke' : '' ?>"></span>
+                    <span class="fa fa-star <?= ($ajuan['idRecDinsos'] == 5) ? 'oke' : '' ?>"></span>
+                    )
                 </div>
             </div>
             <hr class="m-0 p-1">
@@ -406,14 +460,13 @@
                     </label>
                 </div>
                 <div class="col-md-8">
-                    Warga miskin, sudah pernah mendapatkan beberapa bantuan
+                    <?= $ajuan['ketRecDinsos']; ?>
                 </div>
             </div>
         </div>
     </div>
-<?php } ?>
-<!-- Status Ajuan -->
-<?php if ($status == 'proses' || $status == 'selesai') { ?>
+
+    <!-- Status Ajuan -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-info">
             <h6 class="m-0 font-weight-bold text-white">Status Ajuan</h6>
@@ -426,78 +479,93 @@
                     </label>
                 </div>
                 <div class="col-md-8">
-                    <span style="border-radius: 5px;" class="text-white <?= ($status == 'proses') ? 'bg-info' : 'bg-success' ?> p-1">
-                        <?= ($status == 'proses') ? 'Diproses Mitra' : 'Disetujui' ?>
-                    </span>
+                    <?php if ($idStsAjuan == 2) { ?>
+                        <span style="border-radius: 5px;" class="bg-gray-600 p-2 text-white">Untuk Direkomendasi</span>
+                    <?php } elseif ($idStsAjuan <= 5 && $idStsAjuan >= 3) { ?>
+                        <span style="border-radius: 5px;" class="bg-info p-2 text-white"><?= $StatusAjuan; ?></span>
+                    <?php } elseif ($idStsAjuan == 6) { ?>
+                        <span style="border-radius: 5px;" class="bg-warning p-2 text-white"><?= $StatusAjuan; ?></span>
+                    <?php } elseif ($idStsAjuan == 7) { ?>
+                        <span style="border-radius: 5px;" class="bg-success p-2 text-white"><?= $StatusAjuan; ?></span>
+                    <?php } ?>
                 </div>
             </div>
             <hr class="m-0 p-1">
-            <div class="row bg-white darker">
-                <div class="col-md-4">
-                    <label for="">
-                        <b>Mitra</b>
-                    </label>
+            <?php if ($idStsAjuan >= 5) { ?>
+                <div class="row bg-white darker">
+                    <div class="col-md-4">
+                        <label for="">
+                            <b>Alasan</b>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <?= $ajuan['ketRecSurvey']; ?>
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    BAZNAS Surakarta
-                </div>
-            </div>
-            <hr class="m-0 p-1">
-            <div class="row bg-white darker">
-                <div class="col-md-4">
-                    <label for="">
-                        <b>Alasan (opsional)</b>
-                    </label>
-                </div>
-                <div class="col-md-8">
-                    Rumah masih layak
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 <?php } ?>
-<!-- Button -->
-<div class="row">
-    <div class="col">
-        <a href="/dinsos/dftrajuan_i" class="btn btn-warning btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-arrow-left"></i>
-            </span>
-            <span class="text">Kembali</span>
-        </a>
-        <?php if ($status == 'new') { ?>
-            <a href="#" class="btn btn-primary btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-save"></i>
-                </span>
-                <span class="text">Konfirmasi ke Kesra</span>
-            </a>
-        <?php } ?>
-    </div>
-</div>
 
-<script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<!-- POST FORM AJUAN -->
+<script type="text/javascript">
+    $(document).ready(function() {
 
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
-    var img = document.getElementById("myImg");
-    var modalImg = document.getElementById("img01");
-    var captionText = document.getElementById("caption");
-    img.onclick = function() {
-        modal.style.display = "block";
-        modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
-    }
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
+        $('.btnConfirm').click(function(e) {
+            e.preventDefault();
+            swal({
+                    title: "Anda yakin?",
+                    text: "Dengan mengkonfirmasi ajuan, Anda tidak dapat lagi merubah rekomendasi",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "post",
+                            url: $(".formRekomendasi").attr('action'),
+                            data: $(".formRekomendasi").serialize(),
+                            dataType: "json",
+                            beforeSend: function() {
+                                $('.btnConfirm').prop('disabled', true);
+                                $('.btnConfirm').html('<i class="fa fa-spin fa-spinner"></i>');
+                            },
+                            complete: function() {
+                                $('.btnConfirm').prop('disabled', false);
+                                $('.btnConfirm').html("<span class='icon text-white-50'><i class='fas fa-save'></i></span><span class='text'>Konfirmasi ke Kesra</span>");
+                            },
+                            success: function(response) {
+                                if (response.error) {
+                                    if (response.error.eSik) {
+                                        swal("Mohon Maaf!", response.error.eSik, "error");
+                                    } else if (response.error.rec) {
+                                        swal("Mohon Maaf!", response.error.rec, "error");
+                                    }
+                                }
+                                if (response.berhasil) {
+                                    swal({
+                                        title: "Sukses",
+                                        text: response.berhasil.pesan,
+                                        icon: "success",
+                                        button: "Ok",
+                                    }).then((value) => {
+                                        window.location = response.berhasil.link;
+                                    });
+                                }
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                            }
+                        });
+                        return false;
+                    } else {
+                        return false;
+                    }
+                });
+        });
+    });
 </script>
-
 
 <?= $this->endSection(); ?>
