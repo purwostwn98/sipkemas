@@ -1,6 +1,21 @@
 <?= $this->extend("/layout/template.php"); ?>
 <?= $this->section("konten"); ?>
-
+<?php
+$bulan = array(
+    1 =>   'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
+);
+?>
 <!-- Page Heading -->
 <div class="row d-sm-flex align-items-center justify-content-between mb-4">
     <div class="col-auto">
@@ -32,7 +47,7 @@
                 </label>
             </div>
             <div class="col-md-8">
-                <?= ($ajuan['idLbgAjuan'] == 0) ? 'Individu' : 'Lembaga' ?>
+                <?= ($ajuan['idJnsAjuan'] == 0) ? 'Individu' : 'Lembaga' ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -77,30 +92,44 @@
             </div>
             <?php
             $tgl = explode('-', $ajuan['tgAjuan']);
-            $bulan = array(
-                1 =>   'Januari',
-                'Februari',
-                'Maret',
-                'April',
-                'Mei',
-                'Juni',
-                'Juli',
-                'Agustus',
-                'September',
-                'Oktober',
-                'November',
-                'Desember'
-            );
             ?>
             <div class="col-md-8">
                 <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
             </div>
         </div>
+        <?php if ($ajuan['idJnsAjuan'] == 0) { ?>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Status E-SIK</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?= ($ajuan['eSik'] == 0) ? 'Tidak Terdaftar' : 'Terdaftar' ?>
+                </div>
+            </div>
+        <?php } ?>
+        <?php if ($ajuan['eSik'] == 0 && $ajuan['idJnsAjuan'] == 0) { ?>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Surat Keterangan Pemohon</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <a href="<?= base_url(); ?>/uploads_syarat/<?= $ajuan['srtKetPemohon']; ?>" class="btn btn-success btn-sm btn-icon-split mb-2" target="_blank">
+                        <span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lihat</span>
+                    </a>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </div>
 
 <!-- Data Lembaga (Jika Lembaga) -->
-<?php if ($ajuan['idLbgAjuan'] != 0) { ?>
+<?php if ($ajuan['idJnsAjuan'] != 0) { ?>
     <div class="card shadow mb-4">
         <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
             <h6 class="m-0 font-weight-bold text-white">Data Lembaga</h6>
@@ -165,6 +194,117 @@
         <?php } ?>
     </div>
 </div>
+
+<!-- Status Ajuan -->
+<?php
+$tglajuan = explode('-', $ajuan['tgAjuan']);
+$tglKesra = explode('-', $ajuan['tgRecKesra']);
+$tglMitra = explode('-', $ajuan['tgRecSurvey']);
+?>
+<div class="card shadow mb-4">
+    <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Status Ajuan</h6>
+    </div>
+    <div class="card-body">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Pengajuan Bantuan</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                <?php if ($ajuan['idStsAjuan'] >= 1) { ?>
+                    <span class="<?= ($ajuan['idStsAjuan'] >= 1) ? 'bg-success' : '' ?> text-white p-1">
+                        <?= $tglajuan[2] . ' ' . $bulan[(int)$tglajuan[1]] . ' ' . $tglajuan[0]; ?>
+                    </span>
+                <?php } ?>
+            </div>
+        </div>
+        <?php if ($ajuan['idJnsAjuan'] == 0) { ?>
+            <?php
+            $tglDinsos = explode('-', $ajuan['tgRecDinsos']);
+            ?>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Proses Dinsos</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?php if ($ajuan['idStsAjuan'] >= 3) { ?>
+                        <span class="bg-success text-white p-1">
+                            <?= $tglDinsos[2] . ' ' . $bulan[(int)$tglDinsos[1]] . ' ' . $tglDinsos[0]; ?>
+                        </span>
+                    <?php } elseif ($ajuan['idStsAjuan'] == 2) {
+                        echo "<span class='bg-warning text-white p-1'>Sedang diproses</span>";
+                    } else {
+                        echo "<span class='bg-secondary text-white p-1'>Belum diproses</span>";
+                    } ?>
+                </div>
+            </div>
+        <?php } ?>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Proses Kesra</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                <?php if ($ajuan['idStsAjuan'] >= 4) { ?>
+                    <span class="bg-success text-white p-1">
+                        <?= $tglKesra[2] . ' ' . $bulan[(int)$tglKesra[1]] . ' ' . $tglKesra[0]; ?>
+                    </span>
+                <?php } elseif ($ajuan['idStsAjuan'] == 3) {
+                    echo "<span class='bg-warning text-white p-1'>Sedang diproses</span>";
+                } else {
+                    echo "<span class='bg-secondary text-white p-1'>Belum diproses</span>";
+                } ?>
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Proses Mitra</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                <?php if ($ajuan['idStsAjuan'] >= 6) { ?>
+                    <span class="bg-success text-white p-1">
+                        <?= $tglMitra[2] . ' ' . $bulan[(int)$tglMitra[1]] . ' ' . $tglMitra[0]; ?>
+                    </span>
+                <?php } elseif ($ajuan['idStsAjuan'] == 4) {
+                    echo "<span class='bg-warning text-white p-1'>Sedang diproses</span>";
+                } elseif ($ajuan['idStsAjuan'] == 5) {
+                    echo "<span class='bg-primary text-white p-1'>Survey</span>";
+                } else {
+                    echo "<span class='bg-secondary text-white p-1'>Belum diproses</span>";
+                } ?>
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Hasil</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                <?php if ($ajuan['idStsAjuan'] == 6) { ?>
+                    <span class="bg-danger text-white p-1">Ditolak</span>
+                <?php } elseif ($ajuan['idStsAjuan'] == 7) {
+                    echo "<span class='bg-success text-white p-1'>Disetujui</span>";
+                } else {
+                    echo "<span class='bg-secondary text-white p-1'>Belum diproses</span>";
+                } ?>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 <div class="row">
     <div class="col">

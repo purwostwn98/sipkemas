@@ -1,6 +1,21 @@
 <?= $this->extend("/layout/template.php"); ?>
 <?= $this->section("konten"); ?>
-
+<?php
+$bulan = array(
+    1 =>   'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
+);
+?>
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Daftar Ajuan Individu</h1>
@@ -33,91 +48,62 @@
                                     <tr class="text-center" role="row">
                                         <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 10px;">-</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 10px;">No</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 30px;">No.Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">NIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">Rekomendasi</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Program Bantuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 40px;">E-SIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 55px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 30px;">Status Ajuan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/mitra/detailajuan_i?status=new">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">1</td>
-                                        <td>3312201901984489</td>
-                                        <td>Michael User</td>
-                                        <td>30 April 2021</td>
-                                        <td>LAZIS : Santunan Gizi Yatim</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1">To Approve</span>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/mitra/detailajuan_i?status=new">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">2</td>
-                                        <td>3312207801987789</td>
-                                        <td>Salosa Kurniawan</td>
-                                        <td>20 Februari 2021</td>
-                                        <td>LAZIS: Bantuan Paket Internet</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1">To Approve</span>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/mitra/detailajuan_i?status=new">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">3</td>
-                                        <td>6712207801987789</td>
-                                        <td>Fulandari</td>
-                                        <td>19 Januari 2021</td>
-                                        <td>PMI: Dompet Kemanusiaan</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1"><i class="fa fa-clock-o mr-1"></i>Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-gray-600 p-1">To Approve</span>
-                                        </td>
-                                    </tr>
+                                    <?php $no = 0;
+                                    foreach ($ajuan_baru as $baru) : ?>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <a href="/kesra/detailajuan_i/<?= $baru['noAjuan']; ?>">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                            </td>
+                                            <td class="sorting_1 text-center"><?= $no + 1; ?></td>
+                                            <td><?= $baru['noAjuan']; ?></td>
+                                            <td><?= $baru['NIK']; ?></td>
+                                            <td><?= $baru['Nama']; ?></td>
+                                            <?php
+                                            $blnthn = explode('-', $baru['tgAjuan']);
+                                            ?>
+                                            <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
+                                            <td><?= $baru['NamaMitra']; ?>: <?= $baru['namaProgram']; ?></td>
+                                            <td>
+                                                <span style="border-radius: 5px;" class="small text-white <?= ($baru['eSik'] == 1) ? 'bg-success' : 'bg-warning' ?> p-1">
+                                                    <?= ($baru['eSik'] == 1) ? 'Terdaftar' : 'Tidak Terdaftar' ?>
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="fa fa-star <?= ($baru['idRecKesra'] >= 1) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($baru['idRecKesra'] >= 2) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($baru['idRecKesra'] >= 3) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($baru['idRecKesra'] >= 4) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($baru['idRecKesra'] == 5) ? 'oke' : '' ?>"></span>
+                                            </td>
+                                            <td>
+                                                <span style="border-radius: 5px;" <?php if ($baru['idStsAjuan'] == 1) {
+                                                                                        echo ("class='small text-white bg-gray-600 p-1'");
+                                                                                    } elseif ($baru['idStsAjuan'] == 2) {
+                                                                                        echo ("class='small text-white bg-info p-1'");
+                                                                                    } elseif ($baru['idStsAjuan'] == 3) {
+                                                                                        echo ("class='small text-white bg-gray-600 p-1'");
+                                                                                    } elseif ($baru['idStsAjuan'] == 4) {
+                                                                                        echo ("class='small text-white bg-gray-600 p-1'");
+                                                                                    } ?>>
+                                                    To Approve
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php $no++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -138,66 +124,64 @@
                                     <tr class="text-center" role="row">
                                         <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 10px;">-</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 10px;">No</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 30px;">No.Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">NIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">Rekomendasi</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Program Bantuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 40px;">E-SIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 55px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 30px;">Status Ajuan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/mitra/detailajuan_i?status=survey">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">1</td>
-                                        <td>3312201901984489</td>
-                                        <td>Jojo Anonim</td>
-                                        <td>30 April 2021</td>
-                                        <td>PMI : PMI Griya Bahagia</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1">Survey</span>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/mitra/detailajuan_i?status=survey">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">2</td>
-                                        <td>3312207801987789</td>
-                                        <td>Salosa Kurniawan</td>
-                                        <td>20 Februari 2021</td>
-                                        <td>LAZIS : Pendidikan Yatim</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-info p-1">Survey</span>
-                                        </td>
-                                    </tr>
+                                    <?php $no1 = 0;
+                                    foreach ($ajuan_proses as $proses) : ?>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <a href="/kesra/detailajuan_i/<?= $proses['noAjuan']; ?>">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                            </td>
+                                            <td class="sorting_1 text-center"><?= $no1 + 1; ?></td>
+                                            <td><?= $proses['noAjuan']; ?></td>
+                                            <td><?= $proses['NIK']; ?></td>
+                                            <td><?= $proses['Nama']; ?></td>
+                                            <?php
+                                            $blnthn = explode('-', $proses['tgAjuan']);
+                                            ?>
+                                            <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
+                                            <td><?= $proses['NamaMitra']; ?>: <?= $proses['namaProgram']; ?></td>
+                                            <td>
+                                                <span style="border-radius: 5px;" class="small text-white <?= ($proses['eSik'] == 1) ? 'bg-success' : 'bg-warning' ?> p-1">
+                                                    <?= ($proses['eSik'] == 1) ? 'Terdaftar' : 'Tidak Terdaftar' ?>
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="fa fa-star <?= ($proses['idRecKesra'] >= 1) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($proses['idRecKesra'] >= 2) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($proses['idRecKesra'] >= 3) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($proses['idRecKesra'] >= 4) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($proses['idRecKesra'] == 5) ? 'oke' : '' ?>"></span>
+                                            </td>
+                                            <td>
+                                                <span style="border-radius: 5px;" <?php if ($proses['idStsAjuan'] == 1) {
+                                                                                        echo ("class='small text-white bg-gray-600 p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 2) {
+                                                                                        echo ("class='small text-white bg-info p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 3) {
+                                                                                        echo ("class='small text-white bg-gray-600 p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 4) {
+                                                                                        echo ("class='small text-white bg-gray-600 p-1'");
+                                                                                    } elseif ($proses['idStsAjuan'] == 5) {
+                                                                                        echo ("class='small text-white bg-primary p-1'");
+                                                                                    } ?>>
+                                                    Survey
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php $no1++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -218,66 +202,58 @@
                                     <tr class="text-center" role="row">
                                         <th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 10px;">-</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 10px;">No</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">NIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 30px;">No.Ajuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">NIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">E-SIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 30px;">Rekomendasi</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Program Bantuan</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 40px;">E-SIK</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 55px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 30px;">Status Ajuan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/mitra/detailajuan_i?status=selesai">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">1</td>
-                                        <td>3317801901984489</td>
-                                        <td>Jojo Anonim</td>
-                                        <td>30 April 2021</td>
-                                        <td>PMI : PMI Griya Bahagia</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star"></span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Disetujui</span>
-                                        </td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td>
-                                            <a href="/mitra/detailajuan_i?status=selesai">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                        </td>
-                                        <td class="sorting_1">2</td>
-                                        <td>9912207801987789</td>
-                                        <td>Salosa Kurniawan</td>
-                                        <td>20 Februari 2021</td>
-                                        <td>LAZIS : Pendidikan Yatim</td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-success p-1">Terdaftar</span>
-                                        </td>
-                                        <td>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star oke"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                        </td>
-                                        <td>
-                                            <span style="border-radius: 5px;" class="small text-white bg-danger p-1">Ditolak</span>
-                                        </td>
-                                    </tr>
+                                    <?php $no2 = 0;
+                                    foreach ($ajuan_selesai as $selesai) : ?>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <a href="/kesra/detailajuan_i/<?= $selesai['noAjuan']; ?>">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                            </td>
+                                            <td class="sorting_1 text-center"><?= $no2 + 1; ?></td>
+                                            <td><?= $selesai['noAjuan']; ?></td>
+                                            <td><?= $selesai['NIK']; ?></td>
+                                            <td><?= $selesai['Nama']; ?></td>
+                                            <?php
+                                            $blnthn = explode('-', $selesai['tgAjuan']);
+                                            ?>
+                                            <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
+                                            <td><?= $selesai['NamaMitra']; ?>: <?= $selesai['namaProgram']; ?></td>
+                                            <td>
+                                                <span style="border-radius: 5px;" class="small text-white <?= ($selesai['eSik'] == 1) ? 'bg-success' : 'bg-warning' ?> p-1">
+                                                    <?= ($selesai['eSik'] == 1) ? 'Terdaftar' : 'Tidak Terdaftar' ?>
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="fa fa-star <?= ($selesai['idRecKesra'] >= 1) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($selesai['idRecKesra'] >= 2) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($selesai['idRecKesra'] >= 3) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($selesai['idRecKesra'] >= 4) ? 'oke' : '' ?>"></span>
+                                                <span class="fa fa-star <?= ($selesai['idRecKesra'] == 5) ? 'oke' : '' ?>"></span>
+                                            </td>
+                                            <td>
+                                                <span style="border-radius: 5px;" <?php if ($selesai['idStsAjuan'] == 6) {
+                                                                                        echo ("class='small text-white bg-danger p-1'");
+                                                                                    } elseif ($selesai['idStsAjuan'] == 7) {
+                                                                                        echo ("class='small text-white bg-success p-1'");
+                                                                                    } ?>>
+                                                    <?= $selesai['StatusAjuan']; ?>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php $no2++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                         </div>

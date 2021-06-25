@@ -69,7 +69,7 @@ $session = \Config\Services::session();
         </div>
     </li>
     <li class="nav-item <?= ($bttn == 'alur_bantuan') ? 'active' : '' ?>">
-        <a class="nav-link my-1 py-1" href="/kelurahan/alur_bantuan">
+        <a class="nav-link my-1 py-1" href="/pemohon/alur_bantuan">
             <i class="fab fa-stumbleupon-circle fa-fw"></i>
             <span>Alur Bantuan</span>
         </a>
@@ -118,7 +118,7 @@ $session = \Config\Services::session();
     <div class="sidebar-heading">
         Halaman Mitra
     </div>
-    <li class="nav-item active">
+    <li class="nav-item <?= ($bttn == 'mit_dftrajuan') ? 'active' : '' ?>">
         <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#mitraSub" aria-expanded="true" aria-controls="mitraSub">
             <i class="fa-fw far fa-list-alt"></i>
             <span>Daftar Ajuan</span>

@@ -110,19 +110,39 @@ class Kelurahan extends BaseController
                 $noAjuan = random_int(00000000, 99999999);
                 $cekNomorAjuan = $this->ajuanModel->where('noAjuan', $noAjuan)->countAllResults();
             }
-            $data = [
-                'idPemohon' => $idPemohon,
-                'noAjuan' => $noAjuan,
-                'idStsAjuan' => 1,
-                'idLbgAjuan' => 0
-            ];
-            if ($this->ajuanModel->save($data)) {
+            $validation = \Config\Services::validation();
+            $valid = $this->validate([
+                'eSik' => [
+                    'label' => 'E-SIK',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Mohon pilih status {field} pemohon'
+                    ]
+                ],
+
+            ]);
+            if (!$valid) {
                 $msg = [
-                    'berhasil' => [
-                        'noAjuan' => $noAjuan,
-                        'link' => "/kelurahan/dftrpemohon_i"
+                    'error' => [
+                        'esik' => $validation->getError('eSik'),
                     ]
                 ];
+            } else {
+                $data = [
+                    'idPemohon' => $idPemohon,
+                    'noAjuan' => $noAjuan,
+                    'eSik' => $this->request->getVar('eSik'),
+                    'idStsAjuan' => 1,
+                    'idJnsAjuan' => 0
+                ];
+                if ($this->ajuanModel->save($data)) {
+                    $msg = [
+                        'berhasil' => [
+                            'noAjuan' => $noAjuan,
+                            'link' => "/kelurahan/dftrpemohon_i"
+                        ]
+                    ];
+                }
             }
             echo json_encode($msg);
         } else {
@@ -136,14 +156,14 @@ class Kelurahan extends BaseController
             'bttn' => 'dftrajuan',
             'ajuan_baru' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan', 1)
-                ->where('idLbgAjuan =', 0)
+                ->where('idJnsAjuan =', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->findAll(),
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 2)
                 ->where('trajuan.idStsAjuan <=', 5)
-                ->where('idLbgAjuan =', 0)
+                ->where('idJnsAjuan =', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -151,7 +171,7 @@ class Kelurahan extends BaseController
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
-                ->where('idLbgAjuan =', 0)
+                ->where('idJnsAjuan =', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -169,7 +189,7 @@ class Kelurahan extends BaseController
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 2)
                 ->where('trajuan.idStsAjuan <=', 5)
-                ->where('trajuan.idLbgAjuan =', 1)
+                ->where('trajuan.idJnsAjuan =', 1)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -178,7 +198,7 @@ class Kelurahan extends BaseController
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
-                ->where('trajuan.idLbgAjuan =', 1)
+                ->where('trajuan.idJnsAjuan =', 1)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')

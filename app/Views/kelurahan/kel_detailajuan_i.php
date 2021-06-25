@@ -253,6 +253,34 @@
                     <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
                 </div>
             </div>
+            <?php if ($ajuan['idJnsAjuan'] == 0) { ?>
+                <hr class="m-0 p-1">
+                <div class="row bg-white darker">
+                    <div class="col-md-4">
+                        <label for="">
+                            <b>Status E-SIK</b>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <?= ($ajuan['eSik'] == 0) ? 'Tidak Terdaftar' : 'Terdaftar' ?>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if ($ajuan['eSik'] == 0 && $ajuan['idJnsAjuan'] == 0) { ?>
+                <hr class="m-0 p-1">
+                <div class="row bg-white darker">
+                    <div class="col-md-4">
+                        <label for="">
+                            <b>Surat Keterangan Pemohon</b>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <a href="<?= base_url(); ?>/uploads_syarat/<?= $ajuan['srtKetPemohon']; ?>" class="btn btn-success btn-sm btn-icon-split mb-2" target="_blank">
+                            <span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lihat</span>
+                        </a>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     <?php } else { ?>
         <div class="card-body">

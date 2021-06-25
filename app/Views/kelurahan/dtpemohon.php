@@ -15,13 +15,50 @@ $session = \Config\Services::session();
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-user-edit fa-sm text-white-50"></i> Edit Data</a>
         <?php if ($session->get('privUser') != 1) { ?>
             <?php if ($konfirmasi == 1) { ?>
-                <?= form_open("/kelurahan/pengajuanBantuan", ['class' => 'formPengajuan']); ?>
-                <?= csrf_field(); ?>
-                <input type="hidden" name="idPemohon" id="idPemohon" value="<?= $pemohon['idPemohon']; ?>">
-                <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm ml-2 btnAjukan" role="button">
+                <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm ml-2" data-toggle="modal" data-target="#exampleModal">
                     <i class="fas fa-hands-helping fa-sm text-white-50"></i> Ajukan Bantuan
                 </button>
-                <?= form_close(); ?>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-warning">
+                                <h5 class="modal-title text-white" id="exampleModalLabel"><strong>Konfirmasi E-SIK</strong></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <?= form_open("/kelurahan/pengajuanBantuan", ['class' => 'formPengajuan']); ?>
+                            <?= csrf_field(); ?>
+                            <div class="modal-body">
+                                <input type="hidden" name="idPemohon" id="idPemohon" value="<?= $pemohon['idPemohon']; ?>">
+                                <div style="display: none;" class="alert alert-danger" role="alert" id="errorEsik">
+                                    This is a danger alert—check it out!
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><strong>Apakah pemohon sudah terdaftar E-SIK?</strong></label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="eSik" id="eSik1" value="1">
+                                        <label class="form-check-label" for="eSik1">
+                                            Sudah terdaftar
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="eSik" id="eSik2" value="0">
+                                        <label class="form-check-label" for="eSik2">
+                                            Belum terdaftar
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary">Ajukan</button>
+                            </div>
+                            <?= form_close(); ?>
+                        </div>
+                    </div>
+                </div>
             <?php } ?>
             <?php if ($konfirmasi == 0) { ?>
                 <div class="div ml-2">
@@ -244,6 +281,13 @@ $session = \Config\Services::session();
                     $('.btnAjukan').html('Ajukan Bantuan');
                 },
                 success: function(response) {
+                    if (response.error) {
+                        $('#errorEsik').css('display', "block");
+                        $('#errorEsik').html(response.error.esik);
+                    } else {
+                        $('#errorEsik').css('display', "none");
+                        $('#errorEsik').html("-");
+                    }
                     if (response.berhasil) {
                         swal({
                             title: "No. Ajuan: " + response.berhasil.noAjuan,

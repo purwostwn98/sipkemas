@@ -73,6 +73,21 @@ $session = \Config\Services::session();
                 </div>
             </div>
         </div>
+        <div class="srtKeterangan">
+            <?php if ($session->get('eSik') == 0) { ?>
+                <div class="row">
+                    <div class="col-sm-1"> </div>
+                    <div class="col-sm-4">
+                        <label for="">Surat Keterangan Pemohon</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-danger">
+                            <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="srtKetPemohon" name="srtKetPemohon">
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
     </div>
 </div>
 <!-- Identitas Lembaga -->
@@ -148,8 +163,10 @@ $session = \Config\Services::session();
     function getval(sel) {
         if (sel.value == "0") {
             $("#form_lembaga").css("display", "none");
+            $('.srtKeterangan').css("display", "block");
         } else if (sel.value == "1") {
             $("#form_lembaga").css("display", "block");
+            $('.srtKeterangan').css("display", "none");
         }
     }
 
@@ -206,6 +223,8 @@ $session = \Config\Services::session();
                         } else if (response.error.kodeBantuan) {
                             swal("Mohon Maaf!", response.error.kodeBantuan, "error");
                             // $('.errorGender').html(response.error.gender);
+                        } else if (response.error.srtKetPemohon) {
+                            swal("Mohon Maaf!", response.error.srtKetPemohon, "error");
                         } else if (response.error.files) {
                             swal("Mohon Maaf!", response.error.files, "error");
                         }

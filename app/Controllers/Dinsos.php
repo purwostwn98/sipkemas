@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\AjuanModel;
 use App\Models\PemohonModel;
 use App\Models\UploadModel;
+use CodeIgniter\I18n\Time;
 
 class Dinsos extends BaseController
 {
@@ -23,7 +24,7 @@ class Dinsos extends BaseController
             'bttn' => 'sos_dftrajuan',
             'ajuan_baru' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan', 2)
-                ->where('idLbgAjuan', 0)
+                ->where('idJnsAjuan', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -32,7 +33,7 @@ class Dinsos extends BaseController
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 3)
                 ->where('trajuan.idStsAjuan <=', 5)
-                ->where('idLbgAjuan', 0)
+                ->where('idJnsAjuan', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -40,7 +41,7 @@ class Dinsos extends BaseController
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
-                ->where('idLbgAjuan', 0)
+                ->where('idJnsAjuan', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -108,6 +109,8 @@ class Dinsos extends BaseController
                     'eSik' => $this->request->getVar('eSik'),
                     'idRecDinsos' => $this->request->getVar('rekomendasi'),
                     'ketRecDinsos' => $this->request->getVar('ketRecDinsos'),
+                    //'tgRecDinsos' => date('Y-m-d'),
+                    'tgRecDinsos' => new Time('now', 'Asia/Jakarta', 'en_US'),
                     'idStsAjuan' => 3
                 ];
                 $save = $this->ajuanModel->where('idAjuan', $this->request->getVar('idAjuan'))->set($data)->update();

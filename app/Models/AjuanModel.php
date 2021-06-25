@@ -12,9 +12,9 @@ class AjuanModel extends Model
     protected $createdField  = 'tgAjuan';
     protected $updatedField  = 'tgHasil';
     protected $allowedFields = [
-        'noAjuan', 'idPemohon', 'tgAjuan', 'kodeBantuan', 'Keperluan', 'Kebutuhan', 'idStsAjuan', 'idRecDinsos', 'ketRecDinsos',
+        'noAjuan', 'idPemohon', 'tgAjuan', 'kodeBantuan', 'Keperluan', 'Kebutuhan', 'idStsAjuan', 'srtKetPemohon', 'idRecDinsos', 'ketRecDinsos',
         'tgRecDinsos', 'idRecKesra', 'ketRecKesra', 'tgRecKesra', 'idRecSurvey', 'ketRecSurvey', 'tgRecSurvey', 'tgHasil',
-        'nilaiDisetujui', 'jnsBantuan', 'lastEditor', 'eSik', 'idLbgAjuan'
+        'nilaiDisetujui', 'lastEditor', 'eSik', 'idJnsAjuan'
     ];
 }
 

@@ -7,6 +7,7 @@ use App\Models\AjuanModel;
 use App\Models\PemohonModel;
 use App\Models\UploadModel;
 use App\Models\AjuanLbgModel;
+use CodeIgniter\I18n\Time;
 
 class Kesra extends BaseController
 {
@@ -27,7 +28,7 @@ class Kesra extends BaseController
             'bttn' => 'kes_dftrajuan',
             'ajuan_baru' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan', 3)
-                ->where('idLbgAjuan', 0)
+                ->where('idJnsAjuan', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -37,7 +38,7 @@ class Kesra extends BaseController
                 ->where('trajuan.idStsAjuan >=', 2)
                 ->where('trajuan.idStsAjuan <=', 5)
                 ->where('trajuan.idStsAjuan !=', 3)
-                ->where('idLbgAjuan', 0)
+                ->where('idJnsAjuan', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -45,7 +46,7 @@ class Kesra extends BaseController
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
-                ->where('idLbgAjuan', 0)
+                ->where('idJnsAjuan', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -60,7 +61,7 @@ class Kesra extends BaseController
             'bttn' => 'dftrajuan',
             'ajuan_baru' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan', 3)
-                ->where('trajuan.idLbgAjuan', 1)
+                ->where('trajuan.idJnsAjuan', 1)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -70,7 +71,7 @@ class Kesra extends BaseController
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 4)
                 ->where('trajuan.idStsAjuan <=', 5)
-                ->where('trajuan.idLbgAjuan', 1)
+                ->where('trajuan.idJnsAjuan', 1)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -79,7 +80,7 @@ class Kesra extends BaseController
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
-                ->where('trajuan.idLbgAjuan =', 1)
+                ->where('trajuan.idJnsAjuan =', 1)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
@@ -165,6 +166,7 @@ class Kesra extends BaseController
                 $data = [
                     'idRecKesra' => $this->request->getVar('rekomendasi'),
                     'ketRecKesra' => $this->request->getVar('ketRecKesra'),
+                    'tgRecKesra' => new Time('now', 'Asia/Jakarta', 'en_US'),
                     'idStsAjuan' => 4
                 ];
                 $save = $this->ajuanModel->where('idAjuan', $this->request->getVar('idAjuan'))->set($data)->update();

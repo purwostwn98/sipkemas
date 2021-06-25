@@ -45,6 +45,7 @@ $bulan = array(
                                     <tr role="row" class="text-center">
                                         <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 7px;">-</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5px;">No</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 30px;">No.Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 45px;">NIK Pemohon</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Pemohon</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 60px;">Nama Lembaga</th>
@@ -63,6 +64,7 @@ $bulan = array(
                                                 </a>
                                             </td>
                                             <td class="sorting_1"><?= $no; ?></td>
+                                            <td><?= $proses['noAjuan']; ?></td>
                                             <td><?= $proses['NIK']; ?></td>
                                             <td><?= $proses['Nama']; ?></td>
                                             <td><?= $proses['namaLembaga']; ?></td>
@@ -109,6 +111,7 @@ $bulan = array(
                                     <tr role="row" class="text-center">
                                         <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 7px;">-</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5px;">No</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 30px;">No.Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 45px;">NIK Pemohon</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Pemohon</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 60px;">Nama Lembaga</th>
@@ -127,6 +130,7 @@ $bulan = array(
                                                 </a>
                                             </td>
                                             <td class="sorting_1"><?= $no2; ?></td>
+                                            <td><?= $proses['noAjuan']; ?></td>
                                             <td><?= $selesai['NIK']; ?></td>
                                             <td><?= $selesai['Nama']; ?></td>
                                             <td><?= $selesai['namaLembaga']; ?></td>

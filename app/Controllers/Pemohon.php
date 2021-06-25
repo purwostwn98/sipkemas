@@ -162,6 +162,7 @@ class Pemohon extends BaseController
                     'idAjuan' => $ajuan['idAjuan'],
                     'noAjuan' => $noAjuan,
                     'idPemohon' => $ajuan['idPemohon'],
+                    'eSik' => $ajuan['eSik'],
                     'idStsAjuan' => $ajuan['idStsAjuan']
                 ];
                 $this->session->set($dapat_session);
@@ -219,37 +220,78 @@ class Pemohon extends BaseController
         if ($this->session->get('idStsAjuan') == 1) {
             if ($this->request->isAJAX()) {
                 $validation = \Config\Services::validation();
-                $valid = $this->validate([
-                    'jnsbantuan' => [
-                        'label' => 'Jenis Bantuan',
-                        'rules' => 'required',
-                        'errors' => [
-                            'required' => '{field} tidak boleh kosong'
+                // Jika e-sik tidak terdaftar dan jenis ajuan individu
+                if ($this->session->get('eSik') == 0 && $this->request->getVar('jnsbantuan') == 0) {
+                    $valid = [
+                        'jnsbantuan' => [
+                            'label' => 'Jenis Bantuan',
+                            'rules' => 'required',
+                            'errors' => [
+                                'required' => '{field} tidak boleh kosong'
+                            ]
+                        ],
+                        'kodeBantuan' => [
+                            'label' => 'Program Bantuan',
+                            'rules' => 'required',
+                            'errors' => [
+                                'required' => '{field} tidak boleh kosong'
+                            ]
+                        ],
+                        'files' => [
+                            'label' => 'file syarat',
+                            'rules' => 'uploaded[files]|max_size[files,4096]|ext_in[files,pdf]|mime_in[files,application/pdf]',
+                            'errors' => [
+                                'uploaded' => 'Semua {field} tidak boleh kosong',
+                                'max_size' => 'Mohon maaf, ukuran {field} tidak boleh melebihi 4MB',
+                                'ext_in' => 'Mohon maaf, semua {field} harus dalam format pdf',
+                                'mime_in' => 'Mohon maaf, terdapat {field} yang bukan pdf',
+                            ]
+                        ],
+                        'srtKetPemohon' => [
+                            'label' => 'File Surat Keterangan Pemohon',
+                            'rules' => 'uploaded[srtKetPemohon]|max_size[srtKetPemohon,4096]|ext_in[srtKetPemohon,pdf]|mime_in[srtKetPemohon,application/pdf]',
+                            'errors' => [
+                                'uploaded' => '{field} tidak boleh kosong',
+                                'max_size' => 'Mohon maaf, ukuran {field} tidak boleh melebihi 4MB',
+                                'ext_in' => 'Mohon maaf, {field} harus dalam format pdf',
+                                'mime_in' => 'Mohon maaf, {field} bukan pdf',
+                            ]
                         ]
-                    ],
-                    'kodeBantuan' => [
-                        'label' => 'Program Bantuan',
-                        'rules' => 'required',
-                        'errors' => [
-                            'required' => '{field} tidak boleh kosong'
+                    ];
+                } else {
+                    $valid = [
+                        'jnsbantuan' => [
+                            'label' => 'Jenis Bantuan',
+                            'rules' => 'required',
+                            'errors' => [
+                                'required' => '{field} tidak boleh kosong'
+                            ]
+                        ],
+                        'kodeBantuan' => [
+                            'label' => 'Program Bantuan',
+                            'rules' => 'required',
+                            'errors' => [
+                                'required' => '{field} tidak boleh kosong'
+                            ]
+                        ],
+                        'files' => [
+                            'label' => 'file syarat',
+                            'rules' => 'uploaded[files]|max_size[files,4096]|ext_in[files,pdf]|mime_in[files,application/pdf]',
+                            'errors' => [
+                                'uploaded' => 'Semua {field} tidak boleh kosong',
+                                'max_size' => 'Mohon maaf, ukuran {field} tidak boleh melebihi 4MB',
+                                'ext_in' => 'Mohon maaf, semua {field} harus dalam format pdf',
+                                'mime_in' => 'Mohon maaf, terdapat {field} yang bukan pdf',
+                            ]
                         ]
-                    ],
-                    'files' => [
-                        'label' => 'file syarat',
-                        'rules' => 'uploaded[files]|max_size[files,4096]|ext_in[files,pdf]|mime_in[files,application/pdf]',
-                        'errors' => [
-                            'uploaded' => 'Semua {field} tidak boleh kosong',
-                            'max_size' => 'Mohon maaf, ukuran {field} tidak boleh melebihi 4MB',
-                            'ext_in' => 'Mohon maaf, semua {field} harus dalam format pdf',
-                            'mine_in' => 'Mohon maaf, terdapat {field} yang bukan pdf',
-                        ]
-                    ]
-                ]);
-                if (!$valid) {
+                    ];
+                }
+                if (!$this->validate($valid)) {
                     $msg = [
                         'error' => [
                             'jnsbantuan' => $validation->getError('jnsbantuan'),
                             'kodeBantuan' => $validation->getError('kodeBantuan'),
+                            'srtKetPemohon' => $validation->getError('srtKetPemohon'),
                             'files' => $validation->getError('files'),
                         ]
                     ];
@@ -272,7 +314,6 @@ class Pemohon extends BaseController
                                     'required' => '{field} harus diisi'
                                 ]
                             ],
-
                         ]);
                         if (!$valid) {
                             $msg = [
@@ -293,29 +334,47 @@ class Pemohon extends BaseController
                             $this->ajuanLbgModel->save($dataLbg);
                         }
                     }
+                    //Set status ajuan
                     if ($jnsBantuan == 0) {
                         //Jika individu lewat dinsos
                         $idStsAjuan = 2;
-                        $idLbgAjuan = 0;
+                        $idJnsAjuan = 0;
                     } elseif ($jnsBantuan == 1) {
                         //Jika Lembaga langsung kesra
                         $idStsAjuan = 3;
-                        $idLbgAjuan = 1;
+                        $idJnsAjuan = 1;
                     }
-                    $dataAjuan = [
-                        'tgAjuan' => date('Y-m-d'),
-                        'kodeBantuan' => $this->request->getVar('kodeBantuan'),
-                        'Keperluan' => $this->request->getVar('keperluan'),
-                        'Kebutuhan' => $this->request->getVar('kebutuhan'),
-                        'idStsAjuan' => $idStsAjuan,
-                        'idLbgAjuan' => $idLbgAjuan
-                    ];
-                    // Files Syarat
-                    $files = $this->request->getFileMultiple('files');
-                    // $jmlFiles = count($files);
-                    $idSyarat = $this->request->getVar('idSyarat');
+                    // Jika e-sik tidak terdaftar = upload surat ket. pemohon
+                    if ($this->session->get('eSik') == 0 && $this->request->getVar('jnsbantuan') == 0) {
+                        // get file surat ket. pemohon
+                        $srtKetPemohon = $this->request->getFile('srtKetPemohon');
+                        $namaFile = $srtKetPemohon->getRandomName();
+                        // simpan surat ket. pemohon ke directory
+                        $srtKetPemohon->move('uploads_syarat', $namaFile);
+                        $dataAjuan = [
+                            'tgAjuan' => date('Y-m-d'),
+                            'kodeBantuan' => $this->request->getVar('kodeBantuan'),
+                            'Keperluan' => $this->request->getVar('keperluan'),
+                            'Kebutuhan' => $this->request->getVar('kebutuhan'),
+                            'idStsAjuan' => $idStsAjuan,
+                            'idJnsAjuan' => $idJnsAjuan,
+                            'srtKetPemohon' => $namaFile
+                        ];
+                    } else {
+                        $dataAjuan = [
+                            'tgAjuan' => date('Y-m-d'),
+                            'kodeBantuan' => $this->request->getVar('kodeBantuan'),
+                            'Keperluan' => $this->request->getVar('keperluan'),
+                            'Kebutuhan' => $this->request->getVar('kebutuhan'),
+                            'idStsAjuan' => $idStsAjuan,
+                            'idJnsAjuan' => $idJnsAjuan
+                        ];
+                    }
                     //Simpan update ajuan
                     $save = $this->ajuanModel->where('noAjuan', $this->session->get('noAjuan'))->set($dataAjuan)->update();
+                    // Files Syarat
+                    $files = $this->request->getFileMultiple('files');
+                    $idSyarat = $this->request->getVar('idSyarat');
                     // Simpan Files Syarat
                     if ($save) {
                         // simpan syarat ke database
