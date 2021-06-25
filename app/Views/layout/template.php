@@ -210,7 +210,7 @@ $session = \Config\Services::session();
                 <div class="modal-body">Klik "Logout" jika Anda ingin keluar dari Aplikasi SipKe-Mas.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/login/logout">Logout</a>
+                    <a class="btn btn-primary" href="/gerbangska/logout">Logout</a>
                 </div>
             </div>
         </div>

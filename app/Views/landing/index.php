@@ -61,7 +61,7 @@
       </nav>
       <!-- .nav-menu -->
 
-      <a href="/login" class="get-started-btn scrollto">Masuk</a>
+      <a href="/gerbangska" class="get-started-btn scrollto">Masuk</a>
 
     </div>
   </header><!-- End Header -->
@@ -140,7 +140,7 @@
         <!-- <a href="#services" class="btn-get-started scrollto btn-info">Program Bantuan</a> -->
         <a href="/home/daftar" class="btn-get-started scrollto">Formulir Pendaftaran</a>
         <a href="/home/cekAjuan" class="btn-get-started scrollto">Cek Ajuan</a>
-        <!-- <?= form_open("/login/cekuser", ['class' => 'formlogin user']); ?>
+        <!-- <?= form_open("/gerbangska/cekuser", ['class' => 'formlogin user']); ?>
         <?= csrf_field(); ?>
         <div class="row justify-content-center">
           <input type="hidden" name="User" value="pemohon">

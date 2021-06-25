@@ -1,3 +1,6 @@
+<?php
+$session = \Config\Services::session();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,18 +44,18 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
                                     </div>
-                                    <?= form_open("/login/cekuser", ['class' => 'formlogin user']); ?>
+                                    <?= form_open("/gerbangska/cekuser", ['class' => 'formlogin user']); ?>
                                     <?= csrf_field(); ?>
                                     <div class="form-group">
-                                        <input name="User" type="text" class="form-control form-control-user" id="user" aria-describedby="emailHelp" placeholder="Masukkan Username">
+                                        <input name="User" type="text" class="form-control form-control-user <?= ($session->getFlashdata('errorUser')) ? 'is-invalid' : '' ?>" id="user" aria-describedby="emailHelp" placeholder="Masukkan Username">
                                         <div class="invalid-feedback invalidUser text-center">
-
+                                            <?php echo session()->getFlashdata('errorUser'); ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input name="Password" type="password" class="form-control form-control-user" id="password" placeholder="Password">
-                                        <div class="invalid-feedback invalidPassword text-center">
-
+                                        <input name="Password" type="password" class="form-control form-control-user <?= ($session->getFlashdata('errorPassword')) ? 'is-invalid' : '' ?>" id="password" placeholder="Password">
+                                        <div class="invalid-feedback invalidUser text-center">
+                                            <?php echo session()->getFlashdata('errorPassword'); ?>
                                         </div>
                                     </div>
                                     <!-- <div class="form-group">
@@ -104,51 +107,51 @@
     <script src="<?= base_url(); ?>/js/sb-admin-2.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            $('.formlogin').submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "post",
-                    url: $(this).attr('action'),
-                    data: $(this).serialize(),
-                    dataType: "json",
-                    beforeSend: function() {
-                        $('.btnlogin').prop('disabled', true);
-                        $('.btnlogin').html('<i class="fa fa-spin fa-spinner"></i>');
-                    },
-                    complete: function() {
-                        $('.btnlogin').prop('disabled', false);
-                        $('.btnlogin').html('Login');
-                    },
-                    success: function(response) {
-                        if (response.error) {
-                            if (response.error.User) {
-                                $('#user').addClass('is-invalid');
-                                $('.invalidUser').html(response.error.User);
-                            } else {
-                                $('#user').removeClass('is-invalid');
-                                $('.invalidUser').html('');
-                            }
-                            if (response.error.Password) {
-                                $('#password').addClass('is-invalid');
-                                $('.invalidPassword').html(response.error.Password);
-                            } else {
-                                $('#password').removeClass('is-invalid');
-                                $('.invalidPassword').html('');
-                            }
-                        }
-                        if (response.berhasil) {
-                            window.location = response.berhasil.link;
-                        }
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-                    }
-                });
+        // $(document).ready(function() {
+        //     $('.formlogin').submit(function(e) {
+        //         e.preventDefault();
+        //         $.ajax({
+        //             type: "post",
+        //             url: $(this).attr('action'),
+        //             data: $(this).serialize(),
+        //             dataType: "json",
+        //             beforeSend: function() {
+        //                 $('.btnlogin').prop('disabled', true);
+        //                 $('.btnlogin').html('<i class="fa fa-spin fa-spinner"></i>');
+        //             },
+        //             complete: function() {
+        //                 $('.btnlogin').prop('disabled', false);
+        //                 $('.btnlogin').html('Login');
+        //             },
+        //             success: function(response) {
+        //                 if (response.error) {
+        //                     if (response.error.User) {
+        //                         $('#user').addClass('is-invalid');
+        //                         $('.invalidUser').html(response.error.User);
+        //                     } else {
+        //                         $('#user').removeClass('is-invalid');
+        //                         $('.invalidUser').html('');
+        //                     }
+        //                     if (response.error.Password) {
+        //                         $('#password').addClass('is-invalid');
+        //                         $('.invalidPassword').html(response.error.Password);
+        //                     } else {
+        //                         $('#password').removeClass('is-invalid');
+        //                         $('.invalidPassword').html('');
+        //                     }
+        //                 }
+        //                 if (response.berhasil) {
+        //                     return false;
+        //                 }
+        //             },
+        //             error: function(xhr, ajaxOptions, thrownError) {
+        //                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        //             }
+        //         });
 
-                return false;
-            });
-        });
+        //         return false;
+        //     });
+        // });
     </script>
 
 </body>

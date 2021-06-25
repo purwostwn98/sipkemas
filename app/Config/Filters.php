@@ -19,6 +19,11 @@ class Filters extends BaseConfig
 		'csrf'     => CSRF::class,
 		'toolbar'  => DebugToolbar::class,
 		'honeypot' => Honeypot::class,
+		'pemohonFilter' => \App\Filters\PemohonFilters::class,
+		'kelurahanFilter' => \App\Filters\KelurahanFilters::class,
+		'dinsosFilter' => \App\Filters\DinsosFilters::class,
+		'kesraFilter' => \App\Filters\KesraFilters::class,
+		'mitraFilter' => \App\Filters\MitraFilters::class
 	];
 
 	/**
@@ -28,13 +33,76 @@ class Filters extends BaseConfig
 	 * @var array
 	 */
 	public $globals = [
+		//yang boleh diakses sebelum login
 		'before' => [
 			// 'honeypot',
 			// 'csrf',
+			'pemohonFilter' => ['except' => [
+				'gerbangska', 'gerbangska/*',
+				'home', 'home/*',
+				'pemohon', 'pemohon/frpemohon',
+				'pemohon', 'pemohon/proses_daftar',
+				'pemohon', 'pemohon/cetakForm/*',
+				'pemohon', 'pemohon/prosesCekAjuan',
+				'pemohon', 'pemohon/prosesCekAjuan',
+			]],
+			'kelurahanFilter' => ['except' => [
+				'gerbangska/*', 'gerbangska/*',
+				'home', 'home/*',
+				'pemohon', 'pemohon/frpemohon',
+				'pemohon', 'pemohon/proses_daftar',
+				'pemohon', 'pemohon/cetakForm/*',
+				'pemohon', 'pemohon/prosesCekAjuan',
+				'pemohon', 'pemohon/prosesCekAjuan',
+			]],
+			'dinsosFilter' => ['except' => [
+				'gerbangska', 'gerbangska/*',
+				'home', 'home/*',
+				'pemohon', 'pemohon/frpemohon',
+				'pemohon', 'pemohon/proses_daftar',
+				'pemohon', 'pemohon/cetakForm/*',
+				'pemohon', 'pemohon/prosesCekAjuan',
+				'pemohon', 'pemohon/prosesCekAjuan',
+			]],
+			'kesraFilter' => ['except' => [
+				'gerbangska', 'gerbangska/*',
+				'home', 'home/*',
+				'pemohon', 'pemohon/frpemohon',
+				'pemohon', 'pemohon/proses_daftar',
+				'pemohon', 'pemohon/cetakForm/*',
+				'pemohon', 'pemohon/prosesCekAjuan',
+				'pemohon', 'pemohon/prosesCekAjuan',
+			]],
+			'mitraFilter' => ['except' => [
+				'gerbangska', 'gerbangska/*',
+				'home', 'home/*',
+				'pemohon', 'pemohon/frpemohon',
+				'pemohon', 'pemohon/proses_daftar',
+				'pemohon', 'pemohon/cetakForm/*',
+				'pemohon', 'pemohon/prosesCekAjuan',
+				'pemohon', 'pemohon/prosesCekAjuan',
+			]],
 		],
+		//yang boleh diakses setelah login
 		'after'  => [
 			'toolbar',
 			// 'honeypot',
+			'pemohonFilter' => ['except' => [
+				'pemohon', 'pemohon/*',
+			]],
+			'kelurahanFilter' => ['except' => [
+				'kelurahan', 'kelurahan/*',
+				'pemohon', 'pemohon/alur_bantuan',
+			]],
+			'dinsosFilter' => ['except' => [
+				'dinsos', 'dinsos/*',
+			]],
+			'kesraFilter' => ['except' => [
+				'kesra', 'kesra/*',
+			]],
+			'mitraFilter' => ['except' => [
+				'mitra', 'mitra/*',
+			]],
 		],
 	];
 

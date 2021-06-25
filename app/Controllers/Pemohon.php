@@ -36,16 +36,6 @@ class Pemohon extends BaseController
         $data['bttn'] = 'frpemohon';
         return view('pemohon/frpemohon', $data);
     }
-    // public function ajuanbantuan()
-    // {
-    //     $data['bttn'] = 'ajuanbantuan';
-    //     return view('pemohon/dftrbantuan', $data);
-    // }
-    // public function timeline()
-    // {
-    //     $data = ['bttn' => 'timelineajuan'];
-    //     return view('pemohon/timelineajuan', $data);
-    // }
 
     //proses
     public function proses_daftar()
@@ -158,6 +148,7 @@ class Pemohon extends BaseController
             } else {
                 $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)->first();
                 $dapat_session = [
+                    'login' => true,
                     'privUser' => 1,
                     'idAjuan' => $ajuan['idAjuan'],
                     'noAjuan' => $noAjuan,
@@ -173,6 +164,8 @@ class Pemohon extends BaseController
             return redirect()->to('/home/cekAjuan');
         }
     }
+
+    // setelah ini harus login dulu
 
     public function biodata()
     {
@@ -424,7 +417,6 @@ class Pemohon extends BaseController
             exit('Maaf ajuan sudah tidak dapat diedit, hubungi kelurahan jika ingin me-reset ajuan');
         }
     }
-
 
     public function alur_bantuan()
     {
