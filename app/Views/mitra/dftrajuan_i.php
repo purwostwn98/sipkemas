@@ -53,7 +53,6 @@ $bulan = array(
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Program Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 40px;">E-SIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 55px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 30px;">Status Ajuan</th>
                                     </tr>
@@ -63,7 +62,7 @@ $bulan = array(
                                     foreach ($ajuan_baru as $baru) : ?>
                                         <tr role="row" class="odd">
                                             <td>
-                                                <a href="/kesra/detailajuan_i/<?= $baru['noAjuan']; ?>">
+                                                <a href="/mitra/detailajuan_i/<?= $baru['noAjuan']; ?>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                             </td>
@@ -76,11 +75,6 @@ $bulan = array(
                                             ?>
                                             <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
                                             <td><?= $baru['NamaMitra']; ?>: <?= $baru['namaProgram']; ?></td>
-                                            <td>
-                                                <span style="border-radius: 5px;" class="small text-white <?= ($baru['eSik'] == 1) ? 'bg-success' : 'bg-warning' ?> p-1">
-                                                    <?= ($baru['eSik'] == 1) ? 'Terdaftar' : 'Tidak Terdaftar' ?>
-                                                </span>
-                                            </td>
                                             <td class="text-center">
                                                 <span class="fa fa-star <?= ($baru['idRecKesra'] >= 1) ? 'oke' : '' ?>"></span>
                                                 <span class="fa fa-star <?= ($baru['idRecKesra'] >= 2) ? 'oke' : '' ?>"></span>
@@ -129,7 +123,6 @@ $bulan = array(
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Program Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 40px;">E-SIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 55px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 30px;">Status Ajuan</th>
                                     </tr>
@@ -139,7 +132,7 @@ $bulan = array(
                                     foreach ($ajuan_proses as $proses) : ?>
                                         <tr role="row" class="odd">
                                             <td>
-                                                <a href="/kesra/detailajuan_i/<?= $proses['noAjuan']; ?>">
+                                                <a href="/mitra/detailajuan_i/<?= $proses['noAjuan']; ?>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                             </td>
@@ -152,11 +145,6 @@ $bulan = array(
                                             ?>
                                             <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
                                             <td><?= $proses['NamaMitra']; ?>: <?= $proses['namaProgram']; ?></td>
-                                            <td>
-                                                <span style="border-radius: 5px;" class="small text-white <?= ($proses['eSik'] == 1) ? 'bg-success' : 'bg-warning' ?> p-1">
-                                                    <?= ($proses['eSik'] == 1) ? 'Terdaftar' : 'Tidak Terdaftar' ?>
-                                                </span>
-                                            </td>
                                             <td class="text-center">
                                                 <span class="fa fa-star <?= ($proses['idRecKesra'] >= 1) ? 'oke' : '' ?>"></span>
                                                 <span class="fa fa-star <?= ($proses['idRecKesra'] >= 2) ? 'oke' : '' ?>"></span>
@@ -207,7 +195,6 @@ $bulan = array(
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 62px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Program Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 40px;">E-SIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 55px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 30px;">Status Ajuan</th>
                                     </tr>
@@ -217,7 +204,7 @@ $bulan = array(
                                     foreach ($ajuan_selesai as $selesai) : ?>
                                         <tr role="row" class="odd">
                                             <td>
-                                                <a href="/kesra/detailajuan_i/<?= $selesai['noAjuan']; ?>">
+                                                <a href="/mitra/detailajuan_i/<?= $selesai['noAjuan']; ?>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                             </td>
@@ -230,11 +217,6 @@ $bulan = array(
                                             ?>
                                             <td><?= $blnthn[2] . ' ' . $bulan[(int)$blnthn[1]] . ' ' . $blnthn[0]; ?></td>
                                             <td><?= $selesai['NamaMitra']; ?>: <?= $selesai['namaProgram']; ?></td>
-                                            <td>
-                                                <span style="border-radius: 5px;" class="small text-white <?= ($selesai['eSik'] == 1) ? 'bg-success' : 'bg-warning' ?> p-1">
-                                                    <?= ($selesai['eSik'] == 1) ? 'Terdaftar' : 'Tidak Terdaftar' ?>
-                                                </span>
-                                            </td>
                                             <td class="text-center">
                                                 <span class="fa fa-star <?= ($selesai['idRecKesra'] >= 1) ? 'oke' : '' ?>"></span>
                                                 <span class="fa fa-star <?= ($selesai['idRecKesra'] >= 2) ? 'oke' : '' ?>"></span>

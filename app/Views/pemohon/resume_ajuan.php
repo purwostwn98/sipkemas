@@ -26,9 +26,11 @@ $bulan = array(
             <?php if ($ajuan['idStsAjuan'] <= 4) { ?>
                 <span style="border-radius: 5px;" class="bg-info p-2 text-white"><?= $ajuan['StatusAjuan']; ?></span>
             <?php } elseif ($ajuan['idStsAjuan'] == 5) { ?>
-                <span><?= $ajuan['StatusAjuan']; ?></span>
+                <span style="border-radius: 5px;" class="bg-primary p-2 text-white"><?= $ajuan['StatusAjuan']; ?></span>
             <?php } elseif ($ajuan['idStsAjuan'] == 6) { ?>
-                <span><?= $ajuan['StatusAjuan']; ?></span>
+                <span style="border-radius: 5px;" class="bg-danger p-2 text-white"><?= $ajuan['StatusAjuan']; ?></span>
+            <?php } elseif ($ajuan['idStsAjuan'] == 7) { ?>
+                <span style="border-radius: 5px;" class="bg-success p-2 text-white"><?= $ajuan['StatusAjuan']; ?></span>
             <?php } ?>
         </p>
     </div>
@@ -304,6 +306,51 @@ $tglMitra = explode('-', $ajuan['tgRecSurvey']);
 
     </div>
 </div>
+
+<!-- Keputusan Akhir -->
+<?php if ($ajuan['idStsAjuan'] >= 6) { ?>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 <?= ($ajuan['idStsAjuan'] == 6) ? 'bg-danger' : 'bg-success' ?>">
+            <h6 class="m-0 font-weight-bold text-white">Hasil Keputusan Forum Kesra</h6>
+        </div>
+        <div class="card-body">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Status</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <span style="border-radius: 5px;" class="text-white <?= ($ajuan['idStsAjuan'] == 6) ? 'bg-danger' : 'bg-success' ?> p-1">
+                        <?= $ajuan['StatusAjuan']; ?>
+                    </span>
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Alasan / catatan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?= $ajuan['ketRecSurvey']; ?>
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Nilai bantuan disetujui</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    Rp. <?= number_format((float)$ajuan['nilaiDisetujui'], 0, ',', '.'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 
 
 <div class="row">

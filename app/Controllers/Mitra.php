@@ -55,20 +55,163 @@ class Mitra extends BaseController
     }
     public function dftrajuan_l()
     {
-        return view('mitra/dftrajuan_l');
-    }
-    public function detailajuan_i()
-    {
         $data = [
-            'status' => $this->request->getVar('status')
+            'bttn' => 'mit_dftrajuan',
+            'ajuan_baru' => $this->ajuanModel
+                ->where('trajuan.idStsAjuan', 4)
+                ->where('idJnsAjuan', 1)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
+                ->findAll(),
+            'ajuan_proses' => $this->ajuanModel
+                ->where('trajuan.idStsAjuan', 5)
+                ->where('idJnsAjuan', 1)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
+                ->findAll(),
+            'ajuan_selesai' => $this->ajuanModel
+                ->where('trajuan.idStsAjuan >=', 6)
+                ->where('idJnsAjuan', 1)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
+                ->findAll()
+        ];
+        return view('mitra/dftrajuan_l', $data);
+    }
+    public function detailajuan_i($noAjuan)
+    {
+        $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
+            ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
+            ->first();
+        $data = [
+            'bttn' => 'mit_dftrajuan',
+            'ajuan' => $this->ajuanModel->where('noAjuan', $noAjuan)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->first(),
+            'idStsAjuan' => $ajuan['idStsAjuan'],
+            'StatusAjuan' => $ajuan['StatusAjuan'],
+            'pemohon' => $this->pemohonModel->where('idPemohon', $ajuan['idPemohon'])
+                ->join('eagama', 'eagama.idAgama = mpemohon.idAgama')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->join('ekecamatan', 'ekecamatan.idKec = ekelurahan.idKec')
+                ->first(),
+            'dokumen' => $this->uploadModel->where('idAjuan', $ajuan['idAjuan'])
+                ->join('trsyarat', 'trsyarat.idSyarat = trupload.idSyarat')
+                ->findAll()
         ];
         return view('mitra/detailajuan_i', $data);
     }
-    public function detailajuan_l()
+
+    public function detailajuan_l($noAjuan)
     {
+        $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
+            ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+            ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
+            ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+            ->first();
         $data = [
-            'status' => $this->request->getVar('status')
+            'bttn' => 'mit_dftrajuan',
+            'ajuan' => $ajuan,
+            'idStsAjuan' => $ajuan['idStsAjuan'],
+            'StatusAjuan' => $ajuan['StatusAjuan'],
+            'pemohon' => $this->pemohonModel->where('idPemohon', $ajuan['idPemohon'])
+                ->join('eagama', 'eagama.idAgama = mpemohon.idAgama')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->join('ekecamatan', 'ekecamatan.idKec = ekelurahan.idKec')
+                ->first(),
+            'lembaga' => $this->ajuanLbgModel->where('idAjuan', $ajuan['idAjuan'])->first(),
+            'dokumen' => $this->uploadModel->where('idAjuan', $ajuan['idAjuan'])
+                ->join('trsyarat', 'trsyarat.idSyarat = trupload.idSyarat')
+                ->findAll()
         ];
         return view('mitra/detailajuan_l', $data);
+    }
+
+    public function doTindakan()
+    {
+        if ($this->request->isAJAX()) {
+            $validation = \Config\Services::validation();
+            $valid = $this->validate([
+                'persetujuan' => [
+                    'label' => 'persetujuan',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Anda harus memilih salah satu {field}'
+                    ]
+                ],
+            ]);
+            if (!$valid) {
+                $msg = [
+                    'error' => [
+                        'persetujuan' => $validation->getError('persetujuan'),
+                    ]
+                ];
+            } else {
+                // Jika disetujui maka nilai bantuan wajib
+                if ($this->request->getVar('persetujuan') == 1) {
+                    //validasi nilai bantuan
+                    $valid2 = $this->validate([
+                        'nilai' => [
+                            'label' => 'Nilai bantuan',
+                            'rules' => 'required',
+                            'errors' => [
+                                'required' => '{field} tidak boleh kosong'
+                            ]
+                        ],
+                    ]);
+                    if (!$valid2) {
+                        $msg = [
+                            'error' => [
+                                'nilai' => $validation->getError('nilai'),
+                            ]
+                        ];
+                        echo json_encode($msg);
+                        return FALSE;
+                    }
+                }
+                if ($this->request->getVar('persetujuan') == 1) {
+                    $idStsAjuan = 7;
+                } elseif ($this->request->getVar('persetujuan') == 2) {
+                    $idStsAjuan = 5;
+                } elseif ($this->request->getVar('persetujuan') == 3) {
+                    $idStsAjuan = 6;
+                }
+
+                $data = [
+                    'nilaiDisetujui' => $this->request->getVar('nilai'),
+                    'ketRecSurvey' => $this->request->getVar('alasan'),
+                    'tgRecSurvey' => new Time('now', 'Asia/Jakarta', 'en_US'),
+                    'idStsAjuan' => $idStsAjuan
+                ];
+                $save = $this->ajuanModel->where('idAjuan', $this->request->getVar('idAjuan'))->set($data)->update();
+                if ($save) {
+                    $msg = [
+                        'berhasil' => [
+                            'pesan' => "Hasil berhasil dikirim",
+                            'link' => "/mitra/dftrajuan_i"
+                        ]
+                    ];
+                } else {
+                    $msg = [
+                        'error' => [
+                            'rec' => "Gagal simpan",
+                        ]
+                    ];
+                }
+            }
+
+            echo json_encode($msg);
+        }
     }
 }

@@ -1,10 +1,40 @@
 <?= $this->extend("/layout/template.php"); ?>
 <?= $this->section("konten"); ?>
 
+<?php
+$bulan = array(
+    1 =>   'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
+);
+?>
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">> Detail Ajuan</h1>
+<div class="row d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="col-auto">
+        <h1 class="h3 mb-0 text-gray-800">Detail Ajuan</h1>
+    </div>
+    <div class="col-auto mt-4">
+        <p>Status ajuan:
+            <?php if ($idStsAjuan == 4) { ?>
+                <span style="border-radius: 5px;" class="bg-gray-600 p-2 text-white">Untuk Diproses</span>
+            <?php } elseif ($idStsAjuan == 6) { ?>
+                <span style="border-radius: 5px;" class="bg-danger p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } elseif ($idStsAjuan == 7) { ?>
+                <span style="border-radius: 5px;" class="bg-success p-2 text-white"><?= $StatusAjuan; ?></span>
+            <?php } ?>
+        </p>
+    </div>
 </div>
+
 <!-- Data Pemohon -->
 <div class="card shadow mb-4">
     <div class="card-header bg-info py-3">
@@ -21,7 +51,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                3312201901980001
+                <?= $pemohon['NIK']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -35,7 +65,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Purwo Setiawan
+                <?= $pemohon['Nama']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -48,8 +78,11 @@
                         <i>Place, Date of Birth</i>
                     </span></label>
             </div>
+            <?php
+            $tgl = explode('-', $pemohon['tgLahir']);
+            ?>
             <div class="col-md-8">
-                Surakarta, 19 Januari 1998
+                <?= $pemohon['tempatLahir']; ?>, <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -63,7 +96,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Laki-laki
+                <?= ($pemohon['gender'] == 1) ? 'Laki-laki' : 'Perempuan' ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -77,7 +110,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Jl. Brigjen Sudiarto No. 34
+                <?= $pemohon['Alamat']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -91,7 +124,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Danukusuman
+                <?= $pemohon['Kelurahan']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -105,7 +138,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Serengan
+                <?= $pemohon['Kecamatan']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -119,7 +152,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                Islam
+                <?= $pemohon['Agama']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -133,7 +166,7 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                085647053296
+                <?= $pemohon['telepon']; ?>
             </div>
         </div>
         <hr class="m-0 p-1">
@@ -147,202 +180,298 @@
                     </span></label>
             </div>
             <div class="col-md-8">
-                purwostwn98@gmail.com
+                <?= $pemohon['email']; ?>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Data Ajuan Bantuan -->
 <div class="card shadow mb-4">
-    <div class="card-header bg-info py-3">
+    <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
         <h6 class="m-0 font-weight-bold text-white">Data Ajuan Bantuan</h6>
     </div>
-    <div class="card-body">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Paket Bantuan</b>
-                </label>
+    <?php if ($idStsAjuan != 1) { ?>
+        <div class="card-body">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Program Bantuan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?= $ajuan['NamaMitra']; ?>: <?= $ajuan['namaProgram']; ?>
+                </div>
             </div>
-            <div class="col-md-8">
-                BAZNAS: Ndandani Omah
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Nilai Bantuan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    Rp. <?= number_format((float)$ajuan['Kebutuhan'], 0, ',', '.'); ?>
+                </div>
             </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Deskripsi Bantuan</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?= $ajuan['Keperluan']; ?>
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Tgl. Ajuan</b>
+                    </label>
+                </div>
+                <?php
+                $tgl = explode('-', $ajuan['tgAjuan']);
+                ?>
+                <div class="col-md-8">
+                    <?= $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0]; ?>
+                </div>
+            </div>
+            <?php if ($ajuan['idJnsAjuan'] == 0) { ?>
+                <hr class="m-0 p-1">
+                <div class="row bg-white darker">
+                    <div class="col-md-4">
+                        <label for="">
+                            <b>Status E-SIK</b>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <?= ($ajuan['eSik'] == 1) ? 'Terdaftar' : 'Tidak Terdaftar' ?>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if ($ajuan['eSik'] == 0 && $ajuan['idJnsAjuan'] == 0) { ?>
+                <hr class="m-0 p-1">
+                <div class="row bg-white darker">
+                    <div class="col-md-4">
+                        <label for="">
+                            <b>Surat Keterangan Pemohon</b>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <a href="<?= base_url(); ?>/uploads_syarat/<?= $ajuan['srtKetPemohon']; ?>" class="btn btn-success btn-sm btn-icon-split mb-2" target="_blank">
+                            <span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lihat</span>
+                        </a>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Deskripsi Bantuan</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Perbaikan Fasilitas MCK
-            </div>
+    <?php } else { ?>
+        <div class="card-body">
+            Pemohon belum mengisi form ajuan
         </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Tgl. Ajuan</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                20 April 2021
-            </div>
-        </div>
-    </div>
+    <?php } ?>
 </div>
+
 <!-- Dokumen Pendukung -->
 <div class="card shadow mb-4">
-    <div class="card-header bg-info py-3">
+    <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
         <h6 class="m-0 font-weight-bold text-white">Dokumen Pendukung</h6>
     </div>
-    <div class="card-body">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kartu Keluarga</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
+    <?php if ($idStsAjuan != 1) { ?>
+        <div class="card-body">
+            <?php foreach ($dokumen as $dok) { ?>
+                <div class="row bg-white darker">
+                    <div class="col-md-6">
+                        <label for="">
+                            <b><?php echo $dok['Syarat'] ?></b>
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="<?= base_url(); ?>/uploads_syarat/<?= $dok['namaFile']; ?>" class="btn btn-success btn-sm btn-icon-split mb-2" target="_blank">
+                            <span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lihat</span>
+                        </a>
+                    </div>
+                </div>
+                <hr class="m-0 p-1">
+            <?php } ?>
         </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto KTP</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
+    <?php } else { ?>
+        <div class="card-body">
+            Pemohon belum mengupload syarat ajuan
         </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kondisi 1</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kondisi 2</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Foto Kondisi 3</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-        <hr class="m-0 p-1">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="">
-                    <b>Dokumen pendukung lainnya</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Foto
-            </div>
-        </div>
-    </div>
+    <?php } ?>
 </div>
-<!-- <div class="card shadow mb-4">
-    <div class="card-header py-3 bg-info">
-        <h6 class="m-0 font-weight-bold text-white">Data E-SIK</h6>
-    </div>
-    <div class="card-body">
-        DATA E-SIK
-    </div>
-</div> -->
 
-<!-- Rekomendasi dari Kesra -->
+<!-- Hasil Rekomendasi Kesra -->
+<?php if ($idStsAjuan >= 4) { ?>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-info">
+            <h6 class="m-0 font-weight-bold text-white">Rekomendasi (Kesra)</h6>
+        </div>
+        <div class="card-body">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Rekomendasi</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?php if ($ajuan['idRecKesra'] == 1) { ?>
+                        Tidak Direkomendasikan
+                    <?php } elseif ($ajuan['idRecKesra'] == 2) { ?>
+                        Kurang Direkomendasikan
+                    <?php } elseif ($ajuan['idRecKesra'] == 3) { ?>
+                        Direkomendasikan
+                    <?php } elseif ($ajuan['idRecKesra'] == 4) { ?>
+                        Lebih Direkomendasikan
+                    <?php } elseif ($ajuan['idRecKesra'] == 5) { ?>
+                        Sangat Direkomendasikan
+                    <?php } ?> &nbsp;
+                    (
+                    <span class="fa fa-star <?= ($ajuan['idRecKesra'] >= 1) ? 'oke' : '' ?>"></span>
+                    <span class="fa fa-star <?= ($ajuan['idRecKesra'] >= 2) ? 'oke' : '' ?>"></span>
+                    <span class="fa fa-star <?= ($ajuan['idRecKesra'] >= 3) ? 'oke' : '' ?>"></span>
+                    <span class="fa fa-star <?= ($ajuan['idRecKesra'] >= 4) ? 'oke' : '' ?>"></span>
+                    <span class="fa fa-star <?= ($ajuan['idRecKesra'] == 5) ? 'oke' : '' ?>"></span>
+                    )
+                </div>
+            </div>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Ket. Rekomendasi</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?= $ajuan['ketRecKesra']; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+<!-- Status Ajuan -->
+<?php
+$tglajuan = explode('-', $ajuan['tgAjuan']);
+$tglKesra = explode('-', $ajuan['tgRecKesra']);
+$tglMitra = explode('-', $ajuan['tgRecSurvey']);
+?>
 <div class="card shadow mb-4">
-    <div class="card-header py-3 bg-info">
-        <h6 class="m-0 font-weight-bold text-white">Rekomendasi (Kesra)</h6>
+    <div class="card-header d-sm-flex align-items-center justify-content-between bg-info py-3">
+        <h6 class="m-0 font-weight-bold text-white">Status Ajuan</h6>
     </div>
     <div class="card-body">
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
-                    <b>Rekomendasi</b>
+                    <b>Pengajuan Bantuan</b>
                 </label>
             </div>
             <div class="col-md-8">
-                Kurang Direkomendasikan
-                (<i class="fa fa-star oke"></i>
-                <span class="fa fa-star oke"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>)
+                <?php if ($ajuan['idStsAjuan'] >= 1) { ?>
+                    <span class="<?= ($ajuan['idStsAjuan'] >= 1) ? 'bg-success' : '' ?> text-white p-1">
+                        <?= $tglajuan[2] . ' ' . $bulan[(int)$tglajuan[1]] . ' ' . $tglajuan[0]; ?>
+                    </span>
+                <?php } ?>
+            </div>
+        </div>
+        <?php if ($ajuan['idJnsAjuan'] == 0) { ?>
+            <?php
+            $tglDinsos = explode('-', $ajuan['tgRecDinsos']);
+            ?>
+            <hr class="m-0 p-1">
+            <div class="row bg-white darker">
+                <div class="col-md-4">
+                    <label for="">
+                        <b>Proses Dinsos</b>
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <?php if ($ajuan['idStsAjuan'] >= 3) { ?>
+                        <span class="bg-success text-white p-1">
+                            <?= $tglDinsos[2] . ' ' . $bulan[(int)$tglDinsos[1]] . ' ' . $tglDinsos[0]; ?>
+                        </span>
+                    <?php } elseif ($ajuan['idStsAjuan'] == 2) {
+                        echo "<span class='bg-warning text-white p-1'>Sedang diproses</span>";
+                    } else {
+                        echo "<span class='bg-secondary text-white p-1'>Belum diproses</span>";
+                    } ?>
+                </div>
+            </div>
+        <?php } ?>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Proses Kesra</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                <?php if ($ajuan['idStsAjuan'] >= 4) { ?>
+                    <span class="bg-success text-white p-1">
+                        <?= $tglKesra[2] . ' ' . $bulan[(int)$tglKesra[1]] . ' ' . $tglKesra[0]; ?>
+                    </span>
+                <?php } elseif ($ajuan['idStsAjuan'] == 3) {
+                    echo "<span class='bg-warning text-white p-1'>Sedang diproses</span>";
+                } else {
+                    echo "<span class='bg-secondary text-white p-1'>Belum diproses</span>";
+                } ?>
             </div>
         </div>
         <hr class="m-0 p-1">
         <div class="row bg-white darker">
             <div class="col-md-4">
                 <label for="">
-                    <b>Ket. Rekomendasi</b>
+                    <b>Proses Mitra</b>
                 </label>
             </div>
             <div class="col-md-8">
-                Warga miskin, sudah pernah mendapatkan beberapa bantuan
+                <?php if ($ajuan['idStsAjuan'] >= 6) { ?>
+                    <span class="bg-success text-white p-1">
+                        <?= $tglMitra[2] . ' ' . $bulan[(int)$tglMitra[1]] . ' ' . $tglMitra[0]; ?>
+                    </span>
+                <?php } elseif ($ajuan['idStsAjuan'] == 4) {
+                    echo "<span class='bg-warning text-white p-1'>Sedang diproses</span>";
+                } elseif ($ajuan['idStsAjuan'] == 5) {
+                    echo "<span class='bg-primary text-white p-1'>Survey</span>";
+                } else {
+                    echo "<span class='bg-secondary text-white p-1'>Belum diproses</span>";
+                } ?>
+            </div>
+        </div>
+        <hr class="m-0 p-1">
+        <div class="row bg-white darker">
+            <div class="col-md-4">
+                <label for="">
+                    <b>Hasil</b>
+                </label>
+            </div>
+            <div class="col-md-8">
+                <?php if ($ajuan['idStsAjuan'] == 6) { ?>
+                    <span class="bg-danger text-white p-1">Ditolak</span>
+                <?php } elseif ($ajuan['idStsAjuan'] == 7) {
+                    echo "<span class='bg-success text-white p-1'>Disetujui</span>";
+                } else {
+                    echo "<span class='bg-secondary text-white p-1'>Belum diproses</span>";
+                } ?>
             </div>
         </div>
     </div>
 </div>
-
-<!-- <div class="card shadow mb-4">
-    <div class="card-header py-3 bg-info">
-        <h6 class="m-0 font-weight-bold text-white">Rekomendasi</h6>
-    </div>
-    <div class="card-body">
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="rekomendasi">
-                    <b>Rekomendasi</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Sangat Direkomendasikan
-            </div>
-        </div>
-        <div class="row bg-white darker">
-            <div class="col-md-4">
-                <label for="rekomendasi">
-                    <b>Alasan Rekomendasi</b>
-                </label>
-            </div>
-            <div class="col-md-8">
-                Belum pernah mendapatkan bantuan
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <!-- Tindakan Baru -->
-<?php if ($status == 'new') { ?>
+<?php if ($idStsAjuan == 4) { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-warning">
             <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
         </div>
+        <?= form_open("/mitra/doTindakan", ['class' => 'formTindakanBaru']); ?>
+        <?= csrf_field(); ?>
+        <input type="hidden" name="idAjuan" id="idAjuan" value="<?= $ajuan['idAjuan']; ?>">
         <div class="card-body">
             <div class="row bg-white darker py-2">
                 <div class="col-md-4">
@@ -363,11 +492,11 @@
                 <div class="row bg-white darker py-2">
                     <div class="col-md-4">
                         <label for="alasan">
-                            <b>Alasan</b>
+                            <b>Alasan / catatan</b>
                         </label>
                     </div>
                     <div class="col-md-8">
-                        <textarea class="form-control" id="alasan" rows="3" placeholder="Alasan disetujui atau ditolak (opsional)"></textarea>
+                        <textarea class="form-control" id="alasan" name="alasan" rows="3" placeholder="Alasan disetujui atau ditolak (opsional)"></textarea>
                     </div>
                 </div>
                 <div class="nilai">
@@ -378,22 +507,26 @@
                             </label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai">
+                            <input type="number" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai" name="nilai">
                             <small id="nilai" class="form-text text-muted">Isikan nominal bantuan misalnya 750000 (Jika tidak disetujui isikan 0)</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <?= form_close(); ?>
     </div>
 <?php } ?>
 
 <!-- Tindakan setelah survey -->
-<?php if ($status == 'survey') { ?>
+<?php if ($idStsAjuan == 5) { ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-warning">
-            <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
+            <h6 class="m-0 font-weight-bold text-white">Tindakan setelah survey</h6>
         </div>
+        <?= form_open("/mitra/doTindakan", ['class' => 'formTindakanSurvey']); ?>
+        <?= csrf_field(); ?>
+        <input type="hidden" name="idAjuan" id="idAjuan" value="<?= $ajuan['idAjuan']; ?>">
         <div class="card-body">
             <div class="row bg-white darker py-2">
                 <div class="col-md-4">
@@ -405,18 +538,18 @@
                     <select id="approval" class="form-control" name="persetujuan" onchange="getnilai(this);">
                         <option selected value="" disabled>--Pilih--</option>
                         <option value="1">Disetujui</option>
-                        <option value="2">Ditolak</option>
+                        <option value="3">Ditolak</option>
                     </select>
                 </div>
             </div>
             <div class="row bg-white darker py-2">
                 <div class="col-md-4">
                     <label for="alasan">
-                        <b>Alasan</b>
+                        <b>Alasan / catatan</b>
                     </label>
                 </div>
                 <div class="col-md-8">
-                    <textarea class="form-control" id="alasan" rows="3" placeholder="Alasan disetujui atau ditolak (opsional)"></textarea>
+                    <textarea class="form-control" name="alasan" id="alasan" rows="3" placeholder="Alasan disetujui atau ditolak (opsional)"></textarea>
                 </div>
             </div>
             <div class="nilai2">
@@ -427,20 +560,21 @@
                         </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="number" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai">
+                        <input type="number" name="nilai" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai">
                         <small id="nilai" class="form-text text-muted">Isikan nominal bantuan misalnya 750000 (Jika tidak disetujui isikan 0)</small>
                     </div>
                 </div>
             </div>
         </div>
+        <?= form_close(); ?>
     </div>
 <?php } ?>
 
-<!-- Status Ajuan -->
-<?php if ($status == 'selesai') { ?>
+<!-- Keputusan Akhir -->
+<?php if ($idStsAjuan >= 6) { ?>
     <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-info">
-            <h6 class="m-0 font-weight-bold text-white">Status Ajuan</h6>
+        <div class="card-header py-3 <?= ($idStsAjuan == 6) ? 'bg-danger' : 'bg-success' ?>">
+            <h6 class="m-0 font-weight-bold text-white">Hasil Keputusan Forum Kesra</h6>
         </div>
         <div class="card-body">
             <div class="row bg-white darker">
@@ -450,34 +584,37 @@
                     </label>
                 </div>
                 <div class="col-md-8">
-                    <span style="border-radius: 5px;" class="text-white bg-danger p-1">Ditolak</span>
+                    <span style="border-radius: 5px;" class="text-white <?= ($idStsAjuan == 6) ? 'bg-danger' : 'bg-success' ?> p-1">
+                        <?= $StatusAjuan; ?>
+                    </span>
                 </div>
             </div>
             <hr class="m-0 p-1">
             <div class="row bg-white darker">
                 <div class="col-md-4">
                     <label for="">
-                        <b>Mitra</b>
+                        <b>Alasan / catatan</b>
                     </label>
                 </div>
                 <div class="col-md-8">
-                    BAZNAS Surakarta
+                    <?= $ajuan['ketRecSurvey']; ?>
                 </div>
             </div>
             <hr class="m-0 p-1">
             <div class="row bg-white darker">
                 <div class="col-md-4">
                     <label for="">
-                        <b>Alasan</b>
+                        <b>Nilai bantuan disetujui</b>
                     </label>
                 </div>
                 <div class="col-md-8">
-                    Rumah masih layak
+                    Rp. <?= number_format((float)$ajuan['nilaiDisetujui'], 0, ',', '.'); ?>
                 </div>
             </div>
         </div>
     </div>
 <?php } ?>
+
 <!-- Button -->
 <div class="row">
     <div class="col">
@@ -487,13 +624,22 @@
             </span>
             <span class="text">Kembali</span>
         </a>
-        <?php if ($status != 'selesai') { ?>
-            <a href="#" class="btn btn-primary btn-icon-split">
+        <?php if ($idStsAjuan == 4) { ?>
+            <button role="button" class="btn btn-primary btn-icon-split btnBaru">
                 <span class="icon text-white-50">
                     <i class="fas fa-save"></i>
                 </span>
                 <span class="text">Konfirmasi</span>
-            </a>
+            </button>
+        <?php } ?>
+        <!-- Button konfirmasi setelah survey -->
+        <?php if ($idStsAjuan == 5) { ?>
+            <button role="button" class="btn btn-primary btn-icon-split btnSurvey">
+                <span class="icon text-white-50">
+                    <i class="fas fa-save"></i>
+                </span>
+                <span class="text">Konfirmasi</span>
+            </button>
         <?php } ?>
     </div>
 </div>
@@ -515,10 +661,125 @@
     function getnilai(sel) {
         if (sel.value == "1") {
             $(".nilai2").css("display", "block");
-        } else if (sel.value == "2") {
+        } else if (sel.value == "3") {
             $(".nilai2").css("display", "none");
         }
     }
+</script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<!-- POST FORM AJUAN -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        //Btn baru click
+        $('.btnBaru').click(function(e) {
+            e.preventDefault();
+            swal({
+                    title: "Anda yakin?",
+                    text: "Dengan mengkonfirmasi ajuan, Anda tidak dapat lagi merubah rekomendasi",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "post",
+                            url: $(".formTindakanBaru").attr('action'),
+                            data: $(".formTindakanBaru").serialize(),
+                            dataType: "json",
+                            beforeSend: function() {
+                                $('.btnBaru').prop('disabled', true);
+                                $('.btnBaru').html('<i class="fa fa-spin fa-spinner"></i>');
+                            },
+                            complete: function() {
+                                $('.btnBaru').prop('disabled', false);
+                                $('.btnBaru').html("<span class='icon text-white-50'><i class='fas fa-save'></i></span><span class='text'>Konfirmasi ke Kesra</span>");
+                            },
+                            success: function(response) {
+                                if (response.error) {
+                                    if (response.error.persetujuan) {
+                                        swal("Mohon Maaf!", response.error.persetujuan, "error");
+                                    } else if (response.error.nilai) {
+                                        swal("Mohon Maaf!", response.error.nilai, "error");
+                                    }
+                                }
+                                if (response.berhasil) {
+                                    swal({
+                                        title: "Sukses",
+                                        text: response.berhasil.pesan,
+                                        icon: "success",
+                                        button: "Ok",
+                                    }).then((value) => {
+                                        window.location = response.berhasil.link;
+                                    });
+                                }
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                            }
+                        });
+                        return false;
+                    } else {
+                        return false;
+                    }
+                });
+        });
+        //Btn survey click
+        $('.btnSurvey').click(function(e) {
+            e.preventDefault();
+            swal({
+                    title: "Anda yakin?",
+                    text: "Dengan mengkonfirmasi ajuan, Anda tidak dapat lagi merubah rekomendasi",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "post",
+                            url: $(".formTindakanSurvey").attr('action'),
+                            data: $(".formTindakanSurvey").serialize(),
+                            dataType: "json",
+                            beforeSend: function() {
+                                $('.btnSurvey').prop('disabled', true);
+                                $('.btnSurvey').html('<i class="fa fa-spin fa-spinner"></i>');
+                            },
+                            complete: function() {
+                                $('.btnSurvey').prop('disabled', false);
+                                $('.btnSurvey').html("<span class='icon text-white-50'><i class='fas fa-save'></i></span><span class='text'>Konfirmasi ke Kesra</span>");
+                            },
+                            success: function(response) {
+                                if (response.error) {
+                                    if (response.error.persetujuan) {
+                                        swal("Mohon Maaf!", response.error.persetujuan, "error");
+                                    } else if (response.error.nilai) {
+                                        swal("Mohon Maaf!", response.error.nilai, "error");
+                                    }
+                                }
+                                if (response.berhasil) {
+                                    swal({
+                                        title: "Sukses",
+                                        text: response.berhasil.pesan,
+                                        icon: "success",
+                                        button: "Ok",
+                                    }).then((value) => {
+                                        window.location = response.berhasil.link;
+                                    });
+                                }
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                            }
+                        });
+                        return false;
+                    } else {
+                        return false;
+                    }
+                });
+        });
+    });
 </script>
 
 

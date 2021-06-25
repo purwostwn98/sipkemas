@@ -218,7 +218,7 @@ $bulan = array(
                                     foreach ($ajuan_selesai as $selesai) : ?>
                                         <tr role="row" class="odd">
                                             <td>
-                                                <a href="/dinsos/detailajuan_i/<?= $selesai['noAjuan']; ?>">
+                                                <a href="/kesra/detailajuan_i/<?= $selesai['noAjuan']; ?>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                             </td>

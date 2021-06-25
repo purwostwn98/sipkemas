@@ -7,6 +7,7 @@ use App\Models\FormulirModel;
 use App\Models\AjuanModel;
 use App\Models\UploadModel;
 use App\Models\AjuanLbgModel;
+//use App\Libraries\Notification;
 
 class Kelurahan extends BaseController
 {
@@ -15,17 +16,44 @@ class Kelurahan extends BaseController
     protected $ajuanModel;
     protected $uploadModel;
     protected $ajuanLbgModel;
+
+
+
+
     public function __construct()
     {
+        $this->session = session();
+
         $this->pemohonModel = new PemohonModel();
         $this->formulirModel = new FormulirModel();
         $this->ajuanModel = new AjuanModel();
         $this->uploadModel = new UploadModel();
         $this->ajuanLbgModel = new AjuanLbgModel();
+
+
+        //print_r('x');exit;
+        //return view('/kelurahan/kel_dftrpemohon_i');
+        //$nama =$this->session->get('privUser');
+        //if ($nama == '3'){print_r($nama); exit;}
+
+
     }
 
+
+    public function cek()
+    {
+        if ($this->session->get('privUser') <> '2') {
+            $this->session->destroy();
+            return redirect()->to('/home/index');
+            exit;
+        }
+        //print_r($this->session->get('privUser'));
+        //return redirect()->to('/home/index');
+    }
     public function dtpemohon()
     {
+
+
         $konfirmasi = $this->request->getVar('konfirmasi');
         if ($konfirmasi == 'cfcd208495d565ef66e7dff9f98764da') {
             $kode = 0;
@@ -53,12 +81,18 @@ class Kelurahan extends BaseController
     }
     public function dftrpemohon_i()
     {
+        //if ($this->session->get('privUser') == '2'){
+        $this->cek();
         $data = [
             'bttn' => 'dftrpemohon',
             'pemohonBaru' => $this->formulirModel->findAll(),
             'pemohon_terdaftar' => $this->pemohonModel->findAll()
         ];
         return view('kelurahan/kel_dftrpemohon_i', $data);
+        /*} else {
+			return redirect()->to('/home/index');
+			exit;
+		}*/
     }
 
     //Konfirmasi Pendaftaran

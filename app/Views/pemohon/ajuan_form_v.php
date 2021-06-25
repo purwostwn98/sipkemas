@@ -46,6 +46,7 @@ $session = \Config\Services::session();
                             <option value="<?= $row['kodeBantuan']; ?>"><?= $row['NamaMitra']; ?>: <?= $row['namaProgram']; ?></option>
                         <?php } ?>
                     </select>
+					<small id="nilai0" class="form-text text-primary"><i>Keterangan detail Program Bantuan silahkan buka di halaman depan</i></small>
                 </div>
             </div>
             <div class="col-sm-1"></div>
@@ -70,7 +71,8 @@ $session = \Config\Services::session();
             <div class="col-sm-6">
                 <div class="form-group has-danger">
                     <textarea type="text" rows="3" class="form-control col-sm-12  border-left-info animated--grow-in" name="keperluan" id="keperluan" value=""></textarea>
-                </div>
+					<small id="nilai1" class="form-text text-primary"><i>Isikan alasan mengapa mengajukan dan untuk apa bantuan digunakan</i></small>
+				</div>
             </div>
         </div>
         <div class="srtKeterangan">
@@ -83,6 +85,7 @@ $session = \Config\Services::session();
                     <div class="col-sm-6">
                         <div class="form-group has-danger">
                             <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="srtKetPemohon" name="srtKetPemohon">
+							<small id="nilai2" class="form-text text-primary"><i>Surat Keterangan Tidak Mampu dari Kelurahan bila belum terdaftar di eSik</i></small>
                         </div>
                     </div>
                 </div>
