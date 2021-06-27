@@ -58,6 +58,14 @@ $session = \Config\Services::session();
                                             <?php echo session()->getFlashdata('errorPassword'); ?>
                                         </div>
                                     </div>
+                                    <div class="form-group" align="center">
+                                        <label align="center" for="jawabCpt"><?= $text; ?></label>
+                                        <input name="jawabCpt" type="number" class="form-control form-control-user <?= ($session->getFlashdata('errorHitung')) ? 'is-invalid' : '' ?>" id="hitung" placeholder="Jawaban">
+                                        <input name="hslbenar" type="hidden" value="<?= md5($hasil); ?>">
+                                        <div class="invalid-feedback invalidUser text-center">
+                                            <?php echo session()->getFlashdata('errorHitung'); ?>
+                                        </div>
+                                    </div>
                                     <!-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">

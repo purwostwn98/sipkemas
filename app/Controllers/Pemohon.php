@@ -41,13 +41,15 @@ class Pemohon extends BaseController
     public function proses_daftar()
     {
         if ($this->request->isAJAX()) {
-            $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-            $recaptcha_secret = '6LdlXhwbAAAAAJFSMK0WUDl4TffxdJc-eHnblZZB';
-            $recaptcha_response = $this->request->getVar('g-recaptcha-response');
+            // $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+            // $recaptcha_secret = '6LdlXhwbAAAAAJFSMK0WUDl4TffxdJc-eHnblZZB';
+            // $recaptcha_response = $this->request->getVar('g-recaptcha-response');
 
-            $verify = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
-            $recaptcha = json_decode($verify);
-            if ($recaptcha->success == true) {
+            // $verify = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+            // $recaptcha = json_decode($verify);
+            $hslbenar = $this->request->getVar('hslbenar');
+            $jawaban = $this->request->getVar('jawabCpt');
+            if (md5($jawaban) == $hslbenar) {
                 $validation = \Config\Services::validation();
                 $valid = $this->validate([
                     'NIK' => [
@@ -106,7 +108,7 @@ class Pemohon extends BaseController
             } else {
                 $msg = [
                     'a' => [
-                        'b' => "Captcha tidak terverifikasi"
+                        'b' => "Hasil perhitungan Anda salah"
                     ]
                 ];
                 echo json_encode($msg);
@@ -130,13 +132,16 @@ class Pemohon extends BaseController
     // Proses Cek Ajuan
     public function prosesCekAjuan()
     {
-        $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-        $recaptcha_secret = '6LdlXhwbAAAAAJFSMK0WUDl4TffxdJc-eHnblZZB';
-        $recaptcha_response = $this->request->getVar('g-recaptcha-response');
+        // $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+        // $recaptcha_secret = '6LdlXhwbAAAAAJFSMK0WUDl4TffxdJc-eHnblZZB';
+        // $recaptcha_response = $this->request->getVar('g-recaptcha-response');
 
-        $verify = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
-        $recaptcha = json_decode($verify);
-        if ($recaptcha->success == true) {
+        // $verify = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+        // $recaptcha = json_decode($verify);
+        $hslbenar = $this->request->getVar('hslbenar');
+        $jawaban = $this->request->getVar('jawabCpt');
+        //if ($recaptcha->success == true) {
+        if (md5($jawaban) == $hslbenar) {
             $noAjuan = $this->request->getPost('noAjuan');
             $countAjuan = $this->ajuanModel->where('noAjuan', $noAjuan)->countAllResults();
             if ($countAjuan == 0) {
@@ -160,7 +165,7 @@ class Pemohon extends BaseController
                 return redirect()->to('/pemohon/biodata');
             }
         } else {
-            session()->setFlashdata('pesan', 'Mohon maaf, captcha anda tidak valid');
+            session()->setFlashdata('pesan', 'Mohon maaf, hasil perhitungan Anda salah');
             return redirect()->to('/home/cekAjuan');
         }
     }

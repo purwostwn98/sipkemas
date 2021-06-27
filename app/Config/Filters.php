@@ -47,7 +47,7 @@ class Filters extends BaseConfig
 				'pemohon', 'pemohon/prosesCekAjuan',
 			]],
 			'kelurahanFilter' => ['except' => [
-				'gerbangska/*', 'gerbangska/*',
+				'gerbangska', 'gerbangska/*',
 				'home', 'home/*',
 				'pemohon', 'pemohon/frpemohon',
 				'pemohon', 'pemohon/proses_daftar',
@@ -92,16 +92,20 @@ class Filters extends BaseConfig
 			]],
 			'kelurahanFilter' => ['except' => [
 				'kelurahan', 'kelurahan/*',
+				'kelurahan', 'kelurahan/*/*',
 				'pemohon', 'pemohon/alur_bantuan',
 			]],
 			'dinsosFilter' => ['except' => [
 				'dinsos', 'dinsos/*',
+				'dinsos', 'dinsos/*/*'
 			]],
 			'kesraFilter' => ['except' => [
 				'kesra', 'kesra/*',
+				'kesra', 'kesra/*/*'
 			]],
 			'mitraFilter' => ['except' => [
 				'mitra', 'mitra/*',
+				'mitra', 'mitra/*/*'
 			]],
 		],
 	];

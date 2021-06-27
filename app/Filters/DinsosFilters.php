@@ -12,7 +12,7 @@ class DinsosFilters implements FilterInterface
     {
         // Kondisi sebelum login
         if (session()->get('privUser') == "") {
-            return redirect()->to('/gerbangska/index');
+            return redirect()->to('/home/index');
         }
     }
 
@@ -21,7 +21,7 @@ class DinsosFilters implements FilterInterface
         // Kondisi ketika login
         // Kondisi sebelum login
         if (session()->get('privUser') == 3) {
-            return redirect()->to('/kesra/dftrajuan_i');
+            return redirect()->to('/dinsos/dftrajuan_i');
         }
     }
 }

@@ -17,13 +17,27 @@ class Kesra extends BaseController
     protected $ajuanLbgModel;
     public function __construct()
     {
+		$this->session = session();
         $this->ajuanModel = new AjuanModel();
         $this->pemohonModel = new PemohonModel();
         $this->uploadModel = new UploadModel();
         $this->ajuanLbgModel = new AjuanLbgModel();
     }
+	
+	//cek privilege sbg petugas kesra
+    public function cek()
+    {	
+		if ($this->session->get('privUser') <> '4'){
+			$this->session->destroy();
+			return redirect()->to('/home/index');
+			exit;
+		}
+		
+	}
+	
     public function dftrajuan_i()
     {
+		$this->cek();
         $data = [
             'bttn' => 'kes_dftrajuan',
             'ajuan_baru' => $this->ajuanModel
@@ -57,6 +71,7 @@ class Kesra extends BaseController
     }
     public function dftrajuan_l()
     {
+		$this->cek();
         $data = [
             'bttn' => 'dftrajuan',
             'ajuan_baru' => $this->ajuanModel
@@ -92,7 +107,8 @@ class Kesra extends BaseController
         return view('kesra/dftrajuan_l', $data);
     }
     public function detailajuan_i($noAjuan)
-    {
+    {	
+		$this->cek();
         $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
             ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
             ->first();
@@ -119,6 +135,7 @@ class Kesra extends BaseController
 
     public function detailajuan_l($noAjuan)
     {
+		$this->cek();
         $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
             ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
             ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
@@ -144,6 +161,7 @@ class Kesra extends BaseController
 
     public function updateAjuan()
     {
+		$this->cek();
         if ($this->request->isAJAX()) {
             $validation = \Config\Services::validation();
             $valid = $this->validate([

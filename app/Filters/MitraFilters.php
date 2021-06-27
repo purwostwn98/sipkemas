@@ -12,7 +12,7 @@ class MitraFilters implements FilterInterface
     {
         // Kondisi sebelum login
         if (session()->get('privUser') == "") {
-            return redirect()->to('/gerbangska/index');
+            return redirect()->to('/home/index');
         }
     }
 

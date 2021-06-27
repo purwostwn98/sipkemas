@@ -311,8 +311,8 @@ $bulan = array(
 <!-- Hasil Rekomendasi Dinsos -->
 <?php if ($idStsAjuan >= 3) { ?>
     <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-info">
-            <h6 class="m-0 font-weight-bold text-white">Rekomendasi (Dinsos)</h6>
+        <div class="card-header py-3 bg-warning">
+            <h6 class="m-0 font-weight-bold text-white">Rekomendasi Dinas Sosial</h6>
         </div>
         <div class="card-body">
             <!-- <div class="row bg-white darker">
@@ -329,7 +329,7 @@ $bulan = array(
             <div class="row bg-white darker">
                 <div class="col-md-4">
                     <label for="">
-                        <b>Rekomendasi</b>
+                        <b>Tingkat Rekomendasi</b>
                     </label>
                 </div>
                 <div class="col-md-8">
@@ -374,8 +374,8 @@ $bulan = array(
     <?= csrf_field(); ?>
     <input type="hidden" name="idAjuan" id="idAjuan" value="<?= $ajuan['idAjuan']; ?>">
     <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-warning">
-            <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
+        <div class="card-header py-3 bg-danger">
+            <h6 class="m-0 font-weight-bold text-white">Rekomendasi Bidang Kesra</h6>
         </div>
         <div class="card-body">
             <div class="row bg-white darker py-2">
@@ -387,59 +387,89 @@ $bulan = array(
                 <!-- Option Rekomendasi -->
                 <div class="col-md-8">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios1" value="5">
-                        <label class="form-check-label" for="exampleRadios1">
-                            Sangat Direkomendasikan
-                            (<span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>)
-                        </label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios1" value="5">
+                                <label class="form-check-label" for="exampleRadios1">
+                                    Sangat Direkomendasikan
+                                </label>
+                            </div>
+                            <div class="col-md-7">
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios2" value="4">
-                        <label class="form-check-label" for="exampleRadios2">
-                            Lebih Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios2" value="4">
+                                <label class="form-check-label" for="exampleRadios2">
+                                    Lebih Direkomendasikan
+                                </label>
+                            </div>
+                            <div class="col-md-7">
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios3" value="3">
-                        <label class="form-check-label" for="exampleRadios3">
-                            Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios3" value="3">
+                                <label class="form-check-label" for="exampleRadios3">
+                                    Direkomendasikan
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios5" value="2">
-                        <label class="form-check-label" for="exampleRadios5">
-                            Kurang Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios5" value="2">
+                                <label class="form-check-label" for="exampleRadios5">
+                                    Kurang Direkomendasikan
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios4" value="1">
-                        <label class="form-check-label" for="exampleRadios4">
-                            Tidak Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios4" value="1">
+                                <label class="form-check-label" for="exampleRadios4">
+                                    Tidak Direkomendasikan
+                                </label>
+                            </div>
+                            <div class="col-md-7">
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -457,18 +487,18 @@ $bulan = array(
     </div>
     <!-- Button -->
     <div class="row">
-        <div class="col">
+        <div class="col" align='center'>
             <a href="/kesra/dftrajuan_i" class="btn btn-warning btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-arrow-left"></i>
                 </span>
                 <span class="text">Kembali</span>
             </a>
-            <button type="button" role="button" class="btn btn-primary btn-icon-split btnConfirm">
+            <button type="button" role="button" class="btn btn-success btn-icon-split btnConfirm">
                 <span class='icon text-white-50'>
                     <i class='fas fa-save'></i>
                 </span>
-                <span class='text'>Konfirmasi ke Mitra</span>
+                <span class='text'>Simpan Rekomendasi</span>
             </button>
         </div>
     </div>

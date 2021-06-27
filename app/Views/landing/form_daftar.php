@@ -35,9 +35,6 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
-    <!-- Google ReCaptcha -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
     <!-- Sweat Alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -62,7 +59,6 @@
                         </div>
                         <?= form_open("/pemohon/proses_daftar", ['class' => 'formdaftar']); ?>
                         <?= csrf_field(); ?>
-                        <input type="hidden" id="gocode" name="gocode" value="">
                         <!-- NIK -->
                         <div class="form-group row">
                             <label for="NIK" class="col-sm-4 col-form-label">NIK</label>
@@ -172,14 +168,17 @@
                                 <input type="email" name="email" class="form-control" id="email">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="perhitungan" class="col-sm-4 col-form-label"><?= $text; ?></label>
+                            <div class="col-sm-8">
+                                <input type="number" name="jawabCpt" class="form-control" id="perhitungan">
+                                <input type="hidden" name="hslbenar" value="<?= md5($hasil); ?>">
+                            </div>
+                        </div>
                         <div class="row mt-4">
                             <div class="col">
                                 <p class="small"><i><span class="req">*</span>boleh kosong jika tidak ada</i></p>
                             </div>
-                        </div>
-                        <div class="form-group row justify-content-md-center">
-                            <div class="g-recaptcha" data-sitekey="6LdlXhwbAAAAACTiuY1WoMackLIWSIVG6FDH6Do8"></div>
-                            <span class="text-danger" id="captcha_error"></span>
                         </div>
                         <div class="form-group row justify-content-md-center">
                             <div class="col-md-auto">

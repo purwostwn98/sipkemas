@@ -36,7 +36,7 @@
   ======================================================== -->
 
     <!-- Google ReCaptcha -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
 
     <!-- Sweat Alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -71,13 +71,19 @@
                                 <label for="noAjuan" class="col-sm-4 col-form-label">Masukkan No. Ajuan</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="noAjuan" class="form-control" id="noAjuan" placeholder="Nomor Ajuan">
-                                    <div class="invalid-feedback invalidNIK text-center"></div>
                                 </div>
                             </div>
-                            <div class="form-group row justify-content-md-center">
+                            <div class="form-group row">
+                                <label for="jawaban" class="col-sm-4 col-form-label"><?= $text; ?></label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="jawabCpt" class="form-control" id="jawaban" placeholder="Jawaban">
+                                    <input type="hidden" name="hslbenar" class="form-control" value="<?= md5($hasil); ?>">
+                                </div>
+                            </div>
+                            <!-- <div class="form-group row justify-content-md-center">
                                 <div class="g-recaptcha" data-sitekey="6LdlXhwbAAAAACTiuY1WoMackLIWSIVG6FDH6Do8"></div>
                                 <span class="text-danger" id="captcha_error"></span>
-                            </div>
+                            </div> -->
                             <div class="form-group row justify-content-md-center">
                                 <div class="col-md-auto">
                                     <a href="/home/index" role="button" class="btn btn-secondary">Batal</a>

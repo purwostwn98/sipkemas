@@ -346,59 +346,89 @@ $bulan = array(
                 <!-- Option Rekomendasi -->
                 <div class="col-md-8">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios1" value="5">
-                        <label class="form-check-label" for="exampleRadios1">
-                            Sangat Direkomendasikan
-                            (<span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>)
-                        </label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios1" value="5">
+                                <label class="form-check-label" for="exampleRadios1">
+                                    Sangat Direkomendasikan
+                                </label>
+                            </div>
+                            <div class="col-md-7">
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios2" value="4">
-                        <label class="form-check-label" for="exampleRadios2">
-                            Lebih Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios2" value="4">
+                                <label class="form-check-label" for="exampleRadios2">
+                                    Lebih Direkomendasikan
+                                </label>
+                            </div>
+                            <div class="col-md-7">
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios3" value="3">
-                        <label class="form-check-label" for="exampleRadios3">
-                            Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios3" value="3">
+                                <label class="form-check-label" for="exampleRadios3">
+                                    Direkomendasikan
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios5" value="2">
-                        <label class="form-check-label" for="exampleRadios5">
-                            Kurang Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star oke"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios5" value="2">
+                                <label class="form-check-label" for="exampleRadios5">
+                                    Kurang Direkomendasikan
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios4" value="1">
-                        <label class="form-check-label" for="exampleRadios4">
-                            Tidak Direkomendasikan
-                            (<i class="fa fa-star oke"></i>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>)
-                        </label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="rekomendasi" id="exampleRadios4" value="1">
+                                <label class="form-check-label" for="exampleRadios4">
+                                    Tidak Direkomendasikan
+                                </label>
+                            </div>
+                            <div class="col-md-7">
+                                <span class="fa fa-star oke"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -437,7 +467,7 @@ $bulan = array(
 <!-- Hasil Rekomendasi Dinsos -->
 <?php if ($idStsAjuan >= 3) { ?>
     <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-info">
+        <div class="card-header py-3 bg-warning">
             <h6 class="m-0 font-weight-bold text-white">Rekomendasi (Dinsos)</h6>
         </div>
         <div class="card-body">
@@ -490,46 +520,6 @@ $bulan = array(
                     <?= $ajuan['ketRecDinsos']; ?>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Status Ajuan -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-info">
-            <h6 class="m-0 font-weight-bold text-white">Status Ajuan</h6>
-        </div>
-        <div class="card-body">
-            <div class="row bg-white darker">
-                <div class="col-md-4">
-                    <label for="">
-                        <b>Status</b>
-                    </label>
-                </div>
-                <div class="col-md-8">
-                    <?php if ($idStsAjuan == 2) { ?>
-                        <span style="border-radius: 5px;" class="bg-gray-600 p-2 text-white">Untuk Direkomendasi</span>
-                    <?php } elseif ($idStsAjuan <= 5 && $idStsAjuan >= 3) { ?>
-                        <span style="border-radius: 5px;" class="bg-info p-2 text-white"><?= $StatusAjuan; ?></span>
-                    <?php } elseif ($idStsAjuan == 6) { ?>
-                        <span style="border-radius: 5px;" class="bg-warning p-2 text-white"><?= $StatusAjuan; ?></span>
-                    <?php } elseif ($idStsAjuan == 7) { ?>
-                        <span style="border-radius: 5px;" class="bg-success p-2 text-white"><?= $StatusAjuan; ?></span>
-                    <?php } ?>
-                </div>
-            </div>
-            <hr class="m-0 p-1">
-            <?php if ($idStsAjuan >= 5) { ?>
-                <div class="row bg-white darker">
-                    <div class="col-md-4">
-                        <label for="">
-                            <b>Alasan</b>
-                        </label>
-                    </div>
-                    <div class="col-md-8">
-                        <?= $ajuan['ketRecSurvey']; ?>
-                    </div>
-                </div>
-            <?php } ?>
         </div>
     </div>
 <?php } ?>

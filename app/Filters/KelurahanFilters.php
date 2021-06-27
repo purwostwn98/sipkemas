@@ -12,7 +12,7 @@ class KelurahanFilters implements FilterInterface
     {
         // Kondisi sebelum login
         if (session()->get('login') == "") {
-            return redirect()->to('/gerbangska/index');
+            return redirect()->to('/home/index');
         }
     }
 

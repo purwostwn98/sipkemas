@@ -140,19 +140,6 @@
         <!-- <a href="#services" class="btn-get-started scrollto btn-info">Program Bantuan</a> -->
         <a href="/home/daftar" class="btn-get-started scrollto">Formulir Pendaftaran</a>
         <a href="/home/cekAjuan" class="btn-get-started scrollto">Cek Ajuan</a>
-        <!-- <?= form_open("/gerbangska/cekuser", ['class' => 'formlogin user']); ?>
-        <?= csrf_field(); ?>
-        <div class="row justify-content-center">
-          <input type="hidden" name="User" value="pemohon">
-          <input type="hidden" name="Password" value="pemohon">
-          <div class="input-group col-sm-10 col-md-7 col-lg-4 mb-3 py-3">
-            <input type="text" style="border-color: #2487ce;" class="form-control" placeholder="Masukkan no. ajuan" aria-label="Masukkan no. ajuan" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button type="submit" class="btn text-white btnlogin" style="background-color: #2487ce;" role="button">Cek Ajuan</button>
-            </div>
-          </div>
-        </div>
-        <?= form_close(); ?> -->
       </div>
 
       <div class="row icon-boxes">
@@ -207,8 +194,12 @@
               <div class="icon"><img style="max-height: 65px;" src="<?= base_url(); ?>/assets/img/pms.png" alt=""></div>
             </div>
             <h4 class="title text-center"><a href="">PMS</a></h4>
-            <p class="description">Perkumpulan Masyarakat Surakarta yang bergerak dalam kegiatan sosial kemasyarakatan</p>
-            <p><a class="btn btn-sm btn-info" href="/home/bantuan3">Selengkapnya</a></p>
+            <ul class="text-left" style="font-size: 14px;">
+              <li>Bedah Rumah</li>
+              <li>Olahraga</li>
+              <li>Pelatihan Ekonomi Kreatif</li>
+            </ul>
+            <p><a class="btn btn-sm btn-info" href="/home/bantuan4">Selengkapnya</a></p>
           </div>
         </div>
       </div>
