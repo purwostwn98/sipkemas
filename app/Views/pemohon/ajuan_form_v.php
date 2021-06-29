@@ -46,7 +46,7 @@ $session = \Config\Services::session();
                             <option value="<?= $row['kodeBantuan']; ?>"><?= $row['NamaMitra']; ?>: <?= $row['namaProgram']; ?></option>
                         <?php } ?>
                     </select>
-					<small id="nilai0" class="form-text text-primary"><i>Keterangan detail Program Bantuan silahkan buka di halaman depan</i></small>
+                    <small id="nilai0" class="form-text text-primary"><i>Keterangan detail Program Bantuan silahkan buka di halaman depan</i></small>
                 </div>
             </div>
             <div class="col-sm-1"></div>
@@ -58,7 +58,13 @@ $session = \Config\Services::session();
             </div>
             <div class="col-sm-6">
                 <div class="form-group has-danger">
-                    <input type="number" class="form-control col-sm-12  border-left-info animated--grow-in" name="kebutuhan" id="kebutuhan" placeholder="850000">
+                    <label class="sr-only" for="inlineFormInputGroup">Nilai Ajuan</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Rp.</div>
+                        </div>
+                        <input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="kebutuhan" id="inputku" placeholder="-" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);">
+                    </div>
                     <small id="nilai" class="form-text text-primary"><i>Isikan nominal bantuan yang dibutuhkan misalnya 750000</i></small>
                 </div>
             </div>
@@ -71,8 +77,8 @@ $session = \Config\Services::session();
             <div class="col-sm-6">
                 <div class="form-group has-danger">
                     <textarea type="text" rows="3" class="form-control col-sm-12  border-left-info animated--grow-in" name="keperluan" id="keperluan" value=""></textarea>
-					<small id="nilai1" class="form-text text-primary"><i>Isikan alasan mengapa mengajukan dan untuk apa bantuan digunakan</i></small>
-				</div>
+                    <small id="nilai1" class="form-text text-primary"><i>Isikan alasan mengapa mengajukan dan untuk apa bantuan digunakan</i></small>
+                </div>
             </div>
         </div>
         <div class="srtKeterangan">
@@ -85,7 +91,7 @@ $session = \Config\Services::session();
                     <div class="col-sm-6">
                         <div class="form-group has-danger">
                             <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="srtKetPemohon" name="srtKetPemohon">
-							<small id="nilai2" class="form-text text-primary"><i>Surat Keterangan Tidak Mampu dari Kelurahan bila belum terdaftar di eSik</i></small>
+                            <small id="nilai2" class="form-text text-primary"><i>Surat Keterangan Tidak Mampu dari Kelurahan bila belum terdaftar di eSik dalam format pdf</i></small>
                         </div>
                     </div>
                 </div>
@@ -160,6 +166,7 @@ $session = \Config\Services::session();
     <button class="btn btn-danger btn-md btn-icon-split" onclick="del(this.value)"><span class="icon text-white-50"> <i class="fas fa-trash"></i></span><span class="text">Batal</span></button>
 </div>
 <?= form_close(); ?>
+<script type="text/javascript" src="<?= base_url(); ?>/js/angkaRibuan.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script>
     //Untuk hide/show form Lembaga
@@ -196,6 +203,13 @@ $session = \Config\Services::session();
 
 <!-- POST FORM AJUAN -->
 <script type="text/javascript">
+    // $(document).ready(function() {
+    //     $('.btnAjukan').click(function(e) {
+    //         e.preventDefault();
+    //         var nilai = $('#inputku').val();
+    //         alert(nilai);
+    //     })
+    // })
     $(document).ready(function() {
         $('.formAjukan').submit(function(e) {
             e.preventDefault();
@@ -250,14 +264,12 @@ $session = \Config\Services::session();
                         }).then((value) => {
                             window.location = response.berhasil.link;
                         });
-                        // 
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
                 }
             });
-
             return false;
         });
     });

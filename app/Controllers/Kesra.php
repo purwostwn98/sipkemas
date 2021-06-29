@@ -7,6 +7,8 @@ use App\Models\AjuanModel;
 use App\Models\PemohonModel;
 use App\Models\UploadModel;
 use App\Models\AjuanLbgModel;
+use App\Models\KelurahanModel;
+use App\Models\MitraModel;
 use CodeIgniter\I18n\Time;
 
 class Kesra extends BaseController
@@ -15,31 +17,34 @@ class Kesra extends BaseController
     protected $pemohonModel;
     protected $uploadModel;
     protected $ajuanLbgModel;
+    protected $kelurahanModel;
+    protected $mitraModel;
     public function __construct()
     {
-		$this->session = session();
+        $this->session = session();
         $this->ajuanModel = new AjuanModel();
         $this->pemohonModel = new PemohonModel();
         $this->uploadModel = new UploadModel();
         $this->ajuanLbgModel = new AjuanLbgModel();
+        $this->kelurahanModel = new KelurahanModel();
+        $this->mitraModel = new MitraModel();
     }
-	
-	//cek privilege sbg petugas kesra
+
+    //cek privilege sbg petugas kesra
     public function cek()
-    {	
-		if ($this->session->get('privUser') <> '4'){
-			$this->session->destroy();
-			return redirect()->to('/home/index');
-			exit;
-		}
-		
-	}
-	
+    {
+        if ($this->session->get('privUser') <> '4') {
+            $this->session->destroy();
+            return redirect()->to('/home/index');
+            exit;
+        }
+    }
+
     public function dftrajuan_i()
     {
-		$this->cek();
+        $this->cek();
         $data = [
-            'bttn' => 'kes_dftrajuan',
+            'bttn' => 'dftrajuan',
             'ajuan_baru' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan', 3)
                 ->where('idJnsAjuan', 0)
@@ -71,7 +76,7 @@ class Kesra extends BaseController
     }
     public function dftrajuan_l()
     {
-		$this->cek();
+        $this->cek();
         $data = [
             'bttn' => 'dftrajuan',
             'ajuan_baru' => $this->ajuanModel
@@ -107,13 +112,13 @@ class Kesra extends BaseController
         return view('kesra/dftrajuan_l', $data);
     }
     public function detailajuan_i($noAjuan)
-    {	
-		$this->cek();
+    {
+        $this->cek();
         $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
             ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
             ->first();
         $data = [
-            'bttn' => 'sos_dftrajuan',
+            'bttn' => 'dftrajuan',
             'ajuan' => $this->ajuanModel->where('noAjuan', $noAjuan)
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
@@ -135,7 +140,7 @@ class Kesra extends BaseController
 
     public function detailajuan_l($noAjuan)
     {
-		$this->cek();
+        $this->cek();
         $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
             ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
             ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
@@ -161,7 +166,7 @@ class Kesra extends BaseController
 
     public function updateAjuan()
     {
-		$this->cek();
+        $this->cek();
         if ($this->request->isAJAX()) {
             $validation = \Config\Services::validation();
             $valid = $this->validate([
@@ -206,5 +211,102 @@ class Kesra extends BaseController
 
             echo json_encode($msg);
         }
+    }
+
+    public function dashboard()
+    {
+        // Print tgl Indonesia
+        $bulan = array(
+            1 =>   'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        );
+        if ($this->request->getPost('filter') == 'filter') {
+            $tgAwal = $this->request->getPost('tgAwal');
+            $tgAhir = $this->request->getPost('tgAkhir');
+            $tgl = explode('-', $tgAwal);
+            $tgl2 = explode('-', $tgAhir);
+            $tglAwal = $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0];
+            $tglAkhir = $tgl2[2] . ' ' . $bulan[(int)$tgl2[1]] . ' ' . $tgl2[0];
+        } elseif ($this->request->getGet('hpsFilter') == 'noFilter') {
+            // dd($this->request->getPost());
+            $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
+            $tglAwal = "Semua Data";
+            $tglAkhir = "";
+        } else {
+            $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
+            $tglAwal = "Semua Data";
+            $tglAkhir = "";
+        }
+
+        //Untuk statistik kelurahan
+        $dftrKelurahan = $this->kelurahanModel->findAll();
+        foreach ($dftrKelurahan as $kel) {
+            $countAjuanKelurahan = $this->ajuanModel
+                ->where('idStsAjuan >', 1)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $kel['idKel'])
+                ->countAllResults();
+            $semuaKelurahan[$kel['Kelurahan']] = $countAjuanKelurahan;
+            arsort($semuaKelurahan);
+        }
+        // Untuk statistik mitra
+        $dftrMitra = $this->mitraModel->findAll();
+        foreach ($dftrMitra as $mit) {
+            $countAjuanMitra = $this->ajuanModel
+                ->where('idStsAjuan >', 1)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->where('trbantuan.idMitra', $mit['idMitra'])
+                ->countAllResults();
+            $semuaMitra[] = $countAjuanMitra;
+        }
+        $data = [
+            'countPermintaan' => $this->ajuanModel
+                ->where('idStsAjuan', 3)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'countProses' => $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->where('idStsAjuan <', 6)
+                ->where('idStsAjuan !=', 3)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'countDitolak' => $this->ajuanModel
+                ->where('idStsAjuan', 6)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'countDisetujui' => $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'totalDana' => $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->first(),
+            'countKelurahan' => $semuaKelurahan,
+            'countMitra' => $semuaMitra,
+            'tglAwal' => $tglAwal,
+            'tglAkhir' => $tglAkhir,
+            'bttn' => 'dashboard_kesra'
+        ];
+        return view('kesra/dashboard', $data);
     }
 }

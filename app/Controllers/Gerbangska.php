@@ -100,7 +100,7 @@ class Gerbangska extends BaseController
                         } elseif ($row->idPrivUser == 3) {
                             return redirect()->to('/dinsos/dftrajuan_i');
                         } elseif ($row->idPrivUser == 4) {
-                            return redirect()->to('/kesra/dftrajuan_i');
+                            return redirect()->to('/kesra/dashboard');
                         } elseif ($row->idPrivUser == 5) {
                             return redirect()->to('/mitra/dftrajuan_i');
                         }

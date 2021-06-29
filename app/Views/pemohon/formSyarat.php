@@ -1,4 +1,11 @@
 <!-- <div class="card-body unggahSyarat"> -->
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-primary" role="alert">
+            File yang diupload harus dalam format <b>pdf</b> atau <b>image(jpg,jpeg,png)</b> dengan ukuran file max 4 MB.
+        </div>
+    </div>
+</div>
 <?php $no = 0;
 foreach ($Syarat as $syarat) : ?>
     <div class="row">

@@ -35,3 +35,9 @@ class AjuanLbgModel extends Model
         'idAjuan', 'namaLembaga', 'alamat', 'tglBerdiri', 'Akta', 'SuratTerdaftar', 'SuratDomisili'
     ];
 }
+
+class MitraModel extends Model
+{
+    protected $table = 'mmitra';
+    protected $primaryKey = 'idMitra';
+}

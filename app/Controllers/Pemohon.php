@@ -237,12 +237,12 @@ class Pemohon extends BaseController
                         ],
                         'files' => [
                             'label' => 'file syarat',
-                            'rules' => 'uploaded[files]|max_size[files,4096]|ext_in[files,pdf]|mime_in[files,application/pdf]',
+                            'rules' => 'uploaded[files]|max_size[files,4096]|ext_in[files,pdf,jpeg,jpg,png]|mime_in[files,application/pdf,image/jpeg,image/jpg,image/png]',
                             'errors' => [
                                 'uploaded' => 'Semua {field} tidak boleh kosong',
                                 'max_size' => 'Mohon maaf, ukuran {field} tidak boleh melebihi 4MB',
-                                'ext_in' => 'Mohon maaf, semua {field} harus dalam format pdf',
-                                'mime_in' => 'Mohon maaf, terdapat {field} yang bukan pdf',
+                                'ext_in' => 'Mohon maaf, semua {field} harus dalam format pdf/jpg/jpeg/png',
+                                'mime_in' => 'Mohon maaf, terdapat {field} yang bukan pdf/jpg/jpeg/png',
                             ]
                         ],
                         'srtKetPemohon' => [
@@ -274,12 +274,12 @@ class Pemohon extends BaseController
                         ],
                         'files' => [
                             'label' => 'file syarat',
-                            'rules' => 'uploaded[files]|max_size[files,4096]|ext_in[files,pdf]|mime_in[files,application/pdf]',
+                            'rules' => 'uploaded[files]|max_size[files,4096]|ext_in[files,pdf,jpeg,jpg,png]|mime_in[files,application/pdf,image/jpeg,image/jpg,image/png]',
                             'errors' => [
                                 'uploaded' => 'Semua {field} tidak boleh kosong',
                                 'max_size' => 'Mohon maaf, ukuran {field} tidak boleh melebihi 4MB',
-                                'ext_in' => 'Mohon maaf, semua {field} harus dalam format pdf',
-                                'mime_in' => 'Mohon maaf, terdapat {field} yang bukan pdf',
+                                'ext_in' => 'Mohon maaf, semua {field} harus dalam format pdf/jpg/jpeg/png',
+                                'mime_in' => 'Mohon maaf, terdapat {field} yang bukan pdf/jpg/jpeg/png',
                             ]
                         ]
                     ];
@@ -342,6 +342,9 @@ class Pemohon extends BaseController
                         $idStsAjuan = 3;
                         $idJnsAjuan = 1;
                     }
+                    // rubah format nilai
+                    $strNilaiKebutuhan = $this->request->getVar('kebutuhan');
+                    $numbNilaiKebutuhan = str_replace(".", "", $strNilaiKebutuhan);
                     // Jika e-sik tidak terdaftar = upload surat ket. pemohon
                     if ($this->session->get('eSik') == 0 && $this->request->getVar('jnsbantuan') == 0) {
                         // get file surat ket. pemohon
@@ -353,7 +356,7 @@ class Pemohon extends BaseController
                             'tgAjuan' => date('Y-m-d'),
                             'kodeBantuan' => $this->request->getVar('kodeBantuan'),
                             'Keperluan' => $this->request->getVar('keperluan'),
-                            'Kebutuhan' => $this->request->getVar('kebutuhan'),
+                            'Kebutuhan' => $numbNilaiKebutuhan,
                             'idStsAjuan' => $idStsAjuan,
                             'idJnsAjuan' => $idJnsAjuan,
                             'srtKetPemohon' => $namaFile
@@ -363,7 +366,7 @@ class Pemohon extends BaseController
                             'tgAjuan' => date('Y-m-d'),
                             'kodeBantuan' => $this->request->getVar('kodeBantuan'),
                             'Keperluan' => $this->request->getVar('keperluan'),
-                            'Kebutuhan' => $this->request->getVar('kebutuhan'),
+                            'Kebutuhan' => $numbNilaiKebutuhan,
                             'idStsAjuan' => $idStsAjuan,
                             'idJnsAjuan' => $idJnsAjuan
                         ];

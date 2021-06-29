@@ -96,13 +96,18 @@ $session = \Config\Services::session();
     <div class="sidebar-heading">
         Halaman Kesra
     </div>
-
-    <li class="nav-item active">
+    <li class="nav-item <?= ($bttn == 'dashboard_kesra') ? 'active' : '' ?>">
+        <a class="nav-link my-1 py-1" href="/kesra/dashboard">
+            <i class="fas fa-chart-line fa-fw"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+    <li class="nav-item <?= ($bttn == 'dftrajuan') ? 'active' : '' ?>">
         <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fa-fw far fa-list-alt"></i>
             <span>Daftar Ajuan</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTwo" class="collapse <?= ($bttn == 'dftrajuan') ? 'show' : '' ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Daftar Ajuan:</h6>
                 <a class="collapse-item" href="/kesra/dftrajuan_i">Ajuan Individu</a>

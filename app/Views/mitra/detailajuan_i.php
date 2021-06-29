@@ -507,7 +507,14 @@ $tglMitra = explode('-', $ajuan['tgRecSurvey']);
                             </label>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai" name="nilai">
+                            <label class="sr-only" for="inlineFormInputGroup">Nilai Ajuan</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Rp.</div>
+                                </div>
+                                <input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="nilai" id="inputku" placeholder="-" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);">
+                            </div>
+                            <!-- <input type="number" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai" name="nilai"> -->
                             <small id="nilai" class="form-text text-muted">Isikan nominal bantuan misalnya 750000 (Jika tidak disetujui isikan 0)</small>
                         </div>
                     </div>
@@ -560,7 +567,14 @@ $tglMitra = explode('-', $ajuan['tgRecSurvey']);
                         </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="number" name="nilai" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai">
+                        <label class="sr-only" for="inlineFormInputGroup">Nilai Ajuan</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Rp.</div>
+                            </div>
+                            <input type="text" class="form-control col-sm-12  border-left-info animated--grow-in" name="nilai" id="inputku" placeholder="-" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);">
+                        </div>
+                        <!-- <input type="number" class="form-control" placeholder="Nilai Bantuan" aria-describedby="nilai" name="nilai"> -->
                         <small id="nilai" class="form-text text-muted">Isikan nominal bantuan misalnya 750000 (Jika tidak disetujui isikan 0)</small>
                     </div>
                 </div>
@@ -644,6 +658,7 @@ $tglMitra = explode('-', $ajuan['tgRecSurvey']);
     </div>
 </div>
 
+<script type="text/javascript" src="<?= base_url(); ?>/js/angkaRibuan.js"></script>
 
 <script>
     function getval(sel) {

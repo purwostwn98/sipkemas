@@ -21,7 +21,7 @@ class KesraFilters implements FilterInterface
         // Kondisi ketika login
         // Kondisi sebelum login
         if (session()->get('privUser') == 4) {
-            return redirect()->to('/kesra/dftrajuan_i');
+            return redirect()->to('/kesra/dashboard');
         }
     }
 }

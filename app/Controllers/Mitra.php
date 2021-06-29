@@ -187,9 +187,12 @@ class Mitra extends BaseController
                 } elseif ($this->request->getVar('persetujuan') == 3) {
                     $idStsAjuan = 6;
                 }
+                // rubah format nilai
+                $strNilaiDisetujui = $this->request->getVar('nilai');
+                $numbNilaiDisetujui = str_replace(".", "", $strNilaiDisetujui);
 
                 $data = [
-                    'nilaiDisetujui' => $this->request->getVar('nilai'),
+                    'nilaiDisetujui' => $numbNilaiDisetujui,
                     'ketRecSurvey' => $this->request->getVar('alasan'),
                     'tgRecSurvey' => new Time('now', 'Asia/Jakarta', 'en_US'),
                     'idStsAjuan' => $idStsAjuan
