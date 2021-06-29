@@ -88,7 +88,7 @@ class Gerbangska extends BaseController
                             'login' => true,
                             'namauser' => $row->Namauser,
                             'user' => $row->User,
-                            'id_lembaga' => $row->idLembaga,
+                            'idLembaga' => $row->idLembaga,
                             'privUser' => $row->idPrivUser,
                             'email' => $row->email,
                             'telepon' => $row->telepon

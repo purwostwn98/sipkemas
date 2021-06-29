@@ -16,43 +16,42 @@ class Kelurahan extends BaseController
     protected $ajuanModel;
     protected $uploadModel;
     protected $ajuanLbgModel;
-	
-	
-	
-	
+
+
+
+
     public function __construct()
     {
-		$this->session = session();
-		
+        $this->session = session();
+
         $this->pemohonModel = new PemohonModel();
         $this->formulirModel = new FormulirModel();
         $this->ajuanModel = new AjuanModel();
         $this->uploadModel = new UploadModel();
         $this->ajuanLbgModel = new AjuanLbgModel();
-		
-		
-		//print_r('x');exit;
+
+
+        //print_r('x');exit;
         //return view('/kelurahan/kel_dftrpemohon_i');
-		//$nama =$this->session->get('privUser');
-		//if ($nama == '3'){print_r($nama); exit;}
-		
-		
+        //$nama =$this->session->get('privUser');
+        //if ($nama == '3'){print_r($nama); exit;}
+
+
     }
 
-	//cek privilege sbg petugas kelurahan
+    //cek privilege sbg petugas kelurahan
     public function cek()
-    {	
-		if ($this->session->get('privUser') <> '2'){
-			$this->session->destroy();
-			return redirect()->to('/home/index');
-			exit;
-		}
-		
-	}
+    {
+        if ($this->session->get('privUser') <> '2') {
+            $this->session->destroy();
+            return redirect()->to('/home/index');
+            exit;
+        }
+    }
     public function dtpemohon()
     {
-				
-		$this->cek();
+
+        $this->cek();
         $konfirmasi = $this->request->getVar('konfirmasi');
         if ($konfirmasi == 'cfcd208495d565ef66e7dff9f98764da') {
             $kode = 0;
@@ -80,23 +79,24 @@ class Kelurahan extends BaseController
     }
     public function dftrpemohon_i()
     {
-		
-		$this->cek();
+
+        $this->cek();
+        $idKelurahan = $this->session->get('idLembaga');
         $data = [
             'bttn' => 'dftrpemohon',
-            'pemohonBaru' => $this->formulirModel->findAll(),
-            'pemohon_terdaftar' => $this->pemohonModel->findAll()
+            'pemohonBaru' => $this->formulirModel
+                ->where('idKel', $idKelurahan)
+                ->findAll(),
+            'pemohon_terdaftar' => $this->pemohonModel->where('idKel', $idKelurahan)
+                ->findAll(),
         ];
         return view('kelurahan/kel_dftrpemohon_i', $data);
-		
-		
     }
 
     //Konfirmasi Pendaftaran
     public function konfirmasi()
-    {	
-		$this->cek();
-        $status = $this->request->getVar('status');
+    {
+        $this->cek();
         $data = [
             'NIK' => $this->request->getVar('nik'),
             'Nama' => $this->request->getVar('nama'),
@@ -117,8 +117,8 @@ class Kelurahan extends BaseController
     }
 
     public function hapusForm()
-    {	
-		$this->cek();
+    {
+        $this->cek();
         $idFormulir = $this->request->getVar('no');
         if ($this->formulirModel->delete($idFormulir)) {
             return redirect()->to('/kelurahan/dftrpemohon_i');
@@ -126,8 +126,8 @@ class Kelurahan extends BaseController
     }
 
     public function hapusPemohon()
-    {	
-		$this->cek();
+    {
+        $this->cek();
         $idPemohon = $this->request->getVar('no');
         if ($this->pemohonModel->delete($idPemohon)) {
             return redirect()->to('/kelurahan/dftrpemohon_i');
@@ -135,8 +135,8 @@ class Kelurahan extends BaseController
     }
 
     public function pengajuanBantuan()
-    {	
-		$this->cek();
+    {
+        $this->cek();
         if ($this->request->isAJAX()) {
             $idPemohon = $this->request->getVar('idPemohon');
             $noAjuan = random_int(00000000, 99999999);
@@ -186,8 +186,9 @@ class Kelurahan extends BaseController
     }
 
     public function dftrajuan_i()
-    {	
-		$this->cek();
+    {
+        $this->cek();
+        $idKelurahan = $this->session->get('idLembaga');
         $data = [
             'bttn' => 'dftrajuan',
             'ajuan_baru' => $this->ajuanModel
@@ -195,6 +196,7 @@ class Kelurahan extends BaseController
                 ->where('idJnsAjuan =', 0)
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
+                ->where('idKel', $idKelurahan)
                 ->findAll(),
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 2)
@@ -204,6 +206,7 @@ class Kelurahan extends BaseController
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->where('idKel', $idKelurahan)
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
@@ -212,6 +215,7 @@ class Kelurahan extends BaseController
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->where('idKel', $idKelurahan)
                 ->findAll()
         ];
 
@@ -220,7 +224,8 @@ class Kelurahan extends BaseController
 
     public function dftrajuan_l()
     {
-		$this->cek();
+        $this->cek();
+        $idKelurahan = $this->session->get('idLembaga');
         $data = [
             'bttn' => 'dftrajuan',
             'ajuan_proses' => $this->ajuanModel
@@ -232,6 +237,7 @@ class Kelurahan extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
+                ->where('idKel', $idKelurahan)
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
@@ -241,6 +247,7 @@ class Kelurahan extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
+                ->where('idKel', $idKelurahan)
                 ->findAll()
 
         ];
@@ -248,8 +255,8 @@ class Kelurahan extends BaseController
     }
 
     public function detailajuan_i($noAjuan)
-    {	
-		$this->cek();
+    {
+        $this->cek();
         $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
             ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
             ->first();
@@ -276,7 +283,7 @@ class Kelurahan extends BaseController
 
     public function detailajuan_l($noAjuan)
     {
-		$this->cek();
+        $this->cek();
         $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
             ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
             ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')

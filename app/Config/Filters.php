@@ -36,7 +36,10 @@ class Filters extends BaseConfig
 		//yang boleh diakses sebelum login
 		'before' => [
 			// 'honeypot',
-			'csrf',
+			'csrf' => ['except' => [
+				'Home', 'home/*',
+				'Pemohon', 'pemohon/form_syarat'
+			]],
 			'pemohonFilter' => ['except' => [
 				'gerbangska', 'gerbangska/*',
 				'home', 'home/*',
