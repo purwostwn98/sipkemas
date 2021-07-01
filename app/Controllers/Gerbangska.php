@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\UsersModel;
+
 class Gerbangska extends BaseController
 {
 
@@ -45,6 +47,7 @@ class Gerbangska extends BaseController
 
     public function cekuser()
     {
+		$usersModel = new UsersModel();
         $hslbenar = $this->request->getVar('hslbenar');
         $jawaban = $this->request->getVar('jawabCpt');
         if (md5($jawaban) == $hslbenar) {
@@ -74,36 +77,36 @@ class Gerbangska extends BaseController
                 $this->session->setFlashdata('errorPassword', $validation->getError('Password'));
                 return redirect()->to('/gerbangska/index');
             } else {
-                $cek_database = $this->db->query("SELECT * FROM muser 
-                    WHERE User='$User'");
-
-                $result = $cek_database->getResult();
-
-                if (count($result) > 0) {
-                    $row = $cek_database->getRow();
-                    $pass_tabel = $row->Password;
-
-                    if ($pass == $pass_tabel) {
-                        $dapat_session = [
-                            'login' => true,
-                            'namauser' => $row->Namauser,
-                            'user' => $row->User,
-                            'idLembaga' => $row->idLembaga,
-                            'privUser' => $row->idPrivUser,
-                            'email' => $row->email,
-                            'telepon' => $row->telepon
+				
+                $result = $usersModel->where('User', $User)->first();                
+                if($result){
+					$password = $result['Password'];
+					//$verify_pass = password_verify($pass, $password);
+					if(sha1($pass) == $password){
+					//if($verify_pass){
+						$dapat_session = [
+							'login' => true,
+                            'namauser' => $result['Namauser'],
+                            'user' => $result['User'],
+                            'idLembaga' => $result['idLembaga'],
+                            'privUser' => $result['idPrivUser'],
+                            'email' => $result['email'],
+                            'telepon' => $result['telepon']
                         ];
                         $this->session->set($dapat_session);
 
-                        if ($row->idPrivUser == 2) {
+                        if ($this->session->get('privUser') == 2) {
                             return redirect()->to('/kelurahan/dftrpemohon_i');
-                        } elseif ($row->idPrivUser == 3) {
+                        } elseif ($this->session->get('privUser') == 3) {
                             return redirect()->to('/dinsos/dftrajuan_i');
-                        } elseif ($row->idPrivUser == 4) {
+                        } elseif ($this->session->get('privUser') == 4) {
                             return redirect()->to('/kesra/dashboard');
-                        } elseif ($row->idPrivUser == 5) {
+                        } elseif ($this->session->get('privUser') == 5) {
                             return redirect()->to('/mitra/dftrajuan_i');
-                        }
+                        } else {
+							$this->session->destroy();
+							return redirect()->to('/gerbangska/index');
+						}
                     } else {
                         $this->session->setFlashdata('errorPassword', 'Maaf Password Anda salah');
                         return redirect()->to('/gerbangska/index');

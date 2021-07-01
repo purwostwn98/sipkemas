@@ -22,6 +22,46 @@ class Mitra extends BaseController
         $this->ajuanLbgModel = new AjuanLbgModel();
     }
 
+	public function dftprogram()
+    {
+        $idMitra = $this->session->get('idLembaga');
+		$db      = \Config\Database::connect();
+		$program = $db->table('trbantuan')->getWhere(['idMitra' => $idMitra])->getResult();
+		//$query = $data ;
+		//print_r($program); exit;
+        $data = [
+            'bttn' => 'mit_program',
+            'program' => $program,//$this->bantuanModel
+				//->where('trbantuan.idMitra', $idMitra)
+                //->where('trajuan.idStsAjuan', 4)
+                //->where('idJnsAjuan', 0)
+                //->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                //->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
+                //->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                //->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                
+                //->findAll(),
+            /*'ajuan_proses' => $this->ajuanModel
+                ->where('trajuan.idStsAjuan', 5)
+                ->where('idJnsAjuan', 0)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->where('trbantuan.idMitra', $idMitra)
+                ->findAll(),
+            'ajuan_selesai' => $this->ajuanModel
+                ->where('trajuan.idStsAjuan >=', 6)
+                ->where('idJnsAjuan', 0)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->where('trbantuan.idMitra', $idMitra)
+                ->findAll()*/
+        ];
+        return view('mitra/dftprogram', $data);
+    }
     public function dftrajuan_i()
     {
         $idMitra = $this->session->get('idLembaga');

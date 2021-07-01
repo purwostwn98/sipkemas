@@ -10,7 +10,7 @@ class BantuanModel extends Model
     protected $primaryKey = 'idBantuan';
     protected $useTimestamps = false;
     protected $allowedFields = [
-        'kodeBantuan', 'Nama', 'desBantuan', 'idMitra', 'tgInput', 'JnsBantuan', 'NilaiBantuan', 'Periode', 'Tahun'
+        'kodeBantuan', 'namaProgram', 'desBantuan', 'idMitra', 'tgInput', 'JnsBantuan', 'NilaiBantuan', 'StatusProgram', 'Tahun'
     ];
 }
 
@@ -20,6 +20,6 @@ class SyaratModel extends Model
     protected $primaryKey = 'idSyarat';
     protected $useTimestamps = false;
     protected $allowedFields = [
-        'kodeBantuan', 'Syarat'
+        'kodeBantuan', 'Syarat', 'StatusSyarat'
     ];
 }

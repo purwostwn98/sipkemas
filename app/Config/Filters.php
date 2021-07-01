@@ -38,7 +38,9 @@ class Filters extends BaseConfig
 			// 'honeypot',
 			'csrf' => ['except' => [
 				'Home', 'home/*',
-				'Pemohon', 'pemohon/form_syarat'
+				'Pemohon', 'pemohon/form_syarat',
+				'Kesra', 'kesra/frEditSyarat',
+				'Kesra', 'kesra/doHapusSyarat'
 			]],
 			'pemohonFilter' => ['except' => [
 				'gerbangska', 'gerbangska/*',

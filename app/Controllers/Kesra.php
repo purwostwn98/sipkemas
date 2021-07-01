@@ -9,6 +9,8 @@ use App\Models\UploadModel;
 use App\Models\AjuanLbgModel;
 use App\Models\KelurahanModel;
 use App\Models\MitraModel;
+use App\Models\BantuanModel;
+use App\Models\SyaratModel;
 use CodeIgniter\I18n\Time;
 
 class Kesra extends BaseController
@@ -19,6 +21,8 @@ class Kesra extends BaseController
     protected $ajuanLbgModel;
     protected $kelurahanModel;
     protected $mitraModel;
+    protected $bantuanModel;
+    protected $syaratModel;
     public function __construct()
     {
         $this->session = session();
@@ -28,6 +32,8 @@ class Kesra extends BaseController
         $this->ajuanLbgModel = new AjuanLbgModel();
         $this->kelurahanModel = new KelurahanModel();
         $this->mitraModel = new MitraModel();
+        $this->bantuanModel = new BantuanModel();
+        $this->syaratModel = new SyaratModel();
     }
 
     //cek privilege sbg petugas kesra
@@ -308,5 +314,163 @@ class Kesra extends BaseController
             'bttn' => 'dashboard_kesra'
         ];
         return view('kesra/dashboard', $data);
+    }
+
+    public function dftrMitra()
+    {
+        $data = [
+            'bttn' => 'dftrmitra',
+            'mitra' => $this->mitraModel->findAll()
+        ];
+        return view('kesra/dftrmitra', $data);
+    }
+
+    public function dftrBantuan()
+    {
+        $data = [
+            'bttn' => 'dftrbantuan',
+            'bantuan' => $this->bantuanModel
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->findAll()
+        ];
+        return view('kesra/dftrbantuan', $data);
+    }
+
+    public function editProgram()
+    {
+        $idBantuan = $this->request->getVar('kode');
+        $bantuan = $this->bantuanModel
+            ->where('idBantuan', $idBantuan)
+            ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+            ->first();
+        $countSyarat = $this->syaratModel->where('kodeBantuan', $bantuan['kodeBantuan'])->countAllResults();
+        if ($countSyarat >= 1) {
+            $syaratProgram = $this->syaratModel->where('kodeBantuan', $bantuan['kodeBantuan'])->findAll();
+        } else {
+            $syaratProgram = 0;
+        }
+        $data = [
+            'bttn' => 'dftrbantuan',
+            'bantuan' => $bantuan,
+            'syaratProgram' => $syaratProgram
+        ];
+        return view('kesra/editProgram', $data);
+    }
+
+    public function frEditSyarat()
+    {
+        if ($this->request->isAJAX()) {
+            $idSyarat = $this->request->getVar('idSyarat');
+            $data = [
+                'syarat' => $this->syaratModel->find($idSyarat)
+            ];
+            $msg = [
+                'sukses' => view('tambahan/frEditSyarat', $data)
+            ];
+            echo json_encode($msg);
+        } else {
+            exit('Maaf perintah tidak dapat diproses');
+        }
+    }
+
+    public function doEditSyarat()
+    {
+        if ($this->request->isAJAX()) {
+            $idSyarat = $this->request->getVar('idSyarat');
+            $data = [
+                'Syarat' => $this->request->getVar('namaSyarat'),
+                'StatusSyarat' => $this->request->getVar('StatusSyarat')
+            ];
+            if ($this->syaratModel->update($idSyarat, $data)) {
+                $msg = [
+                    'berhasil' => "Syarat berhasil diupdate"
+                ];
+            } else {
+                $msg = [
+                    'gagal' => "Syarat gagal diupdate"
+                ];
+            }
+
+            echo json_encode($msg);
+        } else {
+            exit('Maaf perintah tidak dapat diproses');
+        }
+    }
+
+    public function doHapusSyarat()
+    {
+        if ($this->request->isAJAX()) {
+            $idSyarat = $this->request->getVar('idSyarat');
+            $cekRiwayat = $this->uploadModel->where('idSyarat', $idSyarat)->countAllResults();
+            if ($cekRiwayat >= 1) {
+                $msg = [
+                    'notallowed' => "Mohon maaf, syarat sudah digunakan dalam riwayat ajuan. Jika memang syarat sudah tidak berlaku, Anda bisa me-nonaktifkan melalui menu edit dan menambah syarat baru jika diperlukan"
+                ];
+            } else {
+                if ($this->syaratModel->delete($idSyarat)) {
+                    $msg = [
+                        'berhasil' => "Syarat berhasil dihapus"
+                    ];
+                } else {
+                    $msg = [
+                        'gagal' => "Syarat gagal dihapus"
+                    ];
+                }
+            }
+            echo json_encode($msg);
+        } else {
+            exit('Maaf perintah tidak dapat diproses');
+        }
+    }
+
+    public function doTambahSyarat()
+    {
+        if ($this->request->isAJAX()) {
+            $data = [
+                'kodeBantuan' => $this->request->getVar('kodeBantuan'),
+                'Syarat' => $this->request->getVar('namaSyarat'),
+                'StatusSyarat' => $this->request->getVar('StatusSyarat')
+            ];
+            if ($this->syaratModel->save($data)) {
+                $msg = [
+                    'berhasil' => "Syarat berhasil ditambahkan"
+                ];
+            } else {
+                $msg = [
+                    'gagal' => "Syarat gagal ditambahkan"
+                ];
+            }
+
+            echo json_encode($msg);
+        } else {
+            exit('Maaf perintah tidak dapat diproses');
+        }
+    }
+
+    public function doEditProgram()
+    {
+        if ($this->request->isAJAX()) {
+            $idBantuan = $this->request->getVar('idBantuan');
+            $data = [
+                'namaProgram' => $this->request->getVar('namaProgram'),
+                'StatusProgram' => $this->request->getVar('StatusProgram'),
+                'desBantuan' => $this->request->getVar('desBantuan')
+            ];
+            if ($this->bantuanModel->update($idBantuan, $data)) {
+                $msg = [
+                    'berhasil' => "Program Berhasil diupdate",
+                    'link' => "/kesra/dftrBantuan",
+                ];
+            } else {
+                $msg = [
+                    'gagal' => "Program gagal diupdate",
+                    'link' => "/kesra/dftrBantuan",
+                ];
+            }
+
+            echo json_encode($msg);
+        } else {
+            exit('Maaf perintah tidak dapat diproses');
+        }
     }
 }
