@@ -473,4 +473,78 @@ class Kesra extends BaseController
             exit('Maaf perintah tidak dapat diproses');
         }
     }
+
+    public function frTambahProgram()
+    {
+        $data = [
+            'bttn' => 'dftrbantuan',
+            'mitra' => $this->mitraModel->findAll(),
+        ];
+        return view('kesra/frTambahProgram', $data);
+    }
+
+    public function createKodeBantuan()
+    {
+        if ($this->request->isAJAX()) {
+            $idMitra = $this->request->getPost('idMitra');
+            $Bantuan = $this->bantuanModel->where('idMitra', $idMitra)->findAll();
+            $mitra = $this->mitraModel->where('idMitra', $idMitra)->first();
+            if ($Bantuan) {
+                foreach ($Bantuan as $bantuan) {
+                    $kode = explode('-', $bantuan['kodeBantuan']);
+                    $Angka[] = $kode[1];
+                }
+                $angkaTertinggi = max($Angka);
+                $kodeAngka = $angkaTertinggi + 1;
+            } else {
+                $kodeAngka = 1;
+            }
+            $msg = [
+                'sukses' => [
+                    'kodeMitra' => $mitra['NamaMitra'],
+                    'kodeAngka' => $kodeAngka
+                ]
+            ];
+            echo json_encode($msg);
+        } else {
+            exit("Maaf perintah tidak dapat diproses");
+        }
+    }
+
+    public function doTambahProgram()
+    {
+        if ($this->request->isAJAX()) {
+            $data = [
+                'kodeBantuan' => $this->request->getPost('kodeBantuan'),
+                'namaProgram' => $this->request->getPost('namaProgram'),
+                'StatusProgram' => $this->request->getPost('StatusProgram'),
+                'desBantuan' => $this->request->getPost('desBantuan'),
+                'idMitra' => $this->request->getPost('idMitra'),
+            ];
+            if ($this->bantuanModel->save($data)) {
+                $kodeBantuan = $this->request->getPost('kodeBantuan');
+                $namaSyarat = $this->request->getVar('Syarat');
+                $StatusSyarat = $this->request->getVar('StatusSyarat');
+
+                $jmlSyarat = count($namaSyarat);
+
+                for ($i = 0; $i < $jmlSyarat; $i++) {
+                    $this->syaratModel->insert([
+                        'kodeBantuan' => $kodeBantuan,
+                        'Syarat' => $namaSyarat[$i],
+                        'StatusSyarat' => $StatusSyarat[$i]
+                    ]);
+                }
+                $msg = [
+                    'sukses' => [
+                        'pesan' => "Program berhasil disimpan",
+                        'link' => "/kesra/dftrBantuan"
+                    ]
+                ];
+            }
+            echo json_encode($msg);
+        } else {
+            exit("Maaf perintah tidak dapat diproses");
+        }
+    }
 }

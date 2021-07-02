@@ -40,7 +40,8 @@ class Filters extends BaseConfig
 				'Home', 'home/*',
 				'Pemohon', 'pemohon/form_syarat',
 				'Kesra', 'kesra/frEditSyarat',
-				'Kesra', 'kesra/doHapusSyarat'
+				'Kesra', 'kesra/doHapusSyarat',
+				'Kesra', 'kesra/createKodeBantuan'
 			]],
 			'pemohonFilter' => ['except' => [
 				'gerbangska', 'gerbangska/*',

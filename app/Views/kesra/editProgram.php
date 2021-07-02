@@ -53,7 +53,7 @@
             <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Syarat Program</h6>
                 <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-2" data-toggle="modal" data-target="#addSyaratModal">
-                    <i class="fas fa-search fa-sm text-white-50"></i> Tambah Syarat
+                    <i class="fa fa-plus-circle fa-sm text-white-50"></i> Tambah Syarat
                 </button>
             </div>
             <div class="card-body">
