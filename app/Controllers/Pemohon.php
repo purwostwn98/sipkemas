@@ -190,7 +190,9 @@ class Pemohon extends BaseController
     {
         $data = [
             'bttn' => 'syarat_ketentuan',
-            'bantuan' => $this->bantuanModel->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')->findAll()
+            'bantuan' => $this->bantuanModel
+                ->where('StatusProgram', 'active')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')->findAll()
         ];
         return view('pemohon/ajuan_form_v', $data);
     }
@@ -201,7 +203,9 @@ class Pemohon extends BaseController
         if ($this->request->isAJAX()) {
             $kodeBantuan = $this->request->getVar('kodeBantuan');
             $data = [
-                'Syarat' => $this->syaratModel->where('kodeBantuan', $kodeBantuan)->findAll()
+                'Syarat' => $this->syaratModel->where('kodeBantuan', $kodeBantuan)
+                    ->where('StatusSyarat', 'active')
+                    ->findAll()
             ];
             $msg = [
                 'data' => view('pemohon/formSyarat', $data)

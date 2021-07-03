@@ -41,9 +41,10 @@
                                                         <a href="/kesra/editProgram?kode=<?= $row['idBantuan']; ?>" class="btn btn-warning btn-circle">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
-                                                        <a href="#" class="btn btn-danger btn-circle">
+                                                        <input type="hidden" class="csrf_input" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+                                                        <button onclick="hapus('<?= $row['kodeBantuan']; ?>')" class="btn btn-danger btn-circle">
                                                             <i class="fas fa-trash"></i>
-                                                        </a>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             <?php $no++;
@@ -59,9 +60,51 @@
         </div>
     </div>
 </div>
-
-
-
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script>
+    function hapus(kodeBantuan) {
+        var csrfName = $('.csrf_input').attr('name'); // CSRF Token name
+        var csrfHash = $('.csrf_input').val(); // CSRF hash
+        swal({
+                title: "Peringatan!",
+                text: "Anda yakin ingin menghapus program?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "<?= site_url('kesra/doHapusProgram'); ?>",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            kodeBantuan: kodeBantuan,
+                            [csrfName]: csrfHash
+                        },
+                        success: function(response) {
+                            if (response.notallowed) {
+                                swal("Tidak diizinkan!", response.notallowed, "warning")
+                            } else if (response.berhasil) {
+                                swal("Berhasil!", response.berhasil, "success").then((value) => {
+                                    location.reload();
+                                });
+                            } else if (response.gagal) {
+                                swal("Gagal!", response.gagal, "danger").then((value) => {
+                                    location.reload();
+                                });
+                            }
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                        }
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+    }
+</script>
 
 <?= $this->endSection(); ?>

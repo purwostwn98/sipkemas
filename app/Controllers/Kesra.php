@@ -547,4 +547,30 @@ class Kesra extends BaseController
             exit("Maaf perintah tidak dapat diproses");
         }
     }
+
+    public function doHapusProgram()
+    {
+        if ($this->request->isAJAX()) {
+            $kodeBantuan = $this->request->getVar('kodeBantuan');
+            $cekRiwayat = $this->ajuanModel->where('kodeBantuan', $kodeBantuan)->countAllResults();
+            if ($cekRiwayat >= 1) {
+                $msg = [
+                    'notallowed' => "Mohon maaf, program sudah digunakan dalam riwayat ajuan. Jika memang program sudah tidak berlaku, Anda bisa me-nonaktifkan melalui menu edit dan menambah program baru jika diperlukan"
+                ];
+            } else {
+                if ($this->bantuanModel->where('kodeBantuan', $kodeBantuan)->delete()) {
+                    $msg = [
+                        'berhasil' => "Program berhasil dihapus"
+                    ];
+                } else {
+                    $msg = [
+                        'gagal' => "Program gagal dihapus"
+                    ];
+                }
+            }
+            echo json_encode($msg);
+        } else {
+            exit('Maaf perintah tidak dapat diproses');
+        }
+    }
 }
