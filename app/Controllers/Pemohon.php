@@ -54,10 +54,11 @@ class Pemohon extends BaseController
                 $valid = $this->validate([
                     'NIK' => [
                         'label' => 'NIK',
-                        'rules' => 'required|is_unique[mpemohon.NIK]',
+                        'rules' => 'required|is_unique[mpemohon.NIK]|exact_length[16]',
                         'errors' => [
                             'required' => '{field} tidak boleh kosong',
-                            'is_unique' => 'Maaf, {field} sudah terdaftar'
+                            'is_unique' => 'Maaf, {field} sudah terdaftar',
+                            'exact_length' => 'NIK harus 16 angka'
                         ]
                     ],
 

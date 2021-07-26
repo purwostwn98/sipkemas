@@ -93,7 +93,7 @@
 
 <div class="d-sm-flex align-content-center justify-content-center mb-3">
     <!-- <div class="col-12"> -->
-    <a href="/kesra/dftrBantuan" class="btn btn-md btn-secondary btn-icon-split mr-3">
+    <a onclick="history.go(-1)" class="btn btn-md btn-secondary btn-icon-split mr-3">
         <span class="icon text-white-50">
             <i class="fas fa-arrow-left fa-md"></i>
         </span>

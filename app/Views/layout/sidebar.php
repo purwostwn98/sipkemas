@@ -135,10 +135,11 @@ $session = \Config\Services::session();
     <div class="sidebar-heading">
         Halaman Mitra
     </div>
-    <li class="nav-item <?= ($bttn == 'mit_program') ? 'active' : '' ?>">
-        <a class="nav-link my-1 py-1" href="/mitra/dftprogram">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Daftar Program</span></a>
+    <li class="nav-item <?= ($bttn == 'dashboard_mitra') ? 'active' : '' ?>">
+        <a class="nav-link my-1 py-1" href="/mitra/dashboard">
+            <i class="fas fa-chart-line fa-fw"></i>
+            <span>Dashboard</span>
+        </a>
     </li>
     <li class="nav-item <?= ($bttn == 'mit_dftrajuan') ? 'active' : '' ?>">
         <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#mitraSub" aria-expanded="true" aria-controls="mitraSub">
@@ -152,6 +153,11 @@ $session = \Config\Services::session();
                 <a class="collapse-item" href="/mitra/dftrajuan_l">Ajuan Lembaga</a>
             </div>
         </div>
+    </li>
+    <li class="nav-item <?= ($bttn == 'dftrbantuan') ? 'active' : '' ?>">
+        <a class="nav-link my-1 py-1" href="/mitra/dftprogram">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Daftar Program</span></a>
     </li>
 <?php } ?>
 

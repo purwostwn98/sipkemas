@@ -88,7 +88,15 @@ $session = \Config\Services::session();
         <?php } ?>
     </div>
 </div>
-
+<?php if ($session->getFlashdata('dontDelete')) { ?>
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-danger" role="alert" id="errorEsik">
+                <?= $session->getFlashdata('dontDelete'); ?>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 <!-- Content Row Data Pemohon-->
 <?php if ($konfirmasi == 0) { ?>
     <div class="row bg-white darker">

@@ -22,7 +22,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open("/kesra/dashboard", ['class' => 'formFilter']); ?>
+            <?= form_open("/$halaman/dashboard", ['class' => 'formFilter']); ?>
             <?= csrf_field(); ?>
             <div class="modal-body">
                 <!-- <div style="display: none;" class="alert alert-danger" role="alert" id="errorEsik">
@@ -39,7 +39,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <a href="/kesra/dashboard?hpsFilter=noFilter" role="button" class="btn btn-success">Hapus Filter</a>
+                <a href="/<?= $halaman; ?>/dashboard?hpsFilter=noFilter" role="button" class="btn btn-success">Hapus Filter</a>
                 <button type="submit" name="filter" value="filter" class="btn btn-primary">Filter</button>
             </div>
             <?= form_close(); ?>
@@ -57,7 +57,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Permintaan Rekomendasi
+                            Permintaan <?= ($halaman = 'mitra') ? 'Persetujuan' : 'Rekomendasi' ?>
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $countPermintaan; ?></div>
                     </div>
@@ -151,6 +151,26 @@
 
 <!-- Statistik -->
 <div class="row">
+
+    <!-- Area Chart -->
+    <div class="col-xl-12 col-xl-12">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+
+            <!-- Card Body -->
+            <div class="card-body">
+
+                <!--<canvas id="myAreaChart"></canvas> -->
+                <div align='center' id="chart2"></div><br>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie Chart -->
+
+</div>
+<div class="row">
     <!-- Pie Mitra -->
     <div class="col-lg-5 mb-4">
         <div class="card shadow mb-4">
@@ -195,9 +215,14 @@
         </div>
     </div>
 
+
 </div>
 <!-- Page level plugins -->
 <script src="<?= base_url(); ?>/vendor/chart.js/Chart.min.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+
 <script type="text/javascript">
     // Set new default font family and font color to mimic Bootstrap's default styling
     Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -235,6 +260,47 @@
             },
             cutoutPercentage: 80,
         },
+    });
+
+
+    new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart2',
+            type: 'column',
+        },
+        title: {
+            text: 'Statistik',
+            x: -20
+        },
+        subtitle: {
+            text: 'Bantuan SipKeMas per Kelurahan',
+            x: -20
+        },
+        xAxis: {
+            categories: [<?php
+                            foreach ($countKelurahan as $kelurahan => $countAjuan) {
+                                echo '"' . $kelurahan . '",';
+                            } ?>],
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah'
+            },
+
+
+
+        },
+        series: [{
+            name: 'Kelurahan',
+            data: [<?php
+                    foreach ($countKelurahan as $kelurahan => $countAjuan) {
+                        echo  $countAjuan . ',';
+                    } ?>],
+            color: '#F7DC6F'
+        }, ]
+
+
+
     });
 </script>
 <?= $this->endSection(); ?>

@@ -50,7 +50,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header bg-info py-3 d-sm-flex align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-white">Data Pemohon</h6>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
+                        <a href="/home/cetakFormulir/<?= $pemohon['idFormulir']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
                             <i class="ri-printer-line text-white m-0"></i>
                             <span class="text-white m-0"> Cetak</span>
                         </a>

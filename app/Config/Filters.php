@@ -111,7 +111,17 @@ class Filters extends BaseConfig
 			]],
 			'mitraFilter' => ['except' => [
 				'mitra', 'mitra/*',
-				'mitra', 'mitra/*/*'
+				'mitra', 'mitra/*/*',
+				'kesra', 'kesra/editProgram',
+				'kesra', 'kesra/frEditSyarat',
+				'kesra', 'kesra/doEditSyara',
+				'kesra', 'kesra/doHapusSyarat',
+				'kesra', 'kesra/doTambahSyarat',
+				'kesra', 'kesra/doEditProgram',
+				'kesra', 'kesra/frTambahProgram',
+				'kesra', 'kesra/createKodeBantuan',
+				'kesra', 'kesra/doTambahProgram',
+				'kesra', 'kesra/doHapusProgram',
 			]],
 		],
 	];

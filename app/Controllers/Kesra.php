@@ -311,7 +311,8 @@ class Kesra extends BaseController
             'countMitra' => $semuaMitra,
             'tglAwal' => $tglAwal,
             'tglAkhir' => $tglAkhir,
-            'bttn' => 'dashboard_kesra'
+            'bttn' => 'dashboard_kesra',
+            'halaman' => 'kesra'
         ];
         return view('kesra/dashboard', $data);
     }

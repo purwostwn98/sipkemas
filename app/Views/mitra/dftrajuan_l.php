@@ -45,7 +45,6 @@ $bulan = array(
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
                                     <tr role="row" class="text-center">
-                                        <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 7px;">-</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5px;">No</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 30px;">No.Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 45px;">NIK Pemohon</th>
@@ -55,17 +54,13 @@ $bulan = array(
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 55px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 30px;">Status Ajuan</th>
+                                        <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 40px;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no = 1;
                                     foreach ($ajuan_baru as $baru) { ?>
                                         <tr role="row" class="odd">
-                                            <td>
-                                                <a href="/mitra/detailajuan_l/<?= $baru['noAjuan']; ?>">
-                                                    <i class="far fa-edit"></i>
-                                                </a>
-                                            </td>
                                             <td class="sorting_1"><?= $no; ?></td>
                                             <td><?= $baru['noAjuan']; ?></td>
                                             <td><?= $baru['NIK']; ?></td>
@@ -98,6 +93,14 @@ $bulan = array(
                                                     To Approve
                                                 </span>
                                             </td>
+                                            <td>
+                                                <a href="/mitra/detailajuan_i/<?= $baru['noAjuan']; ?>" class="btn btn-primary btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-flag"></i>
+                                                    </span>
+                                                    <span class="text">Isi Persetujuan</span>
+                                                </a>
+                                            </td>
                                         </tr>
                                     <?php $no++;
                                     } ?>
@@ -119,7 +122,6 @@ $bulan = array(
                             <table class="table table-bordered dataTable" id="dataTable1" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
                                     <tr role="row" class="text-center">
-                                        <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 7px;">-</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5px;">No</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 30px;">No.Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 45px;">NIK Pemohon</th>
@@ -129,17 +131,13 @@ $bulan = array(
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 55px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 30px;">Status Ajuan</th>
+                                        <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 40px;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no1 = 1;
                                     foreach ($ajuan_proses as $proses) { ?>
                                         <tr role="row" class="odd">
-                                            <td>
-                                                <a href="/mitra/detailajuan_l/<?= $proses['noAjuan']; ?>">
-                                                    <i class="far fa-edit"></i>
-                                                </a>
-                                            </td>
                                             <td class="sorting_1"><?= $no1; ?></td>
                                             <td><?= $proses['noAjuan']; ?></td>
                                             <td><?= $proses['NIK']; ?></td>
@@ -172,6 +170,14 @@ $bulan = array(
                                                     Survey
                                                 </span>
                                             </td>
+                                            <td>
+                                                <a href="/mitra/detailajuan_i/<?= $proses['noAjuan']; ?>" class="btn btn-primary btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-flag"></i>
+                                                    </span>
+                                                    <span class="text">Isi Hasil Survey</span>
+                                                </a>
+                                            </td>
                                         </tr>
                                     <?php $no1++;
                                     } ?>
@@ -193,7 +199,6 @@ $bulan = array(
                             <table class="table table-bordered dataTable" id="dataTable2" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                 <thead>
                                     <tr role="row" class="text-center">
-                                        <th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 7px;">-</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 5px;">No</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 30px;">No.Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 45px;">NIK Pemohon</th>
@@ -203,17 +208,13 @@ $bulan = array(
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 55px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 30px;">Status Ajuan</th>
+                                        <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 40px;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no2 = 1;
                                     foreach ($ajuan_selesai as $selesai) { ?>
                                         <tr role="row" class="odd">
-                                            <td>
-                                                <a href="/mitra/detailajuan_l/<?= $selesai['noAjuan']; ?>">
-                                                    <i class="far fa-edit"></i>
-                                                </a>
-                                            </td>
                                             <td class="sorting_1"><?= $no2; ?></td>
                                             <td><?= $selesai['noAjuan']; ?></td>
                                             <td><?= $selesai['NIK']; ?></td>
@@ -243,6 +244,14 @@ $bulan = array(
                                                                                     } ?>>
                                                     <?= $selesai['StatusAjuan']; ?>
                                                 </span>
+                                            </td>
+                                            <td>
+                                                <a href="/mitra/detailajuan_i/<?= $selesai['noAjuan']; ?>" class="btn btn-info btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="far fa-edit"></i>
+                                                    </span>
+                                                    <span class="text">Detail</span>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php $no2++;

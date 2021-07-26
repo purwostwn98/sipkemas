@@ -21,7 +21,7 @@ class MitraFilters implements FilterInterface
         // Kondisi ketika login
         // Kondisi sebelum login
         if (session()->get('privUser') == 5) {
-            return redirect()->to('/mitra/dftrajuan_i');
+            return redirect()->to('/mitra/dashboard');
         }
     }
 }

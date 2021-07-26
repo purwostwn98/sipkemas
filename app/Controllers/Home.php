@@ -2,21 +2,26 @@
 
 namespace App\Controllers;
 
+
 use App\Models\PemohonModel;
 use App\Models\KecamatanModel;
 use App\Models\KelurahanModel;
+use App\Models\FormulirModel;
+use Mpdf\Mpdf;
 
 class Home extends BaseController
 {
 	protected $pemohonModel;
 	protected $kecamatanModel;
 	protected $kelurahanModel;
+	protected $formulirModel;
 
 	public function __construct()
 	{
 		$this->pemohonModel = new PemohonModel();
 		$this->kecamatanModel = new KecamatanModel();
 		$this->kelurahanModel = new KelurahanModel();
+		$this->formulirModel = new FormulirModel();
 	}
 	public function index()
 	{
@@ -72,6 +77,7 @@ class Home extends BaseController
 		];
 		return view('landing/form_daftar', $data);
 	}
+
 	public function cekAjuan()
 	{
 		$a = random_int(1, 9);
@@ -104,7 +110,6 @@ class Home extends BaseController
 		return view('landing/cek_ajuan', $data);
 	}
 
-
 	// load kelurahan
 	public function load_kelurahan()
 	{
@@ -123,5 +128,27 @@ class Home extends BaseController
 		} else {
 			exit('Maaf tidak dapat diproses');
 		}
+	}
+
+	public function cetakFormulir($idFormulir)
+	{
+		$mpdf = new Mpdf(['mode' => 'utf-8', 'format' => 'A5-L']);
+		$formulir = $this->formulirModel
+			->join('eagama', 'eagama.idAgama = mformulir.idAgama')
+			->join('ekelurahan', 'ekelurahan.idKel = mformulir.idKel')
+			->join('ekecamatan', 'ekecamatan.idKec = ekelurahan.idKec')
+			->find($idFormulir);
+		// dd($formulir);
+		$data = [
+			'formulir' => $formulir
+		];
+		$html = view('landing/formDaftarPDF', $data);
+		$mpdf->text_input_as_HTML = true;
+		$mpdf->SetHeader('SIPKEMAS|Formulir Pendaftaran|{PAGENO}');
+		$mpdf->SetFooter('Sekretariat Daerah Bidang Kesejahteraan Rakyat');
+		$mpdf->WriteHTML($html);
+		// $this->response->setHeader('Content-Type', 'application/pdf');
+
+		$mpdf->Output($formulir['noFormulir'] . '.pdf', 'D');
 	}
 }

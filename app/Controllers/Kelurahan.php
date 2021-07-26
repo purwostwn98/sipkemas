@@ -129,8 +129,14 @@ class Kelurahan extends BaseController
     {
         $this->cek();
         $idPemohon = $this->request->getVar('no');
-        if ($this->pemohonModel->delete($idPemohon)) {
-            return redirect()->to('/kelurahan/dftrpemohon_i');
+        $riwayatAjuan = $this->ajuanModel->where('idPemohon', $idPemohon)->countAllResults();
+        if ($riwayatAjuan >= 1) {
+            $this->session->setFlashdata('dontDelete', 'Maaf pemohon tidak dapat dihapus, karena sudah masuk di riwayat ajuan');
+            return redirect()->to("/kelurahan/dtpemohon?konfirmasi=c4ca4238a0b923820dcc509a6f75849b&idPemohon=$idPemohon");
+        } else {
+            if ($this->pemohonModel->delete($idPemohon)) {
+                return redirect()->to('/kelurahan/dftrpemohon_i');
+            }
         }
     }
 
