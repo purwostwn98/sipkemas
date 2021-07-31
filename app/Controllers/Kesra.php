@@ -12,6 +12,7 @@ use App\Models\MitraModel;
 use App\Models\BantuanModel;
 use App\Models\SyaratModel;
 use CodeIgniter\I18n\Time;
+use Mpdf\Mpdf;
 
 class Kesra extends BaseController
 {
@@ -236,7 +237,8 @@ class Kesra extends BaseController
             'November',
             'Desember'
         );
-        if ($this->request->getPost('filter') == 'filter') {
+        if ($this->request->getPost('filterTgl') == 'filter') {
+            $filter = 'filter';
             $tgAwal = $this->request->getPost('tgAwal');
             $tgAhir = $this->request->getPost('tgAkhir');
             $tgl = explode('-', $tgAwal);
@@ -245,11 +247,13 @@ class Kesra extends BaseController
             $tglAkhir = $tgl2[2] . ' ' . $bulan[(int)$tgl2[1]] . ' ' . $tgl2[0];
         } elseif ($this->request->getGet('hpsFilter') == 'noFilter') {
             // dd($this->request->getPost());
+            $filter = 'noFilter';
             $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
             $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
             $tglAwal = "Semua Data";
             $tglAkhir = "";
         } else {
+            $filter = 'noFilter';
             $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
             $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
             $tglAwal = "Semua Data";
@@ -311,6 +315,9 @@ class Kesra extends BaseController
             'countMitra' => $semuaMitra,
             'tglAwal' => $tglAwal,
             'tglAkhir' => $tglAkhir,
+            'norm_tglAwal' => $tgAwal,
+            'norm_tglAkhir' => $tgAhir,
+            'filter' => $filter,
             'bttn' => 'dashboard_kesra',
             'halaman' => 'kesra'
         ];
@@ -573,5 +580,155 @@ class Kesra extends BaseController
         } else {
             exit('Maaf perintah tidak dapat diproses');
         }
+    }
+
+    function eksporpdf()
+    {
+        //Print tgl Indonesia
+        $bulan = array(
+            1 =>   'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        );
+        if ($this->request->getVar('filter') == 'filter') {
+            $tgAwal = $this->request->getVar('tgAwal');
+            $tgAhir = $this->request->getVar('tgAkhir');
+            $tgl = explode('-', $tgAwal);
+            $tgl2 = explode('-', $tgAhir);
+            $tglAwal = $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0];
+            $tglAkhir = $tgl2[2] . ' ' . $bulan[(int)$tgl2[1]] . ' ' . $tgl2[0];
+        } else {
+            $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
+            $tglAwal = "Semua Data";
+            $tglAkhir = "";
+        }
+
+        //Untuk statistik kelurahan
+        $dftrKelurahan = $this->kelurahanModel->findAll();
+        foreach ($dftrKelurahan as $kel) {
+            $countAjuanKelurahan = $this->ajuanModel
+                ->where('idStsAjuan >', 1)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $kel['idKel'])
+                ->countAllResults();
+            $countKelurahanSetuju = $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $kel['idKel'])
+                ->countAllResults();
+            $danaKel = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $kel['idKel'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->first();
+            $semuaKelurahan[$kel['Kelurahan']] = array($countAjuanKelurahan, $countKelurahanSetuju, $danaKel['nilaiDisetujui']);
+            arsort($semuaKelurahan);
+        }
+        // foreach ($semuaKelurahan as $kel => $item) {
+        //     dd($item);
+        // }
+        // Untuk statistik mitra
+        $dftrMitra = $this->mitraModel->findAll();
+        foreach ($dftrMitra as $mit) {
+            $countAjuanMitra = $this->ajuanModel
+                ->where('idStsAjuan >', 1)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->where('trbantuan.idMitra', $mit['idMitra'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $semuaMitra[$mit['NamaMitra']] = $countAjuanMitra;
+            $countMitraSetuju = $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->where('trbantuan.idMitra', $mit['idMitra'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $mitraSetuju[] = $countMitraSetuju;
+            $dana = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->where('trbantuan.idMitra', $mit['idMitra'])
+                ->first();
+            $danaMtrSetuju[] = $dana['nilaiDisetujui'];
+        }
+        $tglNow = new Time('now', 'Asia/Jakarta', 'en_US');
+        $t = explode('-', $tglNow);
+        $a = explode(' ', $t[2]);
+        $tglSekarang = $a[0] . ' ' . $bulan[(int)$t[1]] . ' ' . $t[0];
+        $data = [
+            'countPermintaan' => $this->ajuanModel
+                ->where('idStsAjuan', 3)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'countProses' => $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->where('idStsAjuan <', 6)
+                //->where('idStsAjuan !=', 3)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'countDitolak' => $this->ajuanModel
+                ->where('idStsAjuan', 6)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'countDisetujui' => $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'totalDana' => $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->first(),
+            'countKelurahan' => $semuaKelurahan,
+            'countMitra' => $semuaMitra,
+            'mitraSetuju' => $mitraSetuju,
+            'danaMitraSetuju' => $danaMtrSetuju,
+            'tglAwal' => $tglAwal,
+            'tglAkhir' => $tglAkhir,
+            'tglNow' => $tglSekarang,
+            'filter' => $this->request->getVar('filter'),
+            'halaman' => 'kesra'
+        ];
+        $mpdf = new Mpdf([
+            'debug' => TRUE, 'mode' => 'utf-8', 'format' => 'A4-P',
+            'margin_top' => 15, 'margin_bottom' => 10, 'margin_left' => 12, 'margin_right' => 12
+        ]);
+        // $mpdf = new \Mpdf\Mpdf([
+        //     'debug' => FALSE, 'mode' => 'utf-8', 'orientation' => 'L', 'format' => [216, 308],
+        //     'margin_top' => 15, 'margin_bottom' => 10, 'margin_left' => 12, 'margin_right' => 12
+        // ]);
+        $html = view('kesra/dashboard_pdf.php', $data);
+        $mpdf->text_input_as_HTML = true;
+        $mpdf->WriteHTML($html);
+        //$this->response->setHeader('Content-Type', 'application/pdf');
+
+        $mpdf->Output($tglAwal . ".pdf", 'D');
+        //$mpdf->Output('judulfile.pdf', 'D');
     }
 }

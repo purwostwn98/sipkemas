@@ -1,48 +1,66 @@
+<?php
+$session = \Config\Services::session();
+?>
 <?= $this->extend("/layout/template.php"); ?>
 <?= $this->section("konten"); ?>
 <!-- Page Heading -->
 <div class="row d-sm-flex align-items-center justify-content-between mb-4">
-    <div class="col-auto">
+    <div class="col-lg-6">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
     </div>
     <div class="col-auto">
-        <span class="text-primary"><?= $tglAwal; ?> - <?= $tglAkhir; ?> </span>
-        <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-2" data-toggle="modal" data-target="#filterModal">
-            <i class="fas fa-search fa-sm text-white-50"></i> Filter Tanggal
-        </button>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-info">
-                <h5 class="modal-title text-white" id="filterModalLabel"><strong>Filter tanggal</strong></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <?= form_open("/$halaman/dashboard", ['class' => 'formFilter']); ?>
-            <?= csrf_field(); ?>
-            <div class="modal-body">
-                <!-- <div style="display: none;" class="alert alert-danger" role="alert" id="errorEsik">
-                    This is a danger alert—check it out!
-                </div> -->
-                <div class="form-group">
-                    <label for="inputAddress">Tanggal Mulai</label>
-                    <input type="date" class="form-control" id="inputAddress" name="tgAwal" required>
+        <div class="row">
+            <span class="text-primary"><?= $tglAwal; ?> - <?= $tglAkhir; ?> </span>
+            <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-2" data-toggle="modal" data-target="#filterModal">
+                <i class="fas fa-search fa-sm text-white-50"></i> Filter Tanggal
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title text-white" id="filterModalLabel"><strong>Filter tanggal</strong></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="POST" id="formFilter" action="/<?= $halaman; ?>/dashboard">
+                            <?= csrf_field(); ?>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="inputAddress">Tanggal Mulai</label>
+                                    <input type="date" class="form-control" id="inputAddress" name="tgAwal" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputAddress2">Tanggal Akhir</label>
+                                    <input type="date" class="form-control" id="inputAddress2" name="tgAkhir" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                <a href="/<?= $halaman; ?>/dashboard?hpsFilter=noFilter" role="button" class="btn btn-success">Hapus Filter</a>
+                                <input type="hidden" name="filterTgl" value="filter">
+                                <button type="submit" class="btn btn-primary btnFilter" name="btnFilter">Filter</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputAddress2">Tanggal Akhir</label>
-                    <input type="date" class="form-control" id="inputAddress2" name="tgAkhir" required>
-                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <a href="/<?= $halaman; ?>/dashboard?hpsFilter=noFilter" role="button" class="btn btn-success">Hapus Filter</a>
-                <button type="submit" name="filter" value="filter" class="btn btn-primary">Filter</button>
-            </div>
-            <?= form_close(); ?>
+            <!-- form Ekspor pdf -->
+            <a href=" /<?= $halaman; ?>/eksporpdf?filter=<?= $filter; ?>&tgAwal=<?= $norm_tglAwal; ?>&tgAkhir=<?= $norm_tglAkhir; ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm ml-2 btnPdf" name="btnPdf">
+                <i class="fa fa-file-pdf fa-sm text-white-50"></i> Ekspor PDF
+            </a>
+            <!-- <div>
+                <form method="POST" id="formPdf" action="">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="filter" value="<?= $filter; ?>">
+                    <input type="hidden" name="tgAwal" value="<?= $norm_tglAwal; ?>">
+                    <input type="hidden" name="tgAkhir" value="<?= $norm_tglAkhir; ?>">
+                    <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm ml-2 btnPdf" name="btnPdf" onClick='submitPdf<?= $halaman; ?>()'>
+                        <i class="fa fa-file-pdf fa-sm text-white-50"></i> Ekspor PDF
+                    </button>
+                </form>
+            </div> -->
         </div>
     </div>
 </div>
@@ -222,7 +240,6 @@
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
-
 <script type="text/javascript">
     // Set new default font family and font color to mimic Bootstrap's default styling
     Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -303,4 +320,20 @@
 
     });
 </script>
+
+<!-- <script>
+    function submitPdfkesra() {
+        var action = "<?= site_url("kesra/eksporpdf"); ?>";
+        $("#formPdf").attr('action', action);
+        $("#formPdf").submit();
+    }
+
+    function submitFilterkesra() {
+        var action = "<?= site_url("kesra/dashboard"); ?>";
+        $("#formPdf").attr('action', action);
+        var action = "<?= site_url("kesra/dashboard"); ?>";
+        $("#formFilter").attr('action', action);
+        $("#formFilter").submit();
+    }
+</script> -->
 <?= $this->endSection(); ?>

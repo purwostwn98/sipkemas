@@ -117,8 +117,10 @@ $bulan = array(
 <script type="text/javascript">
     $(document).ready(function() {
         //Btn baru click
-        $('#pdf').click(function(e) {
+        $('#pdfx').click(function(e) {
             e.preventDefault();
+			
+			
             swal({
                     title: "Anda yakin?",
                     text: "Dengan mengkonfirmasi ajuan, Anda tidak dapat lagi merubah rekomendasi",
@@ -171,6 +173,8 @@ $bulan = array(
                 });
         });
         //Btn survey click
+		
+		
         $('.btnSurvey').click(function(e) {
             e.preventDefault();
             swal({
