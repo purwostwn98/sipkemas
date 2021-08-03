@@ -353,26 +353,14 @@ $tglMitra = explode('-', $ajuan['tgRecSurvey']);
 <?php } ?>
 
 
-<div class="row">
-    <div class="col">
-        <a href="#" class="btn btn-warning btn-icon-split">
+<div class="row mb-2">
+    <div class="col text-center">
+        <a href="/pemohon/cetakResume" class="btn btn-danger btn-icon-split">
             <span class="icon text-white-50">
-                <i class="fas fa-arrow-left"></i>
+                <i class="fa fa-file-pdf"></i>
             </span>
-            <span class="text">Kembali</span>
+            <span class="text">Cetak Resume</span>
         </a>
-        <!-- <a href="#" class="btn btn-primary btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-save"></i>
-            </span>
-            <span class="text">Simpan</span>
-        </a>
-        <a href="#" class="btn btn-danger btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-key"></i>
-            </span>
-            <span class="text">Kunci Data</span>
-        </a> -->
     </div>
 </div>
 

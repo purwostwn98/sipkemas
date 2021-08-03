@@ -9,6 +9,8 @@ use App\Models\FormulirModel;
 use App\Models\PemohonModel;
 use App\Models\UploadModel;
 use App\Models\AjuanLbgModel;
+use CodeIgniter\I18n\Time;
+use Mpdf\Mpdf;
 use TheSeer\Tokenizer\Token;
 
 class Pemohon extends BaseController
@@ -534,5 +536,33 @@ class Pemohon extends BaseController
         ];
         // dd($idAjuan);
         return view('pemohon/resume_ajuan', $data);
+    }
+
+    public function cetakResume()
+    {
+        $noAjuan = $this->session->get('noAjuan');
+        $idAjuan = $this->session->get('idAjuan');
+        $data = [
+            'bttn' => 'resumeAjuan',
+            'ajuan' => $this->ajuanModel->where('noAjuan', $noAjuan)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->join('ekecamatan', 'ekecamatan.idKec = ekelurahan.idKec')
+                ->first(),
+            'lembaga' => $this->ajuanLbgModel->where('idAjuan', $idAjuan)->first(),
+            'tglNow' => new Time('now', 'Asia/Jakarta', 'en_US')
+        ];
+        $mpdf = new Mpdf([
+            'debug' => TRUE, 'mode' => 'utf-8', 'format' => 'A4-P',
+            'margin_top' => 8, 'margin_bottom' => 10, 'margin_left' => 20, 'margin_right' => 12
+        ]);
+        $html = view('pemohon/resume_pdf.php', $data);
+        $mpdf->text_input_as_HTML = true;
+        $mpdf->WriteHTML($html);
+
+        $mpdf->Output($data['ajuan']['Nama'] . ".pdf", 'D');
     }
 }

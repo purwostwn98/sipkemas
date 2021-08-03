@@ -263,11 +263,12 @@ class Mitra extends BaseController
             'tglAkhir' => $tglAkhir,
             'tglNow' => $tglSekarang,
             'filter' => $this->request->getVar('filter'),
-            'halaman' => 'mitra'
+            'halaman' => 'mitra',
+            'mitra' => $this->mitraModel->find($idMitra)
         ];
         $mpdf = new MpdfMpdf([
             'debug' => TRUE, 'mode' => 'utf-8', 'format' => 'A4-P',
-            'margin_top' => 15, 'margin_bottom' => 10, 'margin_left' => 12, 'margin_right' => 12
+            'margin_top' => 8, 'margin_bottom' => 10, 'margin_left' => 12, 'margin_right' => 12
         ]);
         // $mpdf = new \Mpdf\Mpdf([
         //     'debug' => FALSE, 'mode' => 'utf-8', 'orientation' => 'L', 'format' => [216, 308],

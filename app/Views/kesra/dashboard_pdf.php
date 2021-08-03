@@ -17,6 +17,7 @@
         }
     </style>
 </head>
+<?php $session = \Config\Services::session(); ?>
 
 <body>
     <table border='0' width="750" cellpadding="0" cellspacing="0" style="border:0px solid black;margin-left:auto;margin-right:auto;">
@@ -44,7 +45,13 @@
         </tr>
     </table>
     <div class="hr"></div>
-    <h3 align='center'>Report SipKeMas <?= ($filter == 'filter') ? "($tglAwal - $tglAkhir)" : '' ?></h3>
+    <div style="margin-top: 10px; font-size: 16px" align='center'><b>Report SipKeMas <?= ($filter == 'filter') ? "($tglAwal - $tglAkhir)" : '' ?></b></div>
+    <?php if ($session->get('privUser') == 5) { ?>
+        <div align="center">
+            <?= $mitra['keteranganMitra']; ?>
+        </div>
+    <?php } ?>
+    <br>
     <table style="width: 100%; text-align:left;">
         <tr align="left">
             <td style="width: 40%; text-align:left;">Jumlah Ajuan</td>

@@ -46,21 +46,10 @@ $session = \Config\Services::session();
                     </div>
                 </div>
             </div>
-            <!-- form Ekspor pdf -->
+            <!-- button Ekspor pdf -->
             <a href=" /<?= $halaman; ?>/eksporpdf?filter=<?= $filter; ?>&tgAwal=<?= $norm_tglAwal; ?>&tgAkhir=<?= $norm_tglAkhir; ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm ml-2 btnPdf" name="btnPdf">
                 <i class="fa fa-file-pdf fa-sm text-white-50"></i> Ekspor PDF
             </a>
-            <!-- <div>
-                <form method="POST" id="formPdf" action="">
-                    <?= csrf_field(); ?>
-                    <input type="hidden" name="filter" value="<?= $filter; ?>">
-                    <input type="hidden" name="tgAwal" value="<?= $norm_tglAwal; ?>">
-                    <input type="hidden" name="tgAkhir" value="<?= $norm_tglAkhir; ?>">
-                    <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm ml-2 btnPdf" name="btnPdf" onClick='submitPdf<?= $halaman; ?>()'>
-                        <i class="fa fa-file-pdf fa-sm text-white-50"></i> Ekspor PDF
-                    </button>
-                </form>
-            </div> -->
         </div>
     </div>
 </div>
@@ -188,53 +177,53 @@ $session = \Config\Services::session();
     <!-- Pie Chart -->
 
 </div>
-<div class="row">
-    <!-- Pie Mitra -->
-    <div class="col-lg-5 mb-4">
-        <div class="card shadow mb-4">
-            <div class="card-header  bg-primary py-3">
-                <h6 class="m-0 font-weight-bold text-white">Statistik Forum Kesra</h6>
-            </div>
-            <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas id="pieMitra"></canvas>
+<?php if ($session->get('privUser') != 5) { ?>
+    <div class="row">
+        <!-- Pie Mitra -->
+        <div class="col-lg-5 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header  bg-primary py-3">
+                    <h6 class="m-0 font-weight-bold text-white">Statistik Forum Kesra</h6>
                 </div>
-                <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-danger"></i> PMI
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-success"></i> LAZIS
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-info"></i> BAZNAS
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-warning"></i> PMS
-                    </span>
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas id="pieMitra"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-danger"></i> PMI
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-success"></i> LAZIS
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-info"></i> BAZNAS
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-warning"></i> PMS
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Statistik kelurahan -->
+        <div class="col-lg-7 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header  bg-success py-3">
+                    <h6 class="m-0 font-weight-bold text-white">Statistik Ajuan per Kelurahan</h6>
+                </div>
+                <div class="card-body">
+                    <?php $i = 0;
+                    foreach ($countKelurahan as $kelurahan => $countAjuan) { ?>
+                        <h4 class="small font-weight-bold"><?= $kelurahan; ?> <span class="float-right"><?= $countAjuan; ?></span></h4>
+                        <hr>
+                    <?php $i++;
+                    } ?>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Statistik kelurahan -->
-    <div class="col-lg-7 mb-4">
-        <div class="card shadow mb-4">
-            <div class="card-header  bg-success py-3">
-                <h6 class="m-0 font-weight-bold text-white">Statistik Kelurahan</h6>
-            </div>
-            <div class="card-body">
-                <?php $i = 0;
-                foreach ($countKelurahan as $kelurahan => $countAjuan) { ?>
-                    <h4 class="small font-weight-bold"><?= $kelurahan; ?> <span class="float-right"><?= $countAjuan; ?></span></h4>
-                    <hr>
-                <?php $i++;
-                } ?>
-            </div>
-        </div>
-    </div>
-
-
-</div>
+<?php } ?>
 <!-- Page level plugins -->
 <script src="<?= base_url(); ?>/vendor/chart.js/Chart.min.js"></script>
 
@@ -245,39 +234,41 @@ $session = \Config\Services::session();
     Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
     Chart.defaults.global.defaultFontColor = '#858796';
 
-    // Pie Chart Example
-    var ctx = document.getElementById("pieMitra");
-    var pieMitra = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ["PMI", "LAZIS", "BAZNAS", "PMS"],
-            datasets: [{
-                data: [<?php for ($p = 0; $p < 4; $p++) {
-                            echo '"' . $countMitra[$p] . '",';
-                        } ?>],
-                backgroundColor: ['#e74a3b', '#1cc88a', '#36b9cc', '#f6c23e'],
-                hoverBackgroundColor: ['#6b231c', '#0c5c3f', '#2c9faf', '#947526'],
-                hoverBorderColor: "rgba(234, 236, 244, 1)",
-            }],
-        },
-        options: {
-            maintainAspectRatio: false,
-            tooltips: {
-                backgroundColor: "rgb(255,255,255)",
-                bodyFontColor: "#858796",
-                borderColor: '#dddfeb',
-                borderWidth: 1,
-                xPadding: 15,
-                yPadding: 15,
-                displayColors: false,
-                caretPadding: 10,
+    <?php if ($session->get('privUser') != 5) { ?>
+        // Pie Chart Example
+        var ctx = document.getElementById("pieMitra");
+        var pieMitra = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["PMI", "LAZIS", "BAZNAS", "PMS"],
+                datasets: [{
+                    data: [<?php for ($p = 0; $p < 4; $p++) {
+                                echo '"' . $countMitra[$p] . '",';
+                            } ?>],
+                    backgroundColor: ['#e74a3b', '#1cc88a', '#36b9cc', '#f6c23e'],
+                    hoverBackgroundColor: ['#6b231c', '#0c5c3f', '#2c9faf', '#947526'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
             },
-            legend: {
-                display: false
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
             },
-            cutoutPercentage: 80,
-        },
-    });
+        });
+    <?php } ?>
 
 
     new Highcharts.Chart({
@@ -320,20 +311,4 @@ $session = \Config\Services::session();
 
     });
 </script>
-
-<!-- <script>
-    function submitPdfkesra() {
-        var action = "<?= site_url("kesra/eksporpdf"); ?>";
-        $("#formPdf").attr('action', action);
-        $("#formPdf").submit();
-    }
-
-    function submitFilterkesra() {
-        var action = "<?= site_url("kesra/dashboard"); ?>";
-        $("#formPdf").attr('action', action);
-        var action = "<?= site_url("kesra/dashboard"); ?>";
-        $("#formFilter").attr('action', action);
-        $("#formFilter").submit();
-    }
-</script> -->
 <?= $this->endSection(); ?>
