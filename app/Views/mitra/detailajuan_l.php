@@ -758,6 +758,7 @@ $tglMitra = explode('-', $ajuan['tgRecSurvey']);
                                     } else if (response.error.nilai) {
                                         swal("Mohon Maaf!", response.error.nilai, "error");
                                     }
+                                    $("input[name='csrf_test_name']").val(response.error.token);
                                 }
                                 if (response.berhasil) {
                                     swal({
@@ -812,6 +813,7 @@ $tglMitra = explode('-', $ajuan['tgRecSurvey']);
                                     } else if (response.error.nilai) {
                                         swal("Mohon Maaf!", response.error.nilai, "error");
                                     }
+                                    $("input[name='csrf_test_name']").val(response.error.token);
                                 }
                                 if (response.berhasil) {
                                     swal({

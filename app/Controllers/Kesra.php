@@ -190,6 +190,7 @@ class Kesra extends BaseController
                 $msg = [
                     'error' => [
                         'rec' => $validation->getError('rekomendasi'),
+                        'token' => csrf_hash(),
                     ]
                 ];
             } else {
@@ -211,6 +212,7 @@ class Kesra extends BaseController
                     $msg = [
                         'error' => [
                             'rec' => "Gagal simpan",
+                            'token' => csrf_hash(),
                         ]
                     ];
                 }
@@ -582,7 +584,7 @@ class Kesra extends BaseController
         }
     }
 
-    function eksporpdf()
+    public function eksporpdf()
     {
         //Print tgl Indonesia
         $bulan = array(

@@ -44,7 +44,30 @@
 </head>
 
 <body>
-    <div class="container mt-4">
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <!-- <h1 class="logo mr-auto"><a href="index.html">OnePage</a></h1> -->
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <div class="row mr-auto">
+                <a href="/home/index" class="logo ml-3"><img src="<?= base_url(); ?>/assets/img/logo_pms.png" alt="" class="img-fluid"></a>
+                <span style="color: #2487ce; font-size: 14px;" class="ml-1 d-none d-lg-block">
+                    <b> Sekretariat Daerah Bidang Kesejahteraan Rakyat </b><br>
+                    Pemerintah Kota Surakarta
+                </span>
+            </div>
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="/home/index">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <div style="margin-top: 110px;" class="container">
         <div class="row justify-content-md-center">
             <div class="col-lg-9">
                 <div class="card shadow mb-4">

@@ -26,7 +26,7 @@
                 <div class="form-group row">
                     <label for="stsProgram" class="col-sm-2 col-form-label">Status Program</label>
                     <div class="col-sm-10">
-                        <select name="StatusProgram" class="form-control border-left-primary">
+                        <select name="StatusProgram" class="form-control border-left-primary" required>
                             <option <?= ($bantuan['StatusProgram'] == 'active') ? 'selected' : '' ?> value="active">Aktif</option>
                             <option <?= ($bantuan['StatusProgram'] == 'nonactive') ? 'selected' : '' ?> value="nonactive">Tidak aktif</option>
                         </select>
@@ -35,7 +35,7 @@
                 <div class="form-group row">
                     <label for="namaProgram" class="col-sm-2 col-form-label">Nama Program</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control border-left-primary" id="namaProgram" value="<?= $bantuan['namaProgram']; ?>" name="namaProgram">
+                        <input type="text" class="form-control border-left-primary" id="namaProgram" value="<?= $bantuan['namaProgram']; ?>" name="namaProgram" required>
                     </div>
                 </div>
                 <div class="form-group row">

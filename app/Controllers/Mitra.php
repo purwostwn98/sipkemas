@@ -111,7 +111,8 @@ class Mitra extends BaseController
                 ->countAllResults(),
             'countProses' => $this->ajuanModel
                 ->where('idStsAjuan >=', 2)
-                ->where('idStsAjuan <', 6)
+                ->where('idStsAjuan <=', 3)
+                // ->where('idStsAjuan !=', 6)
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->where('idMitra', $idMitra)
                 ->where('tgHasil >=', $tgAwal)
@@ -150,7 +151,7 @@ class Mitra extends BaseController
         return view('kesra/dashboard', $data);
     }
 
-    function eksporpdf()
+    public function eksporpdf()
     {
         //Print tgl Indonesia
         $bulan = array(
@@ -214,40 +215,6 @@ class Mitra extends BaseController
             $semuaKelurahan[$kel['Kelurahan']] = array($countAjuanKelurahan, $countKelurahanSetuju, $danaKel['nilaiDisetujui']);
             arsort($semuaKelurahan);
         }
-        // foreach ($semuaKelurahan as $kel => $item) {
-        //     dd($item);
-        // }
-        // Untuk statistik mitra
-        // $dftrMitra = $this->mitraModel->findAll();
-        // foreach ($dftrMitra as $mit) {
-        //     $countAjuanMitra = $this->ajuanModel
-        //         ->where('idStsAjuan >', 1)
-        //         ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
-        //         ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
-        //         ->where('trbantuan.idMitra', $mit['idMitra'])
-        //         ->where('tgHasil >=', $tgAwal)
-        //         ->where('tgHasil <=', $tgAhir)
-        //         ->countAllResults();
-        //     $semuaMitra[$mit['NamaMitra']] = $countAjuanMitra;
-        //     $countMitraSetuju = $this->ajuanModel
-        //         ->where('idStsAjuan', 7)
-        //         ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
-        //         ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
-        //         ->where('trbantuan.idMitra', $mit['idMitra'])
-        //         ->where('tgHasil >=', $tgAwal)
-        //         ->where('tgHasil <=', $tgAhir)
-        //         ->countAllResults();
-        //     $mitraSetuju[] = $countMitraSetuju;
-        //     $dana = $this->ajuanModel->selectSum('nilaiDisetujui')
-        //         ->where('idStsAjuan', 7)
-        //         ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
-        //         ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
-        //         ->where('tgHasil >=', $tgAwal)
-        //         ->where('tgHasil <=', $tgAhir)
-        //         ->where('trbantuan.idMitra', $mit['idMitra'])
-        //         ->first();
-        //     $danaMtrSetuju[] = $dana['nilaiDisetujui'];
-        // }
         $tglNow = new Time('now', 'Asia/Jakarta', 'en_US');
         $t = explode('-', $tglNow);
         $a = explode(' ', $t[2]);
@@ -498,6 +465,7 @@ class Mitra extends BaseController
                 $msg = [
                     'error' => [
                         'persetujuan' => $validation->getError('persetujuan'),
+                        'token' => csrf_hash()
                     ]
                 ];
             } else {
@@ -517,6 +485,7 @@ class Mitra extends BaseController
                         $msg = [
                             'error' => [
                                 'nilai' => $validation->getError('nilai'),
+                                'token' => csrf_hash(),
                             ]
                         ];
                         echo json_encode($msg);
@@ -552,6 +521,7 @@ class Mitra extends BaseController
                     $msg = [
                         'error' => [
                             'rec' => "Gagal simpan",
+                            'token' => csrf_hash(),
                         ]
                     ];
                 }

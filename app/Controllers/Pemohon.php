@@ -9,6 +9,7 @@ use App\Models\FormulirModel;
 use App\Models\PemohonModel;
 use App\Models\UploadModel;
 use App\Models\AjuanLbgModel;
+use TheSeer\Tokenizer\Token;
 
 class Pemohon extends BaseController
 {
@@ -41,6 +42,7 @@ class Pemohon extends BaseController
     public function proses_daftar()
     {
         if ($this->request->isAJAX()) {
+            $security = \Config\Services::security();
             // $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
             // $recaptcha_secret = '6LdlXhwbAAAAAJFSMK0WUDl4TffxdJc-eHnblZZB';
             // $recaptcha_response = $this->request->getVar('g-recaptcha-response');
@@ -58,10 +60,9 @@ class Pemohon extends BaseController
                         'errors' => [
                             'required' => '{field} tidak boleh kosong',
                             'is_unique' => 'Maaf, {field} sudah terdaftar',
-                            'exact_length' => 'NIK harus 16 angka'
+                            'exact_length' => '{field} harus 16 angka'
                         ]
                     ],
-
                     'gender' => [
                         'label' => 'Jenis Kelamin',
                         'rules' => 'required',
@@ -69,6 +70,63 @@ class Pemohon extends BaseController
                             'required' => '{field} tidak boleh kosong',
                         ]
                     ],
+                    'nama' => [
+                        'label' => 'Nama',
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => '{field} tidak boleh kosong',
+                        ]
+                    ],
+                    'tempatlahir' => [
+                        'label' => 'Tempat lahir',
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => '{field} tidak boleh kosong',
+                        ]
+                    ],
+                    'tgLahir' => [
+                        'label' => 'Tanggal lahir',
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => '{field} tidak boleh kosong',
+                        ]
+                    ],
+                    'alamat' => [
+                        'label' => 'Alamat',
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => '{field} tidak boleh kosong',
+                        ]
+                    ],
+                    'kecamatan' => [
+                        'label' => 'Kecamatan',
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => '{field} tidak boleh kosong',
+                        ]
+                    ],
+                    'kelurahan' => [
+                        'label' => 'Kelurahan',
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => '{field} tidak boleh kosong',
+                        ]
+                    ],
+                    'telepon' => [
+                        'label' => 'Telepon',
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => '{field} tidak boleh kosong',
+                        ]
+                    ],
+                    'agama' => [
+                        'label' => 'Agama',
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => '{field} tidak boleh kosong',
+                        ]
+                    ],
+
                 ]);
 
                 if (!$valid) {
@@ -76,6 +134,15 @@ class Pemohon extends BaseController
                         'error' => [
                             'Nik' => $validation->getError('NIK'),
                             'gender' => $validation->getError('gender'),
+                            'nama' => $validation->getError('nama'),
+                            'tempatlahir' => $validation->getError('tempatlahir'),
+                            'tgLahir' => $validation->getError('tgLahir'),
+                            'alamat' => $validation->getError('alamat'),
+                            'kecamatan' => $validation->getError('kecamatan'),
+                            'kelurahan' => $validation->getError('kelurahan'),
+                            'agama' => $validation->getError('agama'),
+                            'telepon' => $validation->getError('telepon'),
+                            'token' => csrf_hash(),
                         ]
                     ];
                 } else {
@@ -109,7 +176,8 @@ class Pemohon extends BaseController
             } else {
                 $msg = [
                     'a' => [
-                        'b' => "Hasil perhitungan Anda salah"
+                        'b' => "Hasil perhitungan Anda salah",
+                        'token' => csrf_hash(),
                     ]
                 ];
                 echo json_encode($msg);
@@ -152,10 +220,13 @@ class Pemohon extends BaseController
                 session()->setFlashdata('pesan', 'Mohon maaf, nomor ajuan anda tidak valid');
                 return redirect()->to('/home/cekAjuan');
             } else {
-                $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)->first();
+                $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
+                    ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                    ->first();
                 $dapat_session = [
                     'login' => true,
                     'privUser' => 1,
+                    'namauser' => $ajuan['Nama'],
                     'idAjuan' => $ajuan['idAjuan'],
                     'noAjuan' => $noAjuan,
                     'idPemohon' => $ajuan['idPemohon'],
@@ -172,7 +243,6 @@ class Pemohon extends BaseController
     }
 
     // setelah ini harus login dulu
-
     public function biodata()
     {
         $idPemohon = $this->session->get('idPemohon');
@@ -296,6 +366,7 @@ class Pemohon extends BaseController
                             'kodeBantuan' => $validation->getError('kodeBantuan'),
                             'srtKetPemohon' => $validation->getError('srtKetPemohon'),
                             'files' => $validation->getError('files'),
+                            'token' => csrf_hash(),
                         ]
                     ];
                 } else {
@@ -323,6 +394,7 @@ class Pemohon extends BaseController
                                 'error' => [
                                     'jnsbantuan' => $validation->getError('namaLbg'),
                                     'kodeBantuan' => $validation->getError('alamatLbg'),
+                                    'token' => csrf_hash(),
                                 ]
                             ];
                             echo json_encode($msg);
@@ -408,6 +480,7 @@ class Pemohon extends BaseController
                                         $msg = [
                                             'error' => [
                                                 'files' => "Gagal simpen ke directory",
+                                                'token' => csrf_hash(),
                                             ]
                                         ];
                                     }
@@ -415,6 +488,7 @@ class Pemohon extends BaseController
                                     $msg = [
                                         'error' => [
                                             'files' => "Gagal simpan syarat ke database",
+                                            'token' => csrf_hash(),
                                         ]
                                     ];
                                 }

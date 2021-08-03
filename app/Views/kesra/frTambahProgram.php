@@ -36,7 +36,7 @@
                 <div class="form-group row">
                     <label for="stsProgram" class="col-sm-2 col-form-label">Status Program</label>
                     <div class="col-sm-10">
-                        <select name="StatusProgram" class="form-control border-left-primary">
+                        <select name="StatusProgram" class="form-control border-left-primary" required>
                             <option value="active">Aktif</option>
                             <option value="nonactive">Tidak aktif</option>
                         </select>
@@ -124,7 +124,7 @@
             $('.formSyarat').append(`
             <tr>
                 <td>
-                    <input type="text" name="Syarat[]" id="namaSyarat" class="form-control border-left-primary" placeholder="Nama Syarat">
+                    <input type="text" name="Syarat[]" id="namaSyarat" class="form-control border-left-primary" placeholder="Nama Syarat" required>
                 </td>
                 <td>
                     <select name="StatusSyarat[]" class="form-control border-left-primary" aria-describedby="stsHelp" id="stsSyarat">

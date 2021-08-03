@@ -47,14 +47,14 @@ $session = \Config\Services::session();
                                     <?= form_open("/gerbangska/cekuser", ['class' => 'formlogin user']); ?>
                                     <?= csrf_field(); ?>
                                     <div class="form-group">
-                                        <input name="User" type="text" class="form-control form-control-user <?= ($session->getFlashdata('errorUser')) ? 'is-invalid' : '' ?>" id="user" aria-describedby="emailHelp" placeholder="Masukkan Username">
+                                        <input name="User" type="text" class="form-control form-control-user <?= ($session->getFlashdata('errorUser')) ? 'is-invalid' : '' ?>" id="user" aria-describedby="emailHelp" placeholder="Masukkan Username" value="<?= old('User'); ?>">
                                         <div class="invalid-feedback invalidUser text-center">
                                             <?php echo session()->getFlashdata('errorUser'); ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input name="Password" type="password" class="form-control form-control-user <?= ($session->getFlashdata('errorPassword')) ? 'is-invalid' : '' ?>" id="password" placeholder="Password">
-                                        <div class="invalid-feedback invalidUser text-center">
+                                        <input name="Password" type="password" class="form-control form-control-user <?= ($session->getFlashdata('errorPassword')) ? 'is-invalid' : '' ?>" id="password" placeholder="Password" value="<?= old('Password'); ?>">
+                                        <div class=" invalid-feedback invalidUser text-center">
                                             <?php echo session()->getFlashdata('errorPassword'); ?>
                                         </div>
                                     </div>

@@ -47,7 +47,7 @@ class Gerbangska extends BaseController
 
     public function cekuser()
     {
-		$usersModel = new UsersModel();
+        $usersModel = new UsersModel();
         $hslbenar = $this->request->getVar('hslbenar');
         $jawaban = $this->request->getVar('jawabCpt');
         if (md5($jawaban) == $hslbenar) {
@@ -75,17 +75,18 @@ class Gerbangska extends BaseController
             if (!$valid) {
                 $this->session->setFlashdata('errorUser', $validation->getError('User'));
                 $this->session->setFlashdata('errorPassword', $validation->getError('Password'));
-                return redirect()->to('/gerbangska/index');
+                return redirect()->to('/gerbangska/index')->withInput();
+                // return redirect()->to('/people/edit/' . $this->request->getVar('slug'))->withInput()
             } else {
-				
-                $result = $usersModel->where('User', $User)->first();                
-                if($result){
-					$password = $result['Password'];
-					//$verify_pass = password_verify($pass, $password);
-					if(sha1($pass) == $password){
-					//if($verify_pass){
-						$dapat_session = [
-							'login' => true,
+
+                $result = $usersModel->where('User', $User)->first();
+                if ($result) {
+                    $password = $result['Password'];
+                    //$verify_pass = password_verify($pass, $password);
+                    if (sha1($pass) == $password) {
+                        //if($verify_pass){
+                        $dapat_session = [
+                            'login' => true,
                             'namauser' => $result['Namauser'],
                             'user' => $result['User'],
                             'idLembaga' => $result['idLembaga'],
@@ -104,21 +105,21 @@ class Gerbangska extends BaseController
                         } elseif ($this->session->get('privUser') == 5) {
                             return redirect()->to('/mitra/dftrajuan_i');
                         } else {
-							$this->session->destroy();
-							return redirect()->to('/gerbangska/index');
-						}
+                            $this->session->destroy();
+                            return redirect()->to('/gerbangska/index');
+                        }
                     } else {
                         $this->session->setFlashdata('errorPassword', 'Maaf Password Anda salah');
-                        return redirect()->to('/gerbangska/index');
+                        return redirect()->to('/gerbangska/index')->withInput();
                     }
                 } else {
                     $this->session->setFlashdata('errorUser', 'Maaf User tidak ditemukan');
-                    return redirect()->to('/gerbangska/index');
+                    return redirect()->to('/gerbangska/index')->withInput();
                 }
             }
         } else {
             $this->session->setFlashdata('errorHitung', 'Maaf, jawaban Anda salah');
-            return redirect()->to('/gerbangska/index');
+            return redirect()->to('/gerbangska/index')->withInput();
         }
     }
 

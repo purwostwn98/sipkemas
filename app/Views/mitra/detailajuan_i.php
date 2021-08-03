@@ -470,7 +470,7 @@ $tglMitra = explode('-', $ajuan['tgRecSurvey']);
             <h6 class="m-0 font-weight-bold text-white">Tindakan</h6>
         </div>
         <?= form_open("/mitra/doTindakan", ['class' => 'formTindakanBaru']); ?>
-        <?= csrf_field(); ?>
+
         <input type="hidden" name="idAjuan" id="idAjuan" value="<?= $ajuan['idAjuan']; ?>">
         <div class="card-body">
             <div class="row bg-white darker py-2">
@@ -718,6 +718,7 @@ $tglMitra = explode('-', $ajuan['tgRecSurvey']);
                                     } else if (response.error.nilai) {
                                         swal("Mohon Maaf!", response.error.nilai, "error");
                                     }
+                                    $("input[name='csrf_test_name']").val(response.error.token);
                                 }
                                 if (response.berhasil) {
                                     swal({
@@ -772,6 +773,7 @@ $tglMitra = explode('-', $ajuan['tgRecSurvey']);
                                     } else if (response.error.nilai) {
                                         swal("Mohon Maaf!", response.error.nilai, "error");
                                     }
+                                    $("input[name='csrf_test_name']").val(response.error.token);
                                 }
                                 if (response.berhasil) {
                                     swal({

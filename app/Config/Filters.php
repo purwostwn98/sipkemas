@@ -114,7 +114,7 @@ class Filters extends BaseConfig
 				'mitra', 'mitra/*/*',
 				'kesra', 'kesra/editProgram',
 				'kesra', 'kesra/frEditSyarat',
-				'kesra', 'kesra/doEditSyara',
+				'kesra', 'kesra/doEditSyarat',
 				'kesra', 'kesra/doHapusSyarat',
 				'kesra', 'kesra/doTambahSyarat',
 				'kesra', 'kesra/doEditProgram',

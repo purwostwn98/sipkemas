@@ -14,28 +14,27 @@ class Dinsos extends BaseController
     protected $uploadModel;
     public function __construct()
     {
-		$this->session = session();
-		
+        $this->session = session();
+
         $this->ajuanModel = new AjuanModel();
         $this->pemohonModel = new PemohonModel();
         $this->uploadModel = new UploadModel();
     }
-	
-	
-	//cek privilege sbg petugas dinsos
+
+
+    //cek privilege sbg petugas dinsos
     public function cek()
-    {	
-		if ($this->session->get('privUser') <> '3'){
-			$this->session->destroy();
-			return redirect()->to('/home/index');
-			exit;
-		}
-		
-	}
-	
+    {
+        if ($this->session->get('privUser') <> '3') {
+            $this->session->destroy();
+            return redirect()->to('/home/index');
+            exit;
+        }
+    }
+
     public function dftrajuan_i()
     {
-		$this->cek();
+        $this->cek();
         $data = [
             'bttn' => 'sos_dftrajuan',
             'ajuan_baru' => $this->ajuanModel
@@ -68,7 +67,7 @@ class Dinsos extends BaseController
     }
     public function detailajuan_i($noAjuan)
     {
-		$this->cek();
+        $this->cek();
         $ajuan = $this->ajuanModel->where('noAjuan', $noAjuan)
             ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
             ->first();
@@ -95,7 +94,7 @@ class Dinsos extends BaseController
 
     public function updateAjuan()
     {
-		$this->cek();
+        $this->cek();
         if ($this->request->isAJAX()) {
             $validation = \Config\Services::validation();
             $valid = $this->validate([
@@ -120,6 +119,7 @@ class Dinsos extends BaseController
                     'error' => [
                         'eSik' => $validation->getError('eSik'),
                         'rec' => $validation->getError('rekomendasi'),
+                        'token' => csrf_hash(),
                     ]
                 ];
             } else {
@@ -143,6 +143,7 @@ class Dinsos extends BaseController
                     $msg = [
                         'error' => [
                             'rec' => "Gagal simpan",
+                            'token' => csrf_hash(),
                         ]
                     ];
                 }

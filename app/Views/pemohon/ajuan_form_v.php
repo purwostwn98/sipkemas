@@ -236,7 +236,6 @@ $session = \Config\Services::session();
                     if (response.error) {
                         if (response.error.jnsbantuan) {
                             swal("Mohon Maaf!", response.error.jnsbantuan, "error");
-                            // $('.errortext').html(response.error.Nik);
                         } else if (response.error.kodeBantuan) {
                             swal("Mohon Maaf!", response.error.kodeBantuan, "error");
                             // $('.errorGender').html(response.error.gender);
@@ -245,6 +244,7 @@ $session = \Config\Services::session();
                         } else if (response.error.files) {
                             swal("Mohon Maaf!", response.error.files, "error");
                         }
+                        $("input[name='csrf_test_name']").val(response.error.token);
                     }
                     if (response.a) {
                         if (response.a.b) {
@@ -254,6 +254,7 @@ $session = \Config\Services::session();
                             $('#alertError').css("display", "none");
                             $('.errortext').html('');
                         }
+                        $("input[name='csrf_test_name']").val(response.a.token);
                     }
                     if (response.berhasil) {
                         swal({

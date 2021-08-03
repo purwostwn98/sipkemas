@@ -759,6 +759,7 @@ $bulan = array(
                                     if (response.error.rec) {
                                         swal("Mohon Maaf!", response.error.rec, "error");
                                     }
+                                    $("input[name='csrf_test_name']").val(response.error.token);
                                 }
                                 if (response.berhasil) {
                                     swal({

@@ -4,7 +4,15 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Detail Program</h1>
-    <a href="/kesra/editProgram?kode=<?= $bantuan['idBantuan']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm ml-2"><i class="far fa-edit text-white-50"></i> Edit</a>
+    <div>
+        <a href="/kesra/editProgram?kode=<?= $bantuan['idBantuan']; ?>" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm ml-2"><i class="far fa-edit text-white-50"></i> Edit</a>
+        <input type="hidden" class="csrf_input" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+        <button onclick="hapus('<?= $bantuan['kodeBantuan']; ?>')" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm ml-2">
+            <i class="fas fa-trash text-white-50"></i>
+            Hapus
+        </button>
+    </div>
+
 </div>
 <div class="row">
     <div class="col-lg-12">
@@ -80,6 +88,51 @@
     </a>
 </div>
 
-
+<script>
+    function hapus(kodeBantuan) {
+        var csrfName = $('.csrf_input').attr('name'); // CSRF Token name
+        var csrfHash = $('.csrf_input').val(); // CSRF hash
+        swal({
+                title: "Peringatan!",
+                text: "Anda yakin ingin menghapus program?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "<?= site_url('kesra/doHapusProgram'); ?>",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            kodeBantuan: kodeBantuan,
+                            [csrfName]: csrfHash
+                        },
+                        success: function(response) {
+                            if (response.notallowed) {
+                                swal("Tidak diizinkan!", response.notallowed, "warning")
+                            } else if (response.berhasil) {
+                                swal("Berhasil!", response.berhasil, "success").then((value) => {
+                                    window.location.href = "<?= site_url('mitra/dftprogram'); ?>";
+                                });
+                            } else if (response.gagal) {
+                                swal("Gagal!", response.gagal, "danger").then((value) => {
+                                    // location.reload();
+                                    window.location.href = "<?= site_url('mitra/dftprogram'); ?>";
+                                });
+                            }
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                        }
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+    }
+</script>
 
 <?= $this->endSection(); ?>

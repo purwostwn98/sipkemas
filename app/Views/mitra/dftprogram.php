@@ -44,8 +44,8 @@ $bulan = array(
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 10px;">No</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 30px;">Kode</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">Nama Program</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">Jenis Bantuan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">Status</th>
+                                        <!-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 45px;">Jenis Bantuan</th> -->
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 25px;">Status</th>
                                         <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -57,7 +57,7 @@ $bulan = array(
                                             <td class="sorting_1 text-center"><?= $no + 1; ?></td>
                                             <td><?= $baru->kodeBantuan; ?></td>
                                             <td><?= $baru->namaProgram; ?></td>
-                                            <td><?= $baru->JnsBantuan; ?></td>
+                                            <!-- <td><?= $baru->JnsBantuan; ?></td> -->
                                             <td><?= ($baru->StatusProgram = 'active') ? 'Aktif' : 'Tidak Aktif' ?></td>
                                             <td>
                                                 <a href="/mitra/detailProgram?kode=<?= $baru->idBantuan; ?>" class="btn btn-primary btn-icon-split btn-sm">
@@ -73,8 +73,6 @@ $bulan = array(
                                                     <span class="text">PDF</span>
                                                 </a>
                                             </td>
-
-
                                         </tr>
                                     <?php $no++;
                                     endforeach; ?>
@@ -119,8 +117,8 @@ $bulan = array(
         //Btn baru click
         $('#pdfx').click(function(e) {
             e.preventDefault();
-			
-			
+
+
             swal({
                     title: "Anda yakin?",
                     text: "Dengan mengkonfirmasi ajuan, Anda tidak dapat lagi merubah rekomendasi",
@@ -173,8 +171,8 @@ $bulan = array(
                 });
         });
         //Btn survey click
-		
-		
+
+
         $('.btnSurvey').click(function(e) {
             e.preventDefault();
             swal({
