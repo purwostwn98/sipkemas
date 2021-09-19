@@ -87,7 +87,7 @@ $session = \Config\Services::session();
                     <div class="row mr-auto">
                         <a href="/home/index" class="logo ml-3"><img style="max-height: 50px;" src="<?= base_url(); ?>/assets/img/logo_pms.png" alt="" class="img-fluid"></a>
                         <span style="color: #2487ce; font-size: 14px;" class="ml-1 d-none d-lg-block">
-                            <b> Sekretariat Daerah Bidang Kesejahteraan Rakyat </b><br>
+                            <b> Sekretariat Daerah Bagian Kesejahteraan Rakyat </b><br>
                             Pemerintah Kota Surakarta
                         </span>
                     </div>

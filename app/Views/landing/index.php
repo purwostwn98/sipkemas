@@ -48,7 +48,7 @@
       <div class="row mr-auto">
         <a href="/home/index" class="logo ml-3"><img src="<?= base_url(); ?>/assets/img/logo_pms.png" alt="" class="img-fluid"></a>
         <span style="color: #2487ce; font-size: 14px;" class="ml-1 d-none d-lg-block">
-          <b> Sekretariat Daerah Bidang Kesejahteraan Rakyat </b><br>
+          <b> Sekretariat Daerah Bagian Kesejahteraan Rakyat </b><br>
           Pemerintah Kota Surakarta
         </span>
       </div>
@@ -218,7 +218,7 @@
             <div class="col-lg-12">
               <p style="color: white;">
                 SipKe-Mas merupakan Sistem Informasi Peningkatan Kesejahteraan Masyarakat yang dibuat oleh <b>Sekretariat Daerah
-                  Bidang Kesejahteraan Rakyat</b> dengan berkoordinasi dengan Bappeda dan Dinas Sosial Kota Surakarta. Aplikasi ini
+                  Bagian Kesejahteraan Rakyat</b> dengan berkoordinasi dengan Bappeda dan Dinas Sosial Kota Surakarta. Aplikasi ini
                 bertujuan untuk kemudahan pengajuan bantuan sistem digital secara cepat dan tepat. Program ini menggandeng
                 Forum Kesra (PMI, Lazis Jateng Cab Solo, Baznas dan PMS) yang bersinergi bersama untuk peningkatan kesejahteraan
                 masyarakat di Surakarta.
@@ -277,7 +277,7 @@
                       <h5 class="text-white font-size-16">Cek Hasil</h5>
                       <p class="text-white">Pemohon melihat proses dan hasil dengan menginput Nomor Ajuan di website.</p>
                       <div>
-                        <a href="#" class="btn btn-info btn-sm">Read more</a>
+                        <a href="#" class="btn btn-info btn-sm">Event Five</a>
                       </div>
                     </div>
                   </li>
@@ -290,7 +290,7 @@
     </section><!-- End About Section -->
 
     <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts section-bg">
+    <!-- <section id="counts" class="counts section-bg">
       <div class="container">
         <div class="row justify-content-end">
           <div class="col-lg-4 col-md-5 col-4 d-md-flex align-items-md-stretch">
@@ -313,7 +313,8 @@
           </div>
         </div>
       </div>
-    </section><!-- End Counts Section -->
+    </section> -->
+    <!-- End Counts Section -->
 
     <!-- ======= About Video Section ======= -->
     <section id="about-video" class="about-video">
@@ -497,7 +498,7 @@
         <div class="row">
 
           <div class="col-lg-6 col-md-6 footer-contact">
-            <h4>Sekretariat Daerah Bidang Kesejahteraan Rakyat</h4>
+            <h4>Sekretariat Daerah Bagian Kesejahteraan Rakyat</h4>
             <p>
               Komp. Balai Kota,
               JL. Jend. Sudirman, No. 2 <br>

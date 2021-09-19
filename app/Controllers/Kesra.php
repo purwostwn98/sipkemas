@@ -8,6 +8,7 @@ use App\Models\PemohonModel;
 use App\Models\UploadModel;
 use App\Models\AjuanLbgModel;
 use App\Models\KelurahanModel;
+use App\Models\KecamatanModel;
 use App\Models\MitraModel;
 use App\Models\BantuanModel;
 use App\Models\SyaratModel;
@@ -21,6 +22,7 @@ class Kesra extends BaseController
     protected $uploadModel;
     protected $ajuanLbgModel;
     protected $kelurahanModel;
+    protected $kecamatanModel;
     protected $mitraModel;
     protected $bantuanModel;
     protected $syaratModel;
@@ -32,6 +34,7 @@ class Kesra extends BaseController
         $this->uploadModel = new UploadModel();
         $this->ajuanLbgModel = new AjuanLbgModel();
         $this->kelurahanModel = new KelurahanModel();
+        $this->kecamatanModel = new KecamatanModel();
         $this->mitraModel = new MitraModel();
         $this->bantuanModel = new BantuanModel();
         $this->syaratModel = new SyaratModel();
@@ -250,13 +253,15 @@ class Kesra extends BaseController
         } elseif ($this->request->getGet('hpsFilter') == 'noFilter') {
             // dd($this->request->getPost());
             $filter = 'noFilter';
-            $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            //$tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAwal = 0000 - 00 - 00;
             $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
             $tglAwal = "Semua Data";
             $tglAkhir = "";
         } else {
             $filter = 'noFilter';
-            $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            //$tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAwal = 0000 - 00 - 00;
             $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
             $tglAwal = "Semua Data";
             $tglAkhir = "";
@@ -273,18 +278,53 @@ class Kesra extends BaseController
                 ->where('idKel', $kel['idKel'])
                 ->countAllResults();
             $semuaKelurahan[$kel['Kelurahan']] = $countAjuanKelurahan;
-            arsort($semuaKelurahan);
+            //arsort($semuaKelurahan);
+        }
+
+        //Untuk statistik kecamatan
+        $dftrKecamatan = $this->kecamatanModel->findAll();
+        foreach ($dftrKecamatan as $kec) {
+            $countAjuanKecamatan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $semuaKecamatan[$kec['Kecamatan']] = $countAjuanKecamatan;
+            //arsort($semuaKelurahan);
         }
         // Untuk statistik mitra
         $dftrMitra = $this->mitraModel->findAll();
         foreach ($dftrMitra as $mit) {
             $countAjuanMitra = $this->ajuanModel
-                ->where('idStsAjuan >', 1)
+                ->where('idStsAjuan >=', 2)
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                //->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                //->where('idKel', $idMitra)                
                 ->where('trbantuan.idMitra', $mit['idMitra'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
                 ->countAllResults();
             $semuaMitra[] = $countAjuanMitra;
+        }
+        // Untuk statistik bantuan
+        $dftrBantuan = $this->bantuanModel->findAll();
+        foreach ($dftrBantuan as $ban) {
+            $countAjuanBantuan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                //->where('idMitra', $idMitra)
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $semuaBantuan[] = $countAjuanBantuan;
         }
         $data = [
             'countPermintaan' => $this->ajuanModel
@@ -314,7 +354,11 @@ class Kesra extends BaseController
                 ->where('tgHasil <=', $tgAhir)
                 ->first(),
             'countKelurahan' => $semuaKelurahan,
+            'countKecamatan' => $semuaKecamatan,
             'countMitra' => $semuaMitra,
+            'daftarMitra' => $dftrMitra,
+            'countBantuan' => $semuaBantuan,
+            'daftarBantuan' => $dftrBantuan,
             'tglAwal' => $tglAwal,
             'tglAkhir' => $tglAkhir,
             'norm_tglAwal' => $tgAwal,
@@ -609,7 +653,8 @@ class Kesra extends BaseController
             $tglAwal = $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0];
             $tglAkhir = $tgl2[2] . ' ' . $bulan[(int)$tgl2[1]] . ' ' . $tgl2[0];
         } else {
-            $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            //$tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAwal = 0000 - 00 - 00;
             $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
             $tglAwal = "Semua Data";
             $tglAkhir = "";
@@ -676,6 +721,30 @@ class Kesra extends BaseController
                 ->first();
             $danaMtrSetuju[] = $dana['nilaiDisetujui'];
         }
+        // Untuk statistik bantuan
+        $dftrBantuan = $this->bantuanModel->findAll();
+        foreach ($dftrBantuan as $ban) {
+            $countAjuanBantuan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                //->where('idMitra', $idMitra)
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $danaBantuan = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                //->where('idMitra', $idMitra)
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->first();
+            $semuaBantuan[$ban['namaProgram']] = array($countAjuanBantuan, $danaBantuan['nilaiDisetujui']);
+            arsort($semuaBantuan);
+        }
         $tglNow = new Time('now', 'Asia/Jakarta', 'en_US');
         $t = explode('-', $tglNow);
         $a = explode(' ', $t[2]);
@@ -711,6 +780,8 @@ class Kesra extends BaseController
             'countMitra' => $semuaMitra,
             'mitraSetuju' => $mitraSetuju,
             'danaMitraSetuju' => $danaMtrSetuju,
+            'countBantuan' => $semuaBantuan,
+            'daftarBantuan' => $dftrBantuan,
             'tglAwal' => $tglAwal,
             'tglAkhir' => $tglAkhir,
             'tglNow' => $tglSekarang,

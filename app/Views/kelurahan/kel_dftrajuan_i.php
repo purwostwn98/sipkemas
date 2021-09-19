@@ -36,9 +36,9 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 40px;">Status Ajuan</th>
-                                        <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
-
-                                    </tr>
+										<th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
+                                        
+									</tr>
                                 </thead>
                                 <tbody>
                                     <?php $no1 = 0;
@@ -78,16 +78,16 @@
                                                                                     } ?>>
                                                     <?= $proses['StatusAjuan']; ?></span>
                                             </td>
-                                            <td>
-                                                <a href="/kelurahan/detailajuan_i/<?= $proses['noAjuan']; ?>" class="btn btn-info btn-icon-split btn-sm">
-                                                    <span class="icon text-white-50">
-                                                        <i class="fas fa-search fa-sm"></i>
-                                                    </span>
-                                                    <span class="text">Detail</span>
-                                                </a>
-
+											<td>
+												<a href="/kelurahan/detailajuan_i/<?= $proses['noAjuan']; ?>" class="btn btn-info btn-icon-split btn-sm">
+													<span class="icon text-white-50">
+														<i class="fas fa-search"></i>
+													</span>
+													<span class="text">Detail</span>
+												</a>
+                                              
                                             </td>
-
+                                            
                                         </tr>
                                     <?php $no1++;
                                     endforeach; ?>
@@ -116,9 +116,9 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Program Bantuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 40px;">Status Ajuan</th>
-                                        <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
-
-                                    </tr>
+										<th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
+                                        
+									</tr>
                                 </thead>
                                 <tbody>
                                     <?php $no1 = 0;
@@ -161,15 +161,15 @@
                                                                                     } ?>>
                                                     <?= $proses['StatusAjuan']; ?></span>
                                             </td>
-                                            <td>
+											<td>
                                                 <a href="/kelurahan/detailajuan_i/<?= $proses['noAjuan']; ?>" class="btn btn-info btn-icon-split btn-sm">
-                                                    <span class="icon text-white-50">
-                                                        <i class="fas fa-search fa-sm"></i>
-                                                    </span>
-                                                    <span class="text">Detail</span>
-                                                </a>
+													<span class="icon text-white-50">
+														<i class="fas fa-search"></i>
+													</span>
+													<span class="text">Detail</span>
+												</a>
                                             </td>
-
+                                            
                                         </tr>
                                     <?php $no1++;
                                     endforeach; ?>
@@ -198,9 +198,9 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 40px;">Tgl. Ajuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 30px;">Jenis Bantuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 40px;">Status Ajuan</th>
-                                        <th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
-
-                                    </tr>
+										<th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
+                                        
+									</tr>
                                 </thead>
                                 <tbody>
                                     <?php $no2 = 0;
@@ -237,15 +237,15 @@
                                                                                     } ?>>
                                                     <?= $selesai['StatusAjuan']; ?></span>
                                             </td>
-                                            <td>
+											<td>
                                                 <a href="/kelurahan/detailajuan_i/<?= $selesai['noAjuan']; ?>" class="btn btn-info btn-icon-split btn-sm">
-                                                    <span class="icon text-white-50">
-                                                        <i class="fas fa-search fa-sm"></i>
-                                                    </span>
-                                                    <span class="text">Detail</span>
-                                                </a>
+													<span class="icon text-white-50">
+														<i class="fas fa-search"></i>
+													</span>
+													<span class="text">Detail</span>
+												</a>
                                             </td>
-
+                                            
                                         </tr>
                                     <?php $no2++;
                                     endforeach; ?>

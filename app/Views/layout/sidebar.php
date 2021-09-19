@@ -49,12 +49,19 @@ $session = \Config\Services::session();
 <!-- Menu Kelurahan -->
 <hr class="sidebar-divider my-0">
 <?php if ($session->get('privUser') == 2) { ?>
-    <li class="nav-item <?= ($bttn == 'dtpemohon' || $bttn == 'dftrpemohon') ? 'active' : '' ?>">
+    <li class="nav-item <?= ($bttn == 'dashboard' || $bttn == 'dashboard') ? 'active' : '' ?>">
+        <a class="nav-link my-1 py-1" href="/kelurahan/dashboard">
+            <i class="fa-fw far fa-address-book"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+	<li class="nav-item <?= ($bttn == 'dtpemohon' || $bttn == 'dftrpemohon') ? 'active' : '' ?>">
         <a class="nav-link my-1 py-1" href="/kelurahan/dftrpemohon_i">
             <i class="fa-fw far fa-address-book"></i>
             <span>Daftar Pemohon</span>
         </a>
     </li>
+    
     <li class="nav-item <?= ($bttn == 'dftrajuan') ? 'active' : '' ?>">
         <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#kel_ajuan" aria-expanded="true" aria-controls="kel_ajuan">
             <i class="fa-fw far fa-list-alt"></i>
@@ -82,7 +89,12 @@ $session = \Config\Services::session();
     <div class="sidebar-heading">
         Halaman Dinsos
     </div>
-
+    <li class="nav-item <?= ($bttn == 'dashboard_dinsos') ? 'active' : '' ?>">
+        <a class="nav-link my-1 py-1" href="/dinsos/dashboard">
+            <i class="fas fa-chart-line fa-fw"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
     <li class="nav-item <?= ($bttn == 'sos_dftrajuan') ? 'active' : '' ?>">
         <a class="nav-link my-1 py-1" href="/dinsos/dftrajuan_i">
             <i class="fa-fw far fa-list-alt"></i>

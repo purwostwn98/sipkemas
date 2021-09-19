@@ -25,7 +25,7 @@
             <th rowspan="3" width="80" style="text-align:center"><img width="50" src="assets/img/logo_pms.png"></th>
             <th style="text-align:left">
                 <p style="font-family: times">
-                    <font size="6">Sekretariat Daerah Bidang Kesejahteraan Rakyat</font>
+                    <font size="6">Sekretariat Daerah Bagian Kesejahteraan Rakyat</font>
                 </p>
             </th>
         </tr>
@@ -46,11 +46,9 @@
     </table>
     <div class="hr"></div>
     <div style="margin-top: 10px; font-size: 16px" align='center'><b>Report SipKeMas <?= ($filter == 'filter') ? "($tglAwal - $tglAkhir)" : '' ?></b></div>
-    <?php if ($session->get('privUser') == 5) { ?>
-        <div align="center">
-            <?= $mitra['keteranganMitra']; ?>
-        </div>
-    <?php } ?>
+    <div align="center">
+        <?= $session->get('namauser'); ?>
+    </div>
     <br>
     <table style="width: 100%; text-align:left;">
         <tr align="left">
@@ -79,7 +77,7 @@
             <td style="text-align: left;"><span style="font-weight: bold;">Rp. <?= number_format((float)$totalDana['nilaiDisetujui'], 0, ',', '.'); ?></span></td>
         </tr>
     </table>
-    <?php if ($halaman == 'kesra') { ?>
+    <?php if ($halaman != 'mitra') { ?>
         <h4 align='left'>Statistik per Mitra</h4>
         <table border="1" style="width: 100%; text-align:left;" cellpadding="4" cellspacing="0">
             <thead>
@@ -104,46 +102,54 @@
             endforeach; ?>
         </table>
     <?php } ?>
-    <h4 align='left'>Statistik per Kelurahan</h4>
+    <?php if ($halaman != "kelurahan") { ?>
+        <h4 align='left'>Statistik per Kelurahan</h4>
+        <table border="1" style="width: 100%; text-align:left;" cellpadding="4" cellspacing="0">
+            <thead>
+                <tr align="center">
+                    <th>No</th>
+                    <th>Kelurahan</th>
+                    <th>Jumlah Semua Ajuan</th>
+                    <th>Jumlah Ajuan Disetujui</th>
+                    <th>Dana Disetujui</th>
+                </tr>
+            </thead>
+            <?php $no2 = 0;
+            foreach ($countKelurahan as $kelurahan => $ajuanKlr) : ?>
+                <tr>
+                    <td style="text-align; center;"><?= $no2 + 1; ?></td>
+                    <td style="text-align; left;"><?= $kelurahan; ?></td>
+                    <td style="text-align: center;"><?= $ajuanKlr[0]; ?></td>
+                    <td style="text-align: center;"><?= $ajuanKlr[1]; ?></td>
+                    <td style="text-align: left;">Rp. <?= number_format((float)$ajuanKlr[2], 0, ',', '.'); ?></td>
+                    <!-- <td style="text-align: left;">Rp. 20.000</td> -->
+                </tr>
+            <?php $no2++;
+            endforeach; ?>
+        </table>
+    <?php } ?>
+    <h4 align='left'>Statistik per Program Bantuan</h4>
     <table border="1" style="width: 100%; text-align:left;" cellpadding="4" cellspacing="0">
         <thead>
             <tr align="center">
                 <th>No</th>
-                <th>Kelurahan</th>
-                <th>Jumlah Semua Ajuan</th>
-                <th>Jumlah Ajuan Disetujui</th>
+                <th>Nama Program</th>
+                <th>Jumlah Ajuan</th>
                 <th>Dana Disetujui</th>
             </tr>
         </thead>
-        <?php $no2 = 0;
-        foreach ($countKelurahan as $kelurahan => $ajuanKlr) : ?>
+        <?php $no3 = 0;
+        foreach ($countBantuan as $bantuan => $ajuanPrg) : ?>
             <tr>
-                <td style="text-align; center;"><?= $no2 + 1; ?></td>
-                <td style="text-align; left;"><?= $kelurahan; ?></td>
-                <td style="text-align: center;"><?= $ajuanKlr[0]; ?></td>
-                <td style="text-align: center;"><?= $ajuanKlr[1]; ?></td>
-                <td style="text-align: left;">Rp. <?= number_format((float)$ajuanKlr[2], 0, ',', '.'); ?></td>
+                <td style="text-align; center;"><?= $no3 + 1; ?></td>
+                <td style="text-align; left;"><?= $bantuan; ?></td>
+                <td style="text-align: center;"><?= $ajuanPrg[0]; ?></td>
+                <td style="text-align: left;">Rp. <?= number_format((float)$ajuanPrg[1], 0, ',', '.'); ?></td>
                 <!-- <td style="text-align: left;">Rp. 20.000</td> -->
             </tr>
-        <?php $no2++;
+        <?php $no3++;
         endforeach; ?>
     </table>
-    <!-- <table align='right'>
-        <tr align='center'>
-            <th>
-                <font size="3"> Surakarta, <?= $tglNow; ?>
-            </th>
-            <th rowspan='3' width='200'></th>
-        </tr>
-        <tr>
-            <td height='50'>&nbsp;</td>
-        </tr>
-        <tr align='center'>
-            <th>
-                <font size="3"> Badgyuegdy
-            </th>
-        </tr>
-    </table> -->
 </body>
 
 </html>

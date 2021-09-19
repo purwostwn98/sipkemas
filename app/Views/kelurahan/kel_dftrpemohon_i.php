@@ -35,9 +35,9 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 70px;">Alamat</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 35px;">Tgl. Daftar</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 60px;">Status</th>
-                                        <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 5px">Aksi</th>
-
-                                    </tr>
+										<th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 5px">Aksi</th>
+                                        
+									</tr>
                                 </thead>
                                 <tbody>
                                     <?php $no1 = 0;
@@ -70,16 +70,16 @@
                                             <td class="text-center">
                                                 <span style="border-radius: 5px;" class="p-1 small bg-warning text-white">Belum Terdaftar</span>
                                             </td>
-                                            <td>
-
-                                                <a href="/kelurahan/dtpemohon?konfirmasi=<?= md5(0); ?>&no=<?= $new['noFormulir']; ?>" class="btn btn-primary btn-icon-split btn-sm">
-                                                    <span class="icon text-white-50">
-                                                        <i class="fas fa-check fa-sm"></i>
-                                                    </span>
-                                                    <span class="text">Daftarkan</span>
-                                                </a>
+											<td>
+                                                
+												<a href="/kelurahan/dtpemohon?konfirmasi=<?= md5(0); ?>&no=<?= $new['noFormulir']; ?>" class="btn btn-primary btn-icon-split btn-sm">
+													<span class="icon text-white-50">
+														<i class="fas fa-check"></i>
+													</span>
+													<span class="text">Daftarkan</span>
+												</a>
                                             </td>
-
+                                            
                                         </tr>
                                     <?php $no1++;
                                     endforeach; ?>
@@ -120,12 +120,12 @@
                                             <td><?= $pemohon['Alamat']; ?></td>
                                             <td><?= ($pemohon['gender'] == 1) ? 'Laki-laki' : 'Perempuan' ?></td>
                                             <td>
-                                                <a href="/kelurahan/dtpemohon?konfirmasi=<?= md5(1); ?>&idPemohon=<?= $pemohon['idPemohon']; ?>" class="btn btn-danger btn-icon-split btn-sm">
-                                                    <span class="icon text-white-50">
-                                                        <i class="fas fa-upload fa-sm"></i>
-                                                    </span>
-                                                    <span class="text">Ajukan Bantuan</span>
-                                                </a>
+                                               <a href="/kelurahan/dtpemohon?konfirmasi=<?= md5(1); ?>&idPemohon=<?= $pemohon['idPemohon']; ?>" class="btn btn-danger btn-icon-split btn-sm">
+													<span class="icon text-white-50">
+														<i class="fas fa-upload"></i>
+													</span>
+													<span class="text">Ajukan Bantuan</span>
+												</a>
                                             </td>
                                             <!-- <td class="text-center">0</td> -->
                                         </tr>

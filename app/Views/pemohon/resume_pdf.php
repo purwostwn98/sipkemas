@@ -41,7 +41,7 @@ $bulan = array(
             <th rowspan="3" width="80" style="text-align:center"><img width="50" src="assets/img/logo_pms.png"></th>
             <th style="text-align:left">
                 <p style="font-family: times">
-                    <font size="6">Sekretariat Daerah Bidang Kesejahteraan Rakyat</font>
+                    <font size="6">Sekretariat Daerah Bagian Kesejahteraan Rakyat</font>
                 </p>
             </th>
         </tr>
@@ -246,12 +246,12 @@ $bulan = array(
             <tr align="left">
                 <td style="width: 40%; text-align:left;">Status</td>
                 <td style="width: 3%;">:</td>
-                <td style="text-align: left;"><?= $ajuan['StatusAjuan']; ?></td>
+                <td style="text-align: left;"><strong><?= $ajuan['StatusAjuan']; ?></strong></td>
             </tr>
             <tr align="left">
                 <td style="width: 40%; text-align:left;">Alasan/catatan</td>
                 <td style="width: 3%;">:</td>
-                <td style="text-align: left;"> <?= $ajuan['ketRecSurvey']; ?></td>
+                <td style="text-align: left;"><?= $ajuan['ketRecSurvey']; ?></td>
             </tr>
             <tr>
                 <td style="width: 40%; text-align:left;">Nilai yang Disetujui</td>

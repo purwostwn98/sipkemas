@@ -97,7 +97,7 @@ class Gerbangska extends BaseController
                         $this->session->set($dapat_session);
 
                         if ($this->session->get('privUser') == 2) {
-                            return redirect()->to('/kelurahan/dftrpemohon_i');
+                            return redirect()->to('/kelurahan/dashboard');
                         } elseif ($this->session->get('privUser') == 3) {
                             return redirect()->to('/dinsos/dftrajuan_i');
                         } elseif ($this->session->get('privUser') == 4) {

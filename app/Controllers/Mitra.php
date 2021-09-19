@@ -63,13 +63,15 @@ class Mitra extends BaseController
             $tglAkhir = $tgl2[2] . ' ' . $bulan[(int)$tgl2[1]] . ' ' . $tgl2[0];
         } elseif ($this->request->getGet('hpsFilter') == 'noFilter') {
             $filter = 'noFilter';
-            $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            //$tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAwal = 0000 - 00 - 00;
             $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
             $tglAwal = "Semua Data";
             $tglAkhir = "";
         } else {
             $filter = 'noFilter';
-            $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            //$tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAwal = 0000 - 00 - 00;
             $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
             $tglAwal = "Semua Data";
             $tglAkhir = "";
@@ -88,7 +90,7 @@ class Mitra extends BaseController
                 ->where('idKel', $kel['idKel'])
                 ->countAllResults();
             $semuaKelurahan[$kel['Kelurahan']] = $countAjuanKelurahan;
-            arsort($semuaKelurahan);
+            //arsort($semuaKelurahan);
         }
         // Untuk statistik mitra
         $dftrMitra = $this->mitraModel->findAll();
@@ -98,8 +100,25 @@ class Mitra extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->where('trbantuan.idMitra', $mit['idMitra'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
                 ->countAllResults();
             $semuaMitra[] = $countAjuanMitra;
+        }
+        // Untuk statistik bantuan
+        $dftrBantuan = $this->bantuanModel
+            ->where('idMitra', $idMitra)
+            ->findAll();
+        foreach ($dftrBantuan as $ban) {
+            $countAjuanBantuan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                // ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $semuaBantuan[] = $countAjuanBantuan;
         }
         $data = [
             'countPermintaan' => $this->ajuanModel
@@ -140,6 +159,8 @@ class Mitra extends BaseController
                 ->first(),
             'countKelurahan' => $semuaKelurahan,
             'countMitra' => $semuaMitra,
+            'countBantuan' => $semuaBantuan,
+            'daftarBantuan' => $dftrBantuan,
             'tglAwal' => $tglAwal,
             'tglAkhir' => $tglAkhir,
             'norm_tglAwal' => $tgAwal,
@@ -176,7 +197,8 @@ class Mitra extends BaseController
             $tglAwal = $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0];
             $tglAkhir = $tgl2[2] . ' ' . $bulan[(int)$tgl2[1]] . ' ' . $tgl2[0];
         } else {
-            $tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            //$tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAwal = 0000 - 00 - 00;
             $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
             $tglAwal = "Semua Data";
             $tglAkhir = "";
@@ -214,6 +236,30 @@ class Mitra extends BaseController
                 ->first();
             $semuaKelurahan[$kel['Kelurahan']] = array($countAjuanKelurahan, $countKelurahanSetuju, $danaKel['nilaiDisetujui']);
             arsort($semuaKelurahan);
+        }
+        // Untuk statistik bantuan
+        $dftrBantuan = $this->bantuanModel
+            ->where('idMitra', $idMitra)
+            ->findAll();
+        foreach ($dftrBantuan as $ban) {
+            $countAjuanBantuan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $danaBantuan = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->first();
+            $semuaBantuan[$ban['namaProgram']] = array($countAjuanBantuan, $danaBantuan['nilaiDisetujui']);
+            arsort($semuaBantuan);
         }
         $tglNow = new Time('now', 'Asia/Jakarta', 'en_US');
         $t = explode('-', $tglNow);
@@ -259,6 +305,8 @@ class Mitra extends BaseController
             // 'countMitra' => $semuaMitra,
             // 'mitraSetuju' => $mitraSetuju,
             // 'danaMitraSetuju' => $danaMtrSetuju,
+            'countBantuan' => $semuaBantuan,
+            'daftarBantuan' => $dftrBantuan,
             'tglAwal' => $tglAwal,
             'tglAkhir' => $tglAkhir,
             'tglNow' => $tglSekarang,

@@ -25,7 +25,7 @@ class FormulirModel extends Model
     protected $updatedField  = 'updated_at';
     protected $allowedFields = [
         'noFormulir', 'Nama', 'tgLahir', 'tempatLahir', 'gender', 'NIK', 'Alamat', 'idKel', 'tgInput', 'updated_at', 'idAgama',
-        'telepon', 'email'
+        'telepon', 'email', 'stsFormulir'
     ];
 }
 

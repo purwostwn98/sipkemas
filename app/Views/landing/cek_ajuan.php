@@ -44,7 +44,26 @@
 </head>
 
 <body>
-    <div class="container mt-5">
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+            <div class="row mr-auto">
+                <a href="/home/index" class="logo ml-3"><img src="<?= base_url(); ?>/assets/img/logo_pms.png" alt="" class="img-fluid"></a>
+                <span style="color: #2487ce; font-size: 14px;" class="ml-1 d-none d-lg-block">
+                    <b> Sekretariat Daerah Bagian Kesejahteraan Rakyat </b><br>
+                    Pemerintah Kota Surakarta
+                </span>
+            </div>
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="/home/index">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <div style="margin-top: 110px;" class="container">
         <div class="row justify-content-md-center mb-3">
             <div class="col-lg-7 col-md-9">
                 <div class="card o-hidden shadow-lg border-bottom-info mb-2">
@@ -103,7 +122,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 footer-contact">
-                        <h4>Sekretariat Daerah Bidang Kesejahteraan Rakyat</h4>
+                        <h4>Sekretariat Daerah Bagian Kesejahteraan Rakyat</h4>
                         <p>
                             Komp. Balai Kota,
                             JL. Jend. Sudirman, No. 2 <br>

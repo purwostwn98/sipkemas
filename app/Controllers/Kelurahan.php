@@ -7,7 +7,11 @@ use App\Models\FormulirModel;
 use App\Models\AjuanModel;
 use App\Models\UploadModel;
 use App\Models\AjuanLbgModel;
-
+use CodeIgniter\I18n\Time;
+use App\Models\KelurahanModel;
+use App\Models\MitraModel;
+use App\Models\BantuanModel;
+use Mpdf\Mpdf;
 
 class Kelurahan extends BaseController
 {
@@ -16,6 +20,9 @@ class Kelurahan extends BaseController
     protected $ajuanModel;
     protected $uploadModel;
     protected $ajuanLbgModel;
+    protected $kelurahanModel;
+    protected $mitraModel;
+    protected $bantuanModel;
 
 
 
@@ -29,6 +36,10 @@ class Kelurahan extends BaseController
         $this->ajuanModel = new AjuanModel();
         $this->uploadModel = new UploadModel();
         $this->ajuanLbgModel = new AjuanLbgModel();
+        $this->kelurahanModel = new KelurahanModel();
+        $this->mitraModel = new MitraModel();
+        $this->bantuanModel = new BantuanModel();
+
 
 
         //print_r('x');exit;
@@ -48,6 +59,293 @@ class Kelurahan extends BaseController
             exit;
         }
     }
+
+    public function dashboard()
+    {
+        $idMitra = $this->session->get('idLembaga'); //idkelurahan
+        // print_r($idMitra);
+        // Print tgl Indonesia
+        $bulan = array(
+            1 =>   'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        );
+        if ($this->request->getPost('filterTgl') == 'filter') {
+            $filter = 'filter';
+            $tgAwal = $this->request->getPost('tgAwal');
+            $tgAhir = $this->request->getPost('tgAkhir');
+            $tgl = explode('-', $tgAwal);
+            $tgl2 = explode('-', $tgAhir);
+            $tglAwal = $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0];
+            $tglAkhir = $tgl2[2] . ' ' . $bulan[(int)$tgl2[1]] . ' ' . $tgl2[0];
+        } elseif ($this->request->getGet('hpsFilter') == 'noFilter') {
+            $filter = 'noFilter';
+            //$tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAwal = 0000 - 00 - 00;
+            $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
+            $tglAwal = "Semua Data";
+            $tglAkhir = "";
+        } else {
+            $filter = 'noFilter';
+            //$tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAwal = 0000 - 00 - 00;
+            $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
+            $tglAwal = "Semua Data";
+            $tglAkhir = "";
+        }
+
+
+        // Untuk statistik mitra
+        $dftrMitra = $this->mitraModel->findAll();
+        foreach ($dftrMitra as $mit) {
+            $countAjuanMitra = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idMitra)
+                ->where('trbantuan.idMitra', $mit['idMitra'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $semuaMitra[] = $countAjuanMitra;
+        }
+
+        // Untuk statistik bantuan
+        $dftrBantuan = $this->bantuanModel->findAll();
+        foreach ($dftrBantuan as $ban) {
+            $countAjuanBantuan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idMitra)
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $semuaBantuan[] = $countAjuanBantuan;
+        }
+        //print_r($semuaMitra);exit();
+        $data = [
+            'countPermintaan' => $this->formulirModel
+                ->where('tgInput >=', $tgAwal)
+                ->where('tgInput <=', $tgAhir)
+                ->where('idKel', $idMitra)
+                ->countAllResults(),
+            'countProses' => $this->ajuanModel
+                ->where('idStsAjuan >=', 3)
+                ->where('idStsAjuan <=', 5)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idMitra)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'countDitolak' => $this->ajuanModel
+                ->where('idStsAjuan', 6)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idMitra)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'countDisetujui' => $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idMitra)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'totalDana' => $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idMitra)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->first(),
+            //'countKelurahan' => $semuaKelurahan,
+            'countMitra' => $semuaMitra,
+            'countBantuan' => $semuaBantuan,
+            'daftarMitra' => $dftrMitra,
+            'daftarBantuan' => $dftrBantuan,
+            'tglAwal' => $tglAwal,
+            'tglAkhir' => $tglAkhir,
+            'norm_tglAwal' => $tgAwal,
+            'norm_tglAkhir' => $tgAhir,
+            'filter' => $filter,
+            'bttn' => 'dashboard',
+            'halaman' => 'kelurahan'
+        ];
+        return view('kelurahan/kel_dashboard', $data);
+    }
+
+    public function eksporpdf()
+    {
+        $idKelurahan = $this->session->get('idLembaga'); //idkelurahan
+        //Print tgl Indonesia
+        $bulan = array(
+            1 =>   'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        );
+        if ($this->request->getVar('filter') == 'filter') {
+            $tgAwal = $this->request->getVar('tgAwal');
+            $tgAhir = $this->request->getVar('tgAkhir');
+            $tgl = explode('-', $tgAwal);
+            $tgl2 = explode('-', $tgAhir);
+            $tglAwal = $tgl[2] . ' ' . $bulan[(int)$tgl[1]] . ' ' . $tgl[0];
+            $tglAkhir = $tgl2[2] . ' ' . $bulan[(int)$tgl2[1]] . ' ' . $tgl2[0];
+        } else {
+            //$tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            $tgAwal = 0000 - 00 - 00;
+            $tgAhir = new Time('now', 'Asia/Jakarta', 'en_US');
+            $tglAwal = "Semua Data";
+            $tglAkhir = "";
+        }
+
+        // Untuk statistik mitra
+        $dftrMitra = $this->mitraModel->findAll();
+        foreach ($dftrMitra as $mit) {
+            $countAjuanMitra = $this->ajuanModel
+                ->where('idStsAjuan >', 1)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idKelurahan)
+                ->where('trbantuan.idMitra', $mit['idMitra'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $semuaMitra[$mit['NamaMitra']] = $countAjuanMitra;
+            $countMitraSetuju = $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idKelurahan)
+                ->where('trbantuan.idMitra', $mit['idMitra'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $mitraSetuju[] = $countMitraSetuju;
+            $dana = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idKelurahan)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->where('trbantuan.idMitra', $mit['idMitra'])
+                ->first();
+            $danaMtrSetuju[] = $dana['nilaiDisetujui'];
+        }
+        // Untuk statistik bantuan
+        $dftrBantuan = $this->bantuanModel->findAll();
+        foreach ($dftrBantuan as $ban) {
+            $countAjuanBantuan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idKelurahan)
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults();
+            $danaBantuan = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idKelurahan)
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->first();
+            $semuaBantuan[$ban['namaProgram']] = array($countAjuanBantuan, $danaBantuan['nilaiDisetujui']);
+            arsort($semuaBantuan);
+        }
+        $tglNow = new Time('now', 'Asia/Jakarta', 'en_US');
+        $t = explode('-', $tglNow);
+        $a = explode(' ', $t[2]);
+        $tglSekarang = $a[0] . ' ' . $bulan[(int)$t[1]] . ' ' . $t[0];
+        $data = [
+            'countPermintaan' => $this->formulirModel
+                ->where('tgInput >=', $tgAwal)
+                ->where('tgInput <=', $tgAhir)
+                ->where('idKel', $idKelurahan)
+                ->countAllResults(),
+            'countProses' => $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->where('idStsAjuan <', 6)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idKelurahan)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->countAllResults(),
+            'countDitolak' => $this->ajuanModel
+                ->where('idStsAjuan', 6)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idKelurahan)
+                ->countAllResults(),
+            'countDisetujui' => $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idKelurahan)
+                ->countAllResults(),
+            'totalDana' => $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $idKelurahan)
+                ->first(),
+            // 'countKelurahan' => $semuaKelurahan,
+            'countMitra' => $semuaMitra,
+            'mitraSetuju' => $mitraSetuju,
+            'danaMitraSetuju' => $danaMtrSetuju,
+            'countBantuan' => $semuaBantuan,
+            'daftarBantuan' => $dftrBantuan,
+            'tglAwal' => $tglAwal,
+            'tglAkhir' => $tglAkhir,
+            'tglNow' => $tglSekarang,
+            'filter' => $this->request->getVar('filter'),
+            'halaman' => 'kelurahan'
+        ];
+        $mpdf = new Mpdf([
+            'debug' => TRUE, 'mode' => 'utf-8', 'format' => 'A4-P',
+            'margin_top' => 8, 'margin_bottom' => 10, 'margin_left' => 12, 'margin_right' => 12
+        ]);
+        // $mpdf = new \Mpdf\Mpdf([
+        //     'debug' => FALSE, 'mode' => 'utf-8', 'orientation' => 'L', 'format' => [216, 308],
+        //     'margin_top' => 15, 'margin_bottom' => 10, 'margin_left' => 12, 'margin_right' => 12
+        // ]);
+        $html = view('kesra/dashboard_pdf.php', $data);
+        $mpdf->text_input_as_HTML = true;
+        $mpdf->WriteHTML($html);
+        //$this->response->setHeader('Content-Type', 'application/pdf');
+
+        $mpdf->Output($tglAwal . ".pdf", 'D');
+        //$mpdf->Output('judulfile.pdf', 'D');
+    }
+
     public function dtpemohon()
     {
 

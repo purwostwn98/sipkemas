@@ -11,8 +11,8 @@ $session = \Config\Services::session();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Sipkemas - Login</title>
+    <link href="<?= base_url(); ?>/assets/img/logo_pms.png" rel="icon" type="image/gif">
+    <title>Sipkemas - Masuk</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url(); ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
