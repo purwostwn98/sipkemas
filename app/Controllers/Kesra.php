@@ -143,7 +143,12 @@ class Kesra extends BaseController
                 ->first(),
             'dokumen' => $this->uploadModel->where('idAjuan', $ajuan['idAjuan'])
                 ->join('trsyarat', 'trsyarat.idSyarat = trupload.idSyarat')
-                ->findAll()
+                ->findAll(),
+            'riwayat' => $this->ajuanModel->where('idPemohon', $ajuan['idPemohon'])
+                ->where('noAjuan !=', $noAjuan)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')->findAll()
         ];
         return view('kesra/detailajuan_i', $data);
     }
@@ -169,7 +174,12 @@ class Kesra extends BaseController
             'lembaga' => $this->ajuanLbgModel->where('idAjuan', $ajuan['idAjuan'])->first(),
             'dokumen' => $this->uploadModel->where('idAjuan', $ajuan['idAjuan'])
                 ->join('trsyarat', 'trsyarat.idSyarat = trupload.idSyarat')
-                ->findAll()
+                ->findAll(),
+            'riwayat' => $this->ajuanModel->where('idPemohon', $ajuan['idPemohon'])
+                ->where('noAjuan !=', $noAjuan)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('estatusajuan as sts', 'sts.idStsAjuan = trajuan.idStsAjuan')
+                ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')->findAll()
         ];
         return view('kesra/detailajuan_l', $data);
     }

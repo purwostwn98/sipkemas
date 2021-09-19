@@ -305,6 +305,63 @@ $bulan = array(
     <?php } ?>
 </div>
 
+<!-- Riwayat Ajuan -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-info">
+        <h6 class="m-0 font-weight-bold text-white">Riwayat Ajuan</h6>
+    </div>
+    <div style="font-size: 14px;" class="card-body">
+        <!-- tabel riwayat -->
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead>
+                                <tr class="text-center" role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending" style="width: 7px;">No</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Tgl Ajuan</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 80px;">Nama Program</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Jenis Ajuan</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama: activate to sort column ascending" style="width: 50px;">Status</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Tgl. Ajuan: activate to sort column ascending" style="width: 50px;">Nominal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 0;
+                                foreach ($riwayat as $ri) { ?>
+                                    <tr role="row" class="odd">
+                                        <td class="sorting_1 text-center"><?= $no + 1; ?></td>
+                                        <?php
+                                        $tglRi = explode('-', $ri['tgAjuan']);
+                                        ?>
+                                        <td> <?= $tglRi[2] . ' ' . $bulan[(int)$tglRi[1]] . ' ' . $tglRi[0]; ?></td>
+                                        <td> <?= $ri['NamaMitra']; ?>: <?= $ri['namaProgram']; ?></td>
+                                        <td><?= ($ri['idJnsAjuan'] == 0) ? 'Individu' : 'Lembaga' ?></td>
+                                        <td>
+                                            <?php if ($ri['idStsAjuan'] <= 4) { ?>
+                                                <span style="border-radius: 5px;" class="bg-info p-2 text-white"><?= $ri['StatusAjuan']; ?></span>
+                                            <?php } elseif ($ri['idStsAjuan'] == 5) { ?>
+                                                <span style="border-radius: 5px;" class="bg-primary p-2 text-white"><?= $ri['StatusAjuan']; ?></span>
+                                            <?php } elseif ($ri['idStsAjuan'] == 6) { ?>
+                                                <span style="border-radius: 5px;" class="bg-danger p-2 text-white"><?= $ri['StatusAjuan']; ?></span>
+                                            <?php } elseif ($ri['idStsAjuan'] == 7) { ?>
+                                                <span style="border-radius: 5px;" class="bg-success p-2 text-white"><?= $ri['StatusAjuan']; ?></span>
+                                            <?php } ?>
+                                        </td>
+                                        <td> Rp <?= number_format((float)$ri['nilaiDisetujui'], 0, ',', '.'); ?></td>
+                                    </tr>
+                                <?php $no++;
+                                } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Hasil Rekomendasi Kesra -->
 <?php if ($idStsAjuan >= 4) { ?>
     <div class="card shadow mb-4">

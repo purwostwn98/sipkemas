@@ -54,9 +54,9 @@ $bulan = array(
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 35px;">Program Bantuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 60px;">Rek.Dinsos</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 50px;">Status Ajuan</th>
-										<th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
-                                        
-									</tr>
+                                        <th aria-controls="dataTable" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
+
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no = 0;
@@ -94,16 +94,16 @@ $bulan = array(
                                                     Dari Dinsos
                                                 </span>
                                             </td>
-											<td>
-												<a href="/kesra/detailajuan_i/<?= $baru['noAjuan']; ?>" class="btn btn-success btn-icon-split btn-sm">
-													<span class="icon text-white-50">
-														<i class="fas fa-check"></i>
-													</span>
-													<span class="text">Isi Rekomendasi</span>
-												</a>
-                                                
+                                            <td>
+                                                <a href="/kesra/detailajuan_i/<?= $baru['noAjuan']; ?>" class="btn btn-success btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                                                    <span class="text">Isi Rekomendasi</span>
+                                                </a>
+
                                             </td>
-                                            
+
                                         </tr>
                                     <?php $no++;
                                     endforeach; ?>
@@ -134,9 +134,9 @@ $bulan = array(
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 35px;">Program Bantuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 60px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 50px;">Status Ajuan</th>
-										<th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
-                                        
-									</tr>
+                                        <th aria-controls="dataTable1" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
+
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no1 = 0;
@@ -182,16 +182,16 @@ $bulan = array(
                                                     <?= $proses['StatusAjuan']; ?>
                                                 </span>
                                             </td>
-											<td>
-												<a href="/kesra/detailajuan_i/<?= $proses['noAjuan']; ?>" class="btn btn-info btn-icon-split btn-sm">
-													<span class="icon text-white-50">
-														<i class="fas fa-search"></i>
-													</span>
-													<span class="text">Detail</span>
-												</a>
-                                               
+                                            <td>
+                                                <a href="/kesra/detailajuan_i/<?= $proses['noAjuan']; ?>" class="btn btn-info btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-search"></i>
+                                                    </span>
+                                                    <span class="text">Detail</span>
+                                                </a>
+
                                             </td>
-                                            
+
                                         </tr>
                                     <?php $no1++;
                                     endforeach; ?>
@@ -222,9 +222,9 @@ $bulan = array(
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 35px;">Program Bantuan</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Jenis Bantuan: activate to sort column ascending" style="width: 60px;">Rek.Kesra</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable2" rowspan="1" colspan="1" aria-label="Status Ajuan: activate to sort column ascending" style="width: 50px;">Status Ajuan</th>
-										<th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
-                                        
-									</tr>
+                                        <th aria-controls="dataTable2" rowspan="1" colspan="1" style="width: 10px;">Aksi</th>
+
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no2 = 0;
@@ -260,15 +260,15 @@ $bulan = array(
                                                     <?= $selesai['StatusAjuan']; ?>
                                                 </span>
                                             </td>
-											<td>
-                                                <a href="/dinsos/detailajuan_i/<?= $selesai['noAjuan']; ?>" class="btn btn-info btn-icon-split btn-sm">
-													<span class="icon text-white-50">
-														<i class="fas fa-search"></i>
-													</span>
-													<span class="text">Detail</span>
-												</a>
+                                            <td>
+                                                <a href="/kesra/detailajuan_i/<?= $selesai['noAjuan']; ?>" class="btn btn-info btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-search"></i>
+                                                    </span>
+                                                    <span class="text">Detail</span>
+                                                </a>
                                             </td>
-                                            
+
                                         </tr>
                                     <?php $no2++;
                                     endforeach; ?>
