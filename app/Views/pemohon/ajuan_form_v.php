@@ -91,7 +91,7 @@ $session = \Config\Services::session();
                     <div class="col-sm-6">
                         <div class="form-group has-danger">
                             <input class="form-control col-sm-12  border-left-info animated--grow-in" type="file" id="srtKetPemohon" name="srtKetPemohon">
-                            <small id="nilai2" class="form-text text-primary"><i>Surat Keterangan Tidak Mampu dari Kelurahan bila belum terdaftar di eSik dalam format pdf</i></small>
+                            <small id="nilai2" class="form-text text-primary"><i>Surat Keterangan Tidak Mampu dari Kelurahan bila belum terdaftar di eSik dalam format pdf. Format surat keterangan dapat didownload </i></small><a class="px-3 bg-warning text-white" style="border-radius: 5px;" target="_blank" href="<?= base_url(); ?>/dokumen/SuKet.pdf">DI SINI</a>
                         </div>
                     </div>
                 </div>
@@ -167,7 +167,8 @@ $session = \Config\Services::session();
 </div>
 <?= form_close(); ?>
 <script type="text/javascript" src="<?= base_url(); ?>/js/angkaRibuan.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>/assets/vendor/jquery/jquery.min2.js"></script>
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
 <script>
     //Untuk hide/show form Lembaga
     function getval(sel) {

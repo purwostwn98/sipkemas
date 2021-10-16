@@ -348,7 +348,6 @@ class Kelurahan extends BaseController
 
     public function dtpemohon()
     {
-
         $this->cek();
         $konfirmasi = $this->request->getVar('konfirmasi');
         if ($konfirmasi == 'cfcd208495d565ef66e7dff9f98764da') {
@@ -375,6 +374,7 @@ class Kelurahan extends BaseController
         ];
         return view('kelurahan/dtpemohon', $data);
     }
+
     public function dftrpemohon_i()
     {
 
@@ -384,8 +384,10 @@ class Kelurahan extends BaseController
             'bttn' => 'dftrpemohon',
             'pemohonBaru' => $this->formulirModel
                 ->where('idKel', $idKelurahan)
+                ->orderBy('tgInput', 'DESC')
                 ->findAll(),
             'pemohon_terdaftar' => $this->pemohonModel->where('idKel', $idKelurahan)
+                ->orderBy('updated_at', 'DESC')
                 ->findAll(),
         ];
         return view('kelurahan/kel_dftrpemohon_i', $data);
@@ -501,6 +503,7 @@ class Kelurahan extends BaseController
                 ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->where('idKel', $idKelurahan)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 2)
@@ -511,6 +514,7 @@ class Kelurahan extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->where('idKel', $idKelurahan)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
@@ -520,6 +524,7 @@ class Kelurahan extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->where('idKel', $idKelurahan)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll()
         ];
 
@@ -542,6 +547,7 @@ class Kelurahan extends BaseController
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
                 ->where('idKel', $idKelurahan)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
@@ -552,6 +558,7 @@ class Kelurahan extends BaseController
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
                 ->where('idKel', $idKelurahan)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll()
 
         ];

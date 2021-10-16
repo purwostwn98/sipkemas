@@ -62,6 +62,7 @@ class Kesra extends BaseController
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 2)
@@ -72,6 +73,7 @@ class Kesra extends BaseController
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
@@ -80,6 +82,7 @@ class Kesra extends BaseController
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll()
         ];
         return view('kesra/dftrajuan_i', $data);
@@ -97,6 +100,7 @@ class Kesra extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 4)
@@ -107,6 +111,7 @@ class Kesra extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
@@ -116,6 +121,7 @@ class Kesra extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll()
 
         ];
@@ -543,6 +549,7 @@ class Kesra extends BaseController
         $data = [
             'bttn' => 'dftrbantuan',
             'mitra' => $this->mitraModel->findAll(),
+            'mitra2' => $this->mitraModel->where('idMitra', $this->session->get('idLembaga'))->findAll()
         ];
         return view('kesra/frTambahProgram', $data);
     }

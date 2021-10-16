@@ -33,6 +33,8 @@
 					</ol>
 					<p>&nbsp;</p>
 				</div>
+				<?= form_open("/pemohon/form_ajuan", ['class' => 'formPernyataan']); ?>
+				<?= csrf_field(); ?>
 				<div class="modal-footer">
 					<div class="row mb-0">
 						<div class="col checkbox">
@@ -45,11 +47,12 @@
 					<br>
 					<div class="row mt-0">
 						<div class="col text-center">
-							<a href="/pemohon/form_ajuan" class="btn btn-success btn-md btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lanjutkan</span></a>&nbsp;&nbsp;
+							<button type="submit" class="btn btn-success btn-md btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lanjutkan</span></button>
+							<!-- <a href="/pemohon/form_ajuan" class="btn btn-success btn-md btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i></span><span class="text">Lanjutkan</span></a>&nbsp;&nbsp; -->
 						</div>
 					</div>
-
 				</div>
+				<?= form_close(); ?>
 			</div>
 		</div>
 	</div>

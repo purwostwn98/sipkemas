@@ -82,7 +82,9 @@
                   yaitu merawat lansia terlantar yang ada di wilayah Kota Surakarta.</p>
                 <p><b>Syarat Pendaftaran</b></p>
                 <ul>
-                  <li>Assesment</li>
+                  <li>Kartu Tanda Penduduk</li>
+                  <li>Kartu Keluarga</li>
+                  <li>Assesment (<a href="<?= base_url(); ?>/dokumen/ass_griya.pdf" target="_blank">Download</a>)</li>
                   <li>Survey</li>
                   <li>Pelaporan ke Satpol PP Kota Surakarta</li>
                   <li>Pelaporan ke Dinsos Kota Surakarta</li>
@@ -104,7 +106,9 @@
                   termanusiakan yaitu merawat orang dengan gangguan jiwa (ODGJ) terlantar. Sehingga ODGJ terawat baik secara mental maupun fisik.</p>
                 <p><b>Syarat Pendaftaran</b></p>
                 <ul>
-                  <li>Assesment</li>
+                  <li>Kartu Tanda Penduduk</li>
+                  <li>Kartu Keluarga</li>
+                  <li>Assesment (<a href="<?= base_url(); ?>/dokumen/ass_griya.pdf" target="_blank">Download</a>)</li>
                   <li>Survey</li>
                   <li>Pelaporan ke Satpol PP Kota Surakarta</li>
                   <li>Pelaporan ke Dinsos Kota Surakarta</li>
@@ -127,9 +131,11 @@
                 </p>
                 <p><b>Syarat Pendaftaran</b></p>
                 <ul>
-                  <li>Merupakan Warga Kota Surakarta</li>
-                  <li>Fotocopy Kartu Keluarga, KTP, dan KIS Pemerintah</li>
-                  <li>Survey dan assesment</li>
+                  <li>Kartu Tanda Penduduk</li>
+                  <li>Kartu Keluarga</li>
+                  <li>Assessment (<a href="<?= base_url(); ?>/dokumen/ass_kemanusiaan.pdf" target="_blank">Download</a>)</li>
+                  <li>KIS Pemerintah</li>
+                  <li>Survey</li>
                 </ul>
               </div>
             </div>

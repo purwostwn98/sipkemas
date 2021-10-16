@@ -1,6 +1,8 @@
 <?= $this->extend("/layout/template.php"); ?>
 <?= $this->section("konten"); ?>
-
+<?php
+$session = \Config\Services::session();
+?>
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Tambah Program</h1>
@@ -21,8 +23,14 @@
                     <div class="col-sm-10">
                         <select id="idMitra" name="idMitra" class="form-control border-left-primary" onchange="getMitra(this)" required>
                             <option value="" selected disabled>--Pilih Mitra--</option>
-                            <?php foreach ($mitra as $mit) { ?>
-                                <option value="<?= $mit['idMitra']; ?>"><?= $mit['NamaMitra']; ?></option>
+                            <?php if ($session->get('privUser') == 4) { ?>
+                                <?php foreach ($mitra as $mit) { ?>
+                                    <option value="<?= $mit['idMitra']; ?>"><?= $mit['NamaMitra']; ?></option>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <?php foreach ($mitra2 as $mit) { ?>
+                                    <option value="<?= $mit['idMitra']; ?>"><?= $mit['NamaMitra']; ?></option>
+                                <?php } ?>
                             <?php } ?>
                         </select>
                     </div>
@@ -116,7 +124,8 @@
     <!-- </div> -->
 </div>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
+<script type="text/javascript" src="<?= base_url(); ?>/assets/vendor/jquery/jquery.min2.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.btnAddRow').click(function(e) {

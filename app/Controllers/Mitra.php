@@ -109,17 +109,22 @@ class Mitra extends BaseController
         $dftrBantuan = $this->bantuanModel
             ->where('idMitra', $idMitra)
             ->findAll();
-        foreach ($dftrBantuan as $ban) {
-            $countAjuanBantuan = $this->ajuanModel
-                ->where('idStsAjuan >=', 2)
-                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
-                // ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
-                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
-                ->where('tgHasil >=', $tgAwal)
-                ->where('tgHasil <=', $tgAhir)
-                ->countAllResults();
-            $semuaBantuan[] = $countAjuanBantuan;
+        if ($dftrBantuan) {
+            foreach ($dftrBantuan as $ban) {
+                $countAjuanBantuan = $this->ajuanModel
+                    ->where('idStsAjuan >=', 2)
+                    ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                    // ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                    ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                    ->where('tgHasil >=', $tgAwal)
+                    ->where('tgHasil <=', $tgAhir)
+                    ->countAllResults();
+                $semuaBantuan[] = $countAjuanBantuan;
+            }
+        } else {
+            $semuaBantuan = [0, 0, 0, 0];
         }
+
         $data = [
             'countPermintaan' => $this->ajuanModel
                 ->where('idStsAjuan', 4)
@@ -371,6 +376,7 @@ class Mitra extends BaseController
         ];
         return view('mitra/dftprogram', $data);
     }
+
     public function dftrajuan_i()
     {
         $idMitra = $this->session->get('idLembaga');
@@ -384,6 +390,7 @@ class Mitra extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->where('trbantuan.idMitra', $idMitra)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan', 5)
@@ -393,6 +400,7 @@ class Mitra extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->where('trbantuan.idMitra', $idMitra)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
@@ -402,6 +410,7 @@ class Mitra extends BaseController
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->where('trbantuan.idMitra', $idMitra)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll()
         ];
         return view('mitra/dftrajuan_i', $data);
@@ -421,6 +430,7 @@ class Mitra extends BaseController
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
                 ->where('trbantuan.idMitra', $idMitra)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan', 5)
@@ -431,6 +441,7 @@ class Mitra extends BaseController
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
                 ->where('trbantuan.idMitra', $idMitra)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
@@ -441,6 +452,7 @@ class Mitra extends BaseController
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
                 ->join('trlembaga', 'trlembaga.idAjuan = trajuan.idAjuan')
                 ->where('trbantuan.idMitra', $idMitra)
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll()
         ];
         return view('mitra/dftrajuan_l', $data);

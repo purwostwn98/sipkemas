@@ -290,7 +290,7 @@
     </section><!-- End About Section -->
 
     <!-- ======= Counts Section ======= -->
-    <!-- <section id="counts" class="counts section-bg">
+    <section id="counts" class="counts section-bg">
       <div class="container">
         <div class="row justify-content-end">
           <div class="col-lg-4 col-md-5 col-4 d-md-flex align-items-md-stretch">
@@ -313,7 +313,7 @@
           </div>
         </div>
       </div>
-    </section> -->
+    </section>
     <!-- End Counts Section -->
 
     <!-- ======= About Video Section ======= -->

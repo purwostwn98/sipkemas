@@ -56,6 +56,7 @@ class Dinsos extends BaseController
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_proses' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 3)
@@ -65,6 +66,7 @@ class Dinsos extends BaseController
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
             'ajuan_selesai' => $this->ajuanModel
                 ->where('trajuan.idStsAjuan >=', 6)
@@ -73,6 +75,7 @@ class Dinsos extends BaseController
                 ->join('estatusajuan', 'estatusajuan.idStsAjuan = trajuan.idStsAjuan')
                 ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
                 ->join('mmitra', 'mmitra.idMitra = trbantuan.idMitra')
+                ->orderBy('tgHasil', 'DESC')
                 ->findAll(),
         ];
         return view('dinsos/sos_dftrajuan_i', $data);
