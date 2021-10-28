@@ -50,8 +50,8 @@
             <div class="row mr-auto">
                 <a href="/home/index" class="logo ml-3"><img src="<?= base_url(); ?>/assets/img/logo_pms.png" alt="" class="img-fluid"></a>
                 <span style="color: #2487ce; font-size: 14px;" class="ml-1 d-none d-lg-block">
-                    <b> Sekretariat Daerah Bagian Kesejahteraan Rakyat </b><br>
-                    Pemerintah Kota Surakarta
+                    <b>Pemerintah Kota Surakarta</b><br>
+                    Sekretariat Daerah Bagian Kesejahteraan Rakyat
                 </span>
             </div>
             <nav class="nav-menu d-none d-lg-block">
@@ -146,7 +146,8 @@
                             <div class="form-group row">
                                 <label for="kecamatan" class="col-sm-4 col-form-label">Kecamatan</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="kecamatan" name="kecamatan" required onchange="getKec(this);">
+                                    <!-- <select class="form-control" id="kecamatan" name="kecamatan" required onchange="getKec(this);"> -->
+                                    <select class="form-control" id="kecamatan" name="kecamatan" required>
                                         <option value="" selected disabled>Pilih Kecamatan</option>
                                         <?php foreach ($kecamatan as $kec) { ?>
                                             <option value="<?= $kec['idKec']; ?>"><?= $kec['Kecamatan']; ?></option>
@@ -224,13 +225,14 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-md-6 footer-contact">
-                        <h4>Sekretariat Daerah Bagian Kesejahteraan Rakyat</h4>
+                        <h4>Bagian Kesejahteraan Rakyat Sekretariat Daerah Kota Surakarta</h4>
                         <p>
                             Komp. Balai Kota,
                             JL. Jend. Sudirman, No. 2 <br>
                             Kp. Baru, Kec. Ps. Kliwon<br>
                             Kota Surakarta, Jawa Tengah 57133 <br><br>
-                            <strong>Phone:</strong> (0271) 644315<br>
+                            <strong>Phone:</strong> (0271) 655398<br>
+                            <strong>Email:</strong> bag-kesra@surakarta.go.id<br>
                             <!-- <strong>Email:</strong> info@example.com<br> -->
                         </p>
                     </div>
@@ -280,27 +282,7 @@
     <!-- Template Main JS File -->
     <script src="<?= base_url(); ?>/assets/js/main.js"></script>
 
-    <script>
-        // Load Kelurahan
-        function getKec(sel) {
-            var idKec = sel.value;
-            $.ajax({
-                url: "<?= site_url('home/load_kelurahan'); ?>",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    idKec: idKec
-                },
-                success: function(response) {
-                    $('.kelurahan').html(response.data);
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-                }
-            });
-
-        }
-
+    <script {csp-script-nonce}>
         $(document).ready(function() {
             $('.formdaftar').submit(function(e) {
                 e.preventDefault();
@@ -374,6 +356,7 @@
             });
         });
     </script>
+    <script src="<?= base_url(); ?>/extra/getKelurahan.js"></script>
 
 
 

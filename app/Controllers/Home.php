@@ -2,11 +2,13 @@
 
 namespace App\Controllers;
 
-
 use App\Models\PemohonModel;
 use App\Models\KecamatanModel;
 use App\Models\KelurahanModel;
 use App\Models\FormulirModel;
+use App\Models\AjuanModel;
+use App\Models\BantuanModel;
+use App\Models\MitraModel;
 use Mpdf\Mpdf;
 
 class Home extends BaseController
@@ -15,6 +17,8 @@ class Home extends BaseController
 	protected $kecamatanModel;
 	protected $kelurahanModel;
 	protected $formulirModel;
+	protected $ajuanModel;
+	protected $mitraModel;
 
 	public function __construct()
 	{
@@ -22,10 +26,39 @@ class Home extends BaseController
 		$this->kecamatanModel = new KecamatanModel();
 		$this->kelurahanModel = new KelurahanModel();
 		$this->formulirModel = new FormulirModel();
+		$this->ajuanModel = new AjuanModel();
+		$this->mitraModel = new MitraModel();
+		$this->programModel = new BantuanModel();
 	}
 	public function index()
 	{
-		return view('landing/index');
+		$program = $this->programModel->findAll();
+		foreach ($program as $prg) {
+			$jmlAjuan = $this->ajuanModel
+				->where('kodeBantuan', $prg['kodeBantuan'])
+				->where('idStsAjuan', 7)
+				->countAllResults();
+			$dataProgram[$prg['namaProgram']] = $jmlAjuan;
+		}
+
+		$mitra = $this->mitraModel->findAll();
+		foreach ($mitra as $key => $mit) {
+			$jmlMitra = $this->ajuanModel
+				->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+				->where('idMitra', $mit['idMitra'])
+				->where('idStsAjuan', 7)->countAllResults();
+			$dataMitra[$mit['NamaMitra']] = $jmlMitra;
+		}
+		$data = [
+			"countAjuan" => $this->ajuanModel->where('idStsAjuan', 7)->countAllResults(),
+			"countMitra" => $this->mitraModel->countAllResults(),
+			"countProgram" => $this->programModel->countAllResults(),
+			"dataProgram" => $dataProgram,
+			"dataMitra" => $dataMitra
+		];
+		// print_r($data['dataProgram']);
+		// die;
+		return view('landing/index', $data);
 	}
 
 	public function bantuan()

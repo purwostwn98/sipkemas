@@ -44,7 +44,8 @@ $session = \Config\Services::session();
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
                                     </div>
-                                    <?= form_open("/gerbangska/cekuser", ['class' => 'formlogin user']); ?>
+                                    <?= form_open(base_url() . "/gerbangska/cekuser", ['class' => 'formlogin user']); ?>
+                                    <!-- <form action="/gerbangska/cekuser" method="POST"> -->
                                     <?= csrf_field(); ?>
                                     <div class="form-group">
                                         <input name="User" type="text" class="form-control form-control-user <?= ($session->getFlashdata('errorUser')) ? 'is-invalid' : '' ?>" id="user" aria-describedby="emailHelp" placeholder="Masukkan Username" value="<?= old('User'); ?>">
@@ -83,7 +84,9 @@ $session = \Config\Services::session();
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a> -->
+                                    <!-- </form> -->
                                     <?= form_close(); ?>
+
                                     <!-- <hr> -->
                                     <!-- <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>

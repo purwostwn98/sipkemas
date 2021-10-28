@@ -20,32 +20,32 @@
 <?php $session = \Config\Services::session(); ?>
 
 <body>
-    <table border='0' width="750" cellpadding="0" cellspacing="0" style="border:0px solid black;margin-left:auto;margin-right:auto;">
+    <table border='0' width="100%" cellpadding="0" cellspacing="0" style="border:0px solid black;margin-left:auto;margin-right:auto;">
         <tr>
             <th rowspan="3" width="80" style="text-align:center"><img width="50" src="assets/img/logo_pms.png"></th>
-            <th style="text-align:left">
-                <p style="font-family: times">
-                    <font size="6">Sekretariat Daerah Bagian Kesejahteraan Rakyat</font>
-                </p>
+            <th align="center" style="text-align:center">
+                <!-- <p style="font-family: times; text-align:center;"> -->
+                <font size="5">PEMERINTAH KOTA SURAKARTA</font>
+                <!-- </p> -->
             </th>
         </tr>
         <tr>
-            <th style="text-align:left">
-                <p style="font-family: times">
-                    <font size="4"><b>Pemerintah Kota Surakarta</b></font>
-                </p>
+            <th align="center" style="text-align:center">
+                <!-- <p style="font-family: times; text-align:center;"> -->
+                <font size="6"><b>SEKRETARIAT DAERAH</b></font>
+                <!-- </p> -->
             </th>
         </tr>
         <tr>
-            <th style="text-align:left">
-                <p style="font-family: times">
-                    <font size="2">Komp. Balai Kota, JL. Jend. Sudirman, No. 2Kp. Baru, Kec. Ps. Kliwon Kota Surakarta, Jawa Tengah 57133</font>
-                </p>
+            <th align="center" style="text-align:center">
+                <!-- <p style="font-family: times; text-align:center;"> -->
+                <font size="5">BAGIAN KESEJAHTERAAN RAKYAT</font>
+                <!-- </p> -->
             </th>
         </tr>
     </table>
     <div class="hr"></div>
-    <div style="margin-top: 10px; font-size: 16px" align='center'><b>Report SipKeMas <?= ($filter == 'filter') ? "($tglAwal - $tglAkhir)" : '' ?></b></div>
+    <div style="margin-top: 10px; font-size: 16px" align='center'><b>Report SIPKE-MAS <?= ($filter == 'filter') ? "($tglAwal - $tglAkhir)" : '' ?></b></div>
     <div align="center">
         <?= $session->get('namauser'); ?>
     </div>

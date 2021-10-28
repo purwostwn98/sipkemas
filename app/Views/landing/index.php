@@ -8,14 +8,15 @@
   <title>SipKe-Mas Surakarta</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://www.gstatic.com;">
 
   <!-- Favicons -->
   <link href="<?= base_url(); ?>/assets/img/logo_pms.png" rel="icon">
   <link href="<?= base_url(); ?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> -->
+  <link href="<?= base_url(); ?>/extra/font_index.css" rel="stylesheet">
   <!-- Vendor CSS Files -->
   <link href="<?= base_url(); ?>/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<?= base_url(); ?>/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
@@ -29,12 +30,41 @@
   <link href="<?= base_url(); ?>/assets/css/style.css" rel="stylesheet">
   <link href="<?= base_url(); ?>/css/alur.css" rel="stylesheet">
 
+  <!-- Pie Chart -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!-- <script type="text/javascript" src="<?= base_url(); ?>/extra/loaderGcharts.js"></script> -->
   <!-- =======================================================
   * Template Name: OnePage - v2.2.2
   * Template URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <style {csp-style-nonce}>
+    .icon img {
+      max-height: 65px;
+    }
+
+    .kopSurat {
+      color: #2487ce;
+      font-size: 14px;
+    }
+
+    .icon-box ul {
+      font-size: 14px;
+    }
+
+    #about h2,
+    #about p {
+      color: white;
+    }
+
+    #piechart,
+    #piechart2 {
+      width: 900px;
+      height: 400px;
+    }
+  </style>
 </head>
 
 <body>
@@ -47,9 +77,9 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <div class="row mr-auto">
         <a href="/home/index" class="logo ml-3"><img src="<?= base_url(); ?>/assets/img/logo_pms.png" alt="" class="img-fluid"></a>
-        <span style="color: #2487ce; font-size: 14px;" class="ml-1 d-none d-lg-block">
-          <b> Sekretariat Daerah Bagian Kesejahteraan Rakyat </b><br>
-          Pemerintah Kota Surakarta
+        <span class="ml-1 d-none d-lg-block kopSurat">
+          <b> Pemerintah Kota Surakarta </b><br>
+          Sekretariat Daerah Bagian Kesejahteraan Rakyat
         </span>
       </div>
       <nav class="nav-menu d-none d-lg-block">
@@ -79,7 +109,7 @@
           <div class="icon-box iconbox-blue">
             <div class="icon"><img style="max-height: 65px;" src="<?= base_url(); ?>/assets/img/logo_pmi.png" alt=""></div>
             <h4><a href="">PMI Surakarta</a></h4>
-            <ul class="text-left" style="font-size: 14px;">
+            <ul class="text-left" >
               <li>Griya PMI Bahagia</li>
               <li>Griya PMI Peduli</li>
               <li>Dompet Kemanusiaan</li>
@@ -132,7 +162,7 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
-          <h1>SipKe-Mas</h1>
+          <h1>SIPKE-MAS</h1>
           <h2>Sistem Informasi Peningkatan Kesejahteraan Masyarakat</h2>
         </div>
       </div>
@@ -146,10 +176,10 @@
         <div class="col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
           <div class="icon-box">
             <div class="row justify-content-center">
-              <div class="icon"><img style="max-height: 65px;" src="<?= base_url(); ?>/assets/img/logo_pmi.png" alt=""></div>
+              <div class="icon"><img src="<?= base_url(); ?>/assets/img/logo_pmi.png" alt=""></div>
             </div>
             <h4 class="title text-center"><a href="https://www.pmisurakarta.or.id/">PMI</a></h4>
-            <ul class="text-left" style="font-size: 14px;">
+            <ul class="text-left">
               <li>Griya PMI Bahagia</li>
               <li>Griya PMI Peduli</li>
               <li>Dompet Kemanusiaan</li>
@@ -161,10 +191,10 @@
         <div class="col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
           <div class="icon-box">
             <div class="row justify-content-center">
-              <div class="icon"><img style="max-height: 65px;" src="<?= base_url(); ?>/assets/img/lazisjateng.png" alt=""></div>
+              <div class="icon"><img src="<?= base_url(); ?>/assets/img/lazisjateng.png" alt=""></div>
             </div>
             <h4 class="title text-center"><a href="https://lazisjateng.org/">Lazis Jateng</a></h4>
-            <ul class="text-left" style="font-size: 14px;">
+            <ul class="text-left">
               <li>Santunan Pendidikan Yatim</li>
               <li>Santunan Gizi Yatim</li>
               <li>Santunan Bunda Yatim</li>
@@ -176,10 +206,10 @@
         <div class="col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
           <div class="icon-box">
             <div class="row justify-content-center">
-              <div class="icon"><img style="max-height: 65px;" src="<?= base_url(); ?>/assets/img/logo_baznas.png" alt=""></div>
+              <div class="icon"><img src="<?= base_url(); ?>/assets/img/logo_baznas.png" alt=""></div>
             </div>
             <h4 class="title text-center"><a href="https://baznas.go.id/">Baznas</a></h4>
-            <ul class="text-left" style="font-size: 14px;">
+            <ul class="text-left">
               <li>Pendidikan</li>
               <li>Ekonomi Produktif</li>
               <li>Kesehatan</li>
@@ -191,10 +221,10 @@
         <div class="col-md-6 col-lg-3 mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="500">
           <div class="icon-box">
             <div class="row justify-content-center">
-              <div class="icon"><img style="max-height: 65px;" src="<?= base_url(); ?>/assets/img/pms.png" alt=""></div>
+              <div class="icon"><img src="<?= base_url(); ?>/assets/img/pms.png" alt=""></div>
             </div>
             <h4 class="title text-center"><a href="">PMS</a></h4>
-            <ul class="text-left" style="font-size: 14px;">
+            <ul class="text-left">
               <li>Bedah Rumah</li>
               <li>Olahraga</li>
               <li>Pelatihan Ekonomi Kreatif</li>
@@ -212,11 +242,11 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2 style="color: white;">Tentang Kami</h2>
+          <h2>Tentang Kami</h2>
           <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. </p> -->
           <div class="row">
             <div class="col-lg-12">
-              <p style="color: white;">
+              <p class="tentangKami">
                 SipKe-Mas merupakan Sistem Informasi Peningkatan Kesejahteraan Masyarakat yang dibuat oleh <b>Sekretariat Daerah
                   Bagian Kesejahteraan Rakyat</b> dengan berkoordinasi dengan Bappeda dan Dinas Sosial Kota Surakarta. Aplikasi ini
                 bertujuan untuk kemudahan pengajuan bantuan sistem digital secara cepat dan tepat. Program ini menggandeng
@@ -295,22 +325,30 @@
         <div class="row justify-content-end">
           <div class="col-lg-4 col-md-5 col-4 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-toggle="counter-up">5</span>
+              <span data-toggle="counter-up"><?= $countProgram; ?></span>
               <p>Jenis Program Bantuan</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-5 col-4 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-toggle="counter-up">85</span>
+              <span data-toggle="counter-up"><?= $countAjuan; ?></span>
               <p>Bantuan Tersalurkan</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-5 col-4 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-toggle="counter-up">4</span>
+              <span data-toggle="counter-up"><?= $countMitra; ?></span>
               <p>Forum Kesra</p>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-lg-6 d-md-flex align-items-md-stretch">
+          <div id="piechart"></div>
+        </div>
+        <div class="col-lg-6 d-md-flex align-items-md-stretch">
+          <div id="piechart2"></div>
         </div>
       </div>
     </section>
@@ -343,12 +381,11 @@
     </section><!-- End About Video Section -->
 
     <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
+    <!-- <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Testimonials</h2>
-          <!-- <p>Komentar</p> -->
         </div>
 
         <div class="owl-carousel testimonials-carousel">
@@ -411,7 +448,8 @@
         </div>
 
       </div>
-    </section><!-- End Testimonials Section -->
+    </section> -->
+    <!-- End Testimonials Section -->
 
     <!-- ======= Contact Section ======= -->
     <!-- <section id="contact" class="contact">
@@ -498,13 +536,14 @@
         <div class="row">
 
           <div class="col-lg-6 col-md-6 footer-contact">
-            <h4>Sekretariat Daerah Bagian Kesejahteraan Rakyat</h4>
+            <h4>Bagian Kesejahteraan Rakyat Sekretariat Daerah Kota Surakarta</h4>
             <p>
               Komp. Balai Kota,
               JL. Jend. Sudirman, No. 2 <br>
               Kp. Baru, Kec. Ps. Kliwon<br>
               Kota Surakarta, Jawa Tengah 57133 <br><br>
-              <strong>Phone:</strong> (0271) 644315<br>
+              <strong>Phone:</strong> (0271) 655398<br>
+              <strong>Email:</strong> bag-kesra@surakarta.go.id<br>
               <!-- <strong>Email:</strong> info@example.com<br> -->
             </p>
           </div>
@@ -554,54 +593,60 @@
   <!-- Template Main JS File -->
   <script src="<?= base_url(); ?>/assets/js/main.js"></script>
 
-  <script>
+  <!-- <script {csp-script-nonce}>
     $(document).ready(function() {
-      $('.formlogin').submit(function(e) {
-        e.preventDefault();
-        $.ajax({
-          type: "post",
-          url: $(this).attr('action'),
-          data: $(this).serialize(),
-          dataType: "json",
-          beforeSend: function() {
-            $('.btnlogin').prop('disabled', true);
-            $('.btnlogin').html('<i class="fa fa-spin fa-spinner"></i>');
-          },
-          complete: function() {
-            $('.btnlogin').prop('disabled', false);
-            $('.btnlogin').html('Cek Ajuan');
-          },
-          success: function(response) {
-            if (response.error) {
-              if (response.error.User) {
-                $('#user').addClass('is-invalid');
-                $('.invalidUser').html(response.error.User);
-              } else {
-                $('#user').removeClass('is-invalid');
-                $('.invalidUser').html('');
-              }
-              if (response.error.Password) {
-                $('#password').addClass('is-invalid');
-                $('.invalidPassword').html(response.error.Password);
-              } else {
-                $('#password').removeClass('is-invalid');
-                $('.invalidPassword').html('');
-              }
-            }
-            if (response.berhasil) {
-              window.location = response.berhasil.link;
-            }
-          },
-          error: function(xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-          }
-        });
 
-        return false;
-      });
     });
-  </script>
+  </script> -->
 
+  <!-- Pie Chart -->
+  <script {csp-script-nonce}>
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Program', 'Ajuan'],
+        <?php foreach ($dataProgram as $program => $jml) { ?>['<?= $program; ?>', <?= $jml; ?>],
+        <?php } ?>
+      ]);
+
+      var options = {
+        title: 'Statistik Bantuan Tersalurkan per Program Bantuan'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
+    }
+  </script>
+  <!-- pie 2 -->
+  <script {csp-script-nonce}>
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data2 = google.visualization.arrayToDataTable([
+        ['Program', 'Ajuan'],
+        <?php foreach ($dataMitra as $mitra => $jmlAjuan) { ?>['<?= $mitra; ?>', <?= $jmlAjuan; ?>],
+        <?php } ?>
+      ]);
+
+      var options2 = {
+        title: 'Statistik Bantuan Tersalurkan per Mitra'
+      };
+
+      var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+      chart2.draw(data2, options2);
+    }
+  </script>
 </body>
 
 </html>

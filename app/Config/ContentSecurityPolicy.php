@@ -53,21 +53,21 @@ class ContentSecurityPolicy extends BaseConfig
 	 *
 	 * @var string|string[]|null
 	 */
-	public $defaultSrc = null;
+	public $defaultSrc = 'self';
 
 	/**
 	 * Lists allowed scripts' URLs.
 	 *
 	 * @var string|string[]
 	 */
-	public $scriptSrc = 'self';
+	public $scriptSrc = ['self', 'https://code.jquery.com', 'https://code.highcharts.com', 'https://www.gstatic.com', 'https://unpkg.com', 'unsafe-hashes', 'unsafe-inline'];
 
 	/**
 	 * Lists allowed stylesheets' URLs.
 	 *
 	 * @var string|string[]
 	 */
-	public $styleSrc = 'self';
+	public $styleSrc = ['self', 'https://fonts.googleapis.com/', 'https://www.gstatic.com', 'unsafe-inline'];
 
 	/**
 	 * Defines the origins from which images can be loaded.
@@ -105,7 +105,7 @@ class ContentSecurityPolicy extends BaseConfig
 	 *
 	 * @var string|string[]
 	 */
-	public $fontSrc = null;
+	public $fontSrc = ['self', 'https://fonts.gstatic.com/', 'https://fonts.googleapis.com/'];
 
 	/**
 	 * Lists valid endpoints for submission from `<form>` tags.
@@ -129,7 +129,7 @@ class ContentSecurityPolicy extends BaseConfig
 	 *
 	 * @var string|string[]|null
 	 */
-	public $mediaSrc = null;
+	public $mediaSrc = 'self';
 
 	/**
 	 * Allows control over Flash and other plugins.

@@ -43,8 +43,8 @@
       <div class="row mr-auto">
         <a href="/home/index" class="logo ml-3"><img src="<?= base_url(); ?>/assets/img/logo_pms.png" alt="" class="img-fluid"></a>
         <span style="color: #2487ce; font-size: 14px;" class="ml-1 d-none d-lg-block">
-          <b> Sekretariat Daerah Bagian Kesejahteraan Rakyat </b><br>
-          Pemerintah Kota Surakarta
+          <b>Pemerintah Kota Surakarta</b><br>
+          Sekretariat Daerah Bagian Kesejahteraan Rakyat
         </span>
       </div>
       <nav class="nav-menu d-none d-lg-block">
@@ -253,13 +253,14 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 col-md-6 footer-contact">
-            <h4>Sekretariat Daerah Bagian Kesejahteraan Rakyat</h4>
+            <h4>Bagian Kesejahteraan Rakyat Sekretariat Daerah Kota Surakarta</h4>
             <p>
               Komp. Balai Kota,
               JL. Jend. Sudirman, No. 2 <br>
               Kp. Baru, Kec. Ps. Kliwon<br>
               Kota Surakarta, Jawa Tengah 57133 <br><br>
-              <strong>Phone:</strong> (0271) 644315<br>
+              <strong>Phone:</strong> (0271) 655398<br>
+              <strong>Email:</strong> bag-kesra@surakarta.go.id<br>
               <!-- <strong>Email:</strong> info@example.com<br> -->
             </p>
           </div>
