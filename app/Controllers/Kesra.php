@@ -12,6 +12,7 @@ use App\Models\KecamatanModel;
 use App\Models\MitraModel;
 use App\Models\BantuanModel;
 use App\Models\SyaratModel;
+use App\Models\UsersModel;
 use CodeIgniter\I18n\Time;
 use Mpdf\Mpdf;
 
@@ -26,6 +27,8 @@ class Kesra extends BaseController
     protected $mitraModel;
     protected $bantuanModel;
     protected $syaratModel;
+    protected $userModel;
+
     public function __construct()
     {
         $this->session = session();
@@ -38,6 +41,7 @@ class Kesra extends BaseController
         $this->mitraModel = new MitraModel();
         $this->bantuanModel = new BantuanModel();
         $this->syaratModel = new SyaratModel();
+        $this->userModel = new UsersModel();
     }
 
     //cek privilege sbg petugas kesra
@@ -820,5 +824,89 @@ class Kesra extends BaseController
 
         $mpdf->Output($tglAwal . ".pdf", 'D');
         //$mpdf->Output('judulfile.pdf', 'D');
+    }
+
+    public function userManagement()
+    {
+        $data = [
+            'bttn' => 'user_mng',
+            'muser' => $this->userModel->join('eprivuser', 'eprivuser.idPrivUser = muser.idPrivUser')
+                ->findAll()
+        ];
+        return view('kesra/user_management', $data);
+    }
+
+    public function editUser()
+    {
+        $idUser = $this->request->getGet('kode');
+        $data = [
+            'bttn' => 'user_mng',
+            'dataUser' => $this->userModel->where('idUser', $idUser)
+                ->join('eprivuser', 'eprivuser.idPrivUser = muser.idPrivUser')->first()
+        ];
+        return view('kesra/edit_user', $data);
+    }
+
+    public function doEditUser()
+    {
+        $idUser = $this->request->getVar('idUser');
+        $validation = \Config\Services::validation();
+        $valid = $this->validate([
+            'pengguna' => [
+                'label' => 'Pengguna',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ],
+            // is_unique[table.field,ignore_field,ignore_value]
+            'username' => [
+                'label' => 'Username',
+                'rules' => 'required|is_unique[muser.User,idUser,{idUser}]',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'is_unique' => '{field} sudah digunakan',
+                ]
+            ],
+            'new_pass' => [
+                'label' => 'New Password',
+                'rules' => 'required|min_length[8]|max_length[200]',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                    'min_length' => '{field} minimal 8 karakter',
+                    'max_length' => '{field} maksimal 200 karakter',
+                ]
+            ],
+            'conf_pass' => [
+                'label' => 'Confirm Password',
+                'rules' => 'matches[new_pass]',
+                'errors' => [
+                    'required' => '{field} salah',
+                ]
+            ],
+        ]);
+
+        if (!$valid) {
+            $this->session->setFlashdata('errorPengguna', $validation->getError('pengguna'));
+            $this->session->setFlashdata('errorUser', $validation->getError('username'));
+            $this->session->setFlashdata('errorPassword', $validation->getError('new_pass'));
+            $this->session->setFlashdata('errorConfPassword', $validation->getError('conf_pass'));
+            return redirect()->to("/kesra/editUser?kode=$idUser")->withInput();
+        } else {
+            $dataSimpan = [
+                'Namauser' => $this->request->getVar('pengguna'),
+                'User' => $this->request->getVar('username'),
+                'Password' => sha1($this->request->getVar('new_pass')),
+                'email' => $this->request->getVar('email'),
+                'telepon' => $this->request->getVar('telepon')
+            ];
+            if ($this->userModel->update($idUser, $dataSimpan)) {
+                $this->session->setFlashdata('berhasilUpdate', "Data berhasil diupdate");
+                return redirect()->to("/kesra/userManagement");
+            } else {
+                $this->session->setFlashdata('gagalUpdate', "Data gagal diupdate");
+                return redirect()->to("/kesra/userManagement");
+            }
+        }
     }
 }

@@ -55,13 +55,13 @@ $session = \Config\Services::session();
             <span>Dashboard</span>
         </a>
     </li>
-	<li class="nav-item <?= ($bttn == 'dtpemohon' || $bttn == 'dftrpemohon') ? 'active' : '' ?>">
+    <li class="nav-item <?= ($bttn == 'dtpemohon' || $bttn == 'dftrpemohon') ? 'active' : '' ?>">
         <a class="nav-link my-1 py-1" href="/kelurahan/dftrpemohon_i">
             <i class="fa-fw far fa-address-book"></i>
             <span>Daftar Pemohon</span>
         </a>
     </li>
-    
+
     <li class="nav-item <?= ($bttn == 'dftrajuan') ? 'active' : '' ?>">
         <a class="nav-link collapsed my-1 py-1" href="#" data-toggle="collapse" data-target="#kel_ajuan" aria-expanded="true" aria-controls="kel_ajuan">
             <i class="fa-fw far fa-list-alt"></i>
@@ -135,8 +135,14 @@ $session = \Config\Services::session();
     </li>
     <li class="nav-item <?= ($bttn == 'dftrbantuan') ? 'active' : '' ?>">
         <a class="nav-link my-1 py-1" href="/kesra/dftrBantuan">
-            <i class="fas fa-box-open fa-fw"></i>
+            <i class="fas fa-atom fa-fw"></i>
             <span>Daftar Program</span>
+        </a>
+    </li>
+    <li class="nav-item <?= ($bttn == 'user_mng') ? 'active' : '' ?>">
+        <a class="nav-link my-1 py-1" href="/kesra/userManagement">
+            <i class="fas fa-box-open fa-fw"></i>
+            <span>User Management</span>
         </a>
     </li>
 <?php } ?>

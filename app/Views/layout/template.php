@@ -26,6 +26,25 @@ $session = \Config\Services::session();
     <link href="<?= base_url(); ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <style>
+        .logoatas {
+            max-height: 50px;
+        }
+
+        .tulisanatas {
+            color: #2487ce;
+            font-size: 14px;
+        }
+
+        .not-show {
+            display: none;
+        }
+
+        .collapse .chard-body {
+            font-size: 12px;
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -43,7 +62,7 @@ $session = \Config\Services::session();
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-landmark"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SipKe-Mas</div>
+                <div class="sidebar-brand-text mx-3">SIPKE-MAS</div>
             </a>
 
             <!-- Divider -->
@@ -85,8 +104,8 @@ $session = \Config\Services::session();
                         </div>
                     </form> -->
                     <div class="row mr-auto">
-                        <a href="/home/index" class="logo ml-3"><img style="max-height: 50px;" src="<?= base_url(); ?>/assets/img/logo_pms.png" alt="" class="img-fluid"></a>
-                        <span style="color: #2487ce; font-size: 14px;" class="ml-1 d-none d-lg-block">
+                        <a href="/home/index" class="logo ml-3"><img class="logoatas" src="<?= base_url(); ?>/assets/img/logo_pms.png" alt="" class="img-fluid"></a>
+                        <span class="ml-1 d-none d-lg-block tulisanatas">
                             <b> Sekretariat Daerah Bagian Kesejahteraan Rakyat </b><br>
                             Pemerintah Kota Surakarta
                         </span>
