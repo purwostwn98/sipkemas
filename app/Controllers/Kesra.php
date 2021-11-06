@@ -708,9 +708,36 @@ class Kesra extends BaseController
             $semuaKelurahan[$kel['Kelurahan']] = array($countAjuanKelurahan, $countKelurahanSetuju, $danaKel['nilaiDisetujui']);
             arsort($semuaKelurahan);
         }
-        // foreach ($semuaKelurahan as $kel => $item) {
-        //     dd($item);
-        // }
+        //Untuk statistik kecamatan
+        $dftrKecamatan = $this->kecamatanModel->findAll();
+        foreach ($dftrKecamatan as $kec) {
+            $countAjuanKecamatan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->countAllResults();
+            $countDisetujuiKec = $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->countAllResults();
+            $danaKec = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->first();
+            $semuaKecamatan[$kec['Kecamatan']] = array($countAjuanKecamatan, $countDisetujuiKec, $danaKec['nilaiDisetujui']);
+            //arsort($semuaKelurahan);
+        }
         // Untuk statistik mitra
         $dftrMitra = $this->mitraModel->findAll();
         foreach ($dftrMitra as $mit) {
@@ -798,6 +825,7 @@ class Kesra extends BaseController
                 ->where('tgHasil <=', $tgAhir)
                 ->first(),
             'countKelurahan' => $semuaKelurahan,
+            'countKecamatan' => $semuaKecamatan,
             'countMitra' => $semuaMitra,
             'mitraSetuju' => $mitraSetuju,
             'danaMitraSetuju' => $danaMtrSetuju,

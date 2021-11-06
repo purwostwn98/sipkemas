@@ -22,7 +22,7 @@
 <body>
     <table border='0' width="100%" cellpadding="0" cellspacing="0" style="border:0px solid black;margin-left:auto;margin-right:auto;">
         <tr>
-            <th rowspan="3" width="80" style="text-align:center"><img width="50" src="assets/img/logo_pms.png"></th>
+            <th rowspan="4" width="80" style="text-align:center"><img width="70" src="assets/img/logo_pms.png"></th>
             <th align="center" style="text-align:center">
                 <!-- <p style="font-family: times; text-align:center;"> -->
                 <font size="5">PEMERINTAH KOTA SURAKARTA</font>
@@ -40,6 +40,13 @@
             <th align="center" style="text-align:center">
                 <!-- <p style="font-family: times; text-align:center;"> -->
                 <font size="5">BAGIAN KESEJAHTERAAN RAKYAT</font>
+                <!-- </p> -->
+            </th>
+        </tr>
+        <tr>
+            <th align="center" style="text-align:center">
+                <!-- <p style="font-family: times; text-align:center;"> -->
+                <font size="2">Jl. Jendral Sudirman No. 2 Telp. (0271) 655398 Email: bag-kesra@surakarta.go.id <br>SURAKARTA <br>57111</font>
                 <!-- </p> -->
             </th>
         </tr>
@@ -125,6 +132,31 @@
                     <!-- <td style="text-align: left;">Rp. 20.000</td> -->
                 </tr>
             <?php $no2++;
+            endforeach; ?>
+        </table>
+        <!-- Statistik Kecamatan -->
+        <h4 align='left'>Statistik per Kecamatan</h4>
+        <table border="1" style="width: 100%; text-align:left;" cellpadding="4" cellspacing="0">
+            <thead>
+                <tr align="center">
+                    <th>No</th>
+                    <th>Kecamatan</th>
+                    <th>Jumlah Semua Ajuan</th>
+                    <th>Jumlah Ajuan Disetujui</th>
+                    <th>Dana Disetujui</th>
+                </tr>
+            </thead>
+            <?php $no99 = 0;
+            foreach ($countKecamatan as $kecamatan => $ajuanKec) : ?>
+                <tr>
+                    <td style="text-align; center;"><?= $no99 + 1; ?></td>
+                    <td style="text-align; left;"><?= $kecamatan; ?></td>
+                    <td style="text-align: center;"><?= $ajuanKec[0]; ?></td>
+                    <td style="text-align: center;"><?= $ajuanKec[1]; ?></td>
+                    <td style="text-align: left;">Rp. <?= number_format((float)$ajuanKec[2], 0, ',', '.'); ?></td>
+                    <!-- <td style="text-align: left;">Rp. 20.000</td> -->
+                </tr>
+            <?php $no99++;
             endforeach; ?>
         </table>
     <?php } ?>

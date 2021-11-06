@@ -9,6 +9,7 @@ use App\Models\AjuanLbgModel;
 use App\Models\KelurahanModel;
 use App\Models\MitraModel;
 use App\Models\BantuanModel;
+use App\Models\KecamatanModel;
 use App\Models\SyaratModel;
 use CodeIgniter\I18n\Time;
 use Mpdf\Mpdf as MpdfMpdf;
@@ -23,6 +24,7 @@ class Mitra extends BaseController
     protected $mitraModel;
     protected $bantuanModel;
     protected $syaratModel;
+    protected $kecamatanModel;
     public function __construct()
     {
         $this->ajuanModel = new AjuanModel();
@@ -33,6 +35,7 @@ class Mitra extends BaseController
         $this->mitraModel = new MitraModel();
         $this->bantuanModel = new BantuanModel();
         $this->syaratModel = new SyaratModel();
+        $this->kecamatanModel = new KecamatanModel();
     }
 
     public function dashboard()
@@ -242,6 +245,42 @@ class Mitra extends BaseController
             $semuaKelurahan[$kel['Kelurahan']] = array($countAjuanKelurahan, $countKelurahanSetuju, $danaKel['nilaiDisetujui']);
             arsort($semuaKelurahan);
         }
+        //Untuk statistik kecamatan
+        $dftrKecamatan = $this->kecamatanModel->findAll();
+        foreach ($dftrKecamatan as $kec) {
+            $countAjuanKecamatan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->countAllResults();
+            $countDisetujuiKec = $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->countAllResults();
+            $danaKec = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->first();
+            $semuaKecamatan[$kec['Kecamatan']] = array($countAjuanKecamatan, $countDisetujuiKec, $danaKec['nilaiDisetujui']);
+            //arsort($semuaKelurahan);
+        }
         // Untuk statistik bantuan
         $dftrBantuan = $this->bantuanModel
             ->where('idMitra', $idMitra)
@@ -307,6 +346,7 @@ class Mitra extends BaseController
                 ->where('idMitra', $idMitra)
                 ->first(),
             'countKelurahan' => $semuaKelurahan,
+            'countKecamatan' => $semuaKecamatan,
             // 'countMitra' => $semuaMitra,
             // 'mitraSetuju' => $mitraSetuju,
             // 'danaMitraSetuju' => $danaMtrSetuju,
