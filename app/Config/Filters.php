@@ -41,7 +41,8 @@ class Filters extends BaseConfig
 				'Pemohon', 'pemohon/form_syarat',
 				'Kesra', 'kesra/frEditSyarat',
 				'Kesra', 'kesra/doHapusSyarat',
-				'Kesra', 'kesra/createKodeBantuan'
+				'Kesra', 'kesra/createKodeBantuan',
+				'Kesra', 'kesra/mitraPdf'
 			]],
 			'pemohonFilter' => ['except' => [
 				'gerbangska', 'gerbangska/*',
@@ -107,7 +108,8 @@ class Filters extends BaseConfig
 			]],
 			'kesraFilter' => ['except' => [
 				'kesra', 'kesra/*',
-				'kesra', 'kesra/*/*'
+				'kesra', 'kesra/*/*',
+				'mitra', 'mitra/dashboard'
 			]],
 			'mitraFilter' => ['except' => [
 				'mitra', 'mitra/*',

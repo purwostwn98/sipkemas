@@ -9,6 +9,7 @@ use App\Models\FormulirModel;
 use App\Models\AjuanModel;
 use App\Models\BantuanModel;
 use App\Models\MitraModel;
+use CodeIgniter\I18n\Time;
 use Mpdf\Mpdf;
 
 class Home extends BaseController
@@ -32,11 +33,45 @@ class Home extends BaseController
 	}
 	public function index()
 	{
+		#Data waktu
+		$tgl_now = new Time('now', 'Asia/Jakarta', 'en_US');
+		$tahun_now = $tgl_now->getYear();
+
+		#Data time series
+		for ($tahun = 2020; $tahun <= $tahun_now; $tahun++) {
+			$pmi = $this->ajuanModel
+				->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+				->where('trbantuan.idMitra', 1)
+				->where('idStsAjuan', 7)
+				->where('year(tgHasil)', $tahun)
+				->countAllResults();
+			$lazis = $this->ajuanModel
+				->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+				->where('trbantuan.idMitra', 2)
+				->where('idStsAjuan', 7)
+				->where('year(tgHasil)', $tahun)
+				->countAllResults();
+			$baznas = $this->ajuanModel
+				->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+				->where('trbantuan.idMitra', 3)
+				->where('idStsAjuan', 7)
+				->where('year(tgHasil)', $tahun)
+				->countAllResults();
+			$pms = $this->ajuanModel
+				->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+				->where('trbantuan.idMitra', 4)
+				->where('idStsAjuan', 7)
+				->where('year(tgHasil)', $tahun)
+				->countAllResults();
+			$jumlah_timeseries[$tahun] = array($pmi, $lazis, $baznas, $pms);
+		}
+
 		$program = $this->programModel->findAll();
 		foreach ($program as $prg) {
 			$jmlAjuan = $this->ajuanModel
 				->where('kodeBantuan', $prg['kodeBantuan'])
 				->where('idStsAjuan', 7)
+				->where('year(tgHasil)', $tahun_now)
 				->countAllResults();
 			$dataProgram[$prg['namaProgram']] = $jmlAjuan;
 		}
@@ -46,7 +81,9 @@ class Home extends BaseController
 			$jmlMitra = $this->ajuanModel
 				->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
 				->where('idMitra', $mit['idMitra'])
-				->where('idStsAjuan', 7)->countAllResults();
+				->where('idStsAjuan', 7)
+				->where('year(tgHasil)', $tahun_now)
+				->countAllResults();
 			$dataMitra[$mit['NamaMitra']] = $jmlMitra;
 		}
 		$data = [
@@ -54,7 +91,9 @@ class Home extends BaseController
 			"countMitra" => $this->mitraModel->countAllResults(),
 			"countProgram" => $this->programModel->countAllResults(),
 			"dataProgram" => $dataProgram,
-			"dataMitra" => $dataMitra
+			"dataMitra" => $dataMitra,
+			"jumlah_timeseries" => $jumlah_timeseries,
+			"tahun_now" => $tahun_now
 		];
 		// print_r($data['dataProgram']);
 		// die;

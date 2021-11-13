@@ -177,7 +177,7 @@ $session = \Config\Services::session();
     <!-- Pie Chart -->
 
 </div>
-<?php if ($session->get('privUser') != 5) { ?>
+<?php if ($halaman != 'mitra') { ?>
     <div class="row">
         <!-- Pie Mitra -->
         <div class="col-lg-5 mb-4">
@@ -193,7 +193,7 @@ $session = \Config\Services::session();
                 </div>
             </div>
         </div>
-        <!-- Statistik kelurahan -->
+        <!-- Statistik Kecamatan -->
         <div class="col-lg-7 mb-4">
             <div class="card shadow mb-4">
                 <div class="card-header  bg-success py-3">
@@ -237,7 +237,7 @@ $session = \Config\Services::session();
     Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
     Chart.defaults.global.defaultFontColor = '#858796';
 
-    <?php if ($session->get('privUser') != 5) { ?>
+    <?php if ($halaman != 'mitra') { ?>
         // Pie Chart Example
         var ctx = document.getElementById("pieMitra");
         var pieMitra = new Chart(ctx, {

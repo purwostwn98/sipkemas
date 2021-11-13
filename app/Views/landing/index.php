@@ -31,8 +31,9 @@
   <link href="<?= base_url(); ?>/css/alur.css" rel="stylesheet">
 
   <!-- Pie Chart -->
+  <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <!-- <script type="text/javascript" src="<?= base_url(); ?>/extra/loaderGcharts.js"></script> -->
+
   <!-- =======================================================
   * Template Name: OnePage - v2.2.2
   * Template URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/
@@ -62,6 +63,11 @@
     #piechart,
     #piechart2 {
       width: 900px;
+      height: 400px;
+    }
+
+    #linechart_material {
+      width: 100%;
       height: 400px;
     }
   </style>
@@ -351,6 +357,11 @@
           <div id="piechart2"></div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-12 d-md-flex align-items-md-stretch">
+          <div id="linechart_material"></div>
+        </div>
+      </div>
     </section>
     <!-- End Counts Section -->
 
@@ -615,7 +626,7 @@
       ]);
 
       var options = {
-        title: 'Statistik Bantuan Tersalurkan per Program Bantuan'
+        title: 'Statistik Bantuan Tersalurkan per Program Bantuan Tahun <?= $tahun_now; ?>'
       };
 
       var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -639,12 +650,72 @@
       ]);
 
       var options2 = {
-        title: 'Statistik Bantuan Tersalurkan per Mitra'
+        title: 'Statistik Bantuan Tersalurkan per Mitra Tahun <?= $tahun_now; ?>'
       };
 
       var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
 
       chart2.draw(data2, options2);
+    }
+  </script>
+
+  <!-- <script {csp-script-nonce} type="text/javascript">
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data3 = google.visualization.arrayToDataTable([
+        ['Year', 'PMI', 'LAZIS Jateng Solo', 'BAZNAS Surakarta', 'PMS'],
+        <?php foreach ($jumlah_timeseries as $tahun => $jml) : ?>["<?= $tahun; ?>", <?= $jml[0]; ?>, <?= $jml[1]; ?>, <?= $jml[2]; ?>, <?= $jml[3]; ?>],
+        <?php endforeach; ?>
+      ]);
+
+      var options3 = {
+        title: 'Grafik Ajuan Disetujui',
+        curveType: 'function',
+        legend: {
+          position: 'bottom'
+        }
+      };
+
+      var chart3 = new google.visualization.LineChart(document.getElementById('linechart_material'));
+
+      chart3.draw(data3, options3);
+    }
+  </script> -->
+
+  <script {csp-script-nonce} type="text/javascript">
+    google.charts.load("current", {
+      packages: ["corechart"]
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Year', 'PMI', 'LAZIS Jateng Solo', 'BAZNAS Surakarta', 'PMS', {
+          role: 'annotation'
+        }],
+        <?php foreach ($jumlah_timeseries as $tahun => $jml) : ?>["<?= $tahun; ?>", <?= $jml[0]; ?>, <?= $jml[1]; ?>, <?= $jml[2]; ?>, <?= $jml[3]; ?>, ''],
+        <?php endforeach; ?>
+      ]);
+
+      var options = {
+        // width: 100 % ,
+        // height: 400,
+        tittle: 'Bar Chart Ajuan Disetujui',
+        legend: {
+          position: 'top',
+          maxLines: 3
+        },
+        bar: {
+          groupWidth: '75%'
+        },
+        isStacked: true
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("linechart_material"));
+      chart.draw(data, options);
     }
   </script>
 </body>

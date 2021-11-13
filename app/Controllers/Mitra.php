@@ -40,7 +40,11 @@ class Mitra extends BaseController
 
     public function dashboard()
     {
-        $idMitra = $this->session->get('idLembaga');
+        if ($this->session->get('privUser') != 5) {
+            $idMitra = $this->request->getVar('idMitra');
+        } else {
+            $idMitra = $this->session->get('idLembaga');
+        }
         // Print tgl Indonesia
         $bulan = array(
             1 =>   'Januari',
@@ -93,6 +97,22 @@ class Mitra extends BaseController
                 ->where('idKel', $kel['idKel'])
                 ->countAllResults();
             $semuaKelurahan[$kel['Kelurahan']] = $countAjuanKelurahan;
+            //arsort($semuaKelurahan);
+        }
+        //Untuk statistik kecamatan
+        $dftrKecamatan = $this->kecamatanModel->findAll();
+        foreach ($dftrKecamatan as $kec) {
+            $countAjuanKecamatan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->where('tgHasil >=', $tgAwal)
+                ->where('tgHasil <=', $tgAhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->countAllResults();
+            $semuaKecamatan[$kec['Kecamatan']] = $countAjuanKecamatan;
             //arsort($semuaKelurahan);
         }
         // Untuk statistik mitra
@@ -166,6 +186,7 @@ class Mitra extends BaseController
                 ->where('tgHasil <=', $tgAhir)
                 ->first(),
             'countKelurahan' => $semuaKelurahan,
+            'countKecamatan' => $semuaKecamatan,
             'countMitra' => $semuaMitra,
             'countBantuan' => $semuaBantuan,
             'daftarBantuan' => $dftrBantuan,
@@ -182,6 +203,11 @@ class Mitra extends BaseController
 
     public function eksporpdf()
     {
+        if ($this->session->get('privUser') != 5) {
+            $idMitra = $this->request->getVar('idMitra');
+        } else {
+            $idMitra = $this->session->get('idLembaga');
+        }
         //Print tgl Indonesia
         $bulan = array(
             1 =>   'Januari',
@@ -211,7 +237,6 @@ class Mitra extends BaseController
             $tglAwal = "Semua Data";
             $tglAkhir = "";
         }
-        $idMitra = $this->session->get('idLembaga');
         //Untuk statistik kelurahan
         $dftrKelurahan = $this->kelurahanModel->findAll();
         foreach ($dftrKelurahan as $kel) {

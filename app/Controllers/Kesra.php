@@ -937,4 +937,210 @@ class Kesra extends BaseController
             }
         }
     }
+
+    public function mitraPdf()
+    {
+        $idMitra = $this->request->getVar('idMitra');
+        $mitra = $this->mitraModel->where('idMitra', $idMitra)->first();
+        //Print tgl Indonesia
+        $bulan = array(
+            1 =>   'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        );
+        if ($this->request->getVar('periode') != 'semua') {
+            $thAwal = $this->request->getVar('periode');
+            $thAkhir = $this->request->getVar('periode');
+        } else {
+            //$tgAwal = Time::parse('March 9, 2016 12:00:00', 'Asia/Jakarta');
+            // $tgAwal = 0000 - 00 - 00;
+            $thAwal = 0000;
+            $tglAkhir = new Time('now', 'Asia/Jakarta', 'en_US');
+            $thAkhir = $tglAkhir->getYear();
+            $tglAwal = "Semua Data";
+            $tglAkhir = "";
+        }
+
+        // dd($thAkhir);
+        //Untuk statistik kelurahan
+        $dftrKelurahan = $this->kelurahanModel->findAll();
+        foreach ($dftrKelurahan as $kel) {
+            $countAjuanKelurahan = $this->ajuanModel
+                ->where('idStsAjuan >', 1)
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $kel['idKel'])
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->countAllResults();
+            $countKelurahanSetuju = $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $kel['idKel'])
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->countAllResults();
+            $danaKel = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('idKel', $kel['idKel'])
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->first();
+            $semuaKelurahan[$kel['Kelurahan']] = array($countAjuanKelurahan, $countKelurahanSetuju, $danaKel['nilaiDisetujui']);
+            arsort($semuaKelurahan);
+        }
+        //Untuk statistik kecamatan
+        $dftrKecamatan = $this->kecamatanModel->findAll();
+        foreach ($dftrKecamatan as $kec) {
+            $countAjuanKecamatan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->countAllResults();
+            $countDisetujuiKec = $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->countAllResults();
+            $danaKec = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->join('ekelurahan', 'ekelurahan.idKel = mpemohon.idKel')
+                ->where('idKec', $kec['idKec'])
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->first();
+            $semuaKecamatan[$kec['Kecamatan']] = array($countAjuanKecamatan, $countDisetujuiKec, $danaKec['nilaiDisetujui']);
+            //arsort($semuaKelurahan);
+        }
+        // Untuk statistik bantuan
+        $dftrBantuan = $this->bantuanModel
+            ->where('idMitra', $idMitra)
+            ->findAll();
+        foreach ($dftrBantuan as $ban) {
+            $countAjuanBantuan = $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->countAllResults();
+            $danaBantuan = $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('idStsAjuan', 7)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->join('mpemohon', 'mpemohon.idPemohon = trajuan.idPemohon')
+                ->where('trajuan.kodeBantuan', $ban['kodeBantuan'])
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->first();
+            $semuaBantuan[$ban['namaProgram']] = array($countAjuanBantuan, $danaBantuan['nilaiDisetujui']);
+            arsort($semuaBantuan);
+        }
+        $tglNow = new Time('now', 'Asia/Jakarta', 'en_US');
+        $t = explode('-', $tglNow);
+        $a = explode(' ', $t[2]);
+        $tglSekarang = $a[0] . ' ' . $bulan[(int)$t[1]] . ' ' . $t[0];
+        $data = [
+            'countPermintaan' => $this->ajuanModel
+                ->where('idStsAjuan', 3)
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->countAllResults(),
+            'countProses' => $this->ajuanModel
+                ->where('idStsAjuan >=', 2)
+                ->where('idStsAjuan <', 6)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->countAllResults(),
+            'countDitolak' => $this->ajuanModel
+                ->where('idStsAjuan', 6)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->where('idMitra', $idMitra)
+                ->countAllResults(),
+            'countDisetujui' => $this->ajuanModel
+                ->where('idStsAjuan', 7)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->where('idMitra', $idMitra)
+                ->countAllResults(),
+            'totalDana' => $this->ajuanModel->selectSum('nilaiDisetujui')
+                ->where('year(tgHasil) >=', $thAwal)
+                ->where('year(tgHasil) <=', $thAkhir)
+                ->join('trbantuan', 'trbantuan.kodeBantuan = trajuan.kodeBantuan')
+                ->where('idMitra', $idMitra)
+                ->first(),
+            'countKelurahan' => $semuaKelurahan,
+            'countKecamatan' => $semuaKecamatan,
+            // 'countMitra' => $semuaMitra,
+            // 'mitraSetuju' => $mitraSetuju,
+            // 'danaMitraSetuju' => $danaMtrSetuju,
+            'countBantuan' => $semuaBantuan,
+            'daftarBantuan' => $dftrBantuan,
+            'thAwal' => $thAwal,
+            'tglNow' => $tglSekarang,
+            'filter' => $this->request->getVar('periode'),
+            'halaman' => 'mitra',
+            'mitra' => $this->mitraModel->find($idMitra)
+        ];
+        $mpdf = new Mpdf([
+            'debug' => TRUE, 'mode' => 'utf-8', 'format' => 'A4-P',
+            'margin_top' => 8, 'margin_bottom' => 10, 'margin_left' => 12, 'margin_right' => 12
+        ]);
+
+        $html = view('kesra/pdf_mitra.php', $data);
+        $mpdf->text_input_as_HTML = true;
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($mitra['NamaMitra'] . ".pdf", 'D');
+
+        // if ($mpdf->Output($mitra['NamaMitra'] . ".pdf", 'D')) {
+        //     $msg = [
+        //         'berhasil' => "Program Berhasil diupdate",
+        //         'link' => "/kesra/dftrBantuan",
+        //     ];
+        // } else {
+        //     $msg = [
+        //         'gagal' => "Program gagal diupdate",
+        //         'link' => "/kesra/dftrBantuan",
+        //     ];
+        // }
+        //     echo json_encode($msg);
+        // } else {
+        //     exit('Maaf perintah tidak dapat diproses');
+        // }
+    }
 }
