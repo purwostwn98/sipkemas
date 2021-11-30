@@ -62,6 +62,24 @@ $session = \Config\Services::session();
                         <textarea class="form-control border-left-primary" id="desProgram" name="desBantuan" rows="4" required></textarea>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="kuota" class="col-sm-2 col-form-label">Kuota</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control border-left-primary" id="kuota" name="kuota" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tahun" class="col-sm-2 col-form-label">Periode</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control border-left-primary" id="tahun" name="tahun" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nilaiBantuan" class="col-sm-2 col-form-label">Besaran Bantuan</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control border-left-primary" id="nilaiBantuan" name="nilaiBantuan" required>
+                    </div>
+                </div>
                 <!-- </form> -->
             </div>
         </div>

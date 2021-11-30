@@ -62,37 +62,46 @@
       <div class="container mt-0">
         <div class="row">
           <div class="col-12 d-sm-flex align-items-center justify-content-between mb-2">
-            <h4 class="text-center mb-3 mt-0">Program Palang Merah Indonesia</h4>
+            <h4 class="text-center mb-3 mt-0">Program <?= $mitra['keteranganMitra']; ?></h4>
             <a href="/home/daftar" style="background-color: #2487ce;" class="btn text-white">Formulir Pendaftaran</a>
           </div>
         </div>
         <div id="accordion">
-          <div class="card">
-            <div class="card-header" id="headingOne">
-              <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  1. Griya PMI Bahagia
-                </button>
-              </h5>
-            </div>
+          <?php $no = 0;
+          foreach ($programBantuan as $program) {
+            $heading = "heading_" . $no;
+            $collapse = "collapse_" . $no; ?>
+            <div class="card">
+              <div class="card-header d-sm-flex align-items-center justify-content-between" id="<?= $heading; ?>">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#<?= $collapse; ?>" aria-expanded="true" aria-controls="<?= $collapse; ?>">
+                    <?= $program['namaProgram']; ?>
+                  </button>
+                </h5>
+                <p class="<?= ($program['StatusProgram'] == 'active') ? 'bg-success' : 'bg-danger' ?> text-white px-2 rounded-top rounded-bottom"><?= ($program['StatusProgram'] == 'active') ? 'Aktif' : 'Tidak Aktif' ?></p>
+              </div>
 
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="card-body">
-                <p>Griya Bahagia merupakan program PMI Kota Surakarta dalam upaya memanusiakan manusia yang tidak termanusiakan
-                  yaitu merawat lansia terlantar yang ada di wilayah Kota Surakarta.</p>
-                <p><b>Syarat Pendaftaran</b></p>
-                <ul>
-                  <li>Kartu Tanda Penduduk</li>
-                  <li>Kartu Keluarga</li>
-                  <li>Assesment (<a href="<?= base_url(); ?>/dokumen/ass_griya.pdf" target="_blank">Download</a>)</li>
-                  <li>Survey</li>
-                  <li>Pelaporan ke Satpol PP Kota Surakarta</li>
-                  <li>Pelaporan ke Dinsos Kota Surakarta</li>
-                </ul>
+              <div id="<?= $collapse; ?>" class="collapse" aria-labelledby="<?= $heading; ?>" data-parent="#accordion">
+                <div class="card-body">
+                  <p><?= $program['desBantuan']; ?></p>
+                  <p><b>Syarat Pendaftaran</b></p>
+                  <ul>
+                    <?php for ($i = 0; $i < count($semua_syarat[$no]); $i++) { ?>
+                      <li><?= $semua_syarat[$no][$i]; ?></li>
+                    <?php } ?>
+                  </ul>
+                  <p><b>Kuota</b></p>
+                  <p><?= $program['kuota']; ?></p>
+                  <p><b>Periode</b></p>
+                  <p><?= $program['tahun']; ?></p>
+                  <p><b>Besaran Bantuan</b></p>
+                  <p><?= $program['NilaiBantuan']; ?></p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card">
+          <?php $no++;
+          } ?>
+          <!-- <div class="card">
             <div class="card-header" id="headingTwo">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -161,8 +170,21 @@
                 </p>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
+        <?php if ($mitra['idMitra'] == 1) { ?>
+          <div class="row mt-3">
+            <div class="col-12 d-sm-flex align-items-center justify-content-between mb-2">
+              <h5 class="text-center mb-3 mt-0">Download Assesment</h5>
+            </div>
+          </div>
+          <div class="row">
+            <ul>
+              <li><a href="<?= base_url(); ?>/dokumen/ass_griya.pdf" target="_blank">Assessment Griya PMI</a></li>
+              <li><a href="<?= base_url(); ?>/dokumen/ass_kemanusiaan.pdf" target="_blank">Assessment Dompet Kemanusiaan</a></li>
+            </ul>
+          </div>
+        <?php } ?>
       </div>
     </section>
 
@@ -231,3 +253,9 @@
 </body>
 
 </html>
+<!-- 
+<li>Kartu Keluarga</li>
+<li>
+<li>Survey</li>
+<li>Pelaporan ke Satpol PP Kota Surakarta</li>
+<li>Pelaporan ke Dinsos Kota Surakarta</li> -->

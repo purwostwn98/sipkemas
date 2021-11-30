@@ -503,7 +503,7 @@ class Kesra extends BaseController
             $data = [
                 'kodeBantuan' => $this->request->getVar('kodeBantuan'),
                 'Syarat' => $this->request->getVar('namaSyarat'),
-                'StatusSyarat' => $this->request->getVar('StatusSyarat')
+                'StatusSyarat' => $this->request->getVar('StatusSyarat'),
             ];
             if ($this->syaratModel->save($data)) {
                 $msg = [
@@ -528,7 +528,10 @@ class Kesra extends BaseController
             $data = [
                 'namaProgram' => $this->request->getVar('namaProgram'),
                 'StatusProgram' => $this->request->getVar('StatusProgram'),
-                'desBantuan' => $this->request->getVar('desBantuan')
+                'desBantuan' => htmlspecialchars($this->request->getVar('desBantuan')),
+                'tahun' => htmlspecialchars($this->request->getVar('tahun')),
+                'kuota' => htmlspecialchars($this->request->getVar('kuota')),
+                'NilaiBantuan' => htmlspecialchars($this->request->getVar('nilaiBantuan'))
             ];
             if ($this->bantuanModel->update($idBantuan, $data)) {
                 $msg = [
@@ -593,8 +596,11 @@ class Kesra extends BaseController
                 'kodeBantuan' => $this->request->getPost('kodeBantuan'),
                 'namaProgram' => $this->request->getPost('namaProgram'),
                 'StatusProgram' => $this->request->getPost('StatusProgram'),
-                'desBantuan' => $this->request->getPost('desBantuan'),
+                'desBantuan' => htmlspecialchars($this->request->getPost('desBantuan')),
                 'idMitra' => $this->request->getPost('idMitra'),
+                'tahun' => htmlspecialchars($this->request->getVar('tahun')),
+                'kuota' => htmlspecialchars($this->request->getVar('kuota')),
+                'NilaiBantuan' => htmlspecialchars($this->request->getVar('nilaiBantuan'))
             ];
             if ($this->bantuanModel->save($data)) {
                 $kodeBantuan = $this->request->getPost('kodeBantuan');

@@ -9,6 +9,7 @@ use App\Models\FormulirModel;
 use App\Models\AjuanModel;
 use App\Models\BantuanModel;
 use App\Models\MitraModel;
+use App\Models\SyaratModel;
 use CodeIgniter\I18n\Time;
 use Mpdf\Mpdf;
 
@@ -20,6 +21,7 @@ class Home extends BaseController
 	protected $formulirModel;
 	protected $ajuanModel;
 	protected $mitraModel;
+	protected $syaratModel;
 
 	public function __construct()
 	{
@@ -30,6 +32,7 @@ class Home extends BaseController
 		$this->ajuanModel = new AjuanModel();
 		$this->mitraModel = new MitraModel();
 		$this->programModel = new BantuanModel();
+		$this->syaratModel = new SyaratModel();
 	}
 	public function index()
 	{
@@ -102,7 +105,28 @@ class Home extends BaseController
 
 	public function bantuan()
 	{
-		return view('landing/detail_bantuan');
+		$idMitra = $this->request->getVar('idMitra');
+		$program = $this->programModel->where('idMitra', $idMitra)->findAll();
+		foreach ($program as $prg) {
+			$syarat = $this->syaratModel->where('kodeBantuan', $prg['kodeBantuan'])
+				->where('StatusSyarat', 'active')
+				->findAll();
+			$syarat_program = [];
+			foreach ($syarat as $sya) {
+				$syarat_program[] = $sya['Syarat'];
+			}
+			$semua_syarat[] = $syarat_program;
+		}
+		// dd($semua_syarat);
+		// for ($i=0; $i < ; $i++) { 
+		// 	# code...
+		// }
+		$data = [
+			'programBantuan' => $program,
+			'mitra' => $this->mitraModel->where('idMitra', $idMitra)->first(),
+			'semua_syarat' => $semua_syarat
+		];
+		return view('landing/detail_bantuan', $data);
 	}
 	public function bantuan2()
 	{

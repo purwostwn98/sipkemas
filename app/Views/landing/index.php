@@ -190,7 +190,7 @@
               <li>Griya PMI Peduli</li>
               <li>Dompet Kemanusiaan</li>
             </ul>
-            <p><a class="btn btn-sm btn-info" href="/home/bantuan">Selengkapnya</a></p>
+            <p><a class="btn btn-sm btn-info" href="/home/bantuan?idMitra=1">Selengkapnya</a></p>
           </div>
         </div>
 
@@ -205,7 +205,7 @@
               <li>Santunan Gizi Yatim</li>
               <li>Santunan Bunda Yatim</li>
             </ul>
-            <p><a class="btn btn-sm btn-info" href="/home/bantuan2">Selengkapnya</a></p>
+            <p><a class="btn btn-sm btn-info" href="/home/bantuan?idMitra=2">Selengkapnya</a></p>
           </div>
         </div>
 
@@ -220,7 +220,7 @@
               <li>Ekonomi Produktif</li>
               <li>Kesehatan</li>
             </ul>
-            <p><a class="btn btn-sm btn-info" href="/home/bantuan3">Selengkapnya</a></p>
+            <p><a class="btn btn-sm btn-info" href="/home/bantuan?idMitra=3">Selengkapnya</a></p>
           </div>
         </div>
 
@@ -235,7 +235,7 @@
               <li>Olahraga</li>
               <li>Pelatihan Ekonomi Kreatif</li>
             </ul>
-            <p><a class="btn btn-sm btn-info" href="/home/bantuan4">Selengkapnya</a></p>
+            <p><a class="btn btn-sm btn-info" href="/home/bantuan?idMitra=4">Selengkapnya</a></p>
           </div>
         </div>
       </div>
